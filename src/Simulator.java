@@ -8,7 +8,7 @@ class Simulator{
 		new Simulator();
 	}//end: main()
 
-	private OGLDisplay display;
+	public OGLDisplay display;
 
 	//Constructor()
 	public Simulator(){
@@ -18,6 +18,7 @@ class Simulator{
 		System.out.println("Simulator started");
 
 		display = new OGLDisplay();
+		display.run();
 
 
 	}//end: Constructor()
