@@ -1,20 +1,20 @@
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
 import java.util.*;
 
+enum State{
+	INTRO,MAIN_MENU, GAME
+}
 
 public class OGLDisplay{
 
-	private static enum State{
-		INTRO,MAIN_MENU, GAME
-	}
-
-	private static State state = State.INTRO;
+	private State state;
 	private Map<String, SimView> views;
 
 	private int display_width;
@@ -25,10 +25,10 @@ public class OGLDisplay{
 
 		views = new HashMap<String, SimView>();
 
-		views.put("MAIN_MENU", new ViewMainMenu());
 
 		display_width=800;
 		display_height=600;
+		state=State.INTRO;
 
 	}
 
@@ -42,6 +42,9 @@ public class OGLDisplay{
             Display.create();
 
             init();
+
+            views.put("MAIN_MENU", new ViewMainMenu(this));
+
 
 	        while(!Display.isCloseRequested()){
 	        	checkInput();
@@ -63,6 +66,11 @@ public class OGLDisplay{
 
         //Display.destroy();
 	}
+
+	public void setState(State state){
+		this.state=state;
+	}
+
 
 	//init(): initialize some stuff
 	public void init(){
@@ -102,7 +110,7 @@ public class OGLDisplay{
 	}
 
 
-	 private static void checkInput() {
+	 private void checkInput() {
         switch (state) {
         	 case INTRO:
 
@@ -124,12 +132,16 @@ public class OGLDisplay{
 
                 if (Keyboard.isKeyDown(Keyboard.KEY_RETURN)) {
                     //tate = State.GAME;
-                    System.out.println("Enter pressed");
+                    //System.out.println("Enter pressed");
                 }
                 if (Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
                     state = State.INTRO;
                 }
                 break;
+        }
+
+        if(Mouse.isButtonDown(0)){
+        	//System.out.println("Mouse X: " + Mouse.getX() + " | Mouse Y: " + Mouse.getY());
         }
     }
 
