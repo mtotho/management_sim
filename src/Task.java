@@ -1,3 +1,5 @@
+//package restuarantsim;
+
 enum TaskType{
 	KITCHEN, CASHIER, CLEANING, MAINTENANCE
 }

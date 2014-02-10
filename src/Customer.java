@@ -1,3 +1,5 @@
+//package restuarantsim;
+
 public class Customer{
 
 	//Constructor()

@@ -1,3 +1,5 @@
+//package restuarantsim;
+
 public class Employee{
 
 	private boolean busy;
