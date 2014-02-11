@@ -1,8 +1,8 @@
 
 public abstract class SimView{
-	protected OGLDisplay screen;
+	protected OGLGameContainer screen;
 
-	public SimView(OGLDisplay screen){
+	public SimView(OGLGameContainer screen){
 		this.screen=screen;
 	}
 
