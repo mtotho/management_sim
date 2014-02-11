@@ -6,12 +6,13 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.*;
+import org.newdawn.slick.*;
 
 import java.util.*;
 
-enum State{
-	INTRO,MAIN_MENU, GAME
-}
+//enum State{
+	//INTRO,MAIN_MENU, GAME
+//}
 
 public class OGLDisplay{
 
@@ -110,10 +111,11 @@ public class OGLDisplay{
 
 		switch (state) {
             case INTRO:
-            	RenderTool.renderText("Restuarant Simulator", 50,480);
-				RenderTool.renderText("Gordon Dragoon", 50,420);
-				RenderTool.renderText("Patrick Welch", 50,400);
-				RenderTool.renderText("Mike Toth", 50,380);
+            	//Graphics.drawString("Hello World", 10,10);
+            	//RenderTool.renderText("Restuarant Simulator", 50,480);
+				//RenderTool.renderText("Gordon Dragoon", 50,420);
+				//RenderTool.renderText("Patrick Welch", 50,400);
+				//RenderTool.renderText("Mike Toth", 50,380);
                 break;
             case GAME:
                 GL11.glColor3f(0f, 1.0f, 0f);
