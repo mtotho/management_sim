@@ -5,6 +5,7 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.*;
 
 import java.util.*;
 
@@ -19,6 +20,10 @@ public class OGLDisplay{
 
 	private int display_width;
 	private int display_height;
+
+	private long last_frame;
+
+
 	
 
 	public OGLDisplay(){
@@ -32,6 +37,19 @@ public class OGLDisplay{
 
 	}
 
+	//getTime(): return time in ms
+	private long getTime(){
+		return (Sys.getTime()*1000)/Sys.getTimerResolution();
+	}
+
+	//getDelta(): return time that has passed since last
+	private int getDelta(){
+		long current_time = getTime();
+		int delta = (int)(current_time-last_frame);
+		last_frame=getTime();
+		return delta;
+	}
+
 	//run(): starts the display and game loop
 	public void run(){
 
@@ -43,11 +61,15 @@ public class OGLDisplay{
 
             init();
 
+            last_frame=getTime();
+
             views.put("MAIN_MENU", new ViewMainMenu(this));
 
 
 	        while(!Display.isCloseRequested()){
 	        	checkInput();
+
+	        	System.out.println(getDelta());
 
 	        	//Animation goes here
 	            render();
