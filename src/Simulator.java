@@ -1,4 +1,8 @@
 //package restuarantsim;
+import org.newdawn.slick.*;
+import org.newdawn.slick.AppGameContainer;
+//import org.newdawn.slick.GameContainer;
+
 
 class Simulator{
 
@@ -17,8 +21,17 @@ class Simulator{
 
 		System.out.println("Simulator started");
 
-		display = new OGLDisplay();
-		display.run();
+		OGLGameContainer game = new OGLGameContainer("Management Simulator");
+	     try {
+	          AppGameContainer container = new AppGameContainer(game);
+	          container.start();
+	     } catch (SlickException e) {
+	          // TODO Auto-generated catch block
+	          e.printStackTrace();
+	     }
+
+		//display = new OGLDisplay();
+		//display.run();
 
 
 	}//end: Constructor()
