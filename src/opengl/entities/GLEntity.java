@@ -9,12 +9,10 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.gui.*;
 
-
 public abstract class GLEntity extends AbstractComponent{
 
 	protected int x,y, width, height;
 	protected double dx, dy;
-
 
 	public GLEntity(GameContainer gc){
 		super(gc);

@@ -51,16 +51,20 @@ public class StateGame extends BasicGameState{
       	Input input = gc.getInput();
   		if(input.isKeyDown(Input.KEY_UP)){
   			c1.setY(c1.getY()-c1.getDY()*delta);
+  			c1.setDirection(FigureDirection.UP);
   			//System.out.println(c1.getY()-c1.getDY());
       	}
       	if(input.isKeyDown(Input.KEY_RIGHT)){
       		c1.setX(c1.getX()+c1.getDX()*delta);
+      		c1.setDirection(FigureDirection.RIGHT);
       	}
   		if(input.isKeyDown(Input.KEY_DOWN)){
   			c1.setY(c1.getY()+c1.getDY()*delta);
+  			c1.setDirection(FigureDirection.DOWN);
       	}
       	if(input.isKeyDown(Input.KEY_LEFT)){
       		c1.setX(c1.getX()-c1.getDX()*delta);
+      		c1.setDirection(FigureDirection.LEFT);
       	}     
  
     }
