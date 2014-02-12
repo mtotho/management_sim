@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Restaurant{
 
 	private ArrayList<Employee> employees;
+	private ArrayList<Customer> customers;
 
 	//Constructor()
 	public Restaurant(){

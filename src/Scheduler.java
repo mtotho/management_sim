@@ -25,4 +25,16 @@ public class Scheduler{
 		return queue.get(queue.size()-1);
 
 	}//end: getTask()
+
+	public void setPriority(){
+
+		queue.get(Task).setPriority(int priority);
+
+	}// end setTaskPriority()
+
+	public int getPriority(){
+
+		return queue.get(Task),getPriority();
+	}//end getPriority()
+	
 }
