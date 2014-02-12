@@ -1,4 +1,5 @@
 //package restuarantsim;
+import java.util.ArrayList;
 
 public class Customer{
 
@@ -18,10 +19,10 @@ private ArrayList<String> order;
 
 	public String getOrder(){
 
-
 		return order.toString();
+
 	}//end getOrder()
 
-	
+
 
 }

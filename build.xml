@@ -10,7 +10,8 @@
     <path id="classpath">
         <fileset dir="${lwjgl_jar.dir}" includes="lwjgl_util.jar"/>
         <fileset dir="${lwjgl_jar.dir}" includes="lwjgl.jar"/>
-        
+        <fileset dir="${slick_jar.dir}" includes="slick.jar"/>
+        <!--<fileset dir="${twl.dir}" includes="TWL.jar"/>-->
     </path>
 
     <property name="build.dir"   value="build"/>
