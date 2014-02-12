@@ -22,7 +22,7 @@ public class StateGame extends BasicGameState{
 	private GLCustomer c1;
 	private ArrayList<GLCustomer> customers;
 
-    @Override
+    @Override 
     public void init(GameContainer gc, StateBasedGame game)
             throws SlickException {
        	this.game=game;

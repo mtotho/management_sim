@@ -23,6 +23,19 @@ public abstract class GLEntity extends AbstractComponent{
 		height=10;
 	}
 
+	public GLEntity(GameContainer gc, double relX, double relY, double relWidth, double relHeight){
+		super(gc);
+
+		int absoluteWidth = gc.getWidth();
+		int absoluteHeight = gc.getHeight();
+
+		x = (int)(relX*absoluteWidth);
+		y = (int)(relY*absoluteHeight);
+		width = (int)(relWidth*absoluteWidth);
+		height = (int)(relHeight*absoluteHeight);
+
+	}
+
 
 	
 	@Override

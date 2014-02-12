@@ -1,5 +1,6 @@
 package mftoth.states;
 
+import mftoth.entities.*;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 import org.newdawn.slick.GameContainer;
@@ -7,6 +8,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.gui.*;
  
 
 
@@ -29,22 +31,34 @@ public class StateMainMenu extends BasicGameState{
 	private int ID = 2;
 	private StateBasedGame game;
 
+	private GLButton btnNewGame;
+
     @Override
-    public void init(GameContainer container, StateBasedGame game)
+    public void init(GameContainer gc, StateBasedGame game)
             throws SlickException {
         this.game=game;
- 
+ 	
+ 		btnNewGame = new GLButton(gc, "New Game", 0.25, 0.15, 0.5, 0.2);
+ 		btnNewGame.setLabelX(200);
+
+ 		//btnNewGame.mousePressed(){
+
+ 		
+ 		
+
     }
  
     @Override
-    public void render(GameContainer container, StateBasedGame game, Graphics g)
+    public void render(GameContainer gc, StateBasedGame game, Graphics g)
             throws SlickException {
        	
        	g.setColor(Color.white);
 
 	    g.drawString("Main Menu", 50, 100);
 
-	    g.drawString("1. Press 1 to start game", 50, 130);
+	   // g.drawString("1. Press 1 to start game", 50, 130);
+
+	    btnNewGame.render(gc, g);
  
     }
  
