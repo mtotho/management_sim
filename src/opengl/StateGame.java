@@ -1,5 +1,7 @@
+
 package mftoth.states;
 
+import mftoth.entities.*;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 import org.newdawn.slick.GameContainer;
@@ -7,44 +9,37 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
- 
 
 
-public class StateMainMenu extends BasicGameState{
+public class StateGame extends BasicGameState{
 
-	//private GLButton btnNewGame; 
-	//private OGLGameContainer game;
-
-	//public ViewMainMenu(OGLGameContainer game){
-		//this.game=game;
-		//super(screen);
-
-		//Width: 60% of display, height: 20% of display, X: 20% from left, Ystart: 40% from top
-		
-		//btnNewGame= new GLButton(Display.getWidth()*0.2, Display.getHeight()-Display.getHeight()*0.4, Display.getWidth()*0.6,Display.getHeight()*0.2, "New Game");
-		//btnNewGame= new GLButton(100f,40f, 20f, 20f, "New Game");
-		
-	//}
-
-	private int ID = 2;
+	
+	private int ID = 3;
 	private StateBasedGame game;
 
+	//private GLCustomer c1;
+
     @Override
-    public void init(GameContainer container, StateBasedGame game)
+    public void init(GameContainer gc, StateBasedGame game)
             throws SlickException {
-        this.game=game;
+       	this.game=game;
+
+      // 	c1 = new GLCustomer(gc);
+
+
  
     }
  
     @Override
-    public void render(GameContainer container, StateBasedGame game, Graphics g)
+    public void render(GameContainer gc, StateBasedGame game, Graphics g)
             throws SlickException {
-       	
-       	g.setColor(Color.white);
+      	
+  		g.setColor(Color.white);
+	    g.drawString("Game State", 50, 10);
 
-	    g.drawString("Main Menu", 50, 100);
+	   // c1.setLocation(100,100);
+	    //c1.render(gc, g);
 
-	    g.drawString("1. Press 1 to start game", 50, 130);
  
     }
  
@@ -63,8 +58,8 @@ public class StateMainMenu extends BasicGameState{
 
     public void keyReleased(int key, char c) {
 	    switch(key) {
-	    case Input.KEY_1:
-	        game.enterState(3);
+	    case Input.KEY_ESCAPE:
+	        game.enterState(1);
 	        break;
 	    case Input.KEY_2:
 	        // TODO: Implement later

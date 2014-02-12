@@ -12,7 +12,7 @@ class Simulator{
 		new Simulator();
 	}//end: main()
 
-	public OGLDisplay display;
+	//public OGLDisplay display;
 
 	//Constructor()
 	public Simulator(){
@@ -24,7 +24,8 @@ class Simulator{
 		OGLGameContainer game = new OGLGameContainer("Management Simulator");
 	     try {
 	          AppGameContainer container = new AppGameContainer(game);
-	          container.setDisplayMode(1280, 800, false);
+	          container.setDisplayMode(800, 600, false);
+	          container.setShowFPS(false);
 	          container.start();
 	     } catch (SlickException e) {
 	          // TODO Auto-generated catch block
