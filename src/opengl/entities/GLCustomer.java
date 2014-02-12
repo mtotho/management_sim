@@ -9,27 +9,27 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.gui.*;
 
-/*
+
 public class GLCustomer extends GLEntity{
 
-	protected double x,y, width, height;
+//	protected double x,y, width, height;
 
 
 	public GLCustomer(GameContainer gc){
 		super(gc);
-
-		x=0;
-		y=0;
-		width=10;
-		height=10;
+		x=100;
+		y=100;
+		dx=1;
+		dy=1;
 	}
 
 
-	@Override
-	public void render(GameContainer gc, Graphics g){
-		g.drawRoundRect(x, y, height, width, 2);
+	//@Override
+	public void render(GUIContext gc, Graphics g){
+		g.fillRoundRect(x, y, height, width, 2);
 	}
 
+	/*
 	//@Override
 	public double getHeight(){
 		return height;
@@ -53,7 +53,7 @@ public class GLCustomer extends GLEntity{
 	public void setLocation(double x, double y){
 		this.x=x;
 		this.y=y;
-	}
+	}*/
 
 
-}*/
+}
