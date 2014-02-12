@@ -21,8 +21,11 @@ public class GLCustomer extends GLEntity{
 
 	public GLCustomer(GameContainer gc) throws SlickException{
 		super(gc);
-		x=100;
-		y=100;
+		Random r = new Random();
+		int low =0;
+		
+		x = r.nextInt(gc.getWidth()-low) +low;
+		y = r.nextInt(gc.getHeight()-low) +low;
 		dx=0.2;
 		dy=0.2;
 		isAutomated=false;
@@ -100,7 +103,7 @@ public class GLCustomer extends GLEntity{
 		x=x + (int)((sign_dx)*dx*delta);
 		y=y + (int)((sign_dy)*dy*delta);
 
-		System.out.println(sign_dy);
+		//System.out.println(sign_dy);
 	}
 
 
