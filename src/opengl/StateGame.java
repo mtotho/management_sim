@@ -25,8 +25,7 @@ public class StateGame extends BasicGameState{
        	this.game=game;
 
       	c1 = new GLCustomer(gc);
-      	c1.setDX(0.2);
-      	c1.setDY(0.2);
+      	
 
 
  

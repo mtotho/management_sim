@@ -12,48 +12,29 @@ import org.newdawn.slick.gui.*;
 
 public class GLCustomer extends GLEntity{
 
-//	protected double x,y, width, height;
+	private Image image;
 
-
-	public GLCustomer(GameContainer gc){
+	public GLCustomer(GameContainer gc) throws SlickException{
 		super(gc);
 		x=100;
 		y=100;
-		dx=1;
-		dy=1;
+		dx=0.2;
+		dy=0.2;
+
+	
+		image = new Image("res/pickachu.png");
+	
+
+	
 	}
 
 
 	//@Override
 	public void render(GUIContext gc, Graphics g){
-		g.fillRoundRect(x, y, height, width, 2);
+		//g.setColor(Color.green);
+		//g.fillRoundRect(x, y, height, width, 2);
+		g.drawImage(image, x,y);
 	}
-
-	/*
-	//@Override
-	public double getHeight(){
-		return height;
-	}
-
-	//@Override
-	public double getWidth(){
-		return width;
-	}
-
-	//@Override
-	public double getX(){
-		return x;
-	}
-	//@Override
-	public double getY(){
-		return y;
-	}
-
-	//[@Override
-	public void setLocation(double x, double y){
-		this.x=x;
-		this.y=y;
-	}*/
 
 
 }
