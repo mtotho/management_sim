@@ -31,8 +31,7 @@ public class StateGame extends BasicGameState{
       	
       	customers=new ArrayList<GLCustomer>();
 
-
- 
+      	
     }
  
     @Override

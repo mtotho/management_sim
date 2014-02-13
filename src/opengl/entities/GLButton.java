@@ -120,6 +120,10 @@ public class GLButton extends GLEntity{
 		
 	}
 
+	public boolean isPressed(){
+		return isPressed;
+	}
+
 	public void mousePressed(int button, int posx, int posy){
 
 		if(button==0 && inBounds(posx,posy)){
@@ -131,7 +135,8 @@ public class GLButton extends GLEntity{
 		
 		//Button is released.. complete click
 		if(button==0 && isPressed){
-
+			
+			isPressed=false;
 		}
 	}
 

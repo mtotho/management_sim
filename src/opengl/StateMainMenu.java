@@ -48,7 +48,6 @@ public class StateMainMenu extends BasicGameState{
  		btnAbout.setY(150);
 
  		//btnNewGame.mousePressed(){
-
  		
  		
 
@@ -57,7 +56,7 @@ public class StateMainMenu extends BasicGameState{
     @Override
     public void render(GameContainer gc, StateBasedGame game, Graphics g)
             throws SlickException {
-            	
+
        	g.setColor(Color.white);
 		g.fillRect(0,0, gc.getWidth(), gc.getHeight());
 
@@ -97,6 +96,17 @@ public class StateMainMenu extends BasicGameState{
 	    default:
 	        break;
 	    }
+	}
+
+	public void mousePressed(int button, int posx, int posy){
+		if(btnNewGame.isPressed()){
+			game.enterState(3);
+		}
+
+		if(btnAbout.isPressed()){
+			System.out.println("btnAbout clicked");
+		}
+
 	}
 
 }
