@@ -59,7 +59,6 @@ public class GLCustomer extends GLEntity{
 		//g.setColor(Color.green);
 		//g.fillRoundRect(x, y, height, width, 2);
 
-
 		switch(direction){
 			case LEFT:
 				g.drawImage(sprite_sheet.getSprite(0,1), x,y);

@@ -19,7 +19,7 @@ public class GLButton extends GLEntity{
 	private SpriteSheet sprite_sheet;
 	private String label;
 	//private FigureDirection direction;
-	private GameContainer game;
+	
 
 	private TrueTypeFont ttfFont;
 	private Font font;
@@ -28,16 +28,16 @@ public class GLButton extends GLEntity{
 	private int lblY;
 
 	private boolean isPressed;
+	private boolean isHovered;
 
 
 	public GLButton(GameContainer gc) throws SlickException{
 		super(gc);
-		game=gc;
-		//image = new Image("res/pickachu.png");
 		
+		init();
 		//clefairy sprite
 		//image = new Image("res/clefairy_sprite.png");
-		//sprite_sheet = new SpriteSheet(image, 17, 17);
+		
 
 	}
 
@@ -45,21 +45,34 @@ public class GLButton extends GLEntity{
 		this(gc);
 
 		this.label=label;
-		setUpFonts();
-
+		
 	}
 
-	public GLButton(GameContainer gc, double relX, double relY, double relWidth, double relHeight) throws SlickException{
-		super(gc,relX, relY, relWidth, relHeight);
-		setUpFonts();
+	public GLButton(GameContainer gc, double x, double y, double width, double height, boolean isRel) throws SlickException{
+		super(gc,x, y, width, height, isRel);
+		
+		init();
 	}
 
-	public GLButton(GameContainer gc, String label, double relX, double relY, double relWidth, double relHeight) throws SlickException{
-		super(gc,relX, relY, relWidth, relHeight);
+	public GLButton(GameContainer gc, String label, double x, double y, double width, double height, boolean isRel) throws SlickException{
+		super(gc,x, y, width, height, isRel);
 
 		this.label=label;
-		setUpFonts();
 		
+		init();
+	}
+
+	//Only width height given, assume centered
+	public GLButton(GameContainer gc, String label, double width, double height) throws SlickException{
+		super(gc, width, height);
+		this.label=label;
+		init();
+	}
+
+	private void init() throws SlickException{
+		setUpFonts();
+		image = new Image("res/buttons/sprite_mc_medium.png");
+		sprite_sheet = new SpriteSheet(image, 499, 80);
 	}
 
 	private void setUpFonts(){
@@ -70,7 +83,7 @@ public class GLButton extends GLEntity{
 
 		if(height>fontSize){
 			int temp = height-fontSize;
-			lblY = temp/2;
+			lblY = temp/2 -(fontSize/4);
 			lblX = 0;
 		}else{
 			lblY=0;
@@ -91,9 +104,15 @@ public class GLButton extends GLEntity{
 
 	//@Override
 	public void render(GUIContext gc, Graphics g){
-		g.setColor(Color.green);
-		g.fillRoundRect(x, y, width, height, 2);
-
+		//g.setColor(Color.green);
+		//g.fillRoundRect(x, y, width, height, 2);
+		//image.draw(x,y,width,height);
+		
+		if(!isHovered){
+			g.drawImage(sprite_sheet.getSprite(0,0), x,y);
+		}else{
+			g.drawImage(sprite_sheet.getSprite(0,1), x,y);
+		}
 		g.setColor(Color.blue);
 		g.setFont(ttfFont);
 		g.drawString(label,x + lblX, y + lblY);
@@ -112,9 +131,15 @@ public class GLButton extends GLEntity{
 		
 		//Button is released.. complete click
 		if(button==0 && isPressed){
-			isPressed=false;
 
+		}
+	}
 
+	public void mouseMoved(int oldx, int oldy, int newx, int newy){
+		if(inBounds(newx, newy)){
+			isHovered=true;
+		}else{
+			isHovered=false;
 		}
 	}
 

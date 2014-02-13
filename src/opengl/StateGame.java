@@ -96,7 +96,7 @@ public class StateGame extends BasicGameState{
       	}     
       	if(input.isKeyDown(Input.KEY_Q)){
       		
-      		customers.add(new GLCustomer(gc));
+      		customers.add(new GLCustomer(gc,true));
 
       		//c1.setDirection(FigureDirection.LEFT);
       	}     

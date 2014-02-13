@@ -13,9 +13,12 @@ public abstract class GLEntity extends AbstractComponent{
 
 	protected int x,y, width, height;
 	protected double dx, dy;
+	protected GameContainer game;
 
 	public GLEntity(GameContainer gc){
 		super(gc);
+
+		game=gc;
 
 		x=0;
 		y=0;
@@ -23,16 +26,39 @@ public abstract class GLEntity extends AbstractComponent{
 		height=10;
 	}
 
-	public GLEntity(GameContainer gc, double relX, double relY, double relWidth, double relHeight){
+	public GLEntity(GameContainer gc, double x, double y, double width, double height, boolean isRel){
 		super(gc);
+		game=gc;
+
+		if(isRel){
+			int absoluteWidth = gc.getWidth();
+			int absoluteHeight = gc.getHeight();
+
+			this.x = (int)(x*absoluteWidth);
+			this.y = (int)(y*absoluteHeight);
+			this.width = (int)(width*absoluteWidth);
+			this.height = (int)(height*absoluteHeight);
+		}else{
+			this.x=(int)x;
+			this.y=(int)y;
+			this.width=(int)width;
+			this.height=(int)height;
+		}
+	}
+
+	public GLEntity(GameContainer gc, double width, double height){
+		super(gc);
+		game=gc;
+
+		this.width=(int)width;
+		this.height=(int)height;
 
 		int absoluteWidth = gc.getWidth();
-		int absoluteHeight = gc.getHeight();
+		double diff = absoluteWidth-width;
 
-		x = (int)(relX*absoluteWidth);
-		y = (int)(relY*absoluteHeight);
-		width = (int)(relWidth*absoluteWidth);
-		height = (int)(relHeight*absoluteHeight);
+		x=(int)(diff/2);
+		y=0;
+
 
 	}
 
