@@ -24,8 +24,8 @@ class Simulator{
 		OGLGameContainer game = new OGLGameContainer("Management Simulator");
 	     try {
 	          AppGameContainer container = new AppGameContainer(game);
-	          container.setDisplayMode(800, 600, false);
-	          container.setShowFPS(false);
+	          container.setDisplayMode(1280, 800, false);
+	          container.setShowFPS(true);
 	          container.start();
 	     } catch (SlickException e) {
 	          // TODO Auto-generated catch block

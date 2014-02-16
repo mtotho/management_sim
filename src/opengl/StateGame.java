@@ -22,7 +22,7 @@ public class StateGame extends BasicGameState{
 	private GLCustomer c1;
 	private ArrayList<GLCustomer> customers;
 
-    @Override
+    @Override 
     public void init(GameContainer gc, StateBasedGame game)
             throws SlickException {
        	this.game=game;
@@ -31,8 +31,7 @@ public class StateGame extends BasicGameState{
       	
       	customers=new ArrayList<GLCustomer>();
 
-
- 
+      	
     }
  
     @Override
@@ -40,7 +39,7 @@ public class StateGame extends BasicGameState{
             throws SlickException {
       	
   		g.setColor(Color.white);
-	    g.drawString("Game State", 50, 10);
+	   // g.drawString("Game State", 50, 10);
 
 	   	c1.setLocation(c1.getX(),c1.getY());
 	    c1.render(gc, g);
@@ -96,7 +95,7 @@ public class StateGame extends BasicGameState{
       	}     
       	if(input.isKeyDown(Input.KEY_Q)){
       		
-      		customers.add(new GLCustomer(gc, true));
+      		customers.add(new GLCustomer(gc,true));
 
       		//c1.setDirection(FigureDirection.LEFT);
       	}     
