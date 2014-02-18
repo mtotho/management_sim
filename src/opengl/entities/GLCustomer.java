@@ -16,55 +16,48 @@ public class GLCustomer extends GLEntity implements Mover{
 	private Image image;
 	private SpriteSheet sprite_sheet;
 	private FigureDirection direction;
-	public boolean isAutomated;
 	private GameContainer game;
 	private Path path;
 	private int path_step;
 	private double doubleX,doubleY;
 	private OGLMap map;
 
+	private boolean isMoving;
+	private int destx, desty;
 
-	public GLCustomer(GameContainer gc) throws SlickException{
+	private AStarPathFinder astar;
+	private boolean walking_path;
+
+	public GLCustomer(GameContainer gc, OGLMap map) throws SlickException{
 		super(gc);
-		Random r = new Random();
-		int low =0;
-		
-		//x = r.nextInt(gc.getWidth()-low) +low;
-		//y = r.nextInt(gc.getHeight()-low) +low;
+		this.map=map;
+		game=gc;
+
 		x=0;
 		y=0;
+		destx=0;
+		desty=0;
 
-		doubleX=x;
-		doubleY=y;
-		dx=0.1;
-		dy=0.1;
-		isAutomated=false;
-		game=gc;
+		dx=0.2;
+		dy=0.2;
+
+		
+		//System.out.println("Path length " + path.getLength());
+		walking_path=false;
+		path_step=0;
 		//image = new Image("res/pickachu.png");
 		
 		//clefairy sprite
 		image = new Image("res/clefairy_sprite.png");
 		sprite_sheet = new SpriteSheet(image, 17, 17);
 
+		//Default values
 		direction = FigureDirection.RIGHT;
+		isMoving=false;
 
-		path = new Path();
-		path_step=0;
-	}
 
-	public GLCustomer(GameContainer gc, boolean isAutomated) throws SlickException{
-		this(gc);
-
-		this.isAutomated=isAutomated;
-
-		if(isAutomated){
-			Random r = new Random();
-			int low =0;
-			
-			x = r.nextInt(gc.getWidth()-low) +low;
-			y = r.nextInt(gc.getHeight()-low) +low;
-		}
-
+		//path = new Path();
+		
 	}
 
 	public void setMap(OGLMap map){
@@ -76,7 +69,7 @@ public class GLCustomer extends GLEntity implements Mover{
 		//g.setColor(Color.green);
 		//g.fillRoundRect(x, y, height, width, 2);
 
-
+		//Change image dependent on direction
 		switch(direction){
 			case LEFT:
 				g.drawImage(sprite_sheet.getSprite(0,1), (int)x,(int)y);
@@ -92,58 +85,135 @@ public class GLCustomer extends GLEntity implements Mover{
 				g.drawImage(sprite_sheet.getSprite(0,0), (int)x,(int)y);
 				break;
 		}
-
 		
 	}
+
+	public void update(GameContainer gc, StateBasedGame game, int delta){
+
+		walkPath();
+
+		//Movement handler
+		if(x-destx<2 && x-destx>=-2){
+			x=destx;
+		}
+		if(y-desty<2 && y-desty>=-2){
+			y=desty;
+		}
+
+		if(x!=destx || y!=desty){
+			isMoving=true;
+			walking_path=true;
+			if(x>destx){
+				x=x-(int)(delta*dx);
+			}else if(x<destx){
+				x=x+(int)(delta*dx);
+			}
+			if(y>desty){
+				y=y-(int)(delta*dy);
+			}else if(y<desty){
+				y=y+(int)(delta*dy);
+			}
+		}else{
+			isMoving=false;
+			if(walking_path){
+				walking_path=false;
+				path_step++;
+			}
+		}
+
+
+
+	}
+
+
+
+	//Move to the given tile x,y
+	public void move(int tilex, int tiley){
+		//isMoving=true;
+		this.destx=map.getAbsX(tilex);
+		this.desty=map.getAbsY(tiley);
+	}
+
+	//Move 1 tile in the given direction
+	public void move(FigureDirection direction){
+		//get current tile coord
+		int tilex = map.getTileX(x);
+		int tiley = map.getTileY(y);
+		int dest_tilex,dest_tiley;
+		dest_tilex=0;
+		dest_tiley=0;
+		this.direction=direction;
+
+	//	System.out.println("origin tile x " + tilex);
+	//	System.out.println("origin tile y " + tiley);
+		if(!isMoving){	
+
+			switch(direction){
+				case LEFT:
+					if(tilex>0){
+						dest_tilex=tilex-1;
+					}else{
+						dest_tilex=0;
+					}
+
+					destx=map.getAbsX(dest_tilex);
+					break;
+				case UP:
+					if(tiley>0){
+						dest_tiley=tiley-1;
+					}else{
+						dest_tiley=0;
+					}
+					desty=map.getAbsY(dest_tiley);
+					break; 
+				case DOWN:
+					if(tiley<map.getHeightInTiles()){
+						dest_tiley=tiley+1;
+					}else{
+						dest_tiley=map.getHeightInTiles();
+					}
+
+					desty=map.getAbsY(dest_tiley);
+					break;
+				case RIGHT:
+					if(tilex<map.getWidthInTiles()){
+						dest_tilex=tilex+1;
+					}else{
+						dest_tilex=map.getWidthInTiles();
+					}	
+					destx=map.getAbsX(dest_tilex);
+					break;
+			}
+		}
+
+	}
+
+	public void setMoving(boolean flag){
+		isMoving=flag;
+	}
+
 	//public void setDestination()
 	public void setPath(Path path){
 		this.path=path;
+		path_step=0;
 	}
 
 	public void walkTileX(int tileX){
 		int absx = map.getAbsX(tileX);
 
-		
+		int diff = x-absx;
+
+
+
 	}
 
-	public void walkPath(int delta){
-		if(path_step<path.getLength()){
-			int destX = path.getX(path_step);
-			int destY = path.getY(path_step);
-			
-	
+	public void walkPath(){
+		//System.out.println("path step: " + path_step);
+		if(path_step<path.getLength() && !walking_path){
+			destx=map.getAbsX(path.getX(path_step));
+			desty=map.getAbsY(path.getY(path_step));
 
 
-			if( !(  (destX<=(doubleX+5)) && (destX>=(doubleX-5)) ) || !( (destY<=(doubleY+5)) && (destY>=(doubleY-5)) )){
-
-
-				if(destX>doubleX){
-					
-					direction=FigureDirection.RIGHT;
-					doubleX = doubleX + (dx*delta);
-					
-					
-				}else{
-					direction=FigureDirection.LEFT;
-					
-					doubleX = doubleX - (dx*delta);
-				}
-
-
-				if(destY>doubleY){
-					direction=FigureDirection.DOWN;
-					doubleY = doubleY + (dy*delta);
-
-				}else{
-					direction=FigureDirection.UP;
-					doubleY = doubleY - (dy*delta);
-				}
-
-				x=(int)doubleX;
-				y=(int)doubleY;
-			}else{
-				path_step++;
-			}
 		}
 	}
 

@@ -22,9 +22,14 @@
    </properties>
   </tile>
  </tileset>
- <layer name="Tile Layer 2" width="54" height="34">
+ <layer name="grass" width="54" height="34">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3W2w6EIAwEUIz//8++GlJ6L0yNDyS6q5XDCHiNMS6i3Yvfpea9z1I/8gx01+7+/a5Y/S+6kOfXPXzvFKpr9nzBtTJZXV5TpUs67urStJOu1f/avN7nc3bcddXzK8vFOWZndO+qdHEWqv/eebjTpc2OMnZycesGokuzvlEO6twzZl6XZU2SXFQ9zXpS5YrWWc0hbtxOurRjbN2bo/vWDpenfxmmSpfXhJ7XSZdUA9kl7S1ZWWa7MsccwRV9j9Bc2pw6ubKvRXFZc+3isn6rdHRxhtPfIp4+eHLp4MrM43fhuh4C3/NmsBwAAA==
+   H4sIAAAAAAAAA+3DQQ0AAAwDoat/05OxDySsmqqqqqqqqurDA3kfaA+wHAAA
+  </data>
+ </layer>
+ <layer name="collision" width="54" height="34">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+2XwQnAIBTFhO6/czcQCzGITa7PwM/RMdZ5PrwlPIu6GM+iLsazqIvxLOpiPIvZfTs2i7qYzaIuZrOoi9ks6mI2i7qYzaIuZrO4tWvGH/8wOzyLuhjPoi7Gs6iL8SzqYjyL07peayhAPrAcAAA=
   </data>
  </layer>
 </map>

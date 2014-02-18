@@ -9,7 +9,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.util.pathfinding.Path;
+import org.newdawn.slick.util.pathfinding.*;
 import org.newdawn.slick.tiled.TiledMap;
 
 import java.util.ArrayList;
@@ -27,6 +27,7 @@ public class StateGame extends BasicGameState{
 	//private Path customerPath;
 	//private TiledMap map;
   private OGLMap map;
+  private AStarPathFinder astar;
 	//private boolean[][] blocking;
 
     @Override 
@@ -54,11 +55,15 @@ public class StateGame extends BasicGameState{
         }*/
 
         
-      	c1 = new GLCustomer(gc);
+      	c1 = new GLCustomer(gc, map);
         c1.setMap(map);
       	c1.setLocation(map.getAbsX(3), map.getAbsY(1));
       	customers=new ArrayList<GLCustomer>();
 
+        astar =new AStarPathFinder(map, 200, false);
+        Path path = astar.findPath(null, 1, 1, 53,1);
+        c1.setPath(path);
+      //  System.out.println("path length: " + path.getLength()); 
 
     }
  
@@ -86,22 +91,12 @@ public class StateGame extends BasicGameState{
     public void update(GameContainer gc, StateBasedGame game, int delta)
             throws SlickException {
 
-
+        c1.update(gc,game,delta);
         //for(int i=0; i<customerPath.getLength(); i++){
      
         	//c1.walkPath(delta);
        
-       // }
-
-     	for(int i=0; i<customers.size(); i++){
-    		GLCustomer customer = (GLCustomer)customers.get(i);
-    		
-    		if(customer.isAutomated){
-				customer.randomMovement(delta);
-			}
-
-    		//customer.render(gc, g);	
-    	}
+       // } 
         
 
       	Input input = gc.getInput();
@@ -109,31 +104,39 @@ public class StateGame extends BasicGameState{
         int mousex = input.getMouseX();
         int mousey = input.getMouseY();
 
-        System.out.println("Map coord: x- " + map.getTileX(mousex) + " | y- " +map.getTileY(mousey));
+        //System.out.println("Map coord: x- " + map.getTileX(mousex) + " | y- " +map.getTileY(mousey));
 
       //	if(!blocked(c1.getX(), c1.getY())){
 	  		if(input.isKeyDown(Input.KEY_UP)){
-	  			c1.setY(c1.getY()-c1.getDY()*delta);
-	  			c1.setDirection(FigureDirection.UP);
-	  			//System.out.println(c1.getY()-c1.getDY());
+	  			//c1.setY(c1.getY()-c1.getDY()*delta);
+	  			//c1.setDirection(FigureDirection.UP);
+          //c1.setMoving(true);
+	  			c1.move(FigureDirection.UP);
+          //System.out.println(c1.getY()-c1.getDY());
 	      	}
 	      	if(input.isKeyDown(Input.KEY_RIGHT)){
-	      		c1.setX(c1.getX()+c1.getDX()*delta);
-	      		c1.setDirection(FigureDirection.RIGHT);
+	      		//c1.setX(c1.getX()+c1.getDX()*delta);
+	      		//c1.setDirection(FigureDirection.RIGHT);
+            //c1.setMoving(true);
+            c1.move(FigureDirection.RIGHT);
 	      	}
 	  		if(input.isKeyDown(Input.KEY_DOWN)){
-	  			c1.setY(c1.getY()+c1.getDY()*delta);
-	  			c1.setDirection(FigureDirection.DOWN);
+	  			//c1.setY(c1.getY()+c1.getDY()*delta);
+	  			//c1.setDirection(FigureDirection.DOWN);
+         // c1.setMoving(true);
+          c1.move(FigureDirection.DOWN);
 	      	}
 	      	if(input.isKeyDown(Input.KEY_LEFT)){
-	      		c1.setX(c1.getX()-c1.getDX()*delta);
-	      		c1.setDirection(FigureDirection.LEFT);
+	      	//	c1.setX(c1.getX()-c1.getDX()*delta);
+	      		//c1.setDirection(FigureDirection.LEFT);
+            //c1.setMoving(true);
+            c1.move(FigureDirection.LEFT);
 	      	}  
       //	}
            
       	if(input.isKeyDown(Input.KEY_Q)){
       		
-      		customers.add(new GLCustomer(gc,true));
+      		customers.add(new GLCustomer(gc,map));
 
       		//c1.setDirection(FigureDirection.LEFT);
       	}     

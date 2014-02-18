@@ -30,12 +30,12 @@ public class OGLMap implements TileBasedMap{
                 }
             }
         }*/
-
+       // System.out.println(map.getTileProperty(map.getTileId(11, 1, map.getLayerIndex("collision")), blocking_property, "false").equals("true"));
  	}
 
     @Override
     public boolean blocked(PathFindingContext ctx, int x, int y) {
-    	return map.getTileProperty(map.getTileId(x, y, 0), blocking_property, "false").equals("true");
+    	return map.getTileProperty(map.getTileId(x, y, map.getLayerIndex("collision")), blocking_property, "false").equals("true");
     }
 
     @Override
@@ -51,6 +51,14 @@ public class OGLMap implements TileBasedMap{
     @Override
     public int getWidthInTiles() {
         return WIDTH;
+    }
+
+    public int getTileHeight(){
+    	return map.getTileHeight();
+    }
+
+    public int getTileWidth(){
+    	return map.getTileWidth();
     }
 
     @Override

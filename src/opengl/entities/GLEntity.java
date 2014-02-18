@@ -113,6 +113,8 @@ public abstract class GLEntity extends AbstractComponent{
 		this.dy=dy;
 	}
 
+
+
 	//[@Override
 	public void setLocation(int x, int y){
 		this.x=x;
