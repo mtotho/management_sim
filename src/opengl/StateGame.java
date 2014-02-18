@@ -13,6 +13,7 @@ import org.newdawn.slick.util.pathfinding.Path;
 import org.newdawn.slick.tiled.TiledMap;
 
 import java.util.ArrayList;
+import mftoth.map.*;
 
 
 public class StateGame extends BasicGameState{
@@ -23,17 +24,22 @@ public class StateGame extends BasicGameState{
 
 	private GLCustomer c1;
 	private ArrayList<GLCustomer> customers;
-	private Path customerPath;
-	private TiledMap map;
-	private boolean[][] blocking;
+	//private Path customerPath;
+	//private TiledMap map;
+  private OGLMap map;
+	//private boolean[][] blocking;
 
     @Override 
     public void init(GameContainer gc, StateBasedGame game)
             throws SlickException {
 
        	this.game=game;
+        map = new OGLMap();
 
-       	map = new TiledMap("res/maps/tile_test.tmx");
+        //AStarPathFinder pathFinder = new AStarPathFinder(map, 100, false);
+        //Path path = pathFinder.findPath(null, 0, 0, 50, 30);
+
+      /* 	map = new TiledMap("res/maps/tile_test.tmx");
        	blocking = new boolean[map.getWidth()][map.getHeight()];
         for (int x = 0; x < map.getWidth(); x++) {
             for (int y = 0; y < map.getHeight(); y++) {
@@ -45,30 +51,21 @@ public class StateGame extends BasicGameState{
                     blocking[x][y] = true;
                 }
             }
-        }
+        }*/
 
+        
       	c1 = new GLCustomer(gc);
-      	
+        c1.setMap(map);
+      	c1.setLocation(map.getAbsX(3), map.getAbsY(1));
       	customers=new ArrayList<GLCustomer>();
 
-      	customerPath = new Path();
-      	customerPath.appendStep(10,0);
-      	customerPath.appendStep(10,100);
-      	customerPath.appendStep(100,100);
-      	customerPath.appendStep(100,50);
-      	customerPath.appendStep(400,50);
-      	customerPath.appendStep(400,200);
-      	customerPath.appendStep(600,200);
-      	customerPath.appendStep(600,600);
-
-      	c1.setPath(customerPath);
 
     }
  
     @Override
     public void render(GameContainer gc, StateBasedGame game, Graphics g)
             throws SlickException {
-      	map.render(0,0);
+      	map.render();
 
 
   		g.setColor(Color.white);
@@ -89,7 +86,7 @@ public class StateGame extends BasicGameState{
     public void update(GameContainer gc, StateBasedGame game, int delta)
             throws SlickException {
 
-            
+
         //for(int i=0; i<customerPath.getLength(); i++){
      
         	//c1.walkPath(delta);
@@ -109,7 +106,12 @@ public class StateGame extends BasicGameState{
 
       	Input input = gc.getInput();
       	
-      	if(!blocked(c1.getX(), c1.getY())){
+        int mousex = input.getMouseX();
+        int mousey = input.getMouseY();
+
+        System.out.println("Map coord: x- " + map.getTileX(mousex) + " | y- " +map.getTileY(mousey));
+
+      //	if(!blocked(c1.getX(), c1.getY())){
 	  		if(input.isKeyDown(Input.KEY_UP)){
 	  			c1.setY(c1.getY()-c1.getDY()*delta);
 	  			c1.setDirection(FigureDirection.UP);
@@ -127,7 +129,7 @@ public class StateGame extends BasicGameState{
 	      		c1.setX(c1.getX()-c1.getDX()*delta);
 	      		c1.setDirection(FigureDirection.LEFT);
 	      	}  
-      	}
+      //	}
            
       	if(input.isKeyDown(Input.KEY_Q)){
       		
@@ -155,11 +157,6 @@ public class StateGame extends BasicGameState{
     public int getID() {
         // TODO Auto-generated method stub
         return ID;
-    }
-
-    public boolean blocked(float x, float y){
-    	System.out.println("float x " + x +  " float y " + y + " | blocking " + blocking[(int)(x/map.getTileWidth())][(int)(y/map.getTileHeight())]);
-    	return blocking[(int)(x/map.getTileWidth())][(int)(y/map.getTileHeight())];
     }
 
     public void keyReleased(int key, char c) {

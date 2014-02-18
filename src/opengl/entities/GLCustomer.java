@@ -1,5 +1,5 @@
 package mftoth.entities;
-
+import mftoth.map.*;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 import org.newdawn.slick.GameContainer;
@@ -21,6 +21,7 @@ public class GLCustomer extends GLEntity implements Mover{
 	private Path path;
 	private int path_step;
 	private double doubleX,doubleY;
+	private OGLMap map;
 
 
 	public GLCustomer(GameContainer gc) throws SlickException{
@@ -66,6 +67,10 @@ public class GLCustomer extends GLEntity implements Mover{
 
 	}
 
+	public void setMap(OGLMap map){
+		this.map=map;
+	}
+
 	//@Override
 	public void render(GUIContext gc, Graphics g){
 		//g.setColor(Color.green);
@@ -93,6 +98,12 @@ public class GLCustomer extends GLEntity implements Mover{
 	//public void setDestination()
 	public void setPath(Path path){
 		this.path=path;
+	}
+
+	public void walkTileX(int tileX){
+		int absx = map.getAbsX(tileX);
+
+		
 	}
 
 	public void walkPath(int delta){
