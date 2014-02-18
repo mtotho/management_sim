@@ -28,8 +28,14 @@ public class Employee{
 		
 	}//end: setTask()
 
-	public int doTask(){
-		//blah blah
+	public int doTask(int delta){
+		
+		if(active_task.isTimeLeft){
+			active_task.consumeTime(mod * delta)
+		}
+		else{
+			active_task = taskQueue.getNextTask()
+		}
 		
 		return 1;
 	}

@@ -6,6 +6,7 @@ public class Scheduler{
 
 	private ArrayList<Task> queue;
 	int index;
+	private Task nextTask;
 
 
 	//Constructor()
@@ -38,5 +39,11 @@ public class Scheduler{
 
 		return queue.get(index).getPriority();
 	}//end getPriority()
+
+	public Task getNext(Task){
+
+
+		return nextTask;
+	}//end getNext
 
 }

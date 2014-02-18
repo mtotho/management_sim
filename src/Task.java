@@ -9,6 +9,7 @@ public class Task{
 	private boolean allow_preemption;
 	private int priority;
 	private TaskType type;
+	private boolean isTimeLeft;
 
 	//Constructor(priority, completion_time)
 	public Task(int priority, int completion_time){
@@ -43,17 +44,28 @@ public class Task{
 
 	public void setPreemption(boolean preemption){
 		allow_preemption=preemption;
-	}
+	}//end setPreemption
 
 	public boolean getPreemption(){
 		return allow_preemption;
-	}
+	}//end getPreemption
 
 	public void setType(TaskType type){
 		this.type=type;
-	}
+	}//end setType
 
 	public TaskType getType(){
 		return type;
-	}
+	}//end getType
+
+	public boolean isTimeLeft{
+
+		return isTimeLeft;
+	}//end isTimeLeft
+
+	public consumeTime(int delta){
+
+		time -= delta;
+
+	}//end consumeTime
 }
