@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class Scheduler{
 
 	private ArrayList<Task> queue;
+	int index;
+
 
 	//Constructor()
 	public Scheduler(){
@@ -25,4 +27,16 @@ public class Scheduler{
 		return queue.get(queue.size()-1);
 
 	}//end: getTask()
+
+	public void setPriority(int priority){
+
+		queue.get(index).setPriority(priority);
+
+	}// end setTaskPriority()
+
+	public int getPriority(){
+
+		return queue.get(index).getPriority();
+	}//end getPriority()
+
 }

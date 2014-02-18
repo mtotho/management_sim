@@ -4,6 +4,9 @@ public class Employee{
 
 	private boolean busy;
 	private Task active_task;
+	private float hoursWorked;
+	private int hours;
+
 
 
 	//Constructor()
@@ -30,5 +33,37 @@ public class Employee{
 		
 		return 1;
 	}
+
+	public Task getActiveTask(){
+
+		return active_task;
+	}//end getActiveTask()
+
+	public void setTraits(){
+
+
+	}//end setTraits()
+
+	public void getTraits(){
+
+
+
+	}// end getTraits()
+
+	public float getHoursWorked(){
+
+		return hoursWorked;
+	}//end getHoursWorked()
+
+	public void setHours(){
+
+		
+	}//end setHours
+
+	public int getHours(){
+
+		return hours;
+	}// end getHours()
+
 
 }
