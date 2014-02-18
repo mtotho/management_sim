@@ -30,11 +30,11 @@ public class Employee{
 
 	public int doTask(int delta){
 		
-		if(active_task.isTimeLeft){
-			active_task.consumeTime(mod * delta)
+		if(active_task.isTimeLeft()){
+			//active_task.consumeTime(mod * delta);
 		}
 		else{
-			active_task = taskQueue.getNextTask()
+			//active_task = taskQueue.getNextTask();
 		}
 		
 		return 1;
