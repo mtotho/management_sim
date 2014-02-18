@@ -60,7 +60,7 @@ public class StateGame extends BasicGameState{
       	c1.setLocation(map.getAbsX(3), map.getAbsY(1));
       	customers=new ArrayList<GLCustomer>();
 
-        astar =new AStarPathFinder(map, 200, false);
+        astar =new AStarPathFinder(map, 400, false);
         Path path = astar.findPath(null, 1, 1, 53,1);
         c1.setPath(path);
       //  System.out.println("path length: " + path.getLength()); 
