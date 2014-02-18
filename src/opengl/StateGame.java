@@ -89,7 +89,7 @@ public class StateGame extends BasicGameState{
     public void update(GameContainer gc, StateBasedGame game, int delta)
             throws SlickException {
 
-
+            
         //for(int i=0; i<customerPath.getLength(); i++){
      
         	//c1.walkPath(delta);
