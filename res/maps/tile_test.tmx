@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="54" height="34" tilewidth="24" tileheight="24">
+ <tileset firstgid="1" name="grass_tile_24x24" tilewidth="24" tileheight="24">
+  <image source="../../raw_res/tiles/grass_tile_24x24.png" width="24" height="24"/>
+  <tile id="0">
+   <properties>
+    <property name="blocking" value="false"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="2" name="24x24_checkered_tile" tilewidth="24" tileheight="24">
+  <image source="../../raw_res/tiles/24x24_checkered_tile.png" width="24" height="24"/>
+  <terraintypes>
+   <terrain name="New Terrain" tile="-1"/>
+  </terraintypes>
+ </tileset>
+ <tileset firstgid="3" name="tree_tile_24x48" tilewidth="24" tileheight="48">
+  <image source="../../raw_res/tiles/tree_tile_24x48.png" width="24" height="48"/>
+  <tile id="0">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="grass" width="54" height="34">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3DQQ0AAAwDoat/05OxDySsmqqqqqqqqurDA3kfaA+wHAAA
+  </data>
+ </layer>
+ <layer name="collision" width="54" height="34">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+2XwQnAIBTFhO6/czcQCzGITa7PwM/RMdZ5PrwlPIu6GM+iLsazqIvxLOpiPIvZfTs2i7qYzaIuZrOoi9ks6mI2i7qYzaIuZrO4tWvGH/8wOzyLuhjPoi7Gs6iL8SzqYjyL07peayhAPrAcAAA=
+  </data>
+ </layer>
+</map>

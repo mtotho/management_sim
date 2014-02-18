@@ -82,7 +82,7 @@ public class GLButton extends GLEntity{
 		fontSize=font.getSize();
 
 		if(height>fontSize){
-			int temp = height-fontSize;
+			int temp = (int)(height-fontSize);
 			lblY = temp/2 -(fontSize/4);
 			lblX = 0;
 		}else{
@@ -109,13 +109,13 @@ public class GLButton extends GLEntity{
 		//image.draw(x,y,width,height);
 		
 		if(!isHovered){
-			g.drawImage(sprite_sheet.getSprite(0,0), x,y);
+			g.drawImage(sprite_sheet.getSprite(0,0), (int)x,(int)y);
 		}else{
-			g.drawImage(sprite_sheet.getSprite(0,1), x,y);
+			g.drawImage(sprite_sheet.getSprite(0,1), (int)x,(int)y);
 		}
 		g.setColor(Color.blue);
 		g.setFont(ttfFont);
-		g.drawString(label,x + lblX, y + lblY);
+		g.drawString(label,(int)(x + lblX), (int)(y + lblY));
 		//uFont.drawString(x + 10, y + 10, label);
 		
 	}
@@ -135,7 +135,7 @@ public class GLButton extends GLEntity{
 		
 		//Button is released.. complete click
 		if(button==0 && isPressed){
-			
+
 			isPressed=false;
 		}
 	}
