@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="60" height="40" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="32x32_floor_tiles" tilewidth="32" tileheight="32">
+  <image source="../tilesets/32x32_floor_tiles.png" width="96" height="96"/>
+  <tile id="8">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="ground" width="60" height="40">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3DMQ0AAAwEoRvev+Zq6A4Jq6aqqqqqqqqqqur7AatUvkKAJQAA
+  </data>
+ </layer>
+ <layer name="collision" width="60" height="40">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+2RwQ3AMAyE8s3+C2eIRiCn8D9k5LW+s+U9Tb3snqZedj+Nab1/+2+97J6mXnZPc6N3UnO9joOi/zoOinodB0W9joOiXsdBUa/joKjXcVDU6zgo6nUcFPU6Dop6HQdFvY6DYtKtN6j3bSb1Hj26zDaAJQAA
+  </data>
+ </layer>
+</map>
