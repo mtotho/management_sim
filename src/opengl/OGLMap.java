@@ -9,15 +9,15 @@ import org.newdawn.slick.util.pathfinding.TileBasedMap;
 import org.newdawn.slick.tiled.TiledMap;
 
 public class OGLMap implements TileBasedMap{
-	private static final int WIDTH = 54;
-  	private static final int HEIGHT = 34;
+	private static final int WIDTH = 60;
+  	private static final int HEIGHT = 40;
   	private TiledMap map;
   	private String blocking_property="blocking";
 
   	private boolean blocking[][];
 
  	public OGLMap() throws SlickException{
-		map = new TiledMap("res/maps/tile_test.tmx");
+		map = new TiledMap("res/maps/restaurant_v1.tmx");
   	 	/*blocking = new boolean[map.getWidth()][map.getHeight()];
         for (int x = 0; x < map.getWidth(); x++) {
             for (int y = 0; y < map.getHeight(); y++) {
