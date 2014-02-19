@@ -40,7 +40,7 @@ public class Scheduler{
 		return queue.get(index).getPriority();
 	}//end getPriority()
 
-	public Task getNext(Task){
+	public Task getNext(){
 
 
 		return nextTask;

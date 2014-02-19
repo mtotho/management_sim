@@ -29,7 +29,7 @@
  </layer>
  <layer name="collision" width="54" height="34">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+2XwQnAIBTFhO6/czcQCzGITa7PwM/RMdZ5PrwlPIu6GM+iLsazqIvxLOpiPIvZfTs2i7qYzaIuZrOoi9ks6mI2i7qYzaIuZrO4tWvGH/8wOzyLuhjPoi7Gs6iL8SzqYjyL07peayhAPrAcAAA=
+   H4sIAAAAAAAAA+1XSQ6AMAg06f//7NXUItuwmDBJYxRZBijW65JjKd6t1MvyM7wwetF+1naN9mcF5WcRi9Pj7HfgJdWjcrDnQmIXBa5eWj2PDIns2IeXD8PrLaNmxJ94cXPOYjMS04e0rHsfWnpt5+PpUSSmD+NlSHSb89JzJofMmqBiliCbl9aWFd7YNfmn/lkqeFHxIupVyQsp++KVseeoOLyyr/n5Z14o35G2u9ery/7ibGrhybtF73R/ulacNyRnIcnzEw+JfQmGl98mxQvl96lfzYtbSP9SuVYv8puk8dON1w1USbgMsBwAAA==
   </data>
  </layer>
 </map>

@@ -58,14 +58,14 @@ public class Task{
 		return type;
 	}//end getType
 
-	public boolean isTimeLeft{
+	public boolean isTimeLeft(){
 
 		return isTimeLeft;
 	}//end isTimeLeft
 
-	public consumeTime(int delta){
+	public void consumeTime(int delta){
 
-		time -= delta;
+	//	time -= delta;
 
 	}//end consumeTime
 }

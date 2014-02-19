@@ -25,7 +25,6 @@ public class GLCustomer extends GLEntity implements Mover{
 	private boolean isMoving;
 	private int destx, desty;
 
-	private AStarPathFinder astar;
 	private boolean walking_path;
 
 	public GLCustomer(GameContainer gc, OGLMap map) throws SlickException{
@@ -124,7 +123,6 @@ public class GLCustomer extends GLEntity implements Mover{
 
 
 	}
-
 
 
 	//Move to the given tile x,y
