@@ -1,11 +1,18 @@
 //package restuarantsim;
 
+enum TaskType{
+	KITCHEN, CASHIER, CLEANING, MAINTENANCE
+}
+
+
 public class Employee{
 
 	private boolean busy;
 	private Task active_task;
 	private float hoursWorked;
 	private int hours;
+	private float mod;
+
 
 
 
@@ -17,24 +24,36 @@ public class Employee{
 	//setTask(): assign current task
 	public void setTask(Task task){
 
+		active_task = task;
+
 		//If employee is busy, check whether the new task is more important
-		if(busy){
-			if(task.getPreemption() && task.getPriority()>active_task.getPriority()){
-				active_task=task;
-			}
-		}else{
+		
+		/*if(busy){
+
+			//if(task.getPreemption() && task.getPriority()>active_task.getPriority()){
 			active_task=task;
+			//}
+
 		}
+		else{
+
+			active_task=task;
+
+		}*/
 		
 	}//end: setTask()
 
-	public int doTask(int delta){
+	public int doTask(float delta){
 		
 		if(active_task.isTimeLeft()){
-			//active_task.consumeTime(mod * delta);
+
+			active_task.consumeTime(mod * delta);
+
 		}
 		else{
-			//active_task = taskQueue.getNextTask();
+
+			busy = false;
+
 		}
 		
 		return 1;
@@ -43,6 +62,7 @@ public class Employee{
 	public Task getActiveTask(){
 
 		return active_task;
+
 	}//end getActiveTask()
 
 	public void setTraits(){
@@ -59,6 +79,7 @@ public class Employee{
 	public float getHoursWorked(){
 
 		return hoursWorked;
+
 	}//end getHoursWorked()
 
 	public void setHours(){
@@ -69,7 +90,18 @@ public class Employee{
 	public int getHours(){
 
 		return hours;
+
 	}// end getHours()
+
+	public String getJob(){	
+
+		return labor;
+
+	}
+	public boolean isBusy(){
+
+		return busy;
+	}
 
 
 }
