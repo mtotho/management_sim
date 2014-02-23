@@ -11,9 +11,16 @@ public class Restaurant{
 	public Restaurant(){
 
 		employees = new ArrayList<Employee>();
+		//Scheduler taskQueue = new Scheduler;
 
 		Employee e1 = new Employee();
+		Employee e2 = new Employee();
+
+	
 		employees.add(e1);
+		employees.add(e2);
+
+		scheduler = new Scheduler();
 
 	}//end: Constructor()
 
@@ -21,4 +28,28 @@ public class Restaurant{
 	public void loop(){
 
 	}//end: loop()
+
+	public void Update(float delta){
+
+		for(int i = 0; i < employees.size(); i++){
+
+			if(employee.get(i).isBusy() != true){
+				
+				scheduler.findEmployeeTask(employee.get(i));
+
+			}
+			else{
+
+				employee.doTask(delta);
+
+			}
+
+
+		}
+
+
+
+
+
+	}
 }
