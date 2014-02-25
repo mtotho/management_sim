@@ -1,5 +1,5 @@
 
-package mftoth.states;
+package mftoth.restaurantsim.ogl;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
@@ -8,13 +8,19 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-
+import mftoth.restaurantsim.logic.*;
 
 public class StateIntro extends BasicGameState{
 
 	
 	private int ID = 1;
 	private StateBasedGame game;
+	private Restaurant restaurant;
+
+	public StateIntro(Restaurant restaurant){
+		super();
+		this.restaurant=restaurant;
+	}
 
     @Override
     public void init(GameContainer container, StateBasedGame game)

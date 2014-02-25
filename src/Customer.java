@@ -1,4 +1,4 @@
-//package restuarantsim;
+package mftoth.restaurantsim.logic;
 import java.util.ArrayList;
 import java.util.Random;
 

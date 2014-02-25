@@ -1,8 +1,10 @@
-//package restuarantsim;
+//package mftoth.restaurantsim.logic;
 import org.newdawn.slick.*;
 import org.newdawn.slick.AppGameContainer;
 //import org.newdawn.slick.GameContainer;
 
+import mftoth.restaurantsim.ogl.*;
+import mftoth.restaurantsim.logic.Restaurant;
 
 class Simulator{
 
@@ -19,9 +21,9 @@ class Simulator{
 
 		Restaurant restaurant = new Restaurant();
 
-		System.out.println("Simulator started");
+		//System.out.println("Simulator started");
 
-		OGLGameContainer game = new OGLGameContainer("Management Simulator");
+		OGLGameContainer game = new OGLGameContainer("Management Simulator", restaurant);
 	     try {
 	          AppGameContainer container = new AppGameContainer(game);
 	          container.setDisplayMode(960, 640, false);

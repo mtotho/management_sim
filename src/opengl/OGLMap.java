@@ -1,4 +1,4 @@
-package mftoth.map;
+package mftoth.restaurantsim.ogl;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.util.pathfinding.AStarPathFinder;

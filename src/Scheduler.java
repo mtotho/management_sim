@@ -1,4 +1,4 @@
-//package restuarantsim;
+package mftoth.restaurantsim.logic;
 
 import java.util.ArrayList;
 
@@ -112,6 +112,41 @@ public class Scheduler{
 
 
 	}//end getPriority()
+
+	public Task getNextTask(TaskType type){
+
+		for(int i = 0; i < highPriority.size(); i++){
+			if(type == highPriority.get(i).getType()){
+				Task task = highPriority.get(i);
+				highPriority.remove(i); //remove this task from queue
+				return task;
+			}
+
+		}
+
+		for(int i = 0; i < midPriority.size(); i++){
+			if(type == midPriority.get(i).getType()){
+				Task task = midPriority.get(i);
+				midPriority.remove(i);
+				//e.setTask(highPriority.get(i));
+				return task;
+			}
+
+		}
+
+		for(int i = 0; i < lowPriority.size(); i++){
+			if(type == lowPriority.get(i).getType()){
+				Task task = lowPriority.get(i);
+				lowPriority.remove(i);
+				//e.setTask(lowPriority.get(i));
+				return task;
+			}
+
+		}
+
+		return null;
+
+	}//end: getNextTask()
 
 	public void findEmployeeTask(Employee e){
 

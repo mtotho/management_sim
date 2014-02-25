@@ -1,4 +1,4 @@
-//package restuarantsim;
+package mftoth.restaurantsim.logic;
 
 import java.util.ArrayList;
 
@@ -7,9 +7,12 @@ public class Restaurant{
 	private ArrayList<Employee> employees;
 	private ArrayList<Customer> customers;
 	private Scheduler scheduler;
-
+	private Time timer;
 	//Constructor()
 	public Restaurant(){
+
+		//initialize timer object which will keep track of and organize time
+		timer = new Time();
 
 		employees = new ArrayList<Employee>();
 		//Scheduler taskQueue = new Scheduler;
@@ -30,27 +33,36 @@ public class Restaurant{
 
 	}//end: loop()
 
-	public void Update(float delta){
+	public void update(int delta){
 
+		//add ms to timer object
+		timer.addMilliSecond(delta);
+
+		System.out.println(timer.getSeconds() + " seconds");
+
+		//Loop through each employee and update task progress
 		for(int i = 0; i < employees.size(); i++){
 
-			if(employees.get(i).isBusy() != true){
+			Employee emp = employees.get(i);
+			//Employee is not busy
+			if(emp.isBusy() != true){
 				
-				scheduler.findEmployeeTask(employees.get(i));
+				//employee is not busy, look for next task
+				Task task = scheduler.getNextTask(emp.getPreferredTask());
 
-			}
-			else{
+				if(task!=null)
+					emp.setTask(task); //set task
 
-				employees.get(i).doTask(delta);
+			//Employee is working on a task
+			}else{
 
-			}
+				//consume time on task. This will automatically set employee to not busy if the task runs out
+				emp.doTask(delta);
 
+			}//end if employee not busy
+		}//end for
+		
+		
+	}//end: Update();
 
-		}
-
-
-
-
-
-	}
-}
+}//end class restaurant

@@ -1,3 +1,5 @@
+package mftoth.restaurantsim.logic;
+
 public class Inventory{
 
 	//Constructor()

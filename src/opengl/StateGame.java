@@ -1,7 +1,7 @@
 
-package mftoth.states;
+package mftoth.restaurantsim.ogl;
 
-import mftoth.entities.*;
+//import mftoth.entities.*;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 import org.newdawn.slick.GameContainer;
@@ -13,7 +13,7 @@ import org.newdawn.slick.util.pathfinding.*;
 import org.newdawn.slick.tiled.TiledMap;
 
 import java.util.ArrayList;
-import mftoth.map.*;
+import mftoth.restaurantsim.logic.*;
 
 
 public class StateGame extends BasicGameState{
@@ -28,10 +28,17 @@ public class StateGame extends BasicGameState{
 	//private TiledMap map;
   private OGLMap map;
   private AStarPathFinder astar;
+
+  private Restaurant restaurant;
 	//private boolean[][] blocking;
 
+  public StateGame(Restaurant restaurant){
+    super();
+    this.restaurant=restaurant;
+  }
+
     @Override 
-    public void init(GameContainer gc, StateBasedGame game)
+  public void init(GameContainer gc, StateBasedGame game)
             throws SlickException {
 
        	this.game=game;
@@ -90,7 +97,9 @@ public class StateGame extends BasicGameState{
     @Override
     public void update(GameContainer gc, StateBasedGame game, int delta)
             throws SlickException {
-
+        //pass time to restaurant
+        restaurant.update(delta);
+        
         c1.update(gc,game,delta);
         //for(int i=0; i<customerPath.getLength(); i++){
      

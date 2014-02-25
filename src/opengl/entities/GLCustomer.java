@@ -1,5 +1,6 @@
-package mftoth.entities;
-import mftoth.map.*;
+package mftoth.restaurantsim.ogl;
+
+//simport mftoth.map.*;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 import org.newdawn.slick.GameContainer;

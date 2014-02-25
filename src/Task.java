@@ -1,3 +1,5 @@
+package mftoth.restaurantsim.logic;
+
 enum TaskType{
 	KITCHEN, CASHIER, CLEANING, MAINTENANCE
 }
@@ -9,7 +11,7 @@ public class Task{
 	private boolean allow_preemption;
 	private TaskType type;
 	private boolean isTimeLeft;
-	private float time;
+	private int time; //ms
 	private int priority;
 
 
@@ -48,13 +50,19 @@ public class Task{
 	}//end getType
 
 	public boolean isTimeLeft(){
-
+		if(time<=0){
+			isTimeLeft=false;
+		}else{
+			isTimeLeft=true;
+		}
 		return isTimeLeft;
 	}//end isTimeLeft
 
-	public void consumeTime(float delta){
+
+	public void consumeTime(int delta){
 
 		time -= delta;
 
+		
 	}//end consumeTime
 }

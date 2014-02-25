@@ -1,6 +1,6 @@
-package mftoth.states;
+package mftoth.restaurantsim.ogl;
 
-import mftoth.entities.*;
+//import mftoth.entities.*;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 import org.newdawn.slick.GameContainer;
@@ -10,7 +10,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.gui.*;
  
-
+import mftoth.restaurantsim.logic.*;
 
 public class StateMainMenu extends BasicGameState{
 
@@ -34,7 +34,14 @@ public class StateMainMenu extends BasicGameState{
 	private GLButton btnNewGame;
 	private GLButton btnAbout;
 
-    @Override
+	private Restaurant restaurant;
+
+	public StateMainMenu(Restaurant restaurant){
+		super();
+		this.restaurant=restaurant;
+	}
+
+	@Override
     public void init(GameContainer gc, StateBasedGame game)
             throws SlickException {
         this.game=game;

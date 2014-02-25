@@ -1,4 +1,5 @@
-//package restuarantsim;
+package mftoth.restaurantsim.logic;
+
 
 public class Employee{
 
@@ -8,19 +9,21 @@ public class Employee{
 	private int hours;
 	private float mod;
 	private String labor;
+	private TaskType preferred_task;
 
 
 
 	//Constructor()
 	public Employee(){
-
+		busy=false;
 	}//end: Constructor()
 
 	//setTask(): assign current task
 	public void setTask(Task task){
 
-		active_task = task;
 
+		active_task = task;
+		busy=true;
 		//If employee is busy, check whether the new task is more important
 		
 		/*if(busy){
@@ -38,17 +41,18 @@ public class Employee{
 		
 	}//end: setTask()
 
-	public int doTask(float delta){
+	public int doTask(int delta){
 		
+		//consume time on task if time is left
 		if(active_task.isTimeLeft()){
 
-			active_task.consumeTime(mod * delta);
+			active_task.consumeTime(delta);
 
-		}
-		else{
+			//set busy to true/false depending on if there is time left
+			busy = active_task.isTimeLeft();
 
+		}else{
 			busy = false;
-
 		}
 		
 		return 1;
@@ -88,13 +92,13 @@ public class Employee{
 
 	}// end getHours()
 
-	public String getJob(){	
+	public TaskType getPreferredTask(){	
 
-		return labor;
+		return preferred_task;
 
 	}
 	public boolean isBusy(){
-
+		
 		return busy;
 	}
 
