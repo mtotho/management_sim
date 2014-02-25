@@ -10,6 +10,7 @@ public class Task{
 	private TaskType type;
 	private boolean isTimeLeft;
 	private float time;
+	private int priority;
 
 
 	//Constructor(priority, completion_time)
@@ -26,6 +27,9 @@ public class Task{
 
 	}//end: Constructor()
 
+	public int getPriority(){
+		return priority;
+	}
 
 	public void setPreemption(boolean preemption){
 		allow_preemption=preemption;

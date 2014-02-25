@@ -25,17 +25,17 @@ public class Scheduler{
 	}//end addTask(Task task)
 
 
-	public void setPriority(String priority, Task task){
+	public void setPriority(int priority, Task task){
+		//low=0, medium=1, high=2
+		if(task.getPriority() == 0){
 
-		if(task.getPriority() == "Low"){
-
-			if (priority == "High"){
+			if (priority == 1){
 
 				highPriority.add(task);
 				lowPriority.remove(task);
 
 			}
-			if (priority == "Medium"){
+			if (priority == 2){
 
 				midPriority.add(task);
 				lowPriority.remove(task);
@@ -44,16 +44,16 @@ public class Scheduler{
 
 		}
 
-		if(task.getPriority() == "Medium"){
+		if(task.getPriority() == 1){
 
-			if (priority == "Low"){
+			if (priority == 0){
 
 				lowPriority.add(task);
 				midPriority.remove(task);
 
 			}
 
-			if (priority == "High"){
+			if (priority == 2){
 
 				highPriority.add(task);
 				midPriority.remove(task);
@@ -62,16 +62,16 @@ public class Scheduler{
 
 		}
 
-		if(task.getPrioriy() == "High"){
+		if(task.getPriority() == 2){
 
-			if (priority == "Low"){
+			if (priority == 0){
 
 				lowPriority.add(task);
 				highPriority.remove(task);
 
 			}
 
-			if (priority == "Medium"){
+			if (priority == 1){
 
 				midPriority.add(task);
 				highPriority.remove(task);
@@ -115,8 +115,10 @@ public class Scheduler{
 
 	public void findEmployeeTask(Employee e){
 
+		//This isnt going to work.. e.getJob returns string and getType returns TaskType enum
+		/*
 		for(int i = 0; i < highPriority.size(); i++){
-			if(e.getJob() == highPriority.getType()){
+			if(e.getJob() == highPriority(i).getType()){
 				e.setTask(highPriority.get(i));
 				return;
 			}
@@ -124,7 +126,7 @@ public class Scheduler{
 		}
 
 		for(int i = 0; i < midPriority.size(); i++){
-			if(e.getJob() == midPriority.getType()){
+			if(e.getJob() == midPriority(i).getType()){
 				e.setTask(highPriority.get(i));
 				return;
 			}
@@ -139,7 +141,7 @@ public class Scheduler{
 
 
 		}
-
+*/
 
 	}//end findEmployeeTask(Employee e)
 

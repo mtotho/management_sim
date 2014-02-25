@@ -21,6 +21,49 @@
  </tileset>
  <tileset firstgid="62" name="16x16_tilesheet" tilewidth="16" tileheight="16">
   <image source="../tilesets/16x16_tilesheet.png" width="64" height="64"/>
+  <tile id="5">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="blocking " value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="78" name="16x16_tilesheet_2" tilewidth="16" tileheight="16">
+  <image source="../tilesets/16x16_tilesheet_2.png" width="64" height="64"/>
+  <tile id="0">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
  </tileset>
  <layer name="ground" width="60" height="40">
   <data encoding="base64" compression="gzip">
@@ -29,7 +72,12 @@
  </layer>
  <layer name="collision" width="60" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3WsQ2AIBBAUTZSo0Zdwf0HkkJLiKFR4L3kl1xyFRdC2vGix5aZkzPExsK3Xyrdd44tsfOuFqX71qrHfadELdpjayIA/qXHP7knbhA3CAAAAAAAtOACGNvj2YAlAAA=
+   H4sIAAAAAAAAA+3WsQnAMAwEQK2UwskWKVK4yP6DhGzgwlhg3cH3LxBCLSLaQHrUUm3eN7sATHRnF1jsyS6wWLX7bJ/3tss+H4O5sgpONvI7/zmzCgIAAAAAALDUBwZjFdeAJQAA
+  </data>
+ </layer>
+ <layer name="collision2" width="60" height="40">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3HsQkAIBAEwetIQfuvzc8EAzGWGdhgk6RVPdv5vxnVvDwAAAAAAAAAAMCLBcci93SAJQAA
   </data>
  </layer>
 </map>

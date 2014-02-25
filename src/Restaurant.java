@@ -6,6 +6,7 @@ public class Restaurant{
 
 	private ArrayList<Employee> employees;
 	private ArrayList<Customer> customers;
+	private Scheduler scheduler;
 
 	//Constructor()
 	public Restaurant(){
@@ -33,14 +34,14 @@ public class Restaurant{
 
 		for(int i = 0; i < employees.size(); i++){
 
-			if(employee.get(i).isBusy() != true){
+			if(employees.get(i).isBusy() != true){
 				
-				scheduler.findEmployeeTask(employee.get(i));
+				scheduler.findEmployeeTask(employees.get(i));
 
 			}
 			else{
 
-				employee.doTask(delta);
+				employees.get(i).doTask(delta);
 
 			}
 

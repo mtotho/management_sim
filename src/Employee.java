@@ -1,10 +1,5 @@
 //package restuarantsim;
 
-enum TaskType{
-	KITCHEN, CASHIER, CLEANING, MAINTENANCE
-}
-
-
 public class Employee{
 
 	private boolean busy;
@@ -12,7 +7,7 @@ public class Employee{
 	private float hoursWorked;
 	private int hours;
 	private float mod;
-
+	private String labor;
 
 
 
