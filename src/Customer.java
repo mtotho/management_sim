@@ -10,10 +10,11 @@ private int nextItem;
 private String  cb =  "cheeseburger";
 private String drink = "drink";
 private String fries = "fries";
+private boolean isRendered;
 
 	//Constructor()
 	public Customer(){
-
+		isRendered=false;
 	}//end: Constructor()
 
 	public void getTraits(){
@@ -49,6 +50,11 @@ private String fries = "fries";
 
 	}//end getOrder()
 
+	public boolean isRendered(){
+		return isRendered;
+	}
 
-
+	public void setRendered(boolean rendered){
+		isRendered=rendered;
+	}
 }

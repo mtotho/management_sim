@@ -28,10 +28,14 @@ public class GLCustomer extends GLEntity implements Mover{
 
 	private boolean walking_path;
 
+	//private Customer customer;
+
 	public GLCustomer(GameContainer gc, OGLMap map) throws SlickException{
 		super(gc);
 		this.map=map;
 		game=gc;
+
+		//this.customer=customer; //the customer logic object
 
 		x=0;
 		y=0;

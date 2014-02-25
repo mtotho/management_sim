@@ -13,6 +13,7 @@ import org.newdawn.slick.util.pathfinding.*;
 import org.newdawn.slick.tiled.TiledMap;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import mftoth.restaurantsim.logic.*;
 
 
@@ -23,7 +24,10 @@ public class StateGame extends BasicGameState{
 	private StateBasedGame game;
 
 	private GLCustomer c1;
-	private ArrayList<GLCustomer> customers;
+  private HashMap<Customer,GLCustomer> cust_map;
+	private ArrayList<GLCustomer> gl_customers;
+  private ArrayList<Customer> customers;
+
 	//private Path customerPath;
 	//private TiledMap map;
   private OGLMap map;
@@ -35,6 +39,9 @@ public class StateGame extends BasicGameState{
   public StateGame(Restaurant restaurant){
     super();
     this.restaurant=restaurant;
+
+    //
+    customers = restaurant.getCustomers();
   }
 
     @Override 
@@ -44,32 +51,15 @@ public class StateGame extends BasicGameState{
        	this.game=game;
         map = new OGLMap();
 
-        //AStarPathFinder pathFinder = new AStarPathFinder(map, 100, false);
-        //Path path = pathFinder.findPath(null, 0, 0, 50, 30);
-
-      /* 	map = new TiledMap("res/maps/tile_test.tmx");
-       	blocking = new boolean[map.getWidth()][map.getHeight()];
-        for (int x = 0; x < map.getWidth(); x++) {
-            for (int y = 0; y < map.getHeight(); y++) {
-                int tileID = map.getTileId(x, y, 0);
-
-                String value = map.getTileProperty(tileID, "blocking", "false");
-                if ("true".equals(value)) {
-                	System.out.println(x + "," + y);
-                    blocking[x][y] = true;
-                }
-            }
-        }*/
-
-        
-      	c1 = new GLCustomer(gc, map);
-        c1.setMap(map);
-      	c1.setLocation(map.getAbsX(3), map.getAbsY(1));
-      	customers=new ArrayList<GLCustomer>();
+        cust_map = new HashMap<Customer, GLCustomer>();
+      	//c1 = new GLCustomer(gc, map);
+        //c1.setMap(map);
+      	//c1.setLocation(map.getAbsX(3), map.getAbsY(1));
+      	gl_customers=new ArrayList<GLCustomer>();
 
         astar =new AStarPathFinder(map, 400, false);
-        Path path = astar.findPath(null, 1, 1, 53,1);
-        c1.setPath(path);
+       
+       // c1.setPath(path);
       //  System.out.println("path length: " + path.getLength()); 
 
     }
@@ -77,18 +67,22 @@ public class StateGame extends BasicGameState{
     @Override
     public void render(GameContainer gc, StateBasedGame game, Graphics g)
             throws SlickException {
-      	map.render();
-
+    	
+      map.render();
 
   		g.setColor(Color.white);
 	   // g.drawString("Game State", 50, 10);
 
-	   	c1.setLocation(c1.getX(),c1.getY());
-	    c1.render(gc, g);
+	   //	c1.setLocation(c1.getX(),c1.getY());
+	   // c1.render(gc, g);
 
+      //Render the customers
     	for(int i=0; i<customers.size(); i++){
-    		GLCustomer customer = (GLCustomer)customers.get(i);
-    		customer.render(gc, g);	
+
+        if(cust_map.containsKey(customers.get(i))){
+          GLCustomer glcust = cust_map.get(customers.get(i));
+          glcust.render(gc, g); 
+        }
     	}
 
 
@@ -100,13 +94,28 @@ public class StateGame extends BasicGameState{
         //pass time to restaurant
         restaurant.update(delta);
         
-        c1.update(gc,game,delta);
-        //for(int i=0; i<customerPath.getLength(); i++){
-     
-        	//c1.walkPath(delta);
-       
-       // } 
-        
+
+        //Check for new logical customer and create gl customer
+        for(int i=0; i<customers.size(); i++){
+
+          //There is no map for this customer
+          if(!cust_map.containsKey(customers.get(i))){
+            
+            //create new glcust
+            GLCustomer glcust = new GLCustomer(gc,map);  
+            Path path = astar.findPath(null, 1, 1, 53,1);
+            glcust.setPath(path);
+              
+            //add to cust map
+            cust_map.put(customers.get(i), glcust);
+
+           // gl_customers.add(glcust);
+          }else{
+              GLCustomer glcust =  cust_map.get(customers.get(i));
+              // glcust.
+              glcust.update(gc, game, delta);
+          }
+        }
 
       	Input input = gc.getInput();
       	
@@ -120,32 +129,32 @@ public class StateGame extends BasicGameState{
 	  			//c1.setY(c1.getY()-c1.getDY()*delta);
 	  			//c1.setDirection(FigureDirection.UP);
           //c1.setMoving(true);
-	  			c1.move(FigureDirection.UP);
+	  			//c1.move(FigureDirection.UP);
           //System.out.println(c1.getY()-c1.getDY());
 	      	}
 	      	if(input.isKeyDown(Input.KEY_RIGHT)){
 	      		//c1.setX(c1.getX()+c1.getDX()*delta);
 	      		//c1.setDirection(FigureDirection.RIGHT);
             //c1.setMoving(true);
-            c1.move(FigureDirection.RIGHT);
+          //  c1.move(FigureDirection.RIGHT);
 	      	}
 	  		if(input.isKeyDown(Input.KEY_DOWN)){
 	  			//c1.setY(c1.getY()+c1.getDY()*delta);
 	  			//c1.setDirection(FigureDirection.DOWN);
          // c1.setMoving(true);
-          c1.move(FigureDirection.DOWN);
+        //  c1.move(FigureDirection.DOWN);
 	      	}
 	      	if(input.isKeyDown(Input.KEY_LEFT)){
 	      	//	c1.setX(c1.getX()-c1.getDX()*delta);
 	      		//c1.setDirection(FigureDirection.LEFT);
             //c1.setMoving(true);
-            c1.move(FigureDirection.LEFT);
+          //  c1.move(FigureDirection.LEFT);
 	      	}  
       //	}
            
       	if(input.isKeyDown(Input.KEY_Q)){
       		
-      		customers.add(new GLCustomer(gc,map));
+      		//customers.add(new GLCustomer(gc,map));
 
       		//c1.setDirection(FigureDirection.LEFT);
       	}     

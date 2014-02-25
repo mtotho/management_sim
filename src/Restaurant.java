@@ -15,6 +15,10 @@ public class Restaurant{
 		timer = new Time();
 
 		employees = new ArrayList<Employee>();
+		customers = new ArrayList<Customer>();
+
+		Customer c1 = new Customer();
+		customers.add(c1);
 		//Scheduler taskQueue = new Scheduler;
 
 		Employee e1 = new Employee();
@@ -38,7 +42,11 @@ public class Restaurant{
 		//add ms to timer object
 		timer.addMilliSecond(delta);
 
-		System.out.println(timer.getSeconds() + " seconds");
+		if(timer.getMilliSeconds()>5000 && timer.getMilliSeconds()<5025){
+			customers.add(new Customer());
+		}
+
+		//System.out.println(timer.getSeconds() + " seconds");
 
 		//Loop through each employee and update task progress
 		for(int i = 0; i < employees.size(); i++){
@@ -64,5 +72,9 @@ public class Restaurant{
 		
 		
 	}//end: Update();
+
+	public ArrayList<Customer> getCustomers(){
+		return customers;
+	}
 
 }//end class restaurant
