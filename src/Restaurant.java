@@ -73,6 +73,10 @@ public class Restaurant{
 		
 	}//end: Update();
 
+	public void addCustomer(){
+		customers.add(new Customer());
+	}
+
 	public ArrayList<Customer> getCustomers(){
 		return customers;
 	}

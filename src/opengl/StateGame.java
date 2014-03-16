@@ -23,6 +23,10 @@ public class StateGame extends BasicGameState{
 	private int ID = 3;
 	private StateBasedGame game;
 
+  private GLButton btn_spawnCust;
+  private Font font;
+  private TrueTypeFont ttf;
+
 	private GLCustomer c1;
   private HashMap<Customer,GLCustomer> cust_map;
 	private ArrayList<GLCustomer> gl_customers;
@@ -57,6 +61,11 @@ public class StateGame extends BasicGameState{
       	//c1.setLocation(map.getAbsX(3), map.getAbsY(1));
       	gl_customers=new ArrayList<GLCustomer>();
 
+        btn_spawnCust =new GLButton(gc, "Spawn", 240, 80);
+        btn_spawnCust.setLabelX(60);
+        btn_spawnCust.setX(1000);
+        btn_spawnCust.setY(40);
+
         astar =new AStarPathFinder(map, 400, false);
        
        // c1.setPath(path);
@@ -71,11 +80,17 @@ public class StateGame extends BasicGameState{
       map.render();
 
   		g.setColor(Color.white);
+
+      btn_spawnCust.render(gc, g);
 	   // g.drawString("Game State", 50, 10);
 
 	   //	c1.setLocation(c1.getX(),c1.getY());
 	   // c1.render(gc, g);
 
+      //font = new Font("Verdana", 20);
+      //TrueTypeFont ttf = new TrueTypeFont(font, true);
+      //g.setFont(ttf);
+      //g.drawString("Number of customers: "+ Integer.toString(customers.size()), 700, 100);
       //Render the customers
     	for(int i=0; i<customers.size(); i++){
 
@@ -91,7 +106,7 @@ public class StateGame extends BasicGameState{
     @Override
     public void update(GameContainer gc, StateBasedGame game, int delta)
             throws SlickException {
-        //pass time to restaurant
+            //pass time to restaurant
         restaurant.update(delta);
         
 
@@ -230,5 +245,12 @@ public class StateGame extends BasicGameState{
 	public void clean_up(){
 
 	}
+
+  public void mousePressed(int button, int posx, int posy){
+    if(btn_spawnCust.isPressed()){
+      restaurant.addCustomer();
+    }
+
+  }
 
 }

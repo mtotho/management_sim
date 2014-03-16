@@ -1,0 +1,3 @@
+public enum TaskType{
+	KITCHEN, CASHIER, CLEANING, MAINTENANCE
+}

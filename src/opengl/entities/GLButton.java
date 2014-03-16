@@ -70,16 +70,14 @@ public class GLButton extends GLEntity{
 	}
 
 	private void init() throws SlickException{
-		setUpFonts();
+		setUpFonts(25);
 		image = new Image("res/buttons/sprite_mc_medium.png");
-		sprite_sheet = new SpriteSheet(image, 499, 80);
+		sprite_sheet = new SpriteSheet(image, this.width, this.height);
 	}
 
-	private void setUpFonts(){
-		font = new Font("Verdana", Font.BOLD, 25);
+	private void setUpFonts(int fontSize){
+		font = new Font("Verdana", Font.BOLD, fontSize);
 		ttfFont = new TrueTypeFont(font,false);
-
-		fontSize=font.getSize();
 
 		if(height>fontSize){
 			int temp = (int)(height-fontSize);
