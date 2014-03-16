@@ -43,7 +43,7 @@ public class Restaurant{
 		timer.addMilliSecond(delta);
 
 		if(timer.getMilliSeconds()>5000 && timer.getMilliSeconds()<5025){
-			customers.add(new Customer());
+			//customers.add(new Customer());
 		}
 
 		//System.out.println(timer.getSeconds() + " seconds");

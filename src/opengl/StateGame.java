@@ -51,6 +51,8 @@ public class StateGame extends BasicGameState{
        	this.game=game;
         map = new OGLMap();
 
+        //GLCustomer c1 = new GLCustomer(gc,map); 
+
         cust_map = new HashMap<Customer, GLCustomer>();
       	//c1 = new GLCustomer(gc, map);
         //c1.setMap(map);
@@ -59,6 +61,9 @@ public class StateGame extends BasicGameState{
 
         astar =new AStarPathFinder(map, 400, false);
        
+
+       // Path path = astar.findPath(null, 1, 1, 53,1);
+        //c1.setPath(path);
        // c1.setPath(path);
       //  System.out.println("path length: " + path.getLength()); 
 
@@ -71,6 +76,7 @@ public class StateGame extends BasicGameState{
       map.render();
 
   		g.setColor(Color.white);
+      //c1.render(gc,g);
 	   // g.drawString("Game State", 50, 10);
 
 	   //	c1.setLocation(c1.getX(),c1.getY());
@@ -94,7 +100,7 @@ public class StateGame extends BasicGameState{
         //pass time to restaurant
         restaurant.update(delta);
         
-
+        //c1.update(gc, game, delta);
         //Check for new logical customer and create gl customer
         for(int i=0; i<customers.size(); i++){
 
@@ -123,7 +129,22 @@ public class StateGame extends BasicGameState{
         int mousey = input.getMouseY();
 
         //System.out.println("Map coord: x- " + map.getTileX(mousex) + " | y- " +map.getTileY(mousey));
+        if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)){
+         
+          GLCustomer glcust = cust_map.get(customers.get(0));
+         // System.out.println(glcust);
 
+          if(!glcust.isPathing()){
+           
+            int destX = map.getTileX(mousex);
+            int destY = map.getTileY(mousey);
+
+            glcust.setPath(destX, destY);
+          
+          }
+
+          
+        }
       //	if(!blocked(c1.getX(), c1.getY())){
 	  		if(input.isKeyDown(Input.KEY_UP)){
 	  			//c1.setY(c1.getY()-c1.getDY()*delta);
