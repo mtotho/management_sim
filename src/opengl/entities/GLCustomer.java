@@ -22,6 +22,7 @@ public class GLCustomer extends GLEntity implements Mover{
 	private int path_step;
 	private double doubleX,doubleY;
 	private OGLMap map;
+	private AStarPathFinder astar;
 
 	private boolean isMoving;
 	private int destx, desty;
@@ -59,7 +60,7 @@ public class GLCustomer extends GLEntity implements Mover{
 		direction = FigureDirection.RIGHT;
 		isMoving=false;
 
-
+		astar =new AStarPathFinder(map, 400, false);
 		//path = new Path();
 		
 	}
@@ -109,13 +110,17 @@ public class GLCustomer extends GLEntity implements Mover{
 			walking_path=true;
 			if(x>destx){
 				x=x-(int)(delta*dx);
+				direction=FigureDirection.LEFT;
 			}else if(x<destx){
 				x=x+(int)(delta*dx);
+				direction=FigureDirection.RIGHT;
 			}
 			if(y>desty){
 				y=y-(int)(delta*dy);
+				direction=FigureDirection.UP;
 			}else if(y<desty){
 				y=y+(int)(delta*dy);
+				direction=FigureDirection.DOWN;
 			}
 		}else{
 			isMoving=false;
@@ -197,8 +202,17 @@ public class GLCustomer extends GLEntity implements Mover{
 
 	//public void setDestination()
 	public void setPath(Path path){
+		
+
 		this.path=path;
 		path_step=0;
+	}
+
+	public void setPath(int tilex, int tiley){
+
+		this.path=astar.findPath(null, map.getTileX(x), map.getTileY(y), tilex, tiley);
+		path_step=0;
+		walking_path=true;
 	}
 
 	public void walkTileX(int tileX){
@@ -211,10 +225,14 @@ public class GLCustomer extends GLEntity implements Mover{
 	}
 
 	public void walkPath(){
+		//System.out.println("path step :" + path_step);
 		//System.out.println("path step: " + path_step);
+		System.out.println("path step: "+ path_step + " path length : "  + path.getLength());
 		if(path_step<path.getLength() && !walking_path){
 			destx=map.getAbsX(path.getX(path_step));
 			desty=map.getAbsY(path.getY(path_step));
+
+			
 
 
 		}
@@ -247,9 +265,23 @@ public class GLCustomer extends GLEntity implements Mover{
 		//System.out.println(sign_dy);
 	}
 
+	public boolean isPathing(){
+		return walking_path;
+	}
 
 	public void setDirection(FigureDirection d){
 		direction=d;
+	}
+
+	public String toString(){
+		String output = "";
+		output+="<Customer>\n";
+		output+="|xpos (absolute): " + x + "\n";
+		output+="|ypos (absolute): " + y + "\n";
+		output+="|xtile          : " + map.getTileX(x) + "\n";
+		output+="|ytile          : " + map.getTileY(y) + "\n";
+
+		return output;
 	}
 
 
