@@ -110,13 +110,17 @@ public class GLCustomer extends GLEntity implements Mover{
 			walking_path=true;
 			if(x>destx){
 				x=x-(int)(delta*dx);
+				direction=FigureDirection.LEFT;
 			}else if(x<destx){
 				x=x+(int)(delta*dx);
+				direction=FigureDirection.RIGHT;
 			}
 			if(y>desty){
 				y=y-(int)(delta*dy);
+				direction=FigureDirection.UP;
 			}else if(y<desty){
 				y=y+(int)(delta*dy);
+				direction=FigureDirection.DOWN;
 			}
 		}else{
 			isMoving=false;
