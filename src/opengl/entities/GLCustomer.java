@@ -209,7 +209,7 @@ public class GLCustomer extends GLEntity implements Mover{
 	}
 
 	public void setPath(int tilex, int tiley){
-
+		//System.out.println("TileX: "+ tilex + " TileY: " + tiley);
 		this.path=astar.findPath(null, map.getTileX(x), map.getTileY(y), tilex, tiley);
 		path_step=0;
 		walking_path=true;
@@ -227,7 +227,7 @@ public class GLCustomer extends GLEntity implements Mover{
 	public void walkPath(){
 		//System.out.println("path step :" + path_step);
 		//System.out.println("path step: " + path_step);
-		System.out.println("path step: "+ path_step + " path length : "  + path.getLength());
+		//System.out.println("path step: "+ path_step + " path length : "  + path.getLength());
 		if(path_step<path.getLength() && !walking_path){
 			destx=map.getAbsX(path.getX(path_step));
 			desty=map.getAbsY(path.getY(path_step));

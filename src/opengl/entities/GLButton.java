@@ -72,7 +72,7 @@ public class GLButton extends GLEntity{
 	private void init() throws SlickException{
 		setUpFonts(25);
 		image = new Image("res/buttons/sprite_mc_medium.png");
-		sprite_sheet = new SpriteSheet(image, this.width, this.height);
+		sprite_sheet = new SpriteSheet(image, 499, 80);
 	}
 
 	private void setUpFonts(int fontSize){
@@ -98,6 +98,10 @@ public class GLButton extends GLEntity{
 		lblX=relX;
 	}
 
+	public String getLabel(){
+		return this.label;
+	}
+
 
 
 	//@Override
@@ -107,9 +111,9 @@ public class GLButton extends GLEntity{
 		//image.draw(x,y,width,height);
 		
 		if(!isHovered){
-			g.drawImage(sprite_sheet.getSprite(0,0), (int)x,(int)y);
+			g.drawImage(sprite_sheet.getSprite(0,0).getScaledCopy(this.width, this.height), (int)x,(int)y);
 		}else{
-			g.drawImage(sprite_sheet.getSprite(0,1), (int)x,(int)y);
+			g.drawImage(sprite_sheet.getSprite(0,1).getScaledCopy(this.width, this.height), (int)x,(int)y);	
 		}
 		g.setColor(Color.blue);
 		g.setFont(ttfFont);
