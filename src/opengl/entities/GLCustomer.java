@@ -38,8 +38,8 @@ public class GLCustomer extends GLEntity implements Mover{
 
 		//this.customer=customer; //the customer logic object
 
-		x=0;
-		y=0;
+		x=16;
+		y=432;
 		destx=0;
 		desty=0;
 

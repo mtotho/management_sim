@@ -174,7 +174,7 @@ public class StateGame extends BasicGameState{
             
             //create new glcust
             GLCustomer glcust = new GLCustomer(gc,map);  
-            Path path = astar.findPath(null, 1, 1, 35,1);
+            Path path = astar.findPath(null, 0, 27, 9,17);
             glcust.setPath(path);
               
             //add to cust map
