@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="40" height="30" tilewidth="16" tileheight="16">
  <tileset firstgid="1" name="tileset_compiled_3-23" tilewidth="16" tileheight="16">
-  <image source="../../../../../Desktop/pokemon_tiles/compiled_tilesets/tileset_compiled_3-23.png" width="256" height="256"/>
+  <image source="../tilesets/tileset_compiled_3-23.png" width="256" height="256"/>
   <tile id="0">
    <properties>
     <property name="blocking" value="true"/>
@@ -189,7 +189,7 @@
   </tile>
  </tileset>
  <tileset firstgid="257" name="matted_tile" tilewidth="16" tileheight="16">
-  <image source="../../../../../Desktop/pokemon_tiles/raw_images/matted_tile.png" width="16" height="16"/>
+  <image source="../tilesets/matted_tile.png" width="16" height="16"/>
   <tile id="0">
    <properties>
     <property name="blocking" value="true"/>
@@ -197,10 +197,10 @@
   </tile>
  </tileset>
  <tileset firstgid="258" name="black_tile" tilewidth="16" tileheight="16">
-  <image source="../../../../../Desktop/pokemon_tiles/raw_images/black_tile.png" width="16" height="16"/>
+  <image source="../tilesets/black_tile.png" width="16" height="16"/>
  </tileset>
  <tileset firstgid="259" name="black_tile_blocking" tilewidth="16" tileheight="16">
-  <image source="../../../../../Desktop/pokemon_tiles/raw_images/black_tile.png" width="16" height="16"/>
+  <image source="../tilesets/black_tile.png" width="16" height="16"/>
   <tile id="0">
    <properties>
     <property name="blocking" value="true"/>
