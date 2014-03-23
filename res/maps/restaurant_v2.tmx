@@ -209,12 +209,12 @@
  </tileset>
  <layer name="ground" width="40" height="30">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3XoQ0AIBAEwa+BEsj3XyMehSDhSEaMX7tdVc01Y/O6h7dmQMPPfQAAAKfS/ya9L90CfxONk8ASAAA=
+   H4sIAAAAAAAAA+3XoQ0AIBAEwa+BEsj3XyMehSDhSEaMX7tdVc01Y/O6h7dmQMPPfQAAAKfS/ya9L90CfxONk8ASAAA=
   </data>
  </layer>
  <layer name="wall_collision" width="40" height="30">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3UMQqAMAwF0ASn6gnU1VN4/4NJBlGkID+xDch/kCkh/UNoEZHirEF9PWRmDpTt9/SQmQjb7+khM08bMJuR7yt/yJeZ4ezZvUyC/Qtjx3xmFexfWDrny5KRT/Uq9G6id1V77w69E7Te7qr2fkt74/1ERERERL0dktIcJMASAAA=
+   H4sIAAAAAAAAA+3UMQqAMAwF0ASn6gnU1VN4/4NJBrFIQX5i0+U/yJSQZvi0iEhx1qS+HjKzBsr2e3rITITt9/SQmbcDmB1x3194X2z/3bO8LIL9C3PifWYX7F/Yku8bZcR9qk+huYnmqvVeDc0JWl+5ar3f09l5PxERERFRtgutWh8pwBIAAA==
   </data>
  </layer>
  <layer name="collision" width="40" height="30">
@@ -222,22 +222,22 @@
    <property name="blocking" value="true"/>
   </properties>
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2TuwqDQBBFNY12Jmm0018Qon0g2ouPXnz8/yd4m4W1cYplnV0yBw4DwxSnmSBwnwjGMIQjnLT50FR3CXze2JfCDL7gBndtvjXVXQ6LG/sEQRCEMx/uAIIfdwDBzB3gOSV3AMGXO4Cg4w4gcP1/pc8M6TPDhb7+woGxS7FcuDJ2/QMVrC3uTWlga3HvAweZc/TzwBIAAA==
+   H4sIAAAAAAAAA+2TuwqDQBBFNY12Jmm0018Qon0g2ouPXnz8/yd4m4W1cYplnV0yBw4DwxSnmSBwnwjGMIQjnLT50FR3CXze2JfCDL7gBndtvjXVXQ6LG/sEQRCEMx/uAIIfdwDBzB3gOSV3AMGXO4Cg4w4gcP1/pc8M6TPDhb7+woGxS7FcuDJ2/QMVrC3uTWlga3HvAweZc/TzwBIAAA==
   </data>
  </layer>
  <layer name="non_collision_mask" width="40" height="30">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3SuQkAIBBEUTW1Du2/RDFbDLxP/A8EkQ1GdpQC3mT06QR5tfniXOvBf9K99/RG9qe1V6V5O++rAAAAwFZO3P2C91G359slAGyKpTfAEgAA
+   H4sIAAAAAAAAA+3SWwoAEBBGYbxaB/tforxJboVBzldTYuQXSgFvMvp0grbRfLGvVL01/CV/99rfGKna/t75rX677qoAAACAKJeM/Yb5WbfnkxIAPSsVqMASAAA=
   </data>
  </layer>
  <layer name="decorative_collision" width="40" height="30">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3XMQoAIAiFYQ/QEdq7/w2bBJdo8BFW/wdvEXFxUTP8YmyimK3qAzJaSEU9BAAAAHBV71eXuV9Xf6CqfoOX93vCBB5cLVzAEgAA
+   H4sIAAAAAAAAA+3XMQoAIAiFYQ/QEdq7/w2bBJdo8BFW/wdvEXFxUTP8YmyimK3qAzJaSEU9BAAAAHBV71eXuV9Xf6CqfoOX93vCBB5cLVzAEgAA
   </data>
  </layer>
  <layer name="cleaning" width="40" height="30">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3XsQkAMAgEQLfJ/humsQwGQiq9AysfG6uPYJqVc8u83P2ZAwAAoIeqB552euNM1d83sETZqMASAAA=
+   H4sIAAAAAAAAA+3XsQkAMAgEQLfJ/humsQwGQiq9AysfG6uPYJqVc8u83P2ZAwAAoIeqB552euNM1d83sETZqMASAAA=
   </data>
  </layer>
 </map>

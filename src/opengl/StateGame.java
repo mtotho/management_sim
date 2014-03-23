@@ -200,14 +200,14 @@ public class StateGame extends BasicGameState{
           GLCustomer glcust = cust_map.get(customers.get(0));
          // System.out.println(glcust);
 
-         if(!glcust.isPathing()){
+         //if(!glcust.isPathing()){
            
             int destX = map.getTileX(mousex);
             int destY = map.getTileY(mousey);
 
-            //glcust.setPath(destX, destY);
+            glcust.setPath(destX, destY);
           
-          }
+          //}
 
           
         }

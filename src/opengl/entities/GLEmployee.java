@@ -12,10 +12,10 @@ import org.newdawn.slick.gui.*;
 import org.newdawn.slick.util.pathfinding.*;
 import java.util.Random;
 
-public class GLCustomer extends GLMoveableEntity{
+public class GLEmployee extends GLMoveableEntity{
 
 
-	public GLCustomer(GameContainer gc, OGLMap map) throws SlickException{
+	public GLEmployee(GameContainer gc, OGLMap map) throws SlickException{
 		super(gc, map);
 		
 		//default some values		
@@ -54,7 +54,7 @@ public class GLCustomer extends GLMoveableEntity{
 
 	public String toString(){
 		String output = "";
-		output+="<Customer>\n";
+		output+="<Employee>\n";
 		output+="|xpos (absolute): " + x + "\n";
 		output+="|ypos (absolute): " + y + "\n";
 		output+="|xtile          : " + map.getTileX(x) + "\n";
