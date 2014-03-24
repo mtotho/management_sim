@@ -23,7 +23,7 @@ public class StateGame extends BasicGameState{
 	private int ID = 3;
 	private StateBasedGame game;
 
-  private GLPanel buttonPanel;
+  //private GLPanel buttonPanel;
   private int buttonMenu;
   private GLButton btn_spawnCust;
   private GLButton btn_randCust;
@@ -43,6 +43,9 @@ public class StateGame extends BasicGameState{
 
   private ArrayList<GLTile> blocking = new ArrayList<GLTile>();
   private ArrayList<GLTile> cleaning = new ArrayList<GLTile>();
+
+  private HashMap<String, GLPanel> panels;
+  private GLPanel active_panel;
 
 	//private Path customerPath;
 	//private TiledMap map;
@@ -90,12 +93,14 @@ public class StateGame extends BasicGameState{
         //create test employee
         e1 = new GLEmployee(gc, map);
 
-        buttonPanel = new GLPanel(restaurant, gc, "Panel 1", true);
-        buttonPanel.setLocation(640,0);
-        buttonPanel.setDimension(320, 480);               
+        panels = new HashMap<String, GLPanel>();
+
+        GLOverviewPanel buttonPanel = new GLOverviewPanel(restaurant, gc);      
         buttonPanel.addButton(gc, "Add Customer", 240, 100);
         buttonPanel.addButton(gc, "Numbah 2", 240, 100);
+        addPanel("OVERVIEW", buttonPanel);
 
+        activatePanel("OVERVIEW");
         /*buttonMenu = 1;
 
         btn_spawnCust = new GLButton(gc, "Spawn", 240, 80);
@@ -127,6 +132,26 @@ public class StateGame extends BasicGameState{
       //  System.out.println("path length: " + path.getLength()); 
 
     }
+
+    public void addPanel(String index, GLPanel panel){
+      panels.put(index,panel);
+    }
+
+    public void activatePanel(String index){
+      if(panels.containsKey(index)){  
+        GLPanel panel = panels.get(index);
+
+        if(active_panel!=null){
+          active_panel.setActive(false);
+        }
+
+        active_panel = panel;
+        panel.setActive(true);
+
+      }
+    }
+
+
  
     @Override
     public void render(GameContainer gc, StateBasedGame game, Graphics g)
@@ -136,7 +161,7 @@ public class StateGame extends BasicGameState{
 
   		g.setColor(Color.white);
 
-      buttonPanel.render(gc, g);
+      active_panel.render(gc, g);
 
       e1.render(gc,g);
       /*if(buttonMenu==1){
@@ -249,7 +274,7 @@ public class StateGame extends BasicGameState{
 
           //  System.out.println(destX);
             if(destX<map.getWidthInTiles() && destY<map.getHeightInTiles() && !map.blocked(null, destX, destY)){
-              e1.setPath(destX, destY);
+              //e1.setPath(destX, destY);
             }
             
           //}
@@ -364,13 +389,15 @@ public class StateGame extends BasicGameState{
 	}
 
   public void mousePressed(int button, int posx, int posy){
-    ArrayList<GLButton> buttons = buttonPanel.getButtons();
+    ArrayList<GLButton> buttons = active_panel.getButtons();
+    //System.out.println(buttons.size());
+
     if(buttons.get(0).isPressed()){
       restaurant.addCustomer();
     }
     if(buttons.get(1).isPressed()){
-      GLCustomer glcust =  cust_map.get(customers.get(0));
-      glcust.setPath(cleaning.get(0).getX(), cleaning.get(0).getY());
+     //1 GLCustomer glcust =  cust_map.get(customers.get(0));
+      //glcust.setPath(cleaning.get(0).getX(), cleaning.get(0).getY());
     }
   }
 

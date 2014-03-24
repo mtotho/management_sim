@@ -18,25 +18,29 @@ import org.newdawn.slick.UnicodeFont;
 public class GLPanel extends GLEntity{
 
 	private String label;
-	private ArrayList<GLButton> buttons = new ArrayList<GLButton>();
+	protected ArrayList<GLButton> buttons = new ArrayList<GLButton>();
 
-	private Boolean active;
+	protected Boolean active;
 	private GameContainer game;
 	private int gameWidth, gameHeight;
 	
-	private Restaurant restaurant;
-	private Time timer;
+	protected Restaurant restaurant;
+	protected Time timer;
 
 
-	public GLPanel(Restaurant restaurant, GameContainer gc, String label, boolean active){
+
+	public GLPanel(Restaurant restaurant, GameContainer gc){
 		super(gc);
 		this.game = gc;
 		this.restaurant=restaurant;
-		this.label = label;
-		this.active = true;
+		//this.label = label;
+		this.active = false;
 
 		this.gameWidth = gc.getWidth();
 		this.gameHeight = gc.getHeight();
+
+		setLocation(640,0);
+       	setDimension(320, 480);   
 
 		timer=restaurant.getTimer();
 	}
@@ -56,7 +60,7 @@ public class GLPanel extends GLEntity{
 		return buttons;
 	}
 
-	public void setActivity(Boolean active){
+	public void setActive(Boolean active){
 		this.active = active;
 	}
 
