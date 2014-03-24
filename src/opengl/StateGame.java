@@ -38,6 +38,8 @@ public class StateGame extends BasicGameState{
 	private ArrayList<GLCustomer> gl_customers;
   private ArrayList<Customer> customers;
 
+  private GLEmployee e1;
+
   private ArrayList<GLTile> blocking = new ArrayList<GLTile>();
   private ArrayList<GLTile> cleaning = new ArrayList<GLTile>();
 
@@ -66,12 +68,12 @@ public class StateGame extends BasicGameState{
 
         blocking = map.getBlockedTiles();
         for(int i=0;i<blocking.size();i++){
-          System.out.println("X: " + blocking.get(i).getX() + " Y: " + blocking.get(i).getY());
+          //System.out.println("X: " + blocking.get(i).getX() + " Y: " + blocking.get(i).getY());
         }
 
         cleaning = map.getCleaningTiles();
         for(int i=0;i<cleaning.size();i++){
-          System.out.println("X: " + cleaning.get(i).getX() + " Y: " + cleaning.get(i).getY());
+         // System.out.println("X: " + cleaning.get(i).getX() + " Y: " + cleaning.get(i).getY());
         }
 
         //GLCustomer c1 = new GLCustomer(gc,map); 
@@ -81,6 +83,9 @@ public class StateGame extends BasicGameState{
         //c1.setMap(map);
       	//c1.setLocation(map.getAbsX(3), map.getAbsY(1));
       	gl_customers= new ArrayList<GLCustomer>();
+
+        //create test employee
+        e1 = new GLEmployee(gc, map);
 
         buttonPanel = new GLPanel(gc, "Panel 1", true);
         buttonPanel.addButton(gc, "Add Customer", 240, 100);
@@ -127,6 +132,8 @@ public class StateGame extends BasicGameState{
   		g.setColor(Color.white);
 
       buttonPanel.render(gc, g);
+
+      e1.render(gc,g);
       /*if(buttonMenu==1){
         btn_spawnCust.render(gc, g);
         btn_randCust.render(gc, g);
@@ -165,16 +172,45 @@ public class StateGame extends BasicGameState{
             //pass time to restaurant
         restaurant.update(delta);
         
+        e1.update(gc,game,delta);
         //c1.update(gc, game, delta);
         //Check for new logical customer and create gl customer
         for(int i=0; i<customers.size(); i++){
 
           //There is no map for this customer
           if(!cust_map.containsKey(customers.get(i))){
-            
+              
+            //the logical customer
+            Customer logic_cust = customers.get(i);
+
+            int wayX=20;
+            int wayY=20;
+            switch(logic_cust.getWaypoint()){
+              case FOODLINE:
+                wayX=9;
+                wayY=16;
+                break;
+              case MENSROOM:
+                wayX=28;
+                wayY=3;
+                break;
+              case WOMENSROOM:
+                wayX=36;
+                wayY=3;
+                break;
+              case RANDOM:
+
+                break;
+              case REGISTER:
+                break;
+            }
+
             //create new glcust
             GLCustomer glcust = new GLCustomer(gc,map);  
-            Path path = astar.findPath(null, 0, 27, 9,17);
+
+            
+
+            Path path = astar.findPath(null, 0, 27, wayX,wayY);
             glcust.setPath(path);
               
             //add to cust map
@@ -197,7 +233,7 @@ public class StateGame extends BasicGameState{
         //System.out.println("Map coord: x- " + map.getTileX(mousex) + " | y- " +map.getTileY(mousey));
         if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)){
          
-          GLCustomer glcust = cust_map.get(customers.get(0));
+         // GLCustomer glcust = cust_map.get(customers.get(0));
          // System.out.println(glcust);
 
          //if(!glcust.isPathing()){
@@ -205,8 +241,11 @@ public class StateGame extends BasicGameState{
             int destX = map.getTileX(mousex);
             int destY = map.getTileY(mousey);
 
-            glcust.setPath(destX, destY);
-          
+          //  System.out.println(destX);
+            if(destX<map.getWidthInTiles() && destY<map.getHeightInTiles() && !map.blocked(null, destX, destY)){
+              e1.setPath(destX, destY);
+            }
+            
           //}
 
           

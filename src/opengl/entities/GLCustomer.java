@@ -25,12 +25,9 @@ public class GLCustomer extends GLMoveableEntity{
 		dx=0.2;
 		dy=0.2;
 
-		//Indicate that movement will use path that it is given
-		use_path=true;	
-
-
+		
 		//Set the spritesheet path. Will use default if not indicated
-		//setSpriteSheet("path/to/sprite/sheet");
+		setSpriteSheet("man_whiteshirt.png");
 	}
 
 

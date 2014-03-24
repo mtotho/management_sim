@@ -14,7 +14,7 @@ import java.util.Random;
 
 public class GLMoveableEntity extends GLEntity implements Mover{
 
-	protected boolean use_path=true;
+	protected boolean use_path=false;
 
 	private AStarPathFinder astar;
 	private Image image;
@@ -25,7 +25,7 @@ public class GLMoveableEntity extends GLEntity implements Mover{
 	protected Path path;
 	protected int path_step;
 	private boolean isMoving;
-	private int destx, desty;
+	protected int destx, desty;
 
 	private boolean walking_path=false; 		//Whether or not the character is in the progress of walking a path
 	private boolean inbetween_nodes=false;	 	//Whether or not the character is between 2 nodes of the current path
@@ -48,25 +48,30 @@ public class GLMoveableEntity extends GLEntity implements Mover{
 		dy=0.2;
 
 		//clefairy sprite
-		image = new Image("res/clefairy_sprite.png");
-		sprite_sheet = new SpriteSheet(image, 17, 17);
+		image = new Image("res/sprites/employee_spritesheet1.png");
+		sprite_sheet = new SpriteSheet(image, 16, 20);
 
 		direction = FigureDirection.RIGHT;
 		isMoving=false;
 
 		astar =new AStarPathFinder(map, 400, false);
+
+		//set default path so we dont have null
+		//setPath(6,16);
+		//path_step=0;
 	}
 
 	public void setMap(OGLMap map){
 		this.map=map;
 	}
 
-	public void setSpriteSheet(String path) throws SlickException{
-		image = new Image(path);
-		sprite_sheet = new SpriteSheet(image, 17, 17);
+	public void setSpriteSheet(String filename) throws SlickException{
+		image = new Image("res/sprites/" + filename);
+		sprite_sheet = new SpriteSheet(image, 16, 20);
 	}
 
 	public void get_next_path_node(){
+
 		//only get next node if we are not at the end of the path, and are not inbetween nodes
 		if(path_step<path.getLength() && !inbetween_nodes){
 
@@ -143,13 +148,13 @@ public class GLMoveableEntity extends GLEntity implements Mover{
 				break;
 
 			case UP:
-				g.drawImage(sprite_sheet.getSprite(0,3), (int)x,(int)y);
+				g.drawImage(sprite_sheet.getSprite(0,2), (int)x,(int)y);
 				break; 
 			case DOWN:
-				g.drawImage(sprite_sheet.getSprite(0,2), (int)x,(int)y);
+				g.drawImage(sprite_sheet.getSprite(0,0), (int)x,(int)y);
 				break;
 			case RIGHT:
-				g.drawImage(sprite_sheet.getSprite(0,0), (int)x,(int)y);
+				g.drawImage(sprite_sheet.getSprite(0,3), (int)x,(int)y);
 				break;
 		}
 		
@@ -219,12 +224,14 @@ public class GLMoveableEntity extends GLEntity implements Mover{
 		
 		this.path=path;
 		path_step=0;
+		use_path=true;
 	}
 
 	public void setPath(int tilex, int tiley){
 		
 		this.path=astar.findPath(null, map.getTileX(x), map.getTileY(y), tilex, tiley);
 		path_step=0;
+		use_path=true;
 	}
 
 	//return whether or not the character is currently walking on a path

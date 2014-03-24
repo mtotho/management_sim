@@ -19,18 +19,18 @@ public class GLEmployee extends GLMoveableEntity{
 		super(gc, map);
 		
 		//default some values		
-		x=16;
-		y=432;
+		x=96;
+		y=256;
+		destx=96;
+		desty=256;
 		
 		dx=0.2;
 		dy=0.2;
 
-		//Indicate that movement will use path that it is given
-		use_path=true;	
 
 
 		//Set the spritesheet path. Will use default if not indicated
-		//setSpriteSheet("path/to/sprite/sheet");
+		setSpriteSheet("employee_spritesheet1.png");
 	}
 
 
