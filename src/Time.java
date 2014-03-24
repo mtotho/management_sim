@@ -1,7 +1,9 @@
 package mftoth.restaurantsim.logic;
 
 public class Time{
-
+	private final static int MS_DAY= 86400000;
+	private final static int MS_HOUR = 3600000;
+	private final static int MS_MINUTE=60000;
 	private int time_passed_ms;
 
 	public Time(){
@@ -18,8 +20,75 @@ public class Time{
 		return seconds;
 	}
 
+	//get the current second of the minute
+	public int getSecond(){
+		int time_in_minute = time_passed_ms % MS_MINUTE;
+		int second = time_in_minute/1000;
+
+		return second;
+	}
+
 	public int getMilliSeconds(){
 		return time_passed_ms;
+	}
+
+	public int getDay(){
+		int day = time_passed_ms/MS_DAY;
+		return day;
+	}
+
+	//get current hour of day
+	public int getHour(){
+		int time_in_day = time_passed_ms % MS_DAY;
+		int hour = time_in_day/MS_HOUR;
+		return hour;
+	}
+
+	//get current minute of hour
+	public int getMinute(){
+		int ms_under_hour = time_passed_ms % MS_HOUR;
+		int minute = ms_under_hour/MS_MINUTE;
+		return minute;
+	}
+
+	public String getFormattedTime(){
+		
+		//int days = time_passed_ms/MS_DAY;
+		String string="";
+		
+		int hour = getHour();
+		int minute = getMinute();
+		int second = getSecond();
+
+		if(hour<10){
+			string+="0"+hour;
+		}else{
+			string+=hour;
+		}
+
+		string+=":";
+
+		if(minute<10){
+			string+="0"+minute;
+		}else{
+			string+=minute;
+		}
+
+		string+=":";
+
+		if(second<10){
+			string+="0"+second;
+		}else{
+			string+=second;
+		}
+
+		
+
+		//System.out.println(daysFloat);
+		//if(days<)
+
+		return string;
+
 	}
 
 	//getday, gethour, etc

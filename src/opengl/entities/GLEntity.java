@@ -113,7 +113,10 @@ public abstract class GLEntity extends AbstractComponent{
 		this.dy=dy;
 	}
 
-
+	public void setDimension(int width, int height){
+		this.width=width;
+		this.height=height;
+	}
 
 	//[@Override
 	public void setLocation(int x, int y){

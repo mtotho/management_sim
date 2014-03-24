@@ -80,6 +80,10 @@ public class Restaurant{
 		customers.add(new Customer());
 	}
 
+	public Time getTimer(){
+		return timer;
+	}
+
 	public ArrayList<Customer> getCustomers(){
 		return customers;
 	}

@@ -37,6 +37,7 @@ public class StateGame extends BasicGameState{
   private HashMap<Customer,GLCustomer> cust_map;
 	private ArrayList<GLCustomer> gl_customers;
   private ArrayList<Customer> customers;
+  private Time timer;
 
   private GLEmployee e1;
 
@@ -57,6 +58,8 @@ public class StateGame extends BasicGameState{
 
     //
     customers = restaurant.getCustomers();
+    timer = restaurant.getTimer();
+
   }
 
     @Override 
@@ -87,7 +90,9 @@ public class StateGame extends BasicGameState{
         //create test employee
         e1 = new GLEmployee(gc, map);
 
-        buttonPanel = new GLPanel(gc, "Panel 1", true);
+        buttonPanel = new GLPanel(restaurant, gc, "Panel 1", true);
+        buttonPanel.setLocation(640,0);
+        buttonPanel.setDimension(320, 480);               
         buttonPanel.addButton(gc, "Add Customer", 240, 100);
         buttonPanel.addButton(gc, "Numbah 2", 240, 100);
 
@@ -171,7 +176,8 @@ public class StateGame extends BasicGameState{
             throws SlickException {
             //pass time to restaurant
         restaurant.update(delta);
-        
+       
+       // System.out.println(timer.getSeconds());
         e1.update(gc,game,delta);
         //c1.update(gc, game, delta);
         //Check for new logical customer and create gl customer

@@ -12,26 +12,33 @@ import java.util.Random;
 
 import java.util.ArrayList;
 import java.awt.Font;
+import mftoth.restaurantsim.logic.*;
 import org.newdawn.slick.UnicodeFont;
 
 public class GLPanel extends GLEntity{
 
 	private String label;
 	private ArrayList<GLButton> buttons = new ArrayList<GLButton>();
+
 	private Boolean active;
 	private GameContainer game;
 	private int gameWidth, gameHeight;
+	
+	private Restaurant restaurant;
+	private Time timer;
 
 
-	public GLPanel(GameContainer gc, String label, boolean active){
+	public GLPanel(Restaurant restaurant, GameContainer gc, String label, boolean active){
 		super(gc);
 		this.game = gc;
-
+		this.restaurant=restaurant;
 		this.label = label;
 		this.active = true;
 
 		this.gameWidth = gc.getWidth();
 		this.gameHeight = gc.getHeight();
+
+		timer=restaurant.getTimer();
 	}
 
 	public void addButton(GameContainer gc, String buttonName) throws SlickException{
@@ -54,8 +61,18 @@ public class GLPanel extends GLEntity{
 	}
 
 	public void render(GUIContext gc, Graphics g){
+		
+
 		// This is used to determine the distance between buttons
 		int yDif = (int)(gameHeight/(buttons.size()+1));
+
+	   	g.setColor(Color.white);
+		g.fillRect(x,y, width, height);
+
+		g.setColor(Color.orange);
+	    g.drawString("time: " + timer.getFormattedTime(), x+10, y+5);
+
+	    g.drawString("day: " + timer.getDay(), x+250, y+5);
 
 		if((buttons.size()>0) && (active==true)){
 			for(int i=0; i<buttons.size(); i++){
@@ -67,4 +84,5 @@ public class GLPanel extends GLEntity{
 			}
 		}
 	}
+
 }
