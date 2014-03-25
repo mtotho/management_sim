@@ -77,11 +77,12 @@ public class Restaurant{
 	}//end: Update();
 
 	public void addCustomer(){
-		customers.add(new Customer());
+		Customer cust = new Customer();
+		customers.add(cust);
 	}
 
 	public Time getTimer(){
-		return timer;
+		return timer;	
 	}
 
 	public ArrayList<Customer> getCustomers(){

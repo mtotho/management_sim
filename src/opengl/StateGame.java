@@ -96,41 +96,13 @@ public class StateGame extends BasicGameState{
         panels = new HashMap<String, GLPanel>();
 
         GLOverviewPanel buttonPanel = new GLOverviewPanel(restaurant, gc);      
-        buttonPanel.addButton(gc, "Add Customer", 240, 100);
-        buttonPanel.addButton(gc, "Numbah 2", 240, 100);
         addPanel("OVERVIEW", buttonPanel);
 
+        //set this panel to active
         activatePanel("OVERVIEW");
-        /*buttonMenu = 1;
-
-        btn_spawnCust = new GLButton(gc, "Spawn", 240, 80);
-        btn_spawnCust.setLabelX(60);
-        btn_spawnCust.setX(640);
-        btn_spawnCust.setY(40);
-
-        btn_randCust = new GLButton(gc, "Employees", 240, 80);
-        btn_randCust.setLabelX(60);
-        btn_randCust.setX(640);
-        btn_randCust.setY(160);
-
-        btn_next1 = new GLButton(gc, "Next", 240, 80);
-        btn_next1.setLabelX(60);
-        btn_next1.setX(640);
-        btn_next1.setY(280);
-
-        btn_back2 = new GLButton(gc, "Back", 240, 80);
-        btn_back2.setLabelX(60);
-        btn_back2.setX(640);
-        btn_back2.setY(280);*/
-
+      
         astar = new AStarPathFinder(map, 400, false);
        
-
-       // Path path = astar.findPath(null, 1, 1, 53,1);
-        //c1.setPath(path);
-       // c1.setPath(path);
-      //  System.out.println("path length: " + path.getLength()); 
-
     }
 
     public void addPanel(String index, GLPanel panel){
@@ -161,7 +133,8 @@ public class StateGame extends BasicGameState{
 
   		g.setColor(Color.white);
 
-      active_panel.render(gc, g);
+      if(active_panel!=null)
+        active_panel.render(gc, g);
 
       e1.render(gc,g);
       /*if(buttonMenu==1){
@@ -388,17 +361,6 @@ public class StateGame extends BasicGameState{
 
 	}
 
-  public void mousePressed(int button, int posx, int posy){
-    ArrayList<GLButton> buttons = active_panel.getButtons();
-    //System.out.println(buttons.size());
-
-    if(buttons.get(0).isPressed()){
-      restaurant.addCustomer();
-    }
-    if(buttons.get(1).isPressed()){
-     //1 GLCustomer glcust =  cust_map.get(customers.get(0));
-      //glcust.setPath(cleaning.get(0).getX(), cleaning.get(0).getY());
-    }
-  }
+  
 
 }

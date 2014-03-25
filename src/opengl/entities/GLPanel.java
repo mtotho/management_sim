@@ -9,16 +9,17 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.gui.*;
 import java.util.Random;
-
+import java.util.LinkedHashMap;
 import java.util.ArrayList;
 import java.awt.Font;
+import java.util.Set;
 import mftoth.restaurantsim.logic.*;
 import org.newdawn.slick.UnicodeFont;
 
 public class GLPanel extends GLEntity{
 
 	private String label;
-	protected ArrayList<GLButton> buttons = new ArrayList<GLButton>();
+	//protected ArrayList<GLButton> buttons = new ArrayList<GLButton>();
 
 	protected Boolean active;
 	private GameContainer game;
@@ -26,6 +27,8 @@ public class GLPanel extends GLEntity{
 	
 	protected Restaurant restaurant;
 	protected Time timer;
+	protected int padding;
+	protected LinkedHashMap<String, GLButton> buttons;
 
 
 
@@ -39,6 +42,7 @@ public class GLPanel extends GLEntity{
 		this.gameWidth = gc.getWidth();
 		this.gameHeight = gc.getHeight();
 
+		buttons = new LinkedHashMap<String, GLButton>();
 		setLocation(640,0);
        	setDimension(320, 480);   
 
@@ -47,16 +51,17 @@ public class GLPanel extends GLEntity{
 
 	public void addButton(GameContainer gc, String buttonName) throws SlickException{
 		GLButton tempButton = new GLButton(gc, buttonName, 499, 80);
-		buttons.add(tempButton);
+		//buttons.add(tempButton);
 	}
 
-	public void addButton(GameContainer gc, String buttonName, int width, int height) throws SlickException{
-		GLButton tempButton = new GLButton(gc, buttonName, width, height);
-		buttons.add(tempButton);
+	public void addButton(GameContainer gc, String id, String label, int width, int height) throws SlickException{
+		GLButton tempButton = new GLButton(gc, label, width, height);
+		buttons.put(id, tempButton);
+		//buttons.add(tempButton);
 	}
 
 
-	public ArrayList<GLButton> getButtons(){
+	public LinkedHashMap<String, GLButton> getButtons(){
 		return buttons;
 	}
 
@@ -68,7 +73,7 @@ public class GLPanel extends GLEntity{
 		
 
 		// This is used to determine the distance between buttons
-		int yDif = (int)(gameHeight/(buttons.size()+1));
+		int yDif = (int)(height/(buttons.size()+1));
 
 	   	g.setColor(Color.white);
 		g.fillRect(x,y, width, height);
@@ -78,15 +83,29 @@ public class GLPanel extends GLEntity{
 
 	    g.drawString("day: " + timer.getDay(), x+250, y+5);
 
+	    Object[] keys = buttons.keySet().toArray();
+	    
+	    for(int i=0; i<keys.length; i++){
+	    
+				GLButton tempButton = buttons.get(keys[i]);
+				tempButton.setLabelX(60);
+				tempButton.setX(padding+x);
+				tempButton.setY((yDif * (i+1)) - 80);
+				tempButton.render(gc, g);
+
+		}
+	    
+
+	    /*
 		if((buttons.size()>0) && (active==true)){
 			for(int i=0; i<buttons.size(); i++){
 				GLButton tempButton = buttons.get(i);
 				tempButton.setLabelX(60);
-				tempButton.setX(640);
+				tempButton.setX(padding+x);
 				tempButton.setY((yDif * (i+1)) - 80);
 				tempButton.render(gc, g);
 			}
-		}
+		}*/
 	}
 
 }
