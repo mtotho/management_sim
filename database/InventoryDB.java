@@ -4,8 +4,9 @@ CS 205 Restaurant Sim database
 
 This will be the class that queries, updates, and sets the details of the Inventory table
 */
+package pjwelch.restaurantsim.database;
 
-import java.sql.*
+import java.sql.*;
 
 public class InventoryDB{
 
@@ -17,7 +18,7 @@ public class InventoryDB{
 
 		try{
 
-			c = DriverManger.getConnection("jdbc:sqlite:sim.db");
+			c = DriverManager.getConnection("jdbc:sqlite:sim.db");
 
 			stmt = c.createStatement();
 
@@ -39,6 +40,8 @@ public class InventoryDB{
 	//QueryQuantity returns the quantity of an item based on the provided ItemID and restauarantID
 	public int QueryQuantity(int itemID, int restaurantID){
 
+		int quantity = 0;
+
 		try{
 
 			c = DriverManager.getConnection("jdbc:sqlite:sim.db");
@@ -51,7 +54,7 @@ public class InventoryDB{
 
 				if(itemID == rs.getInt("ITEM_ID") && restaurantID == (rs.getInt("RESTAURANT_ID"))){
 
-					return rs.getInt("QUANTITY");
+					quantity = rs.getInt("QUANTITY");
 
 				}//end if
 
@@ -69,6 +72,7 @@ public class InventoryDB{
 
 		}//end catch
 
+		return quantity;
 	}//end QueryQuantity
 
 	//addEntry adds a new item with quantity to the inventory
@@ -81,12 +85,12 @@ public class InventoryDB{
 			stmt = c.createStatement();
 
 			String sql = "INSERT VALUES INTO INVENTORY " +
-						 "VALUES (" + restaurantID + ", " + itemId + ", " + quantity + ");";
+						 "VALUES (" + restaurantID + ", " + itemID + ", " + quantity + ");";
 
 			stmt.executeUpdate(sql);
 
 			stmt.close();
-			c.close;
+			c.close();
 
 		}//end try
 		catch(Exception e){
@@ -102,13 +106,15 @@ public class InventoryDB{
 	//creating a seperate inventory for the new restaurant
 	public void createNewInventory(int restaurantID){
 
+		String sql;
+
 		try{
 
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:sim.db");
 
 			stmt = c.createStatement();
-			Result rs = stmt.executeQuery("SELECT * FROM ITEMS;");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM ITEMS;");
 
 			while(rs.next()){
 

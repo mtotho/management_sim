@@ -6,10 +6,11 @@ CS 205 Final Project DB
 This populates the database sim.db tables created by DatabaseInit
 
 */
+package pjwelch.restaurantsim.database;
 
 import java.sql.*;
 
-public class DatabasePop extends Player{
+public class DatabasePop{
 
 	public static void main(String args[]){
 
@@ -96,7 +97,7 @@ public class DatabasePop extends Player{
 
 
 			stmt.close();
-			c.close()
+			c.close();
 
 		}//end try
 

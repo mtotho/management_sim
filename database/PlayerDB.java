@@ -4,6 +4,7 @@ CS 205 Restaurant Sim database
 
 This will be the class that queries, updates, and sets the details of the player table
 */
+package pjwelch.restaurantsim.database;
 
 import java.sql.*;
 
@@ -20,6 +21,8 @@ public class PlayerDB{
 	//queryID returns the player ID based on the player name
 	public int queryID(String playerName){
 
+		int id = 0;
+		String name;
 
 		try{
 
@@ -33,12 +36,12 @@ public class PlayerDB{
 
 			while (rs.next()) {
 
-				int id = rs.getInt("ID");
-				String name = rs.getString("NAME");
+				id = rs.getInt("ID");
+				name = rs.getString("NAME");
 
-				if (name.equals(playerName())){
+				if (name.equals(playerName)){
 
-					return id;
+					break;
 
 				}//end if
 
@@ -56,10 +59,14 @@ public class PlayerDB{
 
 		}//end catch
 
+		return id;
 	}//end queryID
 
 	//queryName returns the player name based on the ID
 	public String queryName(int playerID){
+
+		String name = "";
+		int id;
 
 		try{
 
@@ -67,17 +74,17 @@ public class PlayerDB{
 			c = DriverManager.getConnection("jdbc:sqlite:sim.db");
 			c.setAutoCommit(false);
 
-			stmt = c.createStatemet();
+			stmt = c.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM PLAYER:");
 
 			while (rs.next()) {
 
-				int id = rs.getInt("ID");
-				String name = rs.getString("NAME");
+				id = rs.getInt("ID");
+				name = rs.getString("NAME");
 
 				if(id == playerID){
 
-					return name;
+					break;
 
 				}//end if
 
@@ -89,6 +96,13 @@ public class PlayerDB{
 		c.close();
 
 		}//end try
+		catch(Exception e){
+
+			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+
+		}
+
+		return name;
 
 	}//end queryName
 

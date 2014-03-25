@@ -5,6 +5,8 @@ CS 205 Restaurant Sim Database
 
 This class will update, query, and add enteries to the Restaurant table in the database
 */
+package pjwelch.restaurantsim.database;
+
 import java.sql.*;
 
 public class RestaurantDB{
@@ -15,11 +17,12 @@ public class RestaurantDB{
 	//returns a restauarant ID based on the playerID
 	public int QueryRestaurantID(int playerID){
 
+		int id = 0;
 
 		try{
 			c = DriverManager.getConnection("jdbc:sqlite:sim.db");
 
-			stmt = c.createStatment;
+			stmt = c.createStatement();
 
 			ResultSet rs = stmt.executeQuery("SELECT * FORM ITEMS");
 
@@ -27,7 +30,7 @@ public class RestaurantDB{
 
 				if(rs.getInt("PLAYER_ID") == playerID){
 
-					return rs.getInt("ID");
+					id = rs.getInt("ID");
 
 				} 
 
@@ -45,19 +48,20 @@ public class RestaurantDB{
 
 		}//end catch
 
+		return id;
 
 	}//end QueryRestauarantID
 
 	//creates a new restauarant based on the player ID
 	public void NewRestaurant(int playerID, String name){
 
-		int restaurantID;
+		int restaurantID = 0;
 
 		try{
 
 			c = DriverManager.getConnection("jdbc:sqlite:sim.db");
 
-			stmt = c.createStatement;
+			stmt = c.createStatement();
 
 			ResultSet rs = stmt.executeQuery("SELECT * FROM RESTAURANT");
 
@@ -75,13 +79,13 @@ public class RestaurantDB{
 			restaurantID++;
 
 			String sql = "INSERT VALUES INTO RESTAURANT(ID, NAME, PLAYER_ID) " +
-						"VALUES (" + restaurantID + ", " + name + ", " + playerID ");";
+						"VALUES (" + restaurantID + ", " + name + ", " + playerID + ");";
 
 			stmt.executeUpdate(sql);
 
 			rs.close();
 			stmt.close();
-			c.close()
+			c.close();
 
 		}//end try
 		catch(Exception e){

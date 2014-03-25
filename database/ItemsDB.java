@@ -4,6 +4,7 @@ CS 205 Restaurant Sim database
 
 This will be the class that queries, updates, and sets the details of the items table
 */
+package pjwelch.restaurantsim.database;
 
 import java.sql.*;
 
@@ -24,6 +25,8 @@ public class ItemsDB{
 	//QueryPrice returns an items price based on the item name;
 	public double QueryPrice(String itemName){
 
+		double price = 0;
+
 		try{
 
 			c = DriverManager.getConnection("jdbc:sqlite:sim.db");
@@ -36,11 +39,12 @@ public class ItemsDB{
 
 				int id = rs.getInt("ID");
 				String name = rs.getString("NAME");
-				double price = rs.getString("PRICE");
+				 price = rs.getDouble("PRICE");
 
 				if(name.equals(itemName)){
 
-					return price;
+					
+					break;
 
 				}//end if
 
@@ -57,9 +61,13 @@ public class ItemsDB{
 
 		}//end Catch
 
+		return price;
+
 	}//end QueryPrice
 
 	public int QueryID(String itemName){
+
+		int id = 0;
 
 		try{
 
@@ -71,12 +79,12 @@ public class ItemsDB{
 
 			while(rs.next()){
 
-				int id = rs.getInt("ID");
+				id = rs.getInt("ID");
 				String name = rs.getString("NAME");
 
 				if(name.equals(itemName)){
 
-					return id;
+					break;
 
 				}//end if
 
@@ -94,6 +102,8 @@ public class ItemsDB{
 
 		}//end catch
 
+		return id;
+
 	}//end QueryID
 
 	//addEntry adds a new item row to the Items table
@@ -106,7 +116,7 @@ public class ItemsDB{
 			stmt = c.createStatement();
 
 			String sql = "INSERT INTO ITEMS " +
-						 "VALUES (" + id + ", '" + name + "', " + price ");"; 
+						 "VALUES (" + id + ", '" + name + "', " + price + ");"; 
 
 			stmt.executeUpdate(sql);
 
