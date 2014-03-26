@@ -16,6 +16,7 @@ private Waypoint waypoint;
 	//Constructor()
 	public Customer(){
 		isRendered=false;
+		waypoint = Waypoint.FOODLINE;
 	}//end: Constructor()
 
 	public void getTraits(){
