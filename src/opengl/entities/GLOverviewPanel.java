@@ -1,4 +1,3 @@
-
 package mftoth.restaurantsim.ogl;
 
 import org.newdawn.slick.*;
@@ -17,7 +16,8 @@ import mftoth.restaurantsim.logic.*;
 import org.newdawn.slick.UnicodeFont;
 
 public class GLOverviewPanel extends GLPanel{
-
+	
+	
 	public GLOverviewPanel(Restaurant restaurant, GameContainer gc) throws SlickException{
 		super(restaurant, gc);
 
@@ -39,13 +39,27 @@ public class GLOverviewPanel extends GLPanel{
 	public void mousePressed(int button, int posx, int posy){
 	   // ArrayList<GLButton> buttons = getButtons();
 	    //System.out.println(buttons.size());
-
-	    if(buttons.get("btnAddCustomer").isPressed()){
-	      restaurant.addCustomer();
-	    }
-	    if(buttons.get("btnDebug").isPressed()){
-	     //1 GLCustomer glcust =  cust_map.get(customers.get(0));
-	      //glcust.setPath(cleaning.get(0).getX(), cleaning.get(0).getY());
+	    
+	    //Only register mouse clicks if mouseDown is false (this should prevent the click action being called multiple times per click)
+	    if(!mouseDown){	
+	    	mouseDown=true; //change to true so we cannot re enter this block during this click
+	    	
+		    if(buttons.get("btnAddCustomer").isPressed()){
+		      restaurant.addCustomer();
+		    }
+		    if(buttons.get("btnDebug").isPressed()){
+		     //1 GLCustomer glcust =  cust_map.get(customers.get(0));
+		      //glcust.setPath(cleaning.get(0).getX(), cleaning.get(0).getY());
+		    }
 	    }
   }
+  
+  	public void mouseReleased(int button, int x, int y){
+  		
+  		
+  		mouseDown=false; //change flag back to false after click is done
+  	} 
+  
+  
+  
 }
