@@ -26,7 +26,7 @@ class Simulator{
 		OGLGameContainer game = new OGLGameContainer("Management Simulator", restaurant);
 	     try {
 	          AppGameContainer container = new AppGameContainer(game);
-	          container.setDisplayMode(960, 640, false);
+	          container.setDisplayMode(960, 480, false);
 	          container.setShowFPS(true);
 	          container.start();
 	     } catch (SlickException e) {

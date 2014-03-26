@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="40" height="30" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="tileset_compiled_3-23" tilewidth="16" tileheight="16">
+  <image source="../tilesets/tileset_compiled_3-23.png" width="256" height="256"/>
+  <tile id="0">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="blocking " value="true"/>
+   </properties>
+  </tile>
+  <tile id="16">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="17">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="18">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="22">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="23">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="24">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="25">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="26">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="27">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="38">
+   <properties>
+    <property name="cleaning" value="true"/>
+   </properties>
+  </tile>
+  <tile id="48">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="51">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="52">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="53">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="64">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="65">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="67">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="68">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="69">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="80">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="81">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="83">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="85">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="96">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="97">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="98">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="99">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="100">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="101">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="257" name="matted_tile" tilewidth="16" tileheight="16">
+  <image source="../tilesets/matted_tile.png" width="16" height="16"/>
+  <tile id="0">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="258" name="black_tile" tilewidth="16" tileheight="16">
+  <image source="../tilesets/black_tile.png" width="16" height="16"/>
+ </tileset>
+ <tileset firstgid="259" name="black_tile_blocking" tilewidth="16" tileheight="16">
+  <image source="../tilesets/black_tile.png" width="16" height="16"/>
+  <tile id="0">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="ground" width="40" height="30">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3XoQ0AIBAEwa+BEsj3XyMehSDhSEaMX7tdVc01Y/O6h7dmQMPPfQAAAKfS/ya9L90CfxONk8ASAAA=
+  </data>
+ </layer>
+ <layer name="wall_collision" width="40" height="30">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3UMQqAMAwF0ASn6gnU1VN4/4NJBrFIQX5i0+U/yJSQZvi0iEhx1qS+HjKzBsr2e3rITITt9/SQmbcDmB1x3194X2z/3bO8LIL9C3PifWYX7F/Yku8bZcR9qk+huYnmqvVeDc0JWl+5ar3f09l5PxERERFRtgutWh8pwBIAAA==
+  </data>
+ </layer>
+ <layer name="collision" width="40" height="30">
+  <properties>
+   <property name="blocking" value="true"/>
+  </properties>
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+2TuwqDQBBFNY12Jmm0018Qon0g2ouPXnz8/yd4m4W1cYplnV0yBw4DwxSnmSBwnwjGMIQjnLT50FR3CXze2JfCDL7gBndtvjXVXQ6LG/sEQRCEMx/uAIIfdwDBzB3gOSV3AMGXO4Cg4w4gcP1/pc8M6TPDhb7+woGxS7FcuDJ2/QMVrC3uTWlga3HvAweZc/TzwBIAAA==
+  </data>
+ </layer>
+ <layer name="non_collision_mask" width="40" height="30">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3SWwoAEBBGYbxaB/tforxJboVBzldTYuQXSgFvMvp0grbRfLGvVL01/CV/99rfGKna/t75rX677qoAAACAKJeM/Yb5WbfnkxIAPSsVqMASAAA=
+  </data>
+ </layer>
+ <layer name="decorative_collision" width="40" height="30">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3XMQoAIAiFYQ/QEdq7/w2bBJdo8BFW/wdvEXFxUTP8YmyimK3qAzJaSEU9BAAAAHBV71eXuV9Xf6CqfoOX93vCBB5cLVzAEgAA
+  </data>
+ </layer>
+ <layer name="cleaning" width="40" height="30">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3XsQkAMAgEQLfJ/humsQwGQiq9AysfG6uPYJqVc8u83P2ZAwAAoIeqB552euNM1d83sETZqMASAAA=
+  </data>
+ </layer>
+</map>

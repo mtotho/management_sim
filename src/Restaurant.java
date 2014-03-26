@@ -18,6 +18,7 @@ public class Restaurant{
 		customers = new ArrayList<Customer>();
 
 		Customer c1 = new Customer();
+		c1.setWayPoint(Waypoint.FOODLINE);
 		customers.add(c1);
 		//Scheduler taskQueue = new Scheduler;
 
@@ -42,8 +43,10 @@ public class Restaurant{
 		//add ms to timer object
 		timer.addMilliSecond(delta);
 
-		if(timer.getMilliSeconds()>5000 && timer.getMilliSeconds()<5025){
-			customers.add(new Customer());
+		if(timer.getMilliSeconds() > 5000 && timer.getMilliSeconds()<5000+delta){
+			Customer cust = new Customer();
+			cust.setWayPoint(Waypoint.MENSROOM);
+			customers.add(cust);
 		}
 
 		//System.out.println(timer.getSeconds() + " seconds");
@@ -72,6 +75,10 @@ public class Restaurant{
 		
 		
 	}//end: Update();
+
+	public void addCustomer(){
+		customers.add(new Customer());
+	}
 
 	public ArrayList<Customer> getCustomers(){
 		return customers;

@@ -3,6 +3,7 @@ package mftoth.restaurantsim.logic;
 
 public class Employee{
 
+	private String name;
 	private boolean busy;
 	private Task active_task;
 	private float hoursWorked;
@@ -11,10 +12,12 @@ public class Employee{
 	private String labor;
 	private TaskType preferred_task;
 
-
+	private String[] nameList = {"Mike", "Gordon", "Patrick"};
 
 	//Constructor()
 	public Employee(){
+		int randNum = (int)(Math.random()*3);
+		this.name = nameList[randNum];
 		busy=false;
 	}//end: Constructor()
 
@@ -56,6 +59,10 @@ public class Employee{
 		}
 		
 		return 1;
+	}
+
+	public String getName(){
+		return this.name;
 	}
 
 	public Task getActiveTask(){

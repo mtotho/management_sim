@@ -8,16 +8,24 @@ import org.newdawn.slick.util.pathfinding.PathFindingContext;
 import org.newdawn.slick.util.pathfinding.TileBasedMap;
 import org.newdawn.slick.tiled.TiledMap;
 
+import java.util.ArrayList;
+
 public class OGLMap implements TileBasedMap{
-	private static final int WIDTH = 60;
-  	private static final int HEIGHT = 40;
+	private static final int WIDTH = 40;
+  	private static final int HEIGHT = 30;
+
   	private TiledMap map;
   	private String blocking_property="blocking";
+    private String cleaning_property="cleaning";
+    private boolean[][] arrBlocking = new boolean[WIDTH][HEIGHT];
 
-  	private boolean blocking[][];
+    private ArrayList<GLTile> blocking = new ArrayList<GLTile>();
+    private ArrayList<GLTile> cleaning = new ArrayList<GLTile>();
+
+    private GLTile tempTile;
 
  	public OGLMap() throws SlickException{
-		map = new TiledMap("res/maps/restaurant_v1.tmx");
+		map = new TiledMap("res/maps/restaurant_v2.tmx");
   	 	/*blocking = new boolean[map.getWidth()][map.getHeight()];
         for (int x = 0; x < map.getWidth(); x++) {
             for (int y = 0; y < map.getHeight(); y++) {
@@ -31,11 +39,55 @@ public class OGLMap implements TileBasedMap{
             }
         }*/
        // System.out.println(map.getTileProperty(map.getTileId(11, 1, map.getLayerIndex("collision")), blocking_property, "false").equals("true"));
+
+        for(int x=0;x<WIDTH;x++){
+            for(int y=0;y<HEIGHT;y++){
+                arrBlocking[x][y]=false;
+                if(map.getTileProperty(map.getTileId(x, y, map.getLayerIndex("collision")), blocking_property, "false").equals("true")){
+                    blocking.add(new GLTile(x, y));
+                     arrBlocking[x][y]=true;
+                }
+                if(map.getTileProperty(map.getTileId(x, y, map.getLayerIndex("decorative_collision")), blocking_property, "false").equals("true")){
+                    blocking.add(new GLTile(x, y));
+                     arrBlocking[x][y]=true;
+                }
+                if(map.getTileProperty(map.getTileId(x, y, map.getLayerIndex("wall_collision")), blocking_property, "false").equals("true")){
+                    blocking.add(new GLTile(x, y));
+                     arrBlocking[x][y]=true;
+                }
+            }
+        }
+
+        for(int x=0;x<WIDTH;x++){
+            for(int y=0;y<HEIGHT;y++){
+                if(map.getTileProperty(map.getTileId(x, y, map.getLayerIndex("cleaning")), cleaning_property, "false").equals("true")){
+                    cleaning.add(new GLTile(x, y));
+                }
+            }
+        }
  	}
+
+    public ArrayList<GLTile> getBlockedTiles(){
+
+        return blocking;
+    }
+
+    public ArrayList<GLTile> getCleaningTiles(){
+
+        return cleaning;
+    }
 
     @Override
     public boolean blocked(PathFindingContext ctx, int x, int y) {
-    	return map.getTileProperty(map.getTileId(x, y, map.getLayerIndex("collision")), blocking_property, "false").equals("true");
+
+
+
+     //   boolean collision = arrBlocking[x][y];
+        boolean collision=map.getTileProperty(map.getTileId(x, y, map.getLayerIndex("collision")), blocking_property, "false").equals("true");
+        boolean dec_collision = map.getTileProperty(map.getTileId(x, y, map.getLayerIndex("decorative_collision")), blocking_property, "false").equals("true");
+        boolean wall_collision = map.getTileProperty(map.getTileId(x, y, map.getLayerIndex("wall_collision")), blocking_property, "false").equals("true");
+
+    	return (collision || dec_collision || wall_collision);
     }
 
     @Override
@@ -66,11 +118,21 @@ public class OGLMap implements TileBasedMap{
 
     public int getTileX(int absx){
     	int width = map.getTileWidth();
-    	return (int)(absx/width);
+        if((int)(absx/width)>(WIDTH-1)){
+            return (WIDTH-1);
+        }
+        else{
+            return (int)(absx/width);
+        }
     }
     public int getTileY(int absy){
     	int height = map.getTileHeight();
-    	return (int)(absy/height);
+    	if((int)(absy/height)>(HEIGHT-1)){
+            return (HEIGHT-1);
+        }
+        else{
+            return (int)(absy/height);
+        }
     }
     public int getAbsX(int tileX){
     	int width = map.getTileWidth();

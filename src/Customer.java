@@ -11,6 +11,7 @@ private String  cb =  "cheeseburger";
 private String drink = "drink";
 private String fries = "fries";
 private boolean isRendered;
+private Waypoint waypoint;
 
 	//Constructor()
 	public Customer(){
@@ -49,6 +50,14 @@ private boolean isRendered;
 		
 
 	}//end getOrder()
+
+	public void setWayPoint(Waypoint waypoint){
+		this.waypoint=waypoint;
+	}
+
+	public Waypoint getWaypoint(){
+		return waypoint;
+	}
 
 	public boolean isRendered(){
 		return isRendered;

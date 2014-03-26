@@ -12,22 +12,25 @@ import org.newdawn.slick.gui.*;
 import org.newdawn.slick.util.pathfinding.*;
 import java.util.Random;
 
-public class GLCustomer extends GLMoveableEntity{
+public class GLEmployee extends GLMoveableEntity{
 
 
-	public GLCustomer(GameContainer gc, OGLMap map) throws SlickException{
+	public GLEmployee(GameContainer gc, OGLMap map) throws SlickException{
 		super(gc, map);
 		
 		//default some values		
-		x=16;
-		y=432;
+		x=96;
+		y=256;
+		destx=96;
+		desty=256;
 		
 		dx=0.2;
 		dy=0.2;
 
-		
+
+
 		//Set the spritesheet path. Will use default if not indicated
-		setSpriteSheet("man_whiteshirt.png");
+		setSpriteSheet("employee_spritesheet1.png");
 	}
 
 
@@ -51,7 +54,7 @@ public class GLCustomer extends GLMoveableEntity{
 
 	public String toString(){
 		String output = "";
-		output+="<Customer>\n";
+		output+="<Employee>\n";
 		output+="|xpos (absolute): " + x + "\n";
 		output+="|ypos (absolute): " + y + "\n";
 		output+="|xtile          : " + map.getTileX(x) + "\n";
