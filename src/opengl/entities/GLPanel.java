@@ -29,6 +29,8 @@ public class GLPanel extends GLEntity{
 	protected Time timer;
 	protected int padding;
 	protected LinkedHashMap<String, GLButton> buttons;
+	
+	protected boolean mouseDown;
 
 
 
@@ -38,6 +40,8 @@ public class GLPanel extends GLEntity{
 		this.restaurant=restaurant;
 		//this.label = label;
 		this.active = false;
+		
+		this.mouseDown=false;
 
 		this.gameWidth = gc.getWidth();
 		this.gameHeight = gc.getHeight();
