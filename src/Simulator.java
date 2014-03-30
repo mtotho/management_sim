@@ -6,7 +6,11 @@ import org.newdawn.slick.AppGameContainer;
 import mftoth.restaurantsim.ogl.*;
 import mftoth.restaurantsim.logic.Restaurant;
 
+import org.apache.commons.dbutils.*;
+
 class Simulator{
+
+	private QueryRunner qr;
 
 	//main()
 	public static void main(String[] args) throws InterruptedException{

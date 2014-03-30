@@ -165,9 +165,9 @@ public class StateGame extends BasicGameState{
           glcust.render(gc, g); 
         }
     	}
-
-
     } 
+
+
  
     @Override
     public void update(GameContainer gc, StateBasedGame game, int delta)
@@ -203,7 +203,15 @@ public class StateGame extends BasicGameState{
                 wayY=3;
                 break;
               case RANDOM:
+                wayX= 0 + (int)(Math.random()*map.getWidthInTiles()-1); 
+                wayY= 0 + (int)(Math.random()*map.getHeightInTiles()-1); 
+                while(map.blocked(null, wayX, wayY) || (wayX==0 && wayY==27)){ //0 and 27 are the origin of the customer
+                  wayX= 0 + (int)(Math.random()*map.getWidthInTiles()-1); 
+                  wayY= 0 + (int)(Math.random()*map.getHeightInTiles()-1); 
+                }
 
+                System.out.println("Random wayX: " + wayX);
+                System.out.println("Random wayY: " + wayY);
                 break;
               case REGISTER:
                 break;
@@ -229,6 +237,7 @@ public class StateGame extends BasicGameState{
           }
         }
 
+        System.out.println("customer amount: " + customers.size());
       	Input input = gc.getInput();
       	
         int mousex = input.getMouseX();
@@ -247,7 +256,7 @@ public class StateGame extends BasicGameState{
 
           //  System.out.println(destX);
             if(destX<map.getWidthInTiles() && destY<map.getHeightInTiles() && !map.blocked(null, destX, destY)){
-              //e1.setPath(destX, destY);
+              e1.setPath(destX, destY);
             }
             
           //}

@@ -8,6 +8,7 @@ public class Restaurant{
 	private ArrayList<Customer> customers;
 	private Scheduler scheduler;
 	private Time timer;
+	private int counter;
 	//Constructor()
 	public Restaurant(){
 
@@ -43,10 +44,13 @@ public class Restaurant{
 		//add ms to timer object
 		timer.addMilliSecond(delta);
 
-		if(timer.getMilliSeconds() > 5000 && timer.getMilliSeconds()<5000+delta){
+
+		if(counter % 200==0){
 			Customer cust = new Customer();
-			cust.setWayPoint(Waypoint.MENSROOM);
+			cust.setWayPoint(Waypoint.RANDOM);
 			customers.add(cust);
+
+	
 		}
 
 		//System.out.println(timer.getSeconds() + " seconds");
@@ -73,6 +77,7 @@ public class Restaurant{
 			}//end if employee not busy
 		}//end for
 		
+		counter++;
 		
 	}//end: Update();
 
