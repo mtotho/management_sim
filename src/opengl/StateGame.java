@@ -204,7 +204,14 @@ public class StateGame extends BasicGameState{
             int wayY=20;
             switch(logic_cust.getWaypoint()){
               case FOODLINE:
-                foodline.add(glcust);
+                boolean success = foodline.add(glcust);
+                if(!success){
+                    wayX=36;
+                    wayY=3;
+
+                    path = astar.findPath(null, 0, 27, wayX,wayY);
+                    glcust.setPath(path);
+                }
                 break;
               case MENSROOM:
                 wayX=28;
