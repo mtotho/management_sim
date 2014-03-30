@@ -79,6 +79,7 @@ public class Foodline{
 				GLTile linespot = linetiles.get(i);
 				//System.out.println("linespot x: " + linespot.getX() + " linespot y: " + linespot.getY());
 				glcust.setPath(linespot.getX(), linespot.getY());
+	
 			}
 			
 			return nextcust;
