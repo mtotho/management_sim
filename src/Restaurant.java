@@ -83,6 +83,7 @@ public class Restaurant{
 
 	public void addCustomer(){
 		Customer cust = new Customer();
+		cust.setWayPoint(Waypoint.RANDOM);
 		customers.add(cust);
 	}
 

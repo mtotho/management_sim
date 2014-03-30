@@ -95,8 +95,12 @@ public class StateGame extends BasicGameState{
 
         panels = new HashMap<String, GLPanel>();
 
-        GLOverviewPanel buttonPanel = new GLOverviewPanel(restaurant, gc);      
-        addPanel("OVERVIEW", buttonPanel);
+        GLOverviewPanel overviewPanel = new GLOverviewPanel(restaurant, gc, this);
+        GLEmployeePanel employeePanel = new GLEmployeePanel(restaurant, gc, this);
+        GLTaskPanel taskPanel = new GLTaskPanel(restaurant, gc, this);
+        addPanel("OVERVIEW", overviewPanel);
+        addPanel("EMPLOYEES", employeePanel);
+        addPanel("TASKS", taskPanel);
 
         //set this panel to active
         activatePanel("OVERVIEW");
@@ -118,8 +122,11 @@ public class StateGame extends BasicGameState{
         }
 
         active_panel = panel;
+        for(GLPanel panelValue : panels.values()){
+          panelValue.setActive(false);
+          System.out.println("Panel inactive");
+        }
         panel.setActive(true);
-
       }
     }
 
@@ -131,7 +138,7 @@ public class StateGame extends BasicGameState{
     	
       map.render();
 
-  		g.setColor(Color.white);
+  		g.setColor(Color.black);
 
       if(active_panel!=null)
         active_panel.render(gc, g);
@@ -210,8 +217,8 @@ public class StateGame extends BasicGameState{
                   wayY= 0 + (int)(Math.random()*map.getHeightInTiles()-1); 
                 }
 
-                System.out.println("Random wayX: " + wayX);
-                System.out.println("Random wayY: " + wayY);
+                //System.out.println("Random wayX: " + wayX);
+                //System.out.println("Random wayY: " + wayY);
                 break;
               case REGISTER:
                 break;
@@ -237,7 +244,7 @@ public class StateGame extends BasicGameState{
           }
         }
 
-        System.out.println("customer amount: " + customers.size());
+        //System.out.println("customer amount: " + customers.size());
       	Input input = gc.getInput();
       	
         int mousex = input.getMouseX();

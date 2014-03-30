@@ -15,19 +15,18 @@ import java.awt.Font;
 import mftoth.restaurantsim.logic.*;
 import org.newdawn.slick.UnicodeFont;
 
-public class GLOverviewPanel extends GLPanel{
-
+public class GLEmployeePanel extends GLPanel{
+	
 	private StateGame game;
 	
-	public GLOverviewPanel(Restaurant restaurant, GameContainer gc, StateGame game) throws SlickException{
+	public GLEmployeePanel(Restaurant restaurant, GameContainer gc, StateGame game) throws SlickException{
 		super(restaurant, gc);
 		this.game = game;
 
 
-		addButton(gc,"btnEmployee", "Employees", 300, 100);
-        addButton(gc,"btnTask", "Tasks", 300, 100);
-		addButton(gc,"btnInventory", "Inventory", 300, 100);
-        addButton(gc,"btnStats", "Statistics", 300, 100);
+		addButton(gc,"btnAddCustomer", "Employee List", 300, 100);
+        addButton(gc,"btnDebug", "Numbah 2", 300, 100);
+        addButton(gc, "btnBack", "Back", 300, 100);
 
         padding=10;
 
@@ -45,18 +44,18 @@ public class GLOverviewPanel extends GLPanel{
 	    //System.out.println(buttons.size());
 	    
 	    //Only register mouse clicks if mouseDown is false (this should prevent the click action being called multiple times per click)
-	    if(!mouseDown && (this.active==true)){
+	    if(!mouseDown){	
 	    	mouseDown=true; //change to true so we cannot re enter this block during this click
 	    	
-		    if(buttons.get("btnEmployee").isPressed()){
-		    	System.out.println("That should go to employee");
-		    	game.activatePanel("EMPLOYEES");
+		    if(buttons.get("btnAddCustomer").isPressed()){
+		      restaurant.addCustomer();
 		    }
-		    if(buttons.get("btnTask").isPressed()){
-		    	System.out.println("That should go to task");
-		    	game.activatePanel("TASKS");
+		    if(buttons.get("btnDebug").isPressed()){
 		     //1 GLCustomer glcust =  cust_map.get(customers.get(0));
 		      //glcust.setPath(cleaning.get(0).getX(), cleaning.get(0).getY());
+		    }
+		    if(buttons.get("btnBack").isPressed()){
+		    	game.activatePanel("OVERVIEW");
 		    }
 	    }
   }

@@ -1,9 +1,9 @@
 package mftoth.restaurantsim.logic;
 
 public class Time{
-	private final static int MS_DAY= 86400000;
-	private final static int MS_HOUR = 3600000;
-	private final static int MS_MINUTE=60000;
+	private final static int MS_MINUTE= 310;
+	private final static int MS_HOUR = MS_MINUTE * 60;
+	private final static int MS_DAY= MS_HOUR * 24;
 	private int time_passed_ms;
 
 	public Time(){
@@ -16,14 +16,14 @@ public class Time{
 
 
 	public int getSeconds(){
-		int seconds = (int)(time_passed_ms/1000);
+		int seconds = (int)(time_passed_ms/5);
 		return seconds;
 	}
 
 	//get the current second of the minute
 	public int getSecond(){
 		int time_in_minute = time_passed_ms % MS_MINUTE;
-		int second = time_in_minute/1000;
+		int second = time_in_minute/5;
 
 		return second;
 	}
@@ -74,13 +74,13 @@ public class Time{
 			string+=minute;
 		}
 
-		string+=":";
+		/*string+=":";
 
 		if(second<10){
 			string+="0"+second;
 		}else{
 			string+=second;
-		}
+		}*/
 
 		
 
