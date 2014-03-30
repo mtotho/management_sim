@@ -45,7 +45,7 @@ public class Restaurant{
 		timer.addMilliSecond(delta);
 
 
-		if(counter % 1000==0){
+		if(counter % 300==0){
 			Customer cust = new Customer();
 			cust.setWayPoint(Waypoint.FOODLINE);
 			customers.add(cust);

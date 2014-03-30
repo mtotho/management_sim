@@ -52,15 +52,20 @@ public class Foodline{
 
 	}
 
+	public boolean hasNext(){
+		if(customers.size()>0){
+			return true;
+		}else{
+			return false;
+		}
+	}
 	public GLCustomer getNext(){
+		
 		if(customers.size()>0){
 			
+			System.out.println("Customer line size: " + customers.size());
 			//Move each customer up one spot
-			for(int i=0; i<customers.size(); i++){
-				GLCustomer glcust = customers.get(0);
-				GLTile linespot = linetiles.get(i);
-				glcust.setPath(linespot.getX(), linespot.getY());
-			}
+		
 			
 			//get the first customer
 			GLCustomer nextcust = customers.get(0);
@@ -69,6 +74,13 @@ public class Foodline{
 			//remove the first customer
 			customers.remove(0);
 
+			for(int i=0; i<customers.size(); i++){
+				GLCustomer glcust = customers.get(i);
+				GLTile linespot = linetiles.get(i);
+				//System.out.println("linespot x: " + linespot.getX() + " linespot y: " + linespot.getY());
+				glcust.setPath(linespot.getX(), linespot.getY());
+			}
+			
 			return nextcust;
 		}else{
 			return null;

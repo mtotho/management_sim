@@ -58,6 +58,17 @@ public class GLOverviewPanel extends GLPanel{
 		     //1 GLCustomer glcust =  cust_map.get(customers.get(0));
 		      //glcust.setPath(cleaning.get(0).getX(), cleaning.get(0).getY());
 		    }
+
+    	    if(buttons.get("btnInventory").isPressed()){
+		    	
+		    	if(game.foodline.hasNext()){
+	    			GLCustomer glcust = game.foodline.getNext();
+
+		    		glcust.setPath(26,3);
+		    	}
+		    
+		    	//game.activatePanel("EMPLOYEES");
+		    }
 	    }
   }
   

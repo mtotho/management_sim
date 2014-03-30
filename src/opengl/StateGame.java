@@ -52,9 +52,9 @@ public class StateGame extends BasicGameState{
   private OGLMap map;
   private AStarPathFinder astar;
 
-  private Restaurant restaurant;
+  public Restaurant restaurant;
 
-  private Foodline foodline;
+  public Foodline foodline;
 	//private boolean[][] blocking;
 
   public StateGame(Restaurant restaurant){
