@@ -83,9 +83,9 @@ public class GLPanel extends GLEntity{
 		g.fillRect(x,y, width, height);
 
 		g.setColor(Color.orange);
-	    g.drawString("time: " + timer.getFormattedTime(), x+10, y+5);
+	    g.drawString("Time: " + timer.getFormattedTime(), x+10, y+5);
 
-	    g.drawString("day: " + timer.getDay(), x+250, y+5);
+	    g.drawString("Day: " + timer.getDay(), x+250, y+5);
 
 	    Object[] keys = buttons.keySet().toArray();
 	    
@@ -94,7 +94,7 @@ public class GLPanel extends GLEntity{
 				GLButton tempButton = buttons.get(keys[i]);
 				tempButton.setLabelX(60);
 				tempButton.setX(padding+x);
-				tempButton.setY((yDif * (i+1)) - 80);
+				tempButton.setY((yDif * (i+1)) - 60);
 				tempButton.render(gc, g);
 
 		}

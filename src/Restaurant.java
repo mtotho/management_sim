@@ -45,9 +45,9 @@ public class Restaurant{
 		timer.addMilliSecond(delta);
 
 
-		if(counter % 200==0){
+		if(counter % 300==0){
 			Customer cust = new Customer();
-			cust.setWayPoint(Waypoint.RANDOM);
+			cust.setWayPoint(Waypoint.FOODLINE);
 			customers.add(cust);
 
 	
@@ -62,7 +62,7 @@ public class Restaurant{
 			//Employee is not busy
 			if(emp.isBusy() != true){
 				
-				//employee is not busy, look for next task
+				//employee is not busy, look for next taskQueue
 				Task task = scheduler.getNextTask(emp.getPreferredTask());
 
 				if(task!=null)
@@ -83,6 +83,7 @@ public class Restaurant{
 
 	public void addCustomer(){
 		Customer cust = new Customer();
+		cust.setWayPoint(Waypoint.RANDOM);
 		customers.add(cust);
 	}
 

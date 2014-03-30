@@ -52,7 +52,9 @@ public class StateGame extends BasicGameState{
   private OGLMap map;
   private AStarPathFinder astar;
 
-  private Restaurant restaurant;
+  public Restaurant restaurant;
+
+  public Foodline foodline;
 	//private boolean[][] blocking;
 
   public StateGame(Restaurant restaurant){
@@ -62,6 +64,7 @@ public class StateGame extends BasicGameState{
     //
     customers = restaurant.getCustomers();
     timer = restaurant.getTimer();
+    foodline = new Foodline();
 
   }
 
@@ -95,8 +98,12 @@ public class StateGame extends BasicGameState{
 
         panels = new HashMap<String, GLPanel>();
 
-        GLOverviewPanel buttonPanel = new GLOverviewPanel(restaurant, gc);      
-        addPanel("OVERVIEW", buttonPanel);
+        GLOverviewPanel overviewPanel = new GLOverviewPanel(restaurant, gc, this);
+        GLEmployeePanel employeePanel = new GLEmployeePanel(restaurant, gc, this);
+        GLTaskPanel taskPanel = new GLTaskPanel(restaurant, gc, this);
+        addPanel("OVERVIEW", overviewPanel);
+        addPanel("EMPLOYEES", employeePanel);
+        addPanel("TASKS", taskPanel);
 
         //set this panel to active
         activatePanel("OVERVIEW");
@@ -118,8 +125,11 @@ public class StateGame extends BasicGameState{
         }
 
         active_panel = panel;
+        for(GLPanel panelValue : panels.values()){
+          panelValue.setActive(false);
+          System.out.println("Panel inactive");
+        }
         panel.setActive(true);
-
       }
     }
 
@@ -131,7 +141,7 @@ public class StateGame extends BasicGameState{
     	
       map.render();
 
-  		g.setColor(Color.white);
+  		g.setColor(Color.black);
 
       if(active_panel!=null)
         active_panel.render(gc, g);
@@ -186,21 +196,29 @@ public class StateGame extends BasicGameState{
               
             //the logical customer
             Customer logic_cust = customers.get(i);
+            GLCustomer glcust = new GLCustomer(gc,map);
+            cust_map.put(customers.get(i), glcust);
+            Path path;
 
             int wayX=20;
             int wayY=20;
             switch(logic_cust.getWaypoint()){
               case FOODLINE:
-                wayX=9;
-                wayY=16;
+                foodline.add(glcust);
                 break;
               case MENSROOM:
                 wayX=28;
                 wayY=3;
+
+                path = astar.findPath(null, 0, 27, wayX,wayY);
+                glcust.setPath(path);
                 break;
               case WOMENSROOM:
                 wayX=36;
                 wayY=3;
+
+                path = astar.findPath(null, 0, 27, wayX,wayY);
+                glcust.setPath(path);
                 break;
               case RANDOM:
                 wayX= 0 + (int)(Math.random()*map.getWidthInTiles()-1); 
@@ -210,24 +228,26 @@ public class StateGame extends BasicGameState{
                   wayY= 0 + (int)(Math.random()*map.getHeightInTiles()-1); 
                 }
 
-                System.out.println("Random wayX: " + wayX);
-                System.out.println("Random wayY: " + wayY);
+
+                //System.out.println("Random wayX: " + wayX);
+                //System.out.println("Random wayY: " + wayY);
+
+                path = astar.findPath(null, 0, 27, wayX,wayY);
+                glcust.setPath(path);
+
                 break;
               case REGISTER:
                 break;
             }
 
             //create new glcust
-            GLCustomer glcust = new GLCustomer(gc,map);  
+           
 
             
 
-            Path path = astar.findPath(null, 0, 27, wayX,wayY);
-            glcust.setPath(path);
               
             //add to cust map
-            cust_map.put(customers.get(i), glcust);
-
+           
            // gl_customers.add(glcust);
           }
           else{
@@ -237,7 +257,7 @@ public class StateGame extends BasicGameState{
           }
         }
 
-        System.out.println("customer amount: " + customers.size());
+        //System.out.println("customer amount: " + customers.size());
       	Input input = gc.getInput();
       	
         int mousex = input.getMouseX();

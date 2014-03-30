@@ -229,9 +229,13 @@ public class GLMoveableEntity extends GLEntity implements Mover{
 
 	public void setPath(int tilex, int tiley){
 		
-		this.path=astar.findPath(null, map.getTileX(x), map.getTileY(y), tilex, tiley);
-		path_step=0;
-		use_path=true;
+		if(!(tilex==map.getTileX(x) && tiley==map.getTileY(y))){
+
+
+			this.path=astar.findPath(null, map.getTileX(x), map.getTileY(y), tilex, tiley);
+			path_step=0;
+			use_path=true;
+		}
 	}
 
 	//return whether or not the character is currently walking on a path
