@@ -62,8 +62,9 @@ public class GLOverviewPanel extends GLPanel{
     	    if(buttons.get("btnInventory").isPressed()){
 		    	
 		    	if(game.foodline.hasNext()){
-	    			GLCustomer glcust = game.foodline.getNext();
+	    			//GLCustomer glcust = game.foodline.getNext();
 
+		    		GLMoveableEntity glcust = game.foodline.getNext();
 		    		glcust.setPath(26,3);
 		    	}
 		    

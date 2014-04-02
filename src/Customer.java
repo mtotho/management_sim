@@ -11,12 +11,14 @@ private String  cb =  "cheeseburger";
 private String drink = "drink";
 private String fries = "fries";
 private boolean isRendered;
-private Waypoint waypoint;
+private Locations waypoint;
+private Locations location;
 
 	//Constructor()
 	public Customer(){
 		isRendered=false;
-		waypoint = Waypoint.FOODLINE;
+		location = Locations.ENTRANCE;
+		waypoint = Locations.FOODLINE;
 	}//end: Constructor()
 
 	public void getTraits(){
@@ -52,12 +54,18 @@ private Waypoint waypoint;
 
 	}//end getOrder()
 
-	public void setWayPoint(Waypoint waypoint){
+	public void setWayPoint(Locations waypoint){
 		this.waypoint=waypoint;
 	}
 
-	public Waypoint getWaypoint(){
+	public Locations getWaypoint(){
 		return waypoint;
+	}
+	public Locations getLocation(){
+		return location;
+	}
+	public void setLocation(Locations location){
+		this.location=location;
 	}
 
 	public boolean isRendered(){
@@ -66,5 +74,15 @@ private Waypoint waypoint;
 
 	public void setRendered(boolean rendered){
 		isRendered=rendered;
+	}
+
+	public void update(){
+		
+
+		if(location==waypoint){
+			System.out.println("Have arrived");
+			waypoint=Locations.RANDOM;
+		}
+
 	}
 }

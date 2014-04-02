@@ -11,6 +11,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.gui.*;
 import org.newdawn.slick.util.pathfinding.*;
 import java.util.Random;
+import mftoth.restaurantsim.logic.*;
 
 public class GLMoveableEntity extends GLEntity implements Mover{
 
@@ -26,17 +27,22 @@ public class GLMoveableEntity extends GLEntity implements Mover{
 	protected int path_step;
 	private boolean isMoving;
 	protected int destx, desty;
-
+	protected Locations location;
+	protected Locations destination;
+	protected LocationHandler loc_handler;
 	private boolean walking_path=false; 		//Whether or not the character is in the progress of walking a path
 	private boolean inbetween_nodes=false;	 	//Whether or not the character is between 2 nodes of the current path
 
 
-	public GLMoveableEntity(GameContainer gc, OGLMap map) throws SlickException{
+	protected StateGame sg;
+
+	public GLMoveableEntity(GameContainer gc, OGLMap map, StateGame sg) throws SlickException{
 		super(gc);
 
+		loc_handler = new LocationHandler(map);
 		this.map=map;
 		game=gc;
-
+		this.sg=sg;
 
 		//Default values
 		x=16;
@@ -87,15 +93,22 @@ public class GLMoveableEntity extends GLEntity implements Mover{
 
 			//Increment the path_step for the next node
 			path_step++;
-		}else{
+		}
+
+		if(path_step>=path.getLength()){
 
 			//The path has ended so we can set walking_path to false
 			walking_path=false;
+
+			//No path left so we must be at our destination
+			location=destination;
 		}
 	}
 
 	protected void update(GameContainer gc, StateBasedGame game, int delta){
 		
+	
+
 		if(use_path){
 			get_next_path_node();
 		}
@@ -217,6 +230,10 @@ public class GLMoveableEntity extends GLEntity implements Mover{
 			}
 		}
 
+	}	
+
+	public void setPath(GLTile dest){
+		setPath(dest.getX(), dest.getY());
 	}
 
 	//public void setDestination()
@@ -251,5 +268,7 @@ public class GLMoveableEntity extends GLEntity implements Mover{
 	public void setDirection(FigureDirection d){
 		direction=d;
 	}
+
+
 
 }

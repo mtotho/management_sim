@@ -5,7 +5,7 @@ public class Foodline{
 
 	private final static int CAPACITY = 14;
 
-	private ArrayList<GLCustomer> customers;
+	private ArrayList<GLMoveableEntity> customers;
 	private ArrayList<GLTile> linetiles; 
 
 	public Foodline(){
@@ -30,10 +30,10 @@ public class Foodline{
 
 
 
-		customers = new ArrayList<GLCustomer>();
+		customers = new ArrayList<GLMoveableEntity>();
 	}
 
-	public boolean add(GLCustomer glcust){
+	public boolean add(GLMoveableEntity glcust){
 
 		//If  not at max capacity, add customer
 		if(customers.size()<CAPACITY){
@@ -59,7 +59,7 @@ public class Foodline{
 			return false;
 		}
 	}
-	public GLCustomer getNext(){
+	public GLMoveableEntity getNext(){
 		
 		if(customers.size()>0){
 			
@@ -68,14 +68,14 @@ public class Foodline{
 		
 			
 			//get the first customer
-			GLCustomer nextcust = customers.get(0);
+			GLMoveableEntity nextcust = customers.get(0);
 
 
 			//remove the first customer
 			customers.remove(0);
 
 			for(int i=0; i<customers.size(); i++){
-				GLCustomer glcust = customers.get(i);
+				GLMoveableEntity glcust = customers.get(i);
 				GLTile linespot = linetiles.get(i);
 				//System.out.println("linespot x: " + linespot.getX() + " linespot y: " + linespot.getY());
 				glcust.setPath(linespot.getX(), linespot.getY());

@@ -18,9 +18,9 @@ public class Restaurant{
 		employees = new ArrayList<Employee>();
 		customers = new ArrayList<Customer>();
 
-		Customer c1 = new Customer();
-		c1.setWayPoint(Waypoint.FOODLINE);
-		customers.add(c1);
+		//Customer c1 = new Customer();
+		//c1.setWayPoint(Locations.FOODLINE);
+		//customers.add(c1);
 		//Scheduler taskQueue = new Scheduler;
 
 		Employee e1 = new Employee();
@@ -45,12 +45,11 @@ public class Restaurant{
 		timer.addMilliSecond(delta);
 
 
-		if(counter % 50==0){
+		if(counter % 1000==0){
 			Customer cust = new Customer();
-			cust.setWayPoint(Waypoint.FOODLINE);
+			cust.setWayPoint(Locations.MENSROOM);
 			customers.add(cust);
 
-	
 		}
 
 		//System.out.println(timer.getSeconds() + " seconds");
@@ -83,7 +82,7 @@ public class Restaurant{
 
 	public void addCustomer(){
 		Customer cust = new Customer();
-		cust.setWayPoint(Waypoint.RANDOM);
+		cust.setWayPoint(Locations.RANDOM);
 		customers.add(cust);
 	}
 
