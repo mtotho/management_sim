@@ -1,4 +1,4 @@
-
+  
 package mftoth.restaurantsim.ogl;
 
 //import mftoth.entities.*;
@@ -94,7 +94,7 @@ public class StateGame extends BasicGameState{
       	gl_customers= new ArrayList<GLCustomer>();
 
         //create test employee
-        e1 = new GLEmployee(gc, map);
+        e1 = new GLEmployee(gc, map, this);
 
         panels = new HashMap<String, GLPanel>();
 
@@ -196,61 +196,11 @@ public class StateGame extends BasicGameState{
               
             //the logical customer
             Customer logic_cust = customers.get(i);
-            GLCustomer glcust = new GLCustomer(gc,map);
+            GLCustomer glcust = new GLCustomer(gc,map, this, logic_cust);
             cust_map.put(customers.get(i), glcust);
-            Path path;
-
-            int wayX=20;
-            int wayY=20;
-            switch(logic_cust.getWaypoint()){
-              case FOODLINE:
-                boolean success = foodline.add(glcust);
-                if(!success){
-                    wayX=36;
-                    wayY=3;
-
-                    path = astar.findPath(null, 0, 27, wayX,wayY);
-                    glcust.setPath(path);
-                }
-                break;
-              case MENSROOM:
-                wayX=28;
-                wayY=3;
-
-                path = astar.findPath(null, 0, 27, wayX,wayY);
-                glcust.setPath(path);
-                break;
-              case WOMENSROOM:
-                wayX=36;
-                wayY=3;
-
-                path = astar.findPath(null, 0, 27, wayX,wayY);
-                glcust.setPath(path);
-                break;
-              case RANDOM:
-                wayX= 0 + (int)(Math.random()*map.getWidthInTiles()-1); 
-                wayY= 0 + (int)(Math.random()*map.getHeightInTiles()-1); 
-                while(map.blocked(null, wayX, wayY) || (wayX==0 && wayY==27)){ //0 and 27 are the origin of the customer
-                  wayX= 0 + (int)(Math.random()*map.getWidthInTiles()-1); 
-                  wayY= 0 + (int)(Math.random()*map.getHeightInTiles()-1); 
-                }
-
-
-                //System.out.println("Random wayX: " + wayX);
-                //System.out.println("Random wayY: " + wayY);
-
-                path = astar.findPath(null, 0, 27, wayX,wayY);
-                glcust.setPath(path);
-
-                break;
-              case REGISTER:
-                break;
-            }
-
-            //create new glcust
            
-
-            
+            //glcust.setWaypoint(logic_cust.getWaypoint());
+            //create new glcust            
 
               
             //add to cust map
@@ -278,11 +228,12 @@ public class StateGame extends BasicGameState{
 
          //if(!glcust.isPathing()){
            
+
             int destX = map.getTileX(mousex);
             int destY = map.getTileY(mousey);
 
           //  System.out.println(destX);
-            if(destX<map.getWidthInTiles() && destY<map.getHeightInTiles() && !map.blocked(null, destX, destY)){
+            if(destX<map.getWidthInTiles() && destY<map.getHeightInTiles() && !map.blocked(null, destX, destY) && mousex<=640){
               e1.setPath(destX, destY);
             }
             
@@ -291,54 +242,26 @@ public class StateGame extends BasicGameState{
           
         }
       //	if(!blocked(c1.getX(), c1.getY())){
-	  		if(input.isKeyDown(Input.KEY_UP)){
-	  			//c1.setY(c1.getY()-c1.getDY()*delta);
-	  			//c1.setDirection(FigureDirection.UP);
-          //c1.setMoving(true);
-	  			//c1.move(FigureDirection.UP);
-          //System.out.println(c1.getY()-c1.getDY());
+	  		 if(input.isKeyDown(Input.KEY_UP)){
+	  		
 	      	}
 	      	if(input.isKeyDown(Input.KEY_RIGHT)){
-	      		//c1.setX(c1.getX()+c1.getDX()*delta);
-	      		//c1.setDirection(FigureDirection.RIGHT);
-            //c1.setMoving(true);
-          //  c1.move(FigureDirection.RIGHT);
+	  
 	      	}
-	  		if(input.isKeyDown(Input.KEY_DOWN)){
-	  			//c1.setY(c1.getY()+c1.getDY()*delta);
-	  			//c1.setDirection(FigureDirection.DOWN);
-         // c1.setMoving(true);
-        //  c1.move(FigureDirection.DOWN);
+	  		  if(input.isKeyDown(Input.KEY_DOWN)){
+
 	      	}
 	      	if(input.isKeyDown(Input.KEY_LEFT)){
-	      	//	c1.setX(c1.getX()-c1.getDX()*delta);
-	      		//c1.setDirection(FigureDirection.LEFT);
-            //c1.setMoving(true);
-          //  c1.move(FigureDirection.LEFT);
+	      
 	      	}  
-      //	}
+      
            
-      	if(input.isKeyDown(Input.KEY_Q)){
-      		
-      		//customers.add(new GLCustomer(gc,map));
-
-      		//c1.setDirection(FigureDirection.LEFT);
-      	}     
+        	if(input.isKeyDown(Input.KEY_Q)){
+        		
+        	}     
  
     }
- 	
-
-    /*
-    public void walkPath(GLEntity entity, Path path){
-    	for(int i=0; i<path.getLength(); i++){
-    		int destX = path.getX(i);
-    		int destY = path.getY(i);
-
-
-    	}
-    }*/
-
-
+ 
 
     @Override
     public int getID() {

@@ -1,6 +1,6 @@
 package mftoth.restaurantsim.ogl;
 
-//simport mftoth.map.*;
+import mftoth.restaurantsim.logic.*;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 import org.newdawn.slick.GameContainer;
@@ -14,10 +14,16 @@ import java.util.Random;
 
 public class GLCustomer extends GLMoveableEntity{
 
+	private Customer logical_customer;
 
-	public GLCustomer(GameContainer gc, OGLMap map) throws SlickException{
-		super(gc, map);
+	public GLCustomer(GameContainer gc, OGLMap map, StateGame sg, Customer logical_customer) throws SlickException{
+		super(gc, map, sg);
 		
+		this.logical_customer=logical_customer;
+		this.location=logical_customer.getLocation();
+
+
+		//this.
 		//default some values		
 		x=16;
 		y=432;
@@ -40,12 +46,44 @@ public class GLCustomer extends GLMoveableEntity{
 	}
 
 	public void update(GameContainer gc, StateBasedGame game, int delta){
+		sync();
+		
+		//update the gl destination from the customers
+		
+		System.out.println(isPathInProgress());
+			//This should update the path when the destination is changed;
+		if(!isPathInProgress() && (destination!=location || destination==Locations.RANDOM)){
+
+			//If we arent going to the foodline, get the tile
+			if(destination!=Locations.FOODLINE){
+				 GLTile destTile = loc_handler.getTile(destination);
+				 setPath(destTile);
+			
+			//Otherwise add them to the foodline object
+			}else{
+				sg.foodline.add(this);
+				location=destination;
+			}
+		}
+
 
 		
-
-
+		
 		//leave this at the end of this call. Call some parent functionality
 		super.update(gc,game,delta);
+
+		logical_customer.update();
+	}
+
+	//sync the gl and logical customers
+	public void sync(){
+
+		//get logic destination
+		this.destination = logical_customer.getWaypoint();
+
+
+		//set logic location according to 
+		logical_customer.setLocation(this.location);
 	}
 
 
