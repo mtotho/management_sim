@@ -13,19 +13,15 @@ public class LocationHandler{
 		this.map=map;
 
 		tilemapper=new LinkedHashMap<Locations, GLTile>();
-
-
 		tilemapper.put(Locations.MENSROOM, new GLTile(28,3));
 		tilemapper.put(Locations.WOMENSROOM, new GLTile(36,3));
 		tilemapper.put(Locations.REGISTER, new GLTile(6,16));
-
-
 	}
 
 	public GLTile getTile(Locations location){
 		GLTile tile;	
 		tile = new GLTile(0,27);
-		
+
 		switch(location){
 	
 			case ENTRANCE:

@@ -13,10 +13,12 @@ private String fries = "fries";
 private boolean isRendered;
 private Locations waypoint;
 private Locations location;
+private Restaurant restaurant;
 
 	//Constructor()
-	public Customer(){
+	public Customer(Restaurant restaurant){
 		isRendered=false;
+		this.restaurant=restaurant;
 		location = Locations.ENTRANCE;
 		waypoint = Locations.FOODLINE;
 	}//end: Constructor()
@@ -77,12 +79,9 @@ private Locations location;
 	}
 
 	public void update(){
-		
-
 		if(location==waypoint){
 			System.out.println("Have arrived");
-			waypoint=Locations.RANDOM;
+			waypoint=Locations.MENSROOM;
 		}
-
 	}
 }

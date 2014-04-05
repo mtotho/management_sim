@@ -168,8 +168,9 @@ public class StateGame extends BasicGameState{
       //g.setFont(ttf);
       //g.drawString("Number of customers: "+ Integer.toString(customers.size()), 700, 100);
       //Render the customers
-    	for(int i=0; i<customers.size(); i++){
 
+
+    	for(int i=0; i<customers.size(); i++){
         if(cust_map.containsKey(customers.get(i))){
           GLCustomer glcust = cust_map.get(customers.get(i));
           glcust.render(gc, g); 
@@ -182,37 +183,40 @@ public class StateGame extends BasicGameState{
     @Override
     public void update(GameContainer gc, StateBasedGame game, int delta)
             throws SlickException {
-            //pass time to restaurant
+        //pass time to restaurant
         restaurant.update(delta);
        
+      
+
+
+
        // System.out.println(timer.getSeconds());
         e1.update(gc,game,delta);
-        //c1.update(gc, game, delta);
+       
+
+
         //Check for new logical customer and create gl customer
         for(int i=0; i<customers.size(); i++){
 
-          //There is no map for this customer
+          //There is no matching GLCustomer for this logical customer
           if(!cust_map.containsKey(customers.get(i))){
               
-            //the logical customer
+            //Pull the ogical customer from the arraylist
             Customer logic_cust = customers.get(i);
-            GLCustomer glcust = new GLCustomer(gc,map, this, logic_cust);
-            cust_map.put(customers.get(i), glcust);
-           
-            //glcust.setWaypoint(logic_cust.getWaypoint());
-            //create new glcust            
 
-              
-            //add to cust map
-           
-           // gl_customers.add(glcust);
-          }
-          else{
+            //Create a new GLCustomer and pass the logical customer to it
+            GLCustomer glcust = new GLCustomer(gc,map, this, logic_cust);
+
+            //Add the map between the logic/gui objects using a hashmap
+            cust_map.put(customers.get(i), glcust); 
+
+      
+          //Otherwise we can simply update the customer
+          }else{
               GLCustomer glcust =  cust_map.get(customers.get(i));
-              // glcust.
               glcust.update(gc, game, delta);
           }
-        }
+        }//end for
 
         //System.out.println("customer amount: " + customers.size());
       	Input input = gc.getInput();

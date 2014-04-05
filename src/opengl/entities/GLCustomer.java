@@ -28,8 +28,8 @@ public class GLCustomer extends GLMoveableEntity{
 		x=16;
 		y=432;
 		
-		dx=0.2;
-		dy=0.2;
+		dx=0.1;
+		dy=0.1;
 
 		
 		//Set the spritesheet path. Will use default if not indicated
@@ -78,11 +78,10 @@ public class GLCustomer extends GLMoveableEntity{
 	//sync the gl and logical customers
 	public void sync(){
 
-		//get logic destination
+		//set the GLcustomer destination based on the logic destination value
 		this.destination = logical_customer.getWaypoint();
 
-
-		//set logic location according to 
+		//set logic location according to the graphical location value
 		logical_customer.setLocation(this.location);
 	}
 

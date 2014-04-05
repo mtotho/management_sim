@@ -7,7 +7,7 @@ public class Restaurant{
 	private ArrayList<Employee> employees;
 	private ArrayList<Customer> customers;
 	private Scheduler scheduler;
-	private Time timer;
+	public Time timer;
 	private int counter;
 	//Constructor()
 	public Restaurant(){
@@ -45,11 +45,12 @@ public class Restaurant{
 		timer.addMilliSecond(delta);
 
 
-		if(counter % 1000==0){
-			Customer cust = new Customer();
-			cust.setWayPoint(Locations.MENSROOM);
-			customers.add(cust);
 
+
+		if(counter % 30==0){
+			Customer cust = new Customer(this);
+			cust.setWayPoint(Locations.RANDOM);
+			customers.add(cust);
 		}
 
 		//System.out.println(timer.getSeconds() + " seconds");
@@ -81,7 +82,7 @@ public class Restaurant{
 	}//end: Update();
 
 	public void addCustomer(){
-		Customer cust = new Customer();
+		Customer cust = new Customer(this);
 		cust.setWayPoint(Locations.RANDOM);
 		customers.add(cust);
 	}
