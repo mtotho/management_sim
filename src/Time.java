@@ -33,7 +33,7 @@ public class Time{
 	}
 
 	public int getDay(){
-		int day = time_passed_ms/MS_DAY;
+		int day = (time_passed_ms/MS_DAY)+1;
 		return day;
 	}
 

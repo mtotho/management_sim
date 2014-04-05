@@ -45,9 +45,7 @@ public class Restaurant{
 		timer.addMilliSecond(delta);
 
 
-
-
-		if(counter % 30==0){
+		if(counter % 500==0){
 			Customer cust = new Customer(this);
 			cust.setWayPoint(Locations.RANDOM);
 			customers.add(cust);
@@ -62,8 +60,9 @@ public class Restaurant{
 			//Employee is not busy
 			if(emp.isBusy() != true){
 				
-				//employee is not busy, look for next taskQueue
-				Task task = scheduler.getNextTask(emp.getPreferredTask());
+
+				//employee is not busy, look for next task
+				Task task = scheduler.getNextTask(emp.getDuty());
 
 				if(task!=null)
 					emp.setTask(task); //set task
@@ -93,6 +92,10 @@ public class Restaurant{
 
 	public ArrayList<Customer> getCustomers(){
 		return customers;
+	}
+
+	public ArrayList<Employee> getEmployees(){
+		return employees;
 	}
 
 }//end class restaurant
