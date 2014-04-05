@@ -25,14 +25,14 @@ public class GLTaskPanel extends GLPanel{
 
 
 		addButton(gc,"btnAddCustomer", "Task List", 300, 100);
-        addButton(gc,"btnDebug", "Numbah 2", 300, 100);
+        addButton(gc,"btnPlaceholder", "Placeholder", 300, 100);
         addButton(gc, "btnBack", "Back", 300, 100);
 
         padding=10;
 
 	}
 
-	public void render(GUIContext gc, Graphics g){
+	public void render(GUIContext gc, Graphics g) throws SlickException{
 		
 
 		//Render parent, comment this out if you want to replace default render
@@ -44,13 +44,13 @@ public class GLTaskPanel extends GLPanel{
 	    //System.out.println(buttons.size());
 	    
 	    //Only register mouse clicks if mouseDown is false (this should prevent the click action being called multiple times per click)
-	    if(!mouseDown){	
+	    if(!mouseDown && active){	
 	    	mouseDown=true; //change to true so we cannot re enter this block during this click
 	    	
 		    if(buttons.get("btnAddCustomer").isPressed()){
 		      restaurant.addCustomer();
 		    }
-		    if(buttons.get("btnDebug").isPressed()){
+		    if(buttons.get("btnPlaceholder").isPressed()){
 		     //1 GLCustomer glcust =  cust_map.get(customers.get(0));
 		      //glcust.setPath(cleaning.get(0).getX(), cleaning.get(0).getY());
 		    }

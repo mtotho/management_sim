@@ -1,6 +1,5 @@
 package mftoth.restaurantsim.logic;
 
-
 public class Employee{
 
 	private String name;
@@ -10,13 +9,13 @@ public class Employee{
 	private int hours;
 	private float mod;
 	private String labor;
-	private TaskType preferred_task;
+	private TaskType duty;
 
-	private String[] nameList = {"Mike", "Gordon", "Patrick"};
+	private String[] nameList = {"Mike", "Gordon", "Patrick", "Joey", "Jesus", "Melvin", "Eugene", "Dylan", "Ash", "Gary", "Brock", "Red"};
 
 	//Constructor()
 	public Employee(){
-		int randNum = (int)(Math.random()*3);
+		int randNum = (int)(Math.random()*(nameList.length));
 		this.name = nameList[randNum];
 		busy=false;
 	}//end: Constructor()
@@ -61,6 +60,14 @@ public class Employee{
 		return 1;
 	}
 
+	public void setDuty(TaskType duty){
+		this.duty = duty;
+	}
+
+	public TaskType getDuty(){
+		return duty;
+	}
+
 	public String getName(){
 		return this.name;
 	}
@@ -99,11 +106,6 @@ public class Employee{
 
 	}// end getHours()
 
-	public TaskType getPreferredTask(){	
-
-		return preferred_task;
-
-	}
 	public boolean isBusy(){
 		
 		return busy;

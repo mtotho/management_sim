@@ -33,7 +33,7 @@ public class GLOverviewPanel extends GLPanel{
 
 	}
 
-	public void render(GUIContext gc, Graphics g){
+	public void render(GUIContext gc, Graphics g) throws SlickException{
 		
 
 		//Render parent, comment this out if you want to replace default render
@@ -49,14 +49,10 @@ public class GLOverviewPanel extends GLPanel{
 	    	mouseDown=true; //change to true so we cannot re enter this block during this click
 	    	
 		    if(buttons.get("btnEmployee").isPressed()){
-		    	System.out.println("That should go to employee");
 		    	game.activatePanel("EMPLOYEES");
 		    }
 		    if(buttons.get("btnTask").isPressed()){
-		    	System.out.println("That should go to task");
 		    	game.activatePanel("TASKS");
-		     //1 GLCustomer glcust =  cust_map.get(customers.get(0));
-		      //glcust.setPath(cleaning.get(0).getX(), cleaning.get(0).getY());
 		    }
 	    }
   }

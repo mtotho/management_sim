@@ -73,13 +73,13 @@ public class GLPanel extends GLEntity{
 		this.active = active;
 	}
 
-	public void render(GUIContext gc, Graphics g){
+	public void render(GUIContext gc, Graphics g) throws SlickException{
 		
 
 		// This is used to determine the distance between buttons
 		int yDif = (int)(height/(buttons.size()+1));
 
-	   	g.setColor(Color.white);
+	   	g.setColor(Color.black);
 		g.fillRect(x,y, width, height);
 
 		g.setColor(Color.orange);
@@ -99,17 +99,6 @@ public class GLPanel extends GLEntity{
 
 		}
 	    
-
-	    /*
-		if((buttons.size()>0) && (active==true)){
-			for(int i=0; i<buttons.size(); i++){
-				GLButton tempButton = buttons.get(i);
-				tempButton.setLabelX(60);
-				tempButton.setX(padding+x);
-				tempButton.setY((yDif * (i+1)) - 80);
-				tempButton.render(gc, g);
-			}
-		}*/
 	}
 
 }

@@ -14,7 +14,6 @@ import java.util.Random;
 
 public class GLEmployee extends GLMoveableEntity{
 
-
 	public GLEmployee(GameContainer gc, OGLMap map) throws SlickException{
 		super(gc, map);
 		

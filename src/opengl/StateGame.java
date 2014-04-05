@@ -124,7 +124,6 @@ public class StateGame extends BasicGameState{
         active_panel = panel;
         for(GLPanel panelValue : panels.values()){
           panelValue.setActive(false);
-          System.out.println("Panel inactive");
         }
         panel.setActive(true);
       }
@@ -262,9 +261,9 @@ public class StateGame extends BasicGameState{
             int destY = map.getTileY(mousey);
 
           //  System.out.println(destX);
-            if(destX<map.getWidthInTiles() && destY<map.getHeightInTiles() && !map.blocked(null, destX, destY)){
-              e1.setPath(destX, destY);
-            }
+            //if(destX<map.getWidthInTiles() && destY<map.getHeightInTiles() && !map.blocked(null, destX, destY)){
+            //  e1.setPath(destX, destY);
+            //}
             
           //}
 

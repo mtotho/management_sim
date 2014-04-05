@@ -18,25 +18,79 @@ import org.newdawn.slick.UnicodeFont;
 public class GLEmployeePanel extends GLPanel{
 	
 	private StateGame game;
+	private GameContainer gameCon;
+
+	private ArrayList<Employee> employees;
+	private boolean active_list = false;
 	
 	public GLEmployeePanel(Restaurant restaurant, GameContainer gc, StateGame game) throws SlickException{
 		super(restaurant, gc);
 		this.game = game;
+		this.gameCon = gc;
 
 
-		addButton(gc,"btnAddCustomer", "Employee List", 300, 100);
-        addButton(gc,"btnDebug", "Numbah 2", 300, 100);
+		addButton(gc,"btnEmployeeList", "Employee List", 300, 100);
         addButton(gc, "btnBack", "Back", 300, 100);
 
         padding=10;
 
+        employees = restaurant.getEmployees();
 	}
 
-	public void render(GUIContext gc, Graphics g){
-		
+	public void render(GUIContext gc, Graphics g) throws SlickException{
+		if(!active_list){
+			int yDif = (int)(height/(3));
 
-		//Render parent, comment this out if you want to replace default render
-		super.render(gc,g);
+		   	g.setColor(Color.black);
+			g.fillRect(x,y, width, height);
+
+			g.setColor(Color.orange);
+		    g.drawString("Time: " + timer.getFormattedTime(), x+10, y+5);
+
+		    g.drawString("Day: " + timer.getDay(), x+250, y+5);
+
+		    Object[] keys = buttons.keySet().toArray();
+		    
+		    for(int i=0; i<2; i++){
+		    
+					GLButton tempButton = buttons.get(keys[i]);
+					tempButton.setLabelX(60);
+					tempButton.setX(padding+x);
+					tempButton.setY((yDif * (i+1)) - 60);
+					tempButton.render(gc, g);
+			}
+		}
+		else{
+			g.setColor(Color.black);
+			g.fillRect(x,y, width, height);
+
+			g.setColor(Color.orange);
+		    g.drawString("Time: " + timer.getFormattedTime(), x+10, y+5);
+
+		    g.drawString("Day: " + timer.getDay(), x+250, y+5);
+
+		    for(int i=0; i<employees.size();i++){
+		    	String employeeName = employees.get(i).getName();
+		    	if(!buttons.containsKey("btn"+employeeName)){
+		    		addButton(gameCon, "btn"+employeeName, employeeName, 300, 80);
+		  		}
+		  		else{
+		  			System.out.println(buttons.get("btn"+employeeName).getName());
+		  		}
+		  		GLButton tempButton = buttons.get("btn" + employeeName);
+		    	tempButton.setLabelX(60);
+				tempButton.setX(padding+x);
+				tempButton.setY((y+40)+(80*(i+1)));
+				tempButton.render(gc, g);	
+		    	//g.drawString("Employee: " + employees.get(i).getName(), x+30, (y+30)+(30*(i+1)));*/
+		    }
+
+		    GLButton tempButton = buttons.get("btnBack");
+		    tempButton.setLabelX(60);
+			tempButton.setX(padding+x);
+			tempButton.setY(y+350);
+			tempButton.render(gc, g);
+		}
 	}
 
 	public void mousePressed(int button, int posx, int posy){
@@ -44,18 +98,17 @@ public class GLEmployeePanel extends GLPanel{
 	    //System.out.println(buttons.size());
 	    
 	    //Only register mouse clicks if mouseDown is false (this should prevent the click action being called multiple times per click)
-	    if(!mouseDown){	
+	    if(!mouseDown && active){	
 	    	mouseDown=true; //change to true so we cannot re enter this block during this click
 	    	
-		    if(buttons.get("btnAddCustomer").isPressed()){
-		      restaurant.addCustomer();
+		    if(buttons.get("btnEmployeeList").isPressed() && !active_list){
+		      active_list = !active_list;
 		    }
-		    if(buttons.get("btnDebug").isPressed()){
-		     //1 GLCustomer glcust =  cust_map.get(customers.get(0));
-		      //glcust.setPath(cleaning.get(0).getX(), cleaning.get(0).getY());
-		    }
-		    if(buttons.get("btnBack").isPressed()){
+		    if(buttons.get("btnBack").isPressed() && !active_list){
 		    	game.activatePanel("OVERVIEW");
+		    }
+		   	else if(buttons.get("btnBack").isPressed() && active_list){
+		    	active_list = !active_list;
 		    }
 	    }
   }
