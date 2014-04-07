@@ -91,9 +91,9 @@ public class DBmapper{
 
 	}
 
-	public List select(Class<?> clazz, String whereStatement, Object param){
+	public List select(Class<?> clazz, Object param){
 
-		String selectStatment = "SELECT * FROM " + clazz.getName();
+		String selectStatment = "SELECT * FROM " + clazz;
 
 		try{
 
@@ -120,31 +120,39 @@ public class DBmapper{
 
 	}
 
-	public boolean update(Class<?> clazz, String whereStatement, Object param){
+	public boolean update(Class<?> clazz, Object param){
+
+		String updateStatement  = "UPDATE " + clazz + " WHERE RESTAURANT RESTAURANT_ID = " + clazz.getRestaurantID() + ";" ;
 
 		try{
 
+			qRunner = new QueryRunner();
 
+			qRunner.update(this.c, updateStatement, param);
 
 
 		}
 		catch(Exception e){
 
-
+			System.err.println(e.getClass().getName() + ": " + e.getMessage());
 
 		}
 
 	}
-	public boolean update(Class<?> clazz, String whereStatement, Object[] param){
+	public boolean update(Class<?> clazz, Object[] params){
+
+		String updateStatement = "UPDATE " + clazz + " WHERE RESTAURANT RESTAURANT_ID = " + clazz.getRestaurantID() + ";";
 
 		try{
 
-
+			qRunner = new QueryRunner();
+			qR.update(this.c, updateStatement, params);
 
 
 		}
 		catch(Exception e){
 
+			System.err.println(e.getClass().getName() + ": " + e.getMessage());
 
 		}
 
