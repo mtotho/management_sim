@@ -6,6 +6,7 @@ CS 205 Restaurant Sim Database
 This file initializes the database for the restaurant simulator, named sim.database
 */
 
+
 import java.sql.*;
 
 public class DatabaseInit{
@@ -18,7 +19,7 @@ public class DatabaseInit{
 		try{
 			//Creates Database
 			Class.forName("org.sqlite.JDBC");
-
+		}
 		catch(Exception e){
 
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -72,6 +73,30 @@ public class DatabaseInit{
 			stmt.executeUpdate(sql);
 
 			System.out.println("inventory created");
+
+			sql = "CREATE TABLE EMPLOYEE" +
+				  "(RESTAURANT_ID INT NOT NULL, " +
+				  "EMPLOYEE_ID INT NOT NULL, " +
+				  "EMPLOYEE_NAME TEXT NOT NULL, " +
+				  "PRIMARY KEY(RESTAURANT_ID, EMPLOYEE_ID), "+
+				  "FOREIGN KEY(RESTAURANT_ID) REFERENCES RESTAURANT(ID))";
+				  
+
+			stmt.executeUpdate(sql);
+
+			System.out.println("employee table created");
+
+			sql = "CREATE TABLE TRANSACTIONS" +
+				  "(RESTAURANT_ID INT NOT NULL, " +
+				  "TRANSACTION_ID INT NOT NULL, " +
+				  "TRANSACTION_DATE TEXT NOT NULL, " + 
+				  "TRANSACTION_PRICE DOUBLE NOT NULL, " +
+				  "PRIMARY KEY(RESTAURANT_ID, TRANSACTION_ID), " +
+				  "FOREIGN KEY(RESTAURANT_ID) REFERENCES RESTAURANT(ID))";
+
+			stmt.executeUpdate(sql);
+
+			System.out.println("transaction table created");
 
 			stmt.close();
 			c.close();
