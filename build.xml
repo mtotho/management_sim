@@ -12,6 +12,7 @@
         <fileset dir="${lwjgl_jar.dir}" includes="lwjgl.jar"/>
         <fileset dir="${slick_jar.dir}" includes="slick.jar"/>
         <fileset dir="${libs.dir}" includes="commons-dbutils-1.5.jar"/>
+        <fileset dir="${libs.dir}" includes="sqlite-jdbc-3.7.2.jar"/>
         <!--<fileset dir="${twl.dir}" includes="TWL.jar"/>-->
     </path>
 
