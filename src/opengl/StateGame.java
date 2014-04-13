@@ -1,4 +1,4 @@
-  
+
 package mftoth.restaurantsim.ogl;
 
 //import mftoth.entities.*;
@@ -265,7 +265,7 @@ public class StateGame extends BasicGameState{
             int destY = map.getTileY(mousey);
 
             if(destX<map.getWidthInTiles() && destY<map.getHeightInTiles() && !map.blocked(null, destX, destY) && mousex<=640){
-              e1.setPath(destX, destY);
+              gl_employees.get(0).setPath(destX, destY);
             }
 
 
