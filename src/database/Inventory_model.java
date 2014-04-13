@@ -6,15 +6,15 @@ This is the inventory object that will hold the rows for each entry in the inven
 */
 package pjwelch.restaurantsim.database;
 
-import org.apache.commons.dbutils.DbUtils;
-import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.BeanListHandler;
+import org.apache.commons.dbutils.*;
+//import org.apache.commons.dbutils.QueryRunner;
+//import org.apache.commons.dbutils.BeanListHandler;
 
 import java.sql.*;
 import java.util.*;
 
 //inventory object for each row in the database
-public class Inventory_model{
+public class Inventory_model implements Model{
 
 	private int itemId;
 	private int quantity;
@@ -30,6 +30,9 @@ public class Inventory_model{
 
 	}//end constructor
 
+	public String getTable(){
+		return "Inventory";
+	}
 	//returns the itemID for the entry
 	public int getItemID(){
 
@@ -62,6 +65,8 @@ public class Inventory_model{
 	public String toString(){
 
 		String string = restaurantId + ", " + itemId + ", " + quantity;
+
+		return string;
 
 	}
 

@@ -6,12 +6,12 @@ CS 205 Restaurant Sim Database
 This file initializes the database for the restaurant simulator, named sim.database
 */
 
-
+package pjwelch.restaurantsim.database;
 import java.sql.*;
 
 public class DatabaseInit{
 
-	public static void main (String args[]){
+	public DatabaseInit (){
 
 		Connection c;
 		Statement stmt;

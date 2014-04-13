@@ -6,14 +6,14 @@ This will be the row object for each item entry int the items table in the datab
 */
 package pjwelch.restaurantsim.database;
 
-import org.apache.commons.dbutils.DbUtils;
-import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.BeanListHandler;
+import org.apache.commons.dbutils.*;
+//import org.apache.commons.dbutils.QueryRunner;
+//import org.apache.commons.dbutils.BeanListHandler;
 
 import java.sql.*;
 import java.util.*;
 
-class Items_model{
+class Items_model implements Model{
 
 	private int id;
 	private String name;
@@ -42,6 +42,10 @@ class Items_model{
 
 	}//end getName
 
+	public String getTable(){
+		return "Items";
+	}
+
 	//sets an ID for the item
 	public void setID(int id){
 
@@ -55,6 +59,10 @@ class Items_model{
 		return id;
 
 	}//end getID()
+
+	public int getRestaurantID(){
+		return 0;
+	}
 
 	//sets the price for the item
 	public void setPrice(double price){
@@ -74,6 +82,7 @@ class Items_model{
 
 		String string = id + ", '" + name + "', " + price;
 
+		return string;
 	}
 
 }//end Items

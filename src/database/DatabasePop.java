@@ -12,7 +12,7 @@ import java.sql.*;
 
 public class DatabasePop{
 
-	public static void main(String args[]){
+	public DatabasePop(){
 
 		Connection c; //connection
 		Statement stmt; // sql statement

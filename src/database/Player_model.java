@@ -3,8 +3,9 @@ Patrick Welch
 
 This will be the object for the row entry in the database for the player table
 */
+package pjwelch.restaurantsim.database;
 
-class Player_model{
+class Player_model implements Model{
 
 	private String name;
 	private int id;
@@ -28,10 +29,18 @@ class Player_model{
 
 	}
 
+	public String getTable(){
+		return "Player";
+	}
+
 	public void setId(int id){
 
 		this.id = id;
 
+	}
+
+	public int getRestaurantID(){
+		return 0;
 	}
 
 	public int getId(){
@@ -43,6 +52,8 @@ class Player_model{
 	public String toString(){
 
 		String string = id + ", '" + name + "'";
+
+		return string;
 	}
 
 }

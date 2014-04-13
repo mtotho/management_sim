@@ -3,12 +3,13 @@ Patrick Welch
 
 DB Mapper can be called to query, update, and insert into the respective database tables
 */
+package pjwelch.restaurantsim.database;
 
-
-import org.apache.commons.dbutils.DbUtils;
-import org.apache.commons.QueryRunner;
-import org.apache.commons.BeanListHandler;
-
+//import org.apache.commons.dbutils.DbUtils;
+//import org.apache.commons.dbutils.QueryRunner;
+//import org.apache.commons.dbutils.BeanListHandler;
+import org.apache.commons.dbutils.*;
+import org.apache.commons.dbutils.handlers.*;
 import java.sql.*;
 import java.util.*;
 import java.lang.*;
@@ -23,17 +24,18 @@ public class DBmapper{
 	public QueryRunner qRunner;
 
 
-	public DBmapper() throws Exception{
+	public DBmapper(){
 
 		this.dbpath = dbpath;
 		this.qRunner = new QueryRunner();
 
+		
+			
+
 		if (!this.connect()){
 
-			DatabaseInit();
-			DatabasePop();
-
-			throw new Exception("Failed to connect to database, created a new database");
+			new DatabaseInit();
+			new DatabasePop();
 
 		}
 
@@ -75,9 +77,9 @@ public class DBmapper{
 
 	}
 
-	public boolean insert(Object obj){
+	public boolean insert(Model obj){
 
-		String insertStatment = "INSERT INTO " + obj.getName() + " VALUES (" + obj.toString +");";
+		String insertStatement = "INSERT INTO " + obj.getTable() + " VALUES (" + obj.toString() +");";
 
 		try{
 
@@ -95,28 +97,30 @@ public class DBmapper{
 
 	}
 
-	public List select(Class<?> clazz, Object param){
+	public List select(Class<?> clazz, Model param){
 
-		String selectStatment = "SELECT * FROM " + clazz;
+		String selectStatement = "SELECT * FROM " + clazz;
 
 		try{
 
 			qRunner = new QueryRunner();
-			List beans = (List) qRunner.query(this.c, selectStatment, new BeanListHandler(clazz));
+			List beans = (List) qRunner.query(this.c, selectStatement, new BeanListHandler(clazz));
 
-			for (int i = 0; i < beans.size(); i++){
+			/*for (int i = 0; i < beans.size(); i++){
 
-				clazz bean = (clazz) beans.get(i);
+				Class<?>clazz bean = (clazz) beans.get(i);
 				bean.print();
 
 				return beans;
-			}
+			}*/
+
+			return beans;
 
 		}
 		catch(Exception e){
 
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
-			return beans;
+			return null;
 
 		}
 
@@ -124,10 +128,11 @@ public class DBmapper{
 
 	}
 
-	public boolean update(Class<?> clazz, Object param){
+	public boolean update(Model param){
 
-		String updateStatement  = "UPDATE " + clazz + " WHERE RESTAURANT RESTAURANT_ID = " + clazz.getRestaurantID() + ";" ;
+		String updateStatement  = "UPDATE " + param + " WHERE RESTAURANT_ID = " + param.getRestaurantID() + ";" ;
 
+		boolean success = true;
 		try{
 
 			qRunner = new QueryRunner();
@@ -138,29 +143,35 @@ public class DBmapper{
 		}
 		catch(Exception e){
 
+			success = false;
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
 
 		}
 
-	}
-	public boolean update(Class<?> clazz, Object[] params){
+		return success;
 
-		String updateStatement = "UPDATE " + clazz + " WHERE RESTAURANT RESTAURANT_ID = " + clazz.getRestaurantID() + ";";
+	}
+	public boolean update(Class<?> clazz, List<Model> params){
+
+		boolean success = true;
 
 		try{
+			String updateStatement = "UPDATE " + params.get(0) + " WHERE RESTAURANT_ID = " + params.get(0).getRestaurantID() + ";";
 
 			qRunner = new QueryRunner();
-			qR.update(this.c, updateStatement, params);
+			qRunner.update(this.c, updateStatement, params);
+
 
 
 		}
 		catch(Exception e){
 
+			success = false;
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
 
 		}
 
 
-
+		return success;
 	}
 }

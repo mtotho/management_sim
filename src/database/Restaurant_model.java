@@ -7,16 +7,16 @@ CS 205 Restaurant Sim Database
 */
 package pjwelch.restaurantsim.database;
 
-import org.apache.commons.dbutils.DbUtils;
-import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.BeanListHandler;
+import org.apache.commons.dbutils.*;
+//import org.apache.commons.dbutils.QueryRunner;
+//import org.apache.commons.dbutils.BeanListHandler;
 
 import java.sql.*;
 import java.util.*;
 
 
 //restaurant object for the database table;
-public class Restaurant_model{
+public class Restaurant_model implements Model{
 	private int id; //restaurant id
 	private int playerId; //player id
 	private String name;
@@ -31,7 +31,7 @@ public class Restaurant_model{
 	}//end getID
 	//retrieves playerID
 	public int getPlayerID(){
-		return playerID;
+		return playerId;
 	}//end getPlayerID()
 	//setsID for the restaurant table row
 	public void setID(int id){
@@ -51,16 +51,24 @@ public class Restaurant_model{
 	
 	}
 
+	public int getRestaurantID(){
+		return 0;
+	}
+
 	public String getName(){
 
 		return name;
 
 	}
 
+	public String getTable(){
+		return "Restaurant";
+	}
+
 	public String toString(){
 
 		String string = id + ", '" + name + "', " + playerId;
-
+		return string;
 	}
 
 }//end restaurant	

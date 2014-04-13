@@ -6,15 +6,21 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import java.util.*;
 import mftoth.restaurantsim.logic.Restaurant;
+import pjwelch.restaurantsim.database.*;
 //import mftoth.restaurantsim.ogl.states.*;
 
 public class OGLGameContainer extends StateBasedGame{
 
 	private Restaurant restaurant;
 
-	public OGLGameContainer(String title, Restaurant restaurant){
+	public OGLGameContainer(String title, DBmapper db){
 		super(title);
-		this.restaurant=restaurant;
+		
+
+		//Determine which restaurant to load from DB;
+
+		restaurant = new Restaurant();
+		//this.restaurant=restaurant;
 	}
 
 	 @Override

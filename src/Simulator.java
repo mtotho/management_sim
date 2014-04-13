@@ -5,6 +5,7 @@ import org.newdawn.slick.AppGameContainer;
 
 import mftoth.restaurantsim.ogl.*;
 import mftoth.restaurantsim.logic.Restaurant;
+import pjwelch.restaurantsim.database.*;
 
 
 class Simulator{
@@ -24,11 +25,14 @@ class Simulator{
 	public Simulator(){
 
 		DBmapper db = new DBmapper();
-		Restaurant restaurant = new Restaurant();
+
+
+
+		//Restaurant restaurant = new Restaurant();
 
 		//System.out.println("Simulator started");
 
-		OGLGameContainer game = new OGLGameContainer("Management Simulator", restaurant);
+		OGLGameContainer game = new OGLGameContainer("Management Simulator", db);
 	     try {
 	          AppGameContainer container = new AppGameContainer(game);
 	          container.setDisplayMode(960, 480, false);
