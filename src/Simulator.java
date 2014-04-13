@@ -6,16 +6,16 @@ import org.newdawn.slick.AppGameContainer;
 import mftoth.restaurantsim.ogl.*;
 import mftoth.restaurantsim.logic.Restaurant;
 
-import org.apache.commons.dbutils.*;
 
 class Simulator{
 
-	private QueryRunner qr;
+	//private QueryRunner qr;
 
 	//main()
 	public static void main(String[] args) throws InterruptedException{
 
 		new Simulator();
+
 	}//end: main()
 
 	//public OGLDisplay display;
@@ -23,6 +23,7 @@ class Simulator{
 	//Constructor()
 	public Simulator(){
 
+		DBmapper db = new DBmapper();
 		Restaurant restaurant = new Restaurant();
 
 		//System.out.println("Simulator started");
