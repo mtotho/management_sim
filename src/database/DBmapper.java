@@ -15,8 +15,8 @@ import java.lang.*;
 
 public class DBmapper{
 
-	private String dbpath = "";
-	private String dbDriver = "";
+	private String dbpath = "jdbc:sqlite:sim.db";
+	private String dbDriver = "org.sqlite.JDBC";
 	private String sql = "";
 
 	public Connection c = null; 
@@ -36,13 +36,22 @@ public class DBmapper{
 
 
 	}
+	public void DBcheck(){
+
+
+
+
+
+
+
+	}
 
 	public synchronized boolean connect() {
 
 		try{
-			Class.forName("org.sqlite.JDBC");
+			Class.forName(dbDriver);
 			this.close();
-			c = DriverManager.getConnection(this.dbpath);
+			c = DriverManager.getConnection(dbpath);
 			return true;		
 		}
 		catch(Exception e){
