@@ -10,6 +10,8 @@ public class Employee{
 	private float mod;
 	private String labor;
 	private TaskType duty;
+	private Locations waypoint;
+	private Locations location;
 
 	private String[] nameList = {"Mike", "Gordon", "Patrick", "Joey", "Jesus", "Melvin", "Eugene", "Dylan", "Ash", "Gary", "Brock", "Red"};
 
@@ -18,7 +20,17 @@ public class Employee{
 		int randNum = (int)(Math.random()*(nameList.length));
 		this.name = nameList[randNum];
 		busy=false;
+
+		location = Locations.REGISTER;
+		waypoint = null;
 	}//end: Constructor()
+
+
+	public void update(){
+		
+		
+		
+	}
 
 	//setTask(): assign current task
 	public void setTask(Task task){
@@ -111,5 +123,18 @@ public class Employee{
 		return busy;
 	}
 
+	public void setWayPoint(Locations waypoint){
+		this.waypoint=waypoint;
+	}
+
+	public Locations getWaypoint(){
+		return waypoint;
+	}
+	public Locations getLocation(){
+		return location;
+	}
+	public void setLocation(Locations location){
+		this.location=location;
+	}
 
 }

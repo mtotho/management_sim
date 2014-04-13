@@ -1,6 +1,7 @@
 package mftoth.restaurantsim.ogl;
 
 //simport mftoth.map.*;
+import mftoth.restaurantsim.logic.*;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 import org.newdawn.slick.GameContainer;
@@ -14,20 +15,31 @@ import java.util.Random;
 
 public class GLEmployee extends GLMoveableEntity{
 
+	private Employee logical_emp;
 
-	public GLEmployee(GameContainer gc, OGLMap map, StateGame sg) throws SlickException{
+	public GLEmployee(GameContainer gc, OGLMap map, StateGame sg, Employee logical_emp) throws SlickException{
 		super(gc, map, sg);
+
+		this.logical_emp = logical_emp;
+		this.location = logical_emp.getLocation();
+		this.destination = logical_emp.getWaypoint();
+
+		GLTile tileLocation =  loc_handler.getTile(this.location);
 		
+		
+		//this.
 		//default some values		
-		x=96;
-		y=256;
-		destx=96;
-		desty=256;
+		x=map.getAbsX(tileLocation.getX());
+		y=map.getAbsY(tileLocation.getY());
+		destx=x;
+		desty=y;
+		//destx=96;
+		//desty=256;
 		
-		dx=0.2;
-		dy=0.2;
+		dx=0.1;
+		dy=0.1;
 
-
+		
 
 		//Set the spritesheet path. Will use default if not indicated
 		setSpriteSheet("employee_spritesheet1.png");
@@ -43,14 +55,40 @@ public class GLEmployee extends GLMoveableEntity{
 	}
 
 	public void update(GameContainer gc, StateBasedGame game, int delta){
-
+		sync();
 		
 
+		//If not pathing, not at destination 
+		if(!isPathInProgress() && (destination!=location || destination==Locations.RANDOM)){
 
+			//If we arent going to the foodline, get the tile
+			if(destination!=Locations.FOODLINE){
+				 GLTile destTile = loc_handler.getTile(destination);
+				 setPath(destTile);
+			
+			//Not ever going to foodline
+			}else{
+			//	sg.foodline.add(this);
+			//	location=destination;
+			}
+		}
 		//leave this at the end of this call. Call some parent functionality
 		super.update(gc,game,delta);
+
+		logical_emp.update();
 	}
 
+		//sync the gl and logical customers
+	public void sync(){
+
+		//set the GLcustomer destination based on the logic destination value
+		this.destination = logical_emp.getWaypoint();
+		if(this.destination==null)
+			this.destination=this.location;
+
+		//set logic location according to the graphical location value
+		logical_emp.setLocation(this.location);
+	}
 
 	public String toString(){
 		String output = "";

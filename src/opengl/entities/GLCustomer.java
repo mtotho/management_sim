@@ -23,10 +23,13 @@ public class GLCustomer extends GLMoveableEntity{
 		this.location=logical_customer.getLocation();
 
 
+		GLTile tileLocation =  loc_handler.getTile(this.location);
+
+
 		//this.
 		//default some values		
-		x=16;
-		y=432;
+		x=map.getAbsX(tileLocation.getX());
+		y=map.getAbsY(tileLocation.getY());
 		
 		dx=0.1;
 		dy=0.1;
@@ -50,7 +53,7 @@ public class GLCustomer extends GLMoveableEntity{
 		
 		//update the gl destination from the customers
 		
-		System.out.println(isPathInProgress());
+		//System.out.println(isPathInProgress());
 			//This should update the path when the destination is changed;
 		if(!isPathInProgress() && (destination!=location || destination==Locations.RANDOM)){
 
@@ -66,6 +69,10 @@ public class GLCustomer extends GLMoveableEntity{
 			}
 		}
 
+
+		if(destination==Locations.EXIT && location ==Locations.EXIT){
+			sg.removeCustomer(this, logical_customer);
+		}
 
 		
 		
@@ -97,5 +104,8 @@ public class GLCustomer extends GLMoveableEntity{
 		return output;
 	}
 
+	public Customer getLogical(){
+		return logical_customer;
+	}
 
 }

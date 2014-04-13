@@ -23,7 +23,8 @@ public class LocationHandler{
 		tile = new GLTile(0,27);
 
 		switch(location){
-	
+			
+			case EXIT:
 			case ENTRANCE:
 				int wayX, wayY;
 				double mod = Math.random();
