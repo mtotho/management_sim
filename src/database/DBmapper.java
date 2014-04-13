@@ -15,22 +15,25 @@ import java.lang.*;
 
 public class DBmapper{
 
-	private String dbpath = "";
-	private String dbDriver = "";
+	private String dbpath = "jdbc:sqlite:sim.db";
+	private String dbDriver = "org.sqlite.JDBC";
 	private String sql = "";
 
 	public Connection c = null; 
 	public QueryRunner qRunner;
 
 
-	public DBconnection (String dbpath) throws Exception{
+	public DBmapper() throws Exception{
 
 		this.dbpath = dbpath;
 		this.qRunner = new QueryRunner();
 
 		if (!this.connect()){
 
-			throw new Excception("Failed to connect to database");
+			DatabaseInit();
+			DatabasePop();
+
+			throw new Exception("Failed to connect to database, created a new database");
 
 		}
 
@@ -40,14 +43,15 @@ public class DBmapper{
 	public synchronized boolean connect() {
 
 		try{
-			Class.forName("org.sqlite.JDBC");
+			Class.forName(dbDriver);
 			this.close();
-			c = DriverManager.getConnection(this.dbpath);
+			c = DriverManager.getConnection(dbpath);
 			return true;		
 		}
 		catch(Exception e){
 
-			System.err.println(e.getClass().getName() + ": " e.getMessage());
+			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			return false;
 
 		}
 
@@ -78,7 +82,7 @@ public class DBmapper{
 		try{
 
 			Class<?> clazz = obj.getClass();
-			qRunner.update(this.c, insertStatement)
+			qRunner.update(this.c, insertStatement);
 			return true;
 
 		}
@@ -98,11 +102,11 @@ public class DBmapper{
 		try{
 
 			qRunner = new QueryRunner();
-			List beans = (List) qRunner.query(this.cm, selectStatment, new BeanListHandler(clazz));
+			List beans = (List) qRunner.query(this.c, selectStatment, new BeanListHandler(clazz));
 
 			for (int i = 0; i < beans.size(); i++){
 
-				clazz bean = (clazz) beans.get(i)
+				clazz bean = (clazz) beans.get(i);
 				bean.print();
 
 				return beans;
@@ -112,7 +116,7 @@ public class DBmapper{
 		catch(Exception e){
 
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
-			Return beans;
+			return beans;
 
 		}
 
