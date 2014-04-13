@@ -1,5 +1,5 @@
 package mftoth.restaurantsim.logic;
-
+import mftoth.restaurantsim.ogl.*;
 import java.util.ArrayList;
 
 public class Restaurant{
@@ -9,7 +9,9 @@ public class Restaurant{
 	private Scheduler scheduler;
 	public Time timer;
 	private int counter;
+	private Foodline foodline;
 	//Constructor()
+
 	public Restaurant(){
 
 		//initialize timer object which will keep track of and organize time
@@ -26,6 +28,8 @@ public class Restaurant{
 		Employee e1 = new Employee();
 		Employee e2 = new Employee();
 
+		e1.setLocation(Locations.REGISTER);
+		e2.setLocation(Locations.MENSROOM);
 	
 		employees.add(e1);
 		employees.add(e2);
@@ -45,11 +49,30 @@ public class Restaurant{
 		timer.addMilliSecond(delta);
 
 
-		if(counter % 500==0){
+		if(counter % 200==0){
 			Customer cust = new Customer(this);
-			cust.setWayPoint(Locations.RANDOM);
+			cust.setWayPoint(Locations.FOODLINE);
 			customers.add(cust);
+
+			employees.get(1).setWayPoint(Locations.RANDOM);
+		}	
+
+		if(counter % 600 == 0){
+
+			if(foodline.hasNext()){
+				Customer cust = foodline.getNext();
+				
+				cust.setWayPoint(Locations.EXIT);
+
+
+				foodline.next();
+
+			}
+
+
 		}
+
+		//System.out.privatentln("Has next Customer?: " + );
 
 		//System.out.println(timer.getSeconds() + " seconds");
 
@@ -92,6 +115,10 @@ public class Restaurant{
 
 	public ArrayList<Customer> getCustomers(){
 		return customers;
+	}
+
+	public void setFoodline(Foodline fl){
+		foodline=fl;
 	}
 
 	public ArrayList<Employee> getEmployees(){

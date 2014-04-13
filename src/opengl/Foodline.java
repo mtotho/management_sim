@@ -1,11 +1,12 @@
 package mftoth.restaurantsim.ogl;
+import mftoth.restaurantsim.logic.*;
 import java.util.ArrayList;
 
 public class Foodline{
 
 	private final static int CAPACITY = 14;
 
-	private ArrayList<GLMoveableEntity> customers;
+	private ArrayList<GLCustomer> customers;
 	private ArrayList<GLTile> linetiles; 
 
 	public Foodline(){
@@ -30,10 +31,10 @@ public class Foodline{
 
 
 
-		customers = new ArrayList<GLMoveableEntity>();
+		customers = new ArrayList<GLCustomer>();
 	}
 
-	public boolean add(GLMoveableEntity glcust){
+	public boolean add(GLCustomer glcust){
 
 		//If  not at max capacity, add customer
 		if(customers.size()<CAPACITY){
@@ -59,7 +60,7 @@ public class Foodline{
 			return false;
 		}
 	}
-	public GLMoveableEntity getNext(){
+	public Customer getNext(){
 		
 		if(customers.size()>0){
 			
@@ -68,23 +69,28 @@ public class Foodline{
 		
 			
 			//get the first customer
-			GLMoveableEntity nextcust = customers.get(0);
+			GLCustomer nextcust = customers.get(0);
 
 
-			//remove the first customer
-			customers.remove(0);
-
-			for(int i=0; i<customers.size(); i++){
-				GLMoveableEntity glcust = customers.get(i);
-				GLTile linespot = linetiles.get(i);
-				//System.out.println("linespot x: " + linespot.getX() + " linespot y: " + linespot.getY());
-				glcust.setPath(linespot.getX(), linespot.getY());
-	
-			}
 			
-			return nextcust;
+			return nextcust.getLogical();
 		}else{
 			return null;
+		}
+	}
+
+	public void next(){
+
+		//remove the first customer
+		customers.remove(0);
+
+		//Move the rest of the customers forward
+		for(int i=0; i<customers.size(); i++){
+			GLCustomer glcust = customers.get(i);
+			GLTile linespot = linetiles.get(i);
+			//System.out.println("linespot x: " + linespot.getX() + " linespot y: " + linespot.getY());
+			glcust.setPath(linespot.getX(), linespot.getY());
+
 		}
 	}
 

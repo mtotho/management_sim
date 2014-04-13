@@ -23,6 +23,13 @@ private Restaurant restaurant;
 		waypoint = Locations.FOODLINE;
 	}//end: Constructor()
 
+	public void update(){
+		//if(location==waypoint){
+		//	System.out.println("Have arrived");
+		//	waypoint=Locations.MENSROOM;
+		//}
+	}
+
 	public void getTraits(){
 
 
@@ -78,10 +85,5 @@ private Restaurant restaurant;
 		isRendered=rendered;
 	}
 
-	public void update(){
-		if(location==waypoint){
-			System.out.println("Have arrived");
-			waypoint=Locations.MENSROOM;
-		}
-	}
+
 }

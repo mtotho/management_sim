@@ -36,7 +36,9 @@ public class StateGame extends BasicGameState{
 	private GLCustomer c1;
   private HashMap<Customer,GLCustomer> cust_map;
 	private ArrayList<GLCustomer> gl_customers;
+  private ArrayList<GLEmployee> gl_employees;
   private ArrayList<Customer> customers;
+  private ArrayList<Employee> employees;
   private Time timer;
 
   private GLEmployee e1;
@@ -63,9 +65,13 @@ public class StateGame extends BasicGameState{
 
     //
     customers = restaurant.getCustomers();
+    employees = restaurant.getEmployees();
+
+
     timer = restaurant.getTimer();
     foodline = new Foodline();
 
+    this.restaurant.setFoodline(foodline);
   }
 
     @Override 
@@ -85,6 +91,12 @@ public class StateGame extends BasicGameState{
          // System.out.println("X: " + cleaning.get(i).getX() + " Y: " + cleaning.get(i).getY());
         }
 
+        gl_employees = new ArrayList<GLEmployee>();
+        for(int i=0; i<employees.size(); i++){
+          gl_employees.add(new GLEmployee(gc, map, this, employees.get(i)));
+        }
+
+
         //GLCustomer c1 = new GLCustomer(gc,map); 
 
         cust_map = new HashMap<Customer, GLCustomer>();
@@ -94,7 +106,7 @@ public class StateGame extends BasicGameState{
       	gl_customers= new ArrayList<GLCustomer>();
 
         //create test employee
-        e1 = new GLEmployee(gc, map, this);
+        //e1 = new GLEmployee(gc, map, this);
 
         panels = new HashMap<String, GLPanel>();
 
@@ -132,7 +144,14 @@ public class StateGame extends BasicGameState{
       }
     }
 
+    public void removeCustomer(GLCustomer glcust, Customer logic_cust){
 
+
+     // Customer logic_cust = cust_map.get(cust);
+      cust_map.remove(logic_cust);
+      customers.remove(logic_cust);
+      gl_customers.remove(glcust);
+    }
  
     @Override
     public void render(GameContainer gc, StateBasedGame game, Graphics g)
@@ -145,7 +164,7 @@ public class StateGame extends BasicGameState{
       if(active_panel!=null)
         active_panel.render(gc, g);
 
-      e1.render(gc,g);
+      //1.render(gc,g);
       /*if(buttonMenu==1){
         btn_spawnCust.render(gc, g);
         btn_randCust.render(gc, g);
@@ -175,6 +194,12 @@ public class StateGame extends BasicGameState{
           glcust.render(gc, g); 
         }
     	}
+      for(int j=0; j<gl_employees.size(); j++){
+        //if(cust_map.containsKey(customers.get(i))){
+          GLEmployee glemp = gl_employees.get(j);
+          glemp.render(gc, g); 
+       // }
+      }
     } 
 
 
@@ -190,7 +215,7 @@ public class StateGame extends BasicGameState{
 
 
        // System.out.println(timer.getSeconds());
-        e1.update(gc,game,delta);
+      //  e1.update(gc,game,delta);
        
 
 
@@ -216,6 +241,10 @@ public class StateGame extends BasicGameState{
               glcust.update(gc, game, delta);
           }
         }//end for
+
+        for(int i=0; i<gl_employees.size(); i++){
+          gl_employees.get(i).update(gc, game, delta);
+        }
 
         //System.out.println("customer amount: " + customers.size());
       	Input input = gc.getInput();
