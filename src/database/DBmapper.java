@@ -104,7 +104,7 @@ public class DBmapper{
 		try{
 
 			qRunner = new QueryRunner();
-			List beans = (List) qRunner.query(this.c, selectStatement, new BeanListHandler(clazz));
+			List beans = (List) qRunner.query(this.c, selectStatement, new BeanListHandler(gclazz));
 
 			/*for (int i = 0; i < beans.size(); i++){
 

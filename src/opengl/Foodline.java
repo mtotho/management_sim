@@ -8,6 +8,7 @@ public class Foodline{
 
 	private ArrayList<GLCustomer> customers;
 	private ArrayList<GLTile> linetiles; 
+	private boolean beingHelped = false;
 
 	public Foodline(){
 
@@ -60,11 +61,12 @@ public class Foodline{
 			return false;
 		}
 	}
+
 	public Customer getNext(){
 		
 		if(customers.size()>0){
-			
-			System.out.println("Customer line size: " + customers.size());
+			beingHelped = true;
+			//System.out.println("Customer line size: " + customers.size());
 			//Move each customer up one spot
 		
 			
@@ -79,17 +81,24 @@ public class Foodline{
 		}
 	}
 
+	public boolean isHelped(){
+		return beingHelped;
+	}
+
 	public void next(){
 
 		//remove the first customer
-		customers.remove(0);
+		if(customers.size()>0){
+			customers.remove(0);
+			beingHelped = false;
 
-		//Move the rest of the customers forward
-		for(int i=0; i<customers.size(); i++){
-			GLCustomer glcust = customers.get(i);
-			GLTile linespot = linetiles.get(i);
-			//System.out.println("linespot x: " + linespot.getX() + " linespot y: " + linespot.getY());
-			glcust.setPath(linespot.getX(), linespot.getY());
+			//Move the rest of the customers forward
+			for(int i=0; i<customers.size(); i++){
+				GLCustomer glcust = customers.get(i);
+				GLTile linespot = linetiles.get(i);
+				//System.out.println("linespot x: " + linespot.getX() + " linespot y: " + linespot.getY());
+				glcust.setPath(linespot.getX(), linespot.getY());
+			}
 
 		}
 	}

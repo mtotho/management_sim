@@ -34,8 +34,6 @@ public class Employee{
 
 	//setTask(): assign current task
 	public void setTask(Task task){
-
-
 		active_task = task;
 		busy=true;
 		//If employee is busy, check whether the new task is more important
