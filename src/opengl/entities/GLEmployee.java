@@ -16,6 +16,7 @@ import java.util.Random;
 public class GLEmployee extends GLMoveableEntity{
 
 	private Employee logical_emp;
+	private OGLMap map;
 
 	public GLEmployee(GameContainer gc, OGLMap map, StateGame sg, Employee logical_emp) throws SlickException{
 		super(gc, map, sg);
@@ -23,6 +24,7 @@ public class GLEmployee extends GLMoveableEntity{
 		this.logical_emp = logical_emp;
 		this.location = logical_emp.getLocation();
 		this.destination = logical_emp.getWaypoint();
+		this.map = map;
 
 		GLTile tileLocation =  loc_handler.getTile(this.location);
 		
@@ -59,7 +61,7 @@ public class GLEmployee extends GLMoveableEntity{
 		
 
 		//If not pathing, not at destination 
-		if(!isPathInProgress() && (destination!=location || destination==Locations.RANDOM)){
+		if(!isPathInProgress() && (destination==location || destination==Locations.RANDOM)){
 
 			//If we arent going to the foodline, get the tile
 			if(destination!=Locations.FOODLINE){
@@ -75,7 +77,10 @@ public class GLEmployee extends GLMoveableEntity{
 		//leave this at the end of this call. Call some parent functionality
 		super.update(gc,game,delta);
 
-		logical_emp.update();
+		int tilex = map.getTileX(this.getX());
+		int tiley = map.getTileY(this.getY());
+		//System.out.println("X: " + tilex + " Y: " + tiley);
+		logical_emp.update(tilex, tiley);
 	}
 
 		//sync the gl and logical customers

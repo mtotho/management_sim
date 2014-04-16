@@ -19,6 +19,7 @@ public class GLEmployeePanel extends GLPanel{
 	
 	private StateGame game;
 	private GameContainer gameCon;
+	private Restaurant restaurant;
 
 	private ArrayList<Employee> employees;
 	private boolean active_list = false;
@@ -27,6 +28,7 @@ public class GLEmployeePanel extends GLPanel{
 		super(restaurant, gc);
 		this.game = game;
 		this.gameCon = gc;
+		this.restaurant = restaurant;
 
 
 		addButton(gc,"btnEmployeeList", "Employee List", 300, 100);
@@ -69,13 +71,14 @@ public class GLEmployeePanel extends GLPanel{
 
 		    g.drawString("Day: " + timer.getDay(), x+250, y+5);
 
+		    employees = restaurant.getEmployees();
 		    for(int i=0; i<employees.size();i++){
 		    	String employeeName = employees.get(i).getName();
 		    	if(!buttons.containsKey("btn"+employeeName)){
 		    		addButton(gameCon, "btn"+employeeName, employeeName, 300, 80);
 		  		}
 		  		else{
-		  			System.out.println(buttons.get("btn"+employeeName).getName());
+		  			//System.out.println(buttons.get("btn"+employeeName).getName());
 		  		}
 		  		GLButton tempButton = buttons.get("btn" + employeeName);
 		    	tempButton.setLabelX(60);

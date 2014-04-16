@@ -164,5 +164,9 @@ public class GLButton extends GLEntity{
 		return label;
 	}
 
+	public void changeName(String name){
+		this.label = name;
+	}
+
 
 }

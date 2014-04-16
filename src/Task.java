@@ -13,14 +13,19 @@ public class Task{
 	private boolean isTimeLeft;
 	private int time; //ms
 	private int priority;
+	private Locations waypoint;
+	private String name;
 
 
 	//Constructor(priority, completion_time)
-	public Task(int completion_time, TaskType type){
+	public Task(int completion_time, TaskType type, Locations waypoint, String name){
 
 		
 		this.completion_time=completion_time;
 		this.type = type;
+		this.time = this.completion_time;
+		this.waypoint = waypoint;
+		this.name = name;
 
 	}//end: Constructor(priority, completion_time)
 
@@ -31,6 +36,10 @@ public class Task{
 
 	public int getPriority(){
 		return priority;
+	}
+
+	public Locations getWaypoint(){
+		return waypoint;
 	}
 
 	public void setPreemption(boolean preemption){
@@ -45,15 +54,24 @@ public class Task{
 		this.type=type;
 	}//end setType
 
+	public String getName(){
+		return name;
+	}
+
 	public TaskType getType(){
 		return type;
 	}//end getType
 
+	public int getTimeRemaining(){
+		return time;
+	}
+
 	public boolean isTimeLeft(){
-		if(time<=0){
-			isTimeLeft=false;
-		}else{
+		if(time>0){
 			isTimeLeft=true;
+		}
+		else{
+			isTimeLeft=false;
 		}
 		return isTimeLeft;
 	}//end isTimeLeft

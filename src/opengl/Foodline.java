@@ -63,12 +63,10 @@ public class Foodline{
 	}
 
 	public Customer getNext(){
-		
 		if(customers.size()>0){
 			beingHelped = true;
 			//System.out.println("Customer line size: " + customers.size());
 			//Move each customer up one spot
-		
 			
 			//get the first customer
 			GLCustomer nextcust = customers.get(0);
@@ -83,6 +81,18 @@ public class Foodline{
 
 	public boolean isHelped(){
 		return beingHelped;
+	}
+
+	public boolean atStart(){
+		if(customers.size()>0){
+			int tileX = customers.get(0).getX()/16;
+			int tileY = customers.get(0).getY()/16;
+
+			if(tileX == 8 && tileY == 17){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void next(){

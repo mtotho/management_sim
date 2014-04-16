@@ -52,7 +52,6 @@ public Items_model model;
 
 		items = (random.nextInt() % 6) + 1;
 
-
 		for (int i = 0; i < items + 1; i++){
 
 			nextItem = ((random.nextInt() % 6) + 1);

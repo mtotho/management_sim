@@ -62,6 +62,15 @@ public class LocationHandler{
 		return tile;
 	}
 
+	public Locations getLocation(int tilex, int tiley){
+		//Not finished or needed
+		GLTile tempTile = new GLTile(tilex, tiley);
+		for( Locations location : tilemapper.keySet() ){
+			
+		}
+		return Locations.REGISTER;
+	}
+
 	public GLTile getRandom(){
 		
 	    int wayX= 0 + (int)(Math.random()*map.getWidthInTiles()-1); 
