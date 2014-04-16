@@ -1,6 +1,8 @@
 package mftoth.restaurantsim.logic;
 import mftoth.restaurantsim.ogl.*;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Restaurant{
 
@@ -10,6 +12,7 @@ public class Restaurant{
 	public Time timer;
 	private int counter;
 	private Foodline foodline;
+	private HashMap<Customer, Task> customer2Task;
 	//Constructor()
 
 	public Restaurant(){
@@ -19,6 +22,7 @@ public class Restaurant{
 
 		employees = new ArrayList<Employee>();
 		customers = new ArrayList<Customer>();
+		customer2Task = new HashMap<Customer, Task>();
 
 		//Customer c1 = new Customer();
 		//c1.setWayPoint(Locations.FOODLINE);
@@ -30,6 +34,8 @@ public class Restaurant{
 
 		e1.setLocation(Locations.REGISTER);
 		e2.setLocation(Locations.MENSROOM);
+
+		e1.setDuty(TaskType.CASHIER);
 	
 		employees.add(e1);
 		employees.add(e2);
@@ -57,19 +63,23 @@ public class Restaurant{
 			employees.get(1).setWayPoint(Locations.RANDOM);
 		}	
 
-		if(counter % 600 == 0){
 
-			if(foodline.hasNext()){
+		if(foodline.hasNext()){
+			if(!foodline.isHelped()){
 				Customer cust = foodline.getNext();
-				
-				cust.setWayPoint(Locations.EXIT);
 
-
-				foodline.next();
-
+				Task cashierTask = new Task(10000, TaskType.CASHIER);
+				customer2Task.put(cust, cashierTask);
+				scheduler.addTask(cashierTask);
 			}
+			else{
+				Customer cust = foodline.getNext();
 
-
+				if(!customer2Task.get(cust).isTimeLeft()){
+					foodline.next();
+					cust.setWayPoint(Locations.EXIT);
+				}
+			}
 		}
 
 		//System.out.privatentln("Has next Customer?: " + );

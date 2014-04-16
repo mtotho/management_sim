@@ -16,6 +16,7 @@ public class LocationHandler{
 		tilemapper.put(Locations.MENSROOM, new GLTile(28,3));
 		tilemapper.put(Locations.WOMENSROOM, new GLTile(36,3));
 		tilemapper.put(Locations.REGISTER, new GLTile(6,16));
+		tilemapper.put(Locations.EXIT, new GLTile(0, 27));
 	}
 
 	public GLTile getTile(Locations location){
@@ -25,6 +26,7 @@ public class LocationHandler{
 		switch(location){
 			
 			case EXIT:
+				tile = tilemapper.get(location);
 			case ENTRANCE:
 				int wayX, wayY;
 				double mod = Math.random();
