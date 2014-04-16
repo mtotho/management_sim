@@ -12,14 +12,16 @@ import pjwelch.restaurantsim.database.*;
 public class OGLGameContainer extends StateBasedGame{
 
 	private Restaurant restaurant;
+	public DBmapper db;
 
 	public OGLGameContainer(String title, DBmapper db){
 		super(title);
 		
+		this.db = db;
 
 		//Determine which restaurant to load from DB;
 
-		restaurant = new Restaurant();
+		restaurant = new Restaurant(db);
 		//this.restaurant=restaurant;
 	}
 

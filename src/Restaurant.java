@@ -1,5 +1,6 @@
 package mftoth.restaurantsim.logic;
 import mftoth.restaurantsim.ogl.*;
+import pjwelch.restaurantsim.database.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,12 +14,15 @@ public class Restaurant{
 	private int counter;
 	private Foodline foodline;
 	private HashMap<Customer, Task> customer2Task;
+	public DBmapper db;
 	//Constructor()
 
-	public Restaurant(){
+	public Restaurant(DBmapper db){
 
 		//initialize timer object which will keep track of and organize time
 		timer = new Time();
+
+		this.db = db;
 
 		employees = new ArrayList<Employee>();
 		customers = new ArrayList<Customer>();
@@ -56,7 +60,7 @@ public class Restaurant{
 
 
 		if(counter % 200==0){
-			Customer cust = new Customer(this);
+			Customer cust = new Customer(this, db);
 			cust.setWayPoint(Locations.FOODLINE);
 			customers.add(cust);
 
@@ -114,7 +118,7 @@ public class Restaurant{
 	}//end: Update();
 
 	public void addCustomer(){
-		Customer cust = new Customer(this);
+		Customer cust = new Customer(this, db);
 		cust.setWayPoint(Locations.RANDOM);
 		customers.add(cust);
 	}
