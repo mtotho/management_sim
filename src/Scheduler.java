@@ -7,6 +7,7 @@ public class Scheduler{
 	private ArrayList<Task> lowPriority;
 	private ArrayList<Task> midPriority;
 	private ArrayList<Task> highPriority;
+	private ArrayList<Task> activeTasks;
 
 
 	//Constructor()
@@ -15,6 +16,7 @@ public class Scheduler{
 		lowPriority = new ArrayList<Task>();
 		midPriority = new ArrayList<Task>();
 		highPriority = new ArrayList<Task>();
+		activeTasks = new ArrayList<Task>();
 
 	}//end: Constructor()
 
@@ -23,6 +25,10 @@ public class Scheduler{
 		lowPriority.add(task);
 
 	}//end addTask(Task task)
+
+	public void removeTask(Task task){
+		activeTasks.remove(task);
+	}
 
 
 	public void setPriority(int priority, Task task){
@@ -118,6 +124,7 @@ public class Scheduler{
 		for(int i = 0; i < highPriority.size(); i++){
 			if(type == highPriority.get(i).getType()){
 				Task task = highPriority.get(i);
+				activeTasks.add(task);
 				highPriority.remove(i); //remove this task from queue
 				return task;
 			}
@@ -128,6 +135,7 @@ public class Scheduler{
 			if(type == midPriority.get(i).getType()){
 				Task task = midPriority.get(i);
 				midPriority.remove(i);
+				activeTasks.add(task);
 				//e.setTask(highPriority.get(i));
 				return task;
 			}
@@ -138,6 +146,7 @@ public class Scheduler{
 			if(type == lowPriority.get(i).getType()){
 				Task task = lowPriority.get(i);
 				lowPriority.remove(i);
+				activeTasks.add(task);
 				//e.setTask(lowPriority.get(i));
 				return task;
 			}
@@ -147,6 +156,24 @@ public class Scheduler{
 		return null;
 
 	}//end: getNextTask()
+
+	public ArrayList<Task> getTaskArray(int priority){
+		if(priority == 0){
+			return lowPriority;
+		}
+		else if(priority == 1){
+			return midPriority;
+		}
+		else if(priority == 2){
+			return highPriority;
+		}
+		else if(priority == 3){
+			return activeTasks;
+		}
+		else{
+			return null;
+		}
+	}
 
 	public void findEmployeeTask(Employee e){
 

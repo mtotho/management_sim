@@ -30,15 +30,15 @@ public class Restaurant{
 		//Scheduler taskQueue = new Scheduler;
 
 		Employee e1 = new Employee();
-		Employee e2 = new Employee();
+		//Employee e2 = new Employee();
 
 		e1.setLocation(Locations.REGISTER);
-		e2.setLocation(Locations.MENSROOM);
+		//e2.setLocation(Locations.MENSROOM);
 
 		e1.setDuty(TaskType.CASHIER);
 	
 		employees.add(e1);
-		employees.add(e2);
+		//employees.add(e2);
 
 		scheduler = new Scheduler();
 
@@ -55,22 +55,24 @@ public class Restaurant{
 		timer.addMilliSecond(delta);
 
 
-		if(counter % 200==0){
+		if(counter % 500==0){
 			Customer cust = new Customer(this);
 			cust.setWayPoint(Locations.FOODLINE);
 			customers.add(cust);
 
-			employees.get(1).setWayPoint(Locations.RANDOM);
+			//employees.get(1).setWayPoint(Locations.RANDOM);
 		}	
 
 
 		if(foodline.hasNext()){
 			if(!foodline.isHelped()){
-				Customer cust = foodline.getNext();
+				if(foodline.atStart()){
+					Customer cust = foodline.getNext();
 
-				Task cashierTask = new Task(10000, TaskType.CASHIER);
-				customer2Task.put(cust, cashierTask);
-				scheduler.addTask(cashierTask);
+					Task cashierTask = new Task(4000, TaskType.CASHIER, Locations.REGISTER, "Customer Order");
+					customer2Task.put(cust, cashierTask);
+					scheduler.addTask(cashierTask);
+				}
 			}
 			else{
 				Customer cust = foodline.getNext();
@@ -102,9 +104,11 @@ public class Restaurant{
 
 			//Employee is working on a task
 			}else{
-
 				//consume time on task. This will automatically set employee to not busy if the task runs out
-				emp.doTask(delta);
+				Task tempTask = emp.doTask(delta);
+				if(tempTask!=null){
+					scheduler.removeTask(tempTask);
+				}
 
 			}//end if employee not busy
 		}//end for
@@ -121,6 +125,10 @@ public class Restaurant{
 
 	public Time getTimer(){
 		return timer;	
+	}
+
+	public Scheduler getScheduler(){
+		return scheduler;
 	}
 
 	public ArrayList<Customer> getCustomers(){

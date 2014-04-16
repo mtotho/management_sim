@@ -42,7 +42,6 @@ private Restaurant restaurant;
 
 		items = random.nextInt() % 10;
 
-
 		for (int i = 0; i < items + 1; i++){
 
 			nextItem = ( random.nextInt() % 10 );

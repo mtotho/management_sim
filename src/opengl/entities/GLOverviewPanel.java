@@ -56,7 +56,14 @@ public class GLOverviewPanel extends GLPanel{
 		    }
 
     	    if(buttons.get("btnInventory").isPressed()){
-		    	
+    	    	ArrayList<Employee> employees = new ArrayList<Employee>();
+		    	employees = restaurant.getEmployees();
+		    	System.out.println("EMPLOYEE 1 DATA");
+		    	Employee e1 = employees.get(0);
+		    	System.out.println(e1.getName());
+		    	System.out.println(e1.getLocation());
+		    	System.out.println(e1.getWaypoint());
+		    	System.out.println("Tile: " + e1.getTileX() + " " + e1.getTileY());
 		    
 		    	//game.activatePanel("EMPLOYEES");
 		    }

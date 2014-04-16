@@ -10,8 +10,11 @@ public class Employee{
 	private float mod;
 	private String labor;
 	private TaskType duty;
+
 	private Locations waypoint;
 	private Locations location;
+	private int tileX;
+	private int tileY;
 
 	private String[] nameList = {"Mike", "Gordon", "Patrick", "Joey", "Jesus", "Melvin", "Eugene", "Dylan", "Ash", "Gary", "Brock", "Red"};
 
@@ -26,8 +29,15 @@ public class Employee{
 	}//end: Constructor()
 
 
-	public void update(){
-		
+	public void update(int tileX, int tileY){
+		this.tileX = tileX;
+		this.tileY = tileY;
+		if(tileX == 6 && tileY == 16){
+			this.location = Locations.REGISTER;
+		}
+		else{
+			this.location = null;
+		}
 		
 		
 	}
@@ -37,37 +47,38 @@ public class Employee{
 		active_task = task;
 		busy=true;
 		//If employee is busy, check whether the new task is more important
-		
 		/*if(busy){
-
 			//if(task.getPreemption() && task.getPriority()>active_task.getPriority()){
 			active_task=task;
 			//}
-
 		}
 		else{
-
 			active_task=task;
-
 		}*/
 		
 	}//end: setTask()
 
-	public int doTask(int delta){
+	public Task doTask(int delta){
 		
 		//consume time on task if time is left
 		if(active_task.isTimeLeft()){
+				if(location==active_task.getWaypoint()){
+					active_task.consumeTime(delta);
 
-			active_task.consumeTime(delta);
-
-			//set busy to true/false depending on if there is time left
-			busy = active_task.isTimeLeft();
-
-		}else{
+					//set busy to true/false depending on if there is time left
+					//busy = active_task.isTimeLeft();
+				}
+				else{
+					this.waypoint = active_task.getWaypoint();
+				}
+				System.out.println(active_task.getTimeRemaining());
+		}
+		else{
 			busy = false;
+			return active_task;
 		}
 		
-		return 1;
+		return null;
 	}
 
 	public void setDuty(TaskType duty){
@@ -133,6 +144,14 @@ public class Employee{
 	}
 	public void setLocation(Locations location){
 		this.location=location;
+	}
+
+	public int getTileX(){
+		return this.tileX;
+	}
+
+	public int getTileY(){
+		return this.tileY;
 	}
 
 }
