@@ -12,7 +12,7 @@ import org.newdawn.slick.gui.*;
  
 import mftoth.restaurantsim.logic.*;
 
-public class StateMainMenu extends BasicGameState{
+public class StateNewGame extends BasicGameState{
 
 	//private GLButton btnNewGame; 
 	//private OGLGameContainer game;
@@ -28,15 +28,15 @@ public class StateMainMenu extends BasicGameState{
 		
 	//}
 
-	private int ID = 2;
+	private int ID = 4;
 	private StateBasedGame game;
 
-	private GLButton btnNewGame;
-	private GLButton btnAbout;
+	//private GLButton btnNewGame;
+	//private GLButton btnAbout;
 
 	private Restaurant restaurant;
 
-	public StateMainMenu(Restaurant restaurant){
+	public StateNewGame(Restaurant restaurant){
 		super();
 		this.restaurant=restaurant;
 	}
@@ -46,13 +46,7 @@ public class StateMainMenu extends BasicGameState{
             throws SlickException {
         this.game=game;
  	
- 		btnNewGame = new GLButton(gc, "New Game", 499, 80);
- 		btnNewGame.setLabelX(180);
- 		btnNewGame.setY(30);
-
- 		btnAbout = new GLButton(gc, "About", 499, 80);
- 		btnAbout.setLabelX(190);
- 		btnAbout.setY(150);
+ 	
 
  		//btnNewGame.mousePressed(){
  		
@@ -67,13 +61,11 @@ public class StateMainMenu extends BasicGameState{
        	g.setColor(Color.white);
 		g.fillRect(0,0, gc.getWidth(), gc.getHeight());
 
-	    g.drawString("Main Menu", 50, 100);
+		g.setColor(Color.black);
+	    g.drawString("New Game", 50, 100);
 
 	   // g.drawString("1. Press 1 to start game", 50, 130);
 
-	    btnNewGame.render(gc, g);
-	    btnAbout.render(gc, g);
- 
     }
  
     @Override
@@ -92,7 +84,7 @@ public class StateMainMenu extends BasicGameState{
     public void keyReleased(int key, char c) {
 	    switch(key) {
 	    case Input.KEY_1:
-	        game.enterState(3);
+	        game.enterState(2);
 	        break;
 	    case Input.KEY_2:
 	        // TODO: Implement later
@@ -106,13 +98,13 @@ public class StateMainMenu extends BasicGameState{
 	}
 
 	public void mousePressed(int button, int posx, int posy){
-		if(btnNewGame.isPressed()){
-			game.enterState(4);
+		/*if(btnNewGame.isPressed()){
+			game.enterState(3);
 		}
 
 		if(btnAbout.isPressed()){
 			System.out.println("btnAbout clicked");
-		}
+		}*/
 
 	}
 

@@ -32,6 +32,7 @@ public class OGLGameContainer extends StateBasedGame{
  		addState(new StateIntro(restaurant));
  	 	addState(new StateMainMenu(restaurant));
  	 	addState(new StateGame(restaurant));
+ 	 	addState(new StateNewGame(restaurant));
  
     }
  
