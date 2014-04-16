@@ -1,26 +1,31 @@
 package mftoth.restaurantsim.logic;
+
+import pjwelch.restaurantsim.database.*;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.List;
 
 public class Customer{
 
-private ArrayList<String> order;
+private ArrayList<Items_model> order;
 private int items;
 private int nextItem;
-private String  cb =  "cheeseburger";
-private String drink = "drink";
-private String fries = "fries";
 private boolean isRendered;
 private Locations waypoint;
 private Locations location;
 private Restaurant restaurant;
+public DBmapper db;
+private List<Items_model> menu;
+public Items_model model;
+
 
 	//Constructor()
-	public Customer(Restaurant restaurant){
+	public Customer(Restaurant restaurant, DBmapper db){
 		isRendered=false;
 		this.restaurant=restaurant;
 		location = Locations.ENTRANCE;
 		waypoint = Locations.FOODLINE;
+		this.db = db;
 	}//end: Constructor()
 
 	public void update(){
@@ -38,17 +43,21 @@ private Restaurant restaurant;
 
 	public void giveOrder(){
 
+
+
+		menu = db.select(new Items_model());
+		order = new ArrayList<Items_model>();
+
 		Random random = new Random();
 
-		items = random.nextInt() % 10;
+		items = (random.nextInt() % 6) + 1;
 
 
 		for (int i = 0; i < items + 1; i++){
 
-			nextItem = ( random.nextInt() % 10 );
+			nextItem = ((random.nextInt() % 6) + 1);
 			
-			
-
+			order.add(menu.get(i));
 
 		}
 

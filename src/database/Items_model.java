@@ -13,7 +13,7 @@ import org.apache.commons.dbutils.*;
 import java.sql.*;
 import java.util.*;
 
-class Items_model implements Model{
+public class Items_model implements Model{
 
 	private int id;
 	private String name;
@@ -27,6 +27,11 @@ class Items_model implements Model{
 		this.price = price;
 
 	}//end constructor
+
+	public Items_model(){
+
+		
+	}
 
 	//sets the name for the item entry
 	public void setName(String name){

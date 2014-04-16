@@ -97,14 +97,15 @@ public class DBmapper{
 
 	}
 
-	public List select(Class<?> clazz, Model param){
+	public List select(Model param){
 
-		String selectStatement = "SELECT * FROM " + clazz;
+		String selectStatement = "SELECT * FROM " + param.getTable();
 
 		try{
 
+			ResultSetHandler h = new BeanListHandler(param.getClass());
 			qRunner = new QueryRunner();
-			List beans = (List) qRunner.query(this.c, selectStatement, new BeanListHandler(gclazz));
+			List beans = (List) qRunner.query(this.c, selectStatement, h);
 
 			/*for (int i = 0; i < beans.size(); i++){
 
