@@ -4,18 +4,48 @@ import java.util.ArrayList;
 
 public class Foodline{
 
-	private final static int CAPACITY = 14;
-
+	//private final static int CAPACITY = 14;
+	private int capacity;
 	private ArrayList<GLCustomer> customers;
 	private ArrayList<GLTile> linetiles; 
 	private boolean beingHelped = false;
+	//private FigureDirection customer_direction;
 
-	public Foodline(){
+
+	public Foodline(int x, int y, FigureDirection direction, int capacity){
 
 		linetiles = new ArrayList<GLTile>();
 
-		linetiles.add(new GLTile(8,17));
-		linetiles.add(new GLTile(9,17));
+		this.capacity=capacity;
+
+		for(int i=0; i<capacity; i++){
+
+			switch(direction){
+				case RIGHT:
+					linetiles.add(new GLTile(x+i,y));
+					break;
+				case LEFT:
+					linetiles.add(new GLTile(x-i,y));
+					break;
+
+				case UP:
+					linetiles.add(new GLTile(x,y-i));
+					break;
+
+
+				case DOWN:
+					linetiles.add(new GLTile(x,y+i));
+					break;
+
+			}
+			
+
+
+		}
+
+/*
+		
+		linetiles.add(new GLTile(x+1,17));
 		linetiles.add(new GLTile(10,17));
 		linetiles.add(new GLTile(11,17));
 		linetiles.add(new GLTile(12,17));
@@ -29,16 +59,22 @@ public class Foodline{
 		linetiles.add(new GLTile(20,17));
 		linetiles.add(new GLTile(21,17));
 		linetiles.add(new GLTile(22,17));
-
+*/
 
 
 		customers = new ArrayList<GLCustomer>();
 	}
 
+	public void setLineTiles(ArrayList<GLTile> linetiles){
+		if(customers.size()==0){
+			this.linetiles=linetiles;
+		}
+	}
+
 	public boolean add(GLCustomer glcust){
 
 		//If  not at max capacity, add customer
-		if(customers.size()<CAPACITY){
+		if(customers.size()<capacity){
 			customers.add(glcust);
 
 			//get the tile for the spot in the line

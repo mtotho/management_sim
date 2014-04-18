@@ -15,6 +15,8 @@ public class Restaurant{
 	private Foodline foodline;
 	private HashMap<Customer, Task> customer2Task;
 	public DBmapper db;
+
+	public StateGame sg;
 	//Constructor()
 
 	public Restaurant(DBmapper db){
@@ -61,7 +63,7 @@ public class Restaurant{
 
 		if(counter % 500==0){
 			Customer cust = new Customer(this, db);
-
+ 
 			cust.setWayPoint(Locations.FOODLINE);
 			customers.add(cust);
 
@@ -142,6 +144,10 @@ public class Restaurant{
 
 	public void setFoodline(Foodline fl){
 		foodline=fl;
+	}
+
+	public void setStateGame(StateGame sg){
+		this.sg=sg;
 	}
 
 	public ArrayList<Employee> getEmployees(){

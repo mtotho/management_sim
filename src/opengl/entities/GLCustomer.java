@@ -58,13 +58,16 @@ public class GLCustomer extends GLMoveableEntity{
 		if(!isPathInProgress() && (destination!=location || destination==Locations.RANDOM)){
 
 			//If we arent going to the foodline, get the tile
-			if(destination!=Locations.FOODLINE){
+			if(destination!=Locations.FOODLINE && destination!=Locations.WAITLINE){
 				 GLTile destTile = loc_handler.getTile(destination);
 				 setPath(destTile);
 			
 			//Otherwise add them to the foodline object
-			}else{
+			}else if(destination==Locations.FOODLINE){
 				sg.foodline.add(this);
+				location=destination;
+			}else if(destination==Locations.WAITLINE){
+				sg.waitline.add(this);
 				location=destination;
 			}
 		}

@@ -57,6 +57,7 @@ public class StateGame extends BasicGameState{
   public Restaurant restaurant;
 
   public Foodline foodline;
+  public Foodline waitline;
 	//private boolean[][] blocking;
 
   public StateGame(Restaurant restaurant){
@@ -69,7 +70,10 @@ public class StateGame extends BasicGameState{
 
 
     timer = restaurant.getTimer();
-    foodline = new Foodline();
+    foodline = new Foodline(8, 17, FigureDirection.RIGHT, 14);
+    waitline = new Foodline(12, 12, FigureDirection.RIGHT, 12);
+
+    this.restaurant.setStateGame(this);
 
     this.restaurant.setFoodline(foodline);
   }
@@ -78,10 +82,19 @@ public class StateGame extends BasicGameState{
   public void init(GameContainer gc, StateBasedGame game)
             throws SlickException {
 
+
+
+
+
+
+
        	this.game=game;
         map = new OGLMap();
 
+
         blocking = map.getBlockedTiles();
+
+        /*
         for(int i=0;i<blocking.size();i++){
           //System.out.println("X: " + blocking.get(i).getX() + " Y: " + blocking.get(i).getY());
         }
@@ -89,7 +102,7 @@ public class StateGame extends BasicGameState{
         cleaning = map.getCleaningTiles();
         for(int i=0;i<cleaning.size();i++){
          // System.out.println("X: " + cleaning.get(i).getX() + " Y: " + cleaning.get(i).getY());
-        }
+        }*/
 
         gl_employees = new ArrayList<GLEmployee>();
         for(int i=0; i<employees.size(); i++){

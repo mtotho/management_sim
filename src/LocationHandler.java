@@ -17,6 +17,8 @@ public class LocationHandler{
 		tilemapper.put(Locations.WOMENSROOM, new GLTile(36,3));
 		tilemapper.put(Locations.REGISTER, new GLTile(6,16));
 		tilemapper.put(Locations.EXIT, new GLTile(0, 27));
+		tilemapper.put(Locations.PICKUPWINDOW, new GLTile(10, 12));
+		tilemapper.put(Locations.KITCHENWINDOW, new GLTile(10, 9));
 	}
 
 	public GLTile getTile(Locations location){
@@ -46,6 +48,14 @@ public class LocationHandler{
 
 			//WOMENSROOM: Set the entity path to the women's room
 			case WOMENSROOM:
+				tile = tilemapper.get(location);
+			break;
+
+			case PICKUPWINDOW:
+				tile = tilemapper.get(location);
+			break;
+
+			case KITCHENWINDOW:
 				tile = tilemapper.get(location);
 			break;
 
