@@ -63,6 +63,7 @@ public class GLEmployee extends GLMoveableEntity{
 		//If not pathing, not at destination 
 		if(!isPathInProgress() && (destination==location || destination==Locations.RANDOM)){
 
+			//System.out.println("Im here");
 			//If we arent going to the foodline, get the tile
 			if(destination!=Locations.FOODLINE){
 				 GLTile destTile = loc_handler.getTile(destination);

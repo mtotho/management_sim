@@ -95,7 +95,7 @@ public class GLMoveableEntity extends GLEntity implements Mover{
 			path_step++;
 		}
 
-		if(path_step>=path.getLength()){
+		if(path_step>=path.getLength() && (x==destx && y==desty)){
 
 			//The path has ended so we can set walking_path to false
 			walking_path=false;
@@ -114,13 +114,12 @@ public class GLMoveableEntity extends GLEntity implements Mover{
 		}
 
 		//if the current x position is with +/- 2 of the destination, just make x the destination
-		if(x-destx<2 && x-destx>=-2){
+		/*if(x-destx<2 && x-destx>=-2){
 			x=destx;
 		}
 		if(y-desty<2 && y-desty>=-2){
 			y=desty;
-		}
-
+		}*/
 		if(x!=destx || y!=desty){
 			isMoving=true;
 			//inbetween_nodes=true;

@@ -216,7 +216,7 @@ public class StateGame extends BasicGameState{
 
        // System.out.println(timer.getSeconds());
       //  e1.update(gc,game,delta);
-       
+      
 
 
         //Check for new logical customer and create gl customer
