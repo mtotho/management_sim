@@ -157,7 +157,7 @@ public class StateGame extends BasicGameState{
     public void render(GameContainer gc, StateBasedGame game, Graphics g)
             throws SlickException {
     	
-      map.render();
+      map.render(0);
 
   		g.setColor(Color.black);
 
@@ -200,6 +200,11 @@ public class StateGame extends BasicGameState{
           glemp.render(gc, g); 
        // }
       }
+      map.render(1);
+      map.render(2);
+      map.render(3);
+      map.render(4);
+      map.render(5);
     } 
 
 

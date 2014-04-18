@@ -144,8 +144,9 @@ public class OGLMap implements TileBasedMap{
     }
 
 
-    public void render(){
-		map.render(0,0);
+    public void render(int layer){
+		map.render(0,0, layer);
+
     }
 
 }
