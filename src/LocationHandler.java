@@ -17,6 +17,7 @@ public class LocationHandler{
 		tilemapper.put(Locations.WOMENSROOM, new GLTile(36,3));
 		tilemapper.put(Locations.REGISTER, new GLTile(6,16));
 		tilemapper.put(Locations.EXIT, new GLTile(0, 27));
+		tilemapper.put(Locations.KITCHEN, new GLTile(3, 6));
 	}
 
 	public GLTile getTile(Locations location){
@@ -55,6 +56,10 @@ public class LocationHandler{
 			break;
 
 			case REGISTER:
+				tile = tilemapper.get(location);
+			break;
+
+			case KITCHEN:
 				tile = tilemapper.get(location);
 			break;
 		}  

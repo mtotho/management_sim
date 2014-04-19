@@ -35,6 +35,9 @@ public class Employee{
 		if(tileX == 6 && tileY == 16){
 			this.location = Locations.REGISTER;
 		}
+		else if(tileX == 3 && tileY == 6){
+			this.location = Locations.KITCHEN;
+		}
 		else{
 			this.location = null;
 		}
@@ -71,7 +74,7 @@ public class Employee{
 				else{
 					this.waypoint = active_task.getWaypoint();
 				}
-				System.out.println(active_task.getTimeRemaining());
+				//System.out.println(active_task.getTimeRemaining());
 		}
 		else{
 			busy = false;
