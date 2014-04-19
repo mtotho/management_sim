@@ -27,7 +27,7 @@ public class DatabaseInit{
 		}
 
 		try{
-			c = DriverManager.getConnection("jdbc:sqlite:sim.db");
+			c = DriverManager.getConnection("jdbc:sqlite:res/sim.db");
 			
 			System.out.println("Opened Database successfully");
 

@@ -20,12 +20,14 @@ public Items_model model;
 
 
 	//Constructor()
-	public Customer(Restaurant restaurant, DBmapper db){
+	public Customer(Restaurant restaurant, List<Items_model> menu){
 		isRendered=false;
 		this.restaurant=restaurant;
 		location = Locations.ENTRANCE;
 		waypoint = Locations.FOODLINE;
 		this.db = db;
+		this.menu = menu;
+
 	}//end: Constructor()
 
 	public void update(){
@@ -44,8 +46,6 @@ public Items_model model;
 	public void giveOrder(){
 
 
-
-		menu = db.select(new Items_model());
 		order = new ArrayList<Items_model>();
 
 		Random random = new Random();

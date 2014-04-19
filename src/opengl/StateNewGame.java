@@ -9,8 +9,12 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.gui.*;
+import org.newdawn.slick.gui.AbstractComponent.*;
  
 import mftoth.restaurantsim.logic.*;
+
+import java.awt.Font;
+import org.newdawn.slick.UnicodeFont;
 
 public class StateNewGame extends BasicGameState{
 
@@ -30,6 +34,10 @@ public class StateNewGame extends BasicGameState{
 
 	private int ID = 4;
 	private StateBasedGame game;
+	private TrueTypeFont ttfont;
+	private Font font;
+	private int fontSize = 19;
+	private TextField text;
 
 	//private GLButton btnNewGame;
 	//private GLButton btnAbout;
@@ -39,14 +47,16 @@ public class StateNewGame extends BasicGameState{
 	public StateNewGame(Restaurant restaurant){
 		super();
 		this.restaurant=restaurant;
+		font = new Font("Verdana", Font.BOLD, fontSize);
+		ttfont = new TrueTypeFont(font, false);
+		
+
 	}
 
 	@Override
     public void init(GameContainer gc, StateBasedGame game)
             throws SlickException {
         this.game=game;
- 	
- 	
 
  		//btnNewGame.mousePressed(){
  		
@@ -62,7 +72,10 @@ public class StateNewGame extends BasicGameState{
 		g.fillRect(0,0, gc.getWidth(), gc.getHeight());
 
 		g.setColor(Color.black);
-	    g.drawString("New Game", 50, 100);
+	    g.drawString("Start a New Game of Management Simulator", 50, 25);
+	    g.drawString("Enter your name: ", 100, 100);
+	    text = new TextField(gc, ttfont, 250, 97, 200, 25);
+	    text.render(gc, g);
 
 	   // g.drawString("1. Press 1 to start game", 50, 130);
 
@@ -98,6 +111,7 @@ public class StateNewGame extends BasicGameState{
 	}
 
 	public void mousePressed(int button, int posx, int posy){
+
 		/*if(btnNewGame.isPressed()){
 			game.enterState(3);
 		}

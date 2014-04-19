@@ -4,6 +4,7 @@ import pjwelch.restaurantsim.database.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Restaurant{
 
@@ -15,8 +16,8 @@ public class Restaurant{
 	private Foodline foodline;
 	private HashMap<Customer, Task> customer2Task;
 	public DBmapper db;
-
 	public StateGame sg;
+	public List<Items_model> menu;
 	//Constructor()
 
 	public Restaurant(DBmapper db){
@@ -25,6 +26,8 @@ public class Restaurant{
 		timer = new Time();
 
 		this.db = db;
+
+		menu = db.select(new Items_model());
 
 		employees = new ArrayList<Employee>();
 		customers = new ArrayList<Customer>();
@@ -66,8 +69,8 @@ public class Restaurant{
 
 
 		if(counter % 500==0){
-			Customer cust = new Customer(this, db);
- 
+
+			Customer cust = new Customer(this, menu);
 			cust.setWayPoint(Locations.FOODLINE);
 			customers.add(cust);
 
@@ -143,7 +146,7 @@ public class Restaurant{
 	}//end: Update();
 
 	public void addCustomer(){
-		Customer cust = new Customer(this, db);
+		Customer cust = new Customer(this, menu);
 		cust.setWayPoint(Locations.RANDOM);
 		customers.add(cust);
 	}

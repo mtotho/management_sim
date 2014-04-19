@@ -13,6 +13,7 @@ import org.apache.commons.dbutils.handlers.*;
 import java.sql.*;
 import java.util.*;
 import java.lang.*;
+import java.io.*;
 
 public class DBmapper{
 
@@ -22,6 +23,10 @@ public class DBmapper{
 
 	public Connection c = null; 
 	public QueryRunner qRunner;
+	public Connection conn = null;
+	public Statement stmt;
+	public DatabaseMetaData meta;
+	public ResultSet rs;
 
 
 	public DBmapper(){
@@ -29,34 +34,84 @@ public class DBmapper{
 		this.dbpath = dbpath;
 		this.qRunner = new QueryRunner();
 
-		
-			
+		System.out.println("dbmapper constructor called");
+		//System.out.println(this.connect());
 
-		if (!this.connect()){
+		File f = new File("res/sim.db");
 
+		if (!f.exists()){
+
+			System.out.println("1");
 			new DatabaseInit();
+			System.out.println("2");
 			new DatabasePop();
 
 		}
 
+		connect();
 
 	}
+	/*public boolean DBcheck(){
 
-	public synchronized boolean connect() {
+		boolean exists = true;
+		ArrayList<String> list = new ArrayList<String>();
+		String databases = "";
 
 		try{
 			Class.forName(dbDriver);
-			this.close();
-			c = DriverManager.getConnection(dbpath);
-			return true;		
-		}
-		catch(Exception e){
+			conn = DriverManager.getConnection("jdbc:sqlite:src/database/sim.db");
+			//stmt = conn.createStatement();
+			meta = conn.getMetaData();
+			rs = meta.getCatalogs();
 
-			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			while(rs.next()){
+
+				databases = rs.getString("TABLE_CAT");
+				list.add(databases);
+				System.out.println(databases);
+
+			}
+			System.out.println("this is" + databases.toString() + " databases");
+			if(list.contains("sim.db")){
+				return exists;
+			}
+			else{
+
+				exists = false;			
+			}
+
+			rs.close();
+			conn.close();
+			stmt.close();	
+			return exists;		
+
+		}	
+		catch(Exception e){
+			System.out.println("DSFEFWGSGFSDF");
+			System.err.println(e.getClass().getName() + ": " + e.getMessage() + "DBCHECK");
 			return false;
 
 		}
 
+	}*/
+
+	public synchronized void connect(){
+
+		try{
+			
+			Class.forName(dbDriver);
+			//this.close();
+			System.out.println(DriverManager.getConnection("jdbc:sqlite:res/sim.db"));
+			c = DriverManager.getConnection("jdbc:sqlite:res/sim.db");
+			//return true;		
+		}
+		catch(Exception e){
+			
+			System.err.println(e.getClass().getName() + ": " + e.getMessage() + "CONNECT");
+			//return false;
+
+		}
+		
 	}
 
 	public synchronized void close() {
@@ -70,8 +125,8 @@ public class DBmapper{
 
 		}
 		catch(Exception e){
-
-			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			System.out.println("CLOSE!!!");
+			System.err.println(e.getClass().getName() + ": " + e.getMessage() + "CLOSE");
 
 		}
 
@@ -89,8 +144,8 @@ public class DBmapper{
 
 		}
 		catch(Exception e){
-
-			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			System.out.println("INSERT");
+			System.err.println(e.getClass().getName() + ": " + e.getMessage() + "INSERT");
 			return false;
 
 		}
@@ -119,8 +174,8 @@ public class DBmapper{
 
 		}
 		catch(Exception e){
-
-			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			System.out.println("SELECT");
+			System.err.println(e.getClass().getName() + ": " + e.getMessage() + "SELECT");
 			return null;
 
 		}
@@ -143,9 +198,9 @@ public class DBmapper{
 
 		}
 		catch(Exception e){
-
+			System.out.println("UPDATE");
 			success = false;
-			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			System.err.println(e.getClass().getName() + ": " + e.getMessage() + "UPDATE");
 
 		}
 
@@ -166,9 +221,9 @@ public class DBmapper{
 
 		}
 		catch(Exception e){
-
+			System.out.println("UPDATE[]");
 			success = false;
-			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			System.err.println(e.getClass().getName() + ": " + e.getMessage() + "UPDATE[]");
 
 		}
 
