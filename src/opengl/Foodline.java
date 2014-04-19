@@ -138,16 +138,27 @@ public class Foodline{
 			customers.remove(0);
 			beingHelped = false;
 
-			//Move the rest of the customers forward
-			for(int i=0; i<customers.size(); i++){
-				GLCustomer glcust = customers.get(i);
-				GLTile linespot = linetiles.get(i);
-				//System.out.println("linespot x: " + linespot.getX() + " linespot y: " + linespot.getY());
-				glcust.setPath(linespot.getX(), linespot.getY());
-			}
+			advanceLine();
 
 		}
 	}
 
+	public void advanceLine(){
+		//Move the rest of the customers forward
+		for(int i=0; i<customers.size(); i++){
+			GLCustomer glcust = customers.get(i);
+			GLTile linespot = linetiles.get(i);
+			//System.out.println("linespot x: " + linespot.getX() + " linespot y: " + linespot.getY());
+			glcust.setPath(linespot.getX(), linespot.getY());
+		}
+	}
+
+	public void removeCustomer(GLCustomer glcust){
+		if(customers.contains(glcust)){
+			customers.remove(glcust);
+			beingHelped=false;
+			advanceLine();
+		}
+	}
 
 }

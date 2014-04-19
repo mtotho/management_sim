@@ -1,5 +1,6 @@
 package mftoth.restaurantsim.logic;
 
+import mftoth.restaurantsim.ogl.*;
 import pjwelch.restaurantsim.database.*;
 import java.util.ArrayList;
 import java.util.Random;
@@ -17,6 +18,7 @@ private Restaurant restaurant;
 public DBmapper db;
 private List<Items_model> menu;
 public Items_model model;
+private GLCustomer glcust;
 
 
 	//Constructor()
@@ -37,6 +39,14 @@ public Items_model model;
 		//}
 	}
 
+	public void setGLCustomer(GLCustomer glcust){
+		this.glcust=glcust;
+	}
+
+	public GLCustomer getGLCustomer(){
+		return glcust;
+	}
+	
 	public void getTraits(){
 
 

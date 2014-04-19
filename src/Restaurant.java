@@ -68,7 +68,7 @@ public class Restaurant{
 		timer.addMilliSecond(delta);
 
 
-		if(counter % 500==0){
+		if(counter % 250==0){
 
 			Customer cust = new Customer(this, menu);
 			cust.setWayPoint(Locations.FOODLINE);
@@ -93,7 +93,6 @@ public class Restaurant{
 
 				if(!customer2Task.get(cust).isTimeLeft()){
 					foodline.next();
-					cust.setWayPoint(Locations.EXIT);
 				}
 			}
 		}
@@ -120,16 +119,22 @@ public class Restaurant{
 			}else{
 				//consume time on task. This will automatically set employee to not busy if the task runs out
 				Task tempTask = emp.doTask(delta);
-				if(tempTask!=null  && tempTask.getTimeRemaining()<=0){
+				if(tempTask!=null  && !tempTask.isTimeLeft()){
 					for( Customer cust : customer2Task.keySet()){
 						if(customer2Task.get(cust)==tempTask){
 							if(tempTask.getDuty()==TaskType.CASHIER){
 								Task kitchenTask = new Task(5000, TaskType.KITCHEN, Locations.KITCHEN, "Making food");
+								
+								//customer2Task.remove(cust);
 								customer2Task.put(cust, kitchenTask);
+								cust.setWayPoint(Locations.WAITLINE);
 								scheduler.addTask(kitchenTask);
 							}
-							else{
+							else if(tempTask.getDuty()==TaskType.KITCHEN){
+								sg.waitline.removeCustomer(cust.getGLCustomer());
 								customer2Task.remove(cust);
+								cust.setWayPoint(Locations.EXIT);
+								
 							}
 						}
 						//System.out.println(cust.getLocation());
