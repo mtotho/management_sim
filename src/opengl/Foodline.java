@@ -9,11 +9,14 @@ public class Foodline{
 	private ArrayList<GLCustomer> customers;
 	private ArrayList<GLTile> linetiles; 
 	private boolean beingHelped = false;
+	private int startx;
+	private int starty;
 	//private FigureDirection customer_direction;
 
 
 	public Foodline(int x, int y, FigureDirection direction, int capacity){
-
+		startx=x;
+		starty=y;
 		linetiles = new ArrayList<GLTile>();
 
 		this.capacity=capacity;
@@ -124,7 +127,7 @@ public class Foodline{
 			int tileX = customers.get(0).getX()/16;
 			int tileY = customers.get(0).getY()/16;
 
-			if(tileX == 8 && tileY == 17){
+			if(tileX == startx && tileY == starty){
 				return true;
 			}
 		}
@@ -138,16 +141,27 @@ public class Foodline{
 			customers.remove(0);
 			beingHelped = false;
 
-			//Move the rest of the customers forward
-			for(int i=0; i<customers.size(); i++){
-				GLCustomer glcust = customers.get(i);
-				GLTile linespot = linetiles.get(i);
-				//System.out.println("linespot x: " + linespot.getX() + " linespot y: " + linespot.getY());
-				glcust.setPath(linespot.getX(), linespot.getY());
-			}
+			advanceLine();
 
 		}
 	}
 
+	public void advanceLine(){
+		//Move the rest of the customers forward
+		for(int i=0; i<customers.size(); i++){
+			GLCustomer glcust = customers.get(i);
+			GLTile linespot = linetiles.get(i);
+			//System.out.println("linespot x: " + linespot.getX() + " linespot y: " + linespot.getY());
+			glcust.setPath(linespot.getX(), linespot.getY());
+		}
+	}
+
+	public void removeCustomer(GLCustomer glcust){
+		if(customers.contains(glcust)){
+			customers.remove(glcust);
+			beingHelped=false;
+			advanceLine();
+		}
+	}
 
 }

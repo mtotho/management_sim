@@ -1,5 +1,6 @@
 package mftoth.restaurantsim.logic;
 
+import mftoth.restaurantsim.ogl.*;
 import pjwelch.restaurantsim.database.*;
 import java.util.ArrayList;
 import java.util.Random;
@@ -17,6 +18,11 @@ private Restaurant restaurant;
 public DBmapper db;
 private List<Items_model> menu;
 public Items_model model;
+private GLCustomer glcust;
+
+private boolean windowReached;
+private boolean exiting;
+private int last_ms;
 
 
 	//Constructor()
@@ -27,16 +33,37 @@ public Items_model model;
 		waypoint = Locations.FOODLINE;
 		this.db = db;
 		this.menu = menu;
+		windowReached=false;
+		exiting=false;
 
 	}//end: Constructor()
 
 	public void update(){
-		//if(location==waypoint){
-		//	System.out.println("Have arrived");
-		//	waypoint=Locations.MENSROOM;
-		//}
+
+		if(!exiting){
+
+
+			if(location==Locations.PICKUPWINDOW && !windowReached && !exiting){
+				windowReached=true;
+				last_ms=restaurant.timer.getMilliSeconds();
+			}
+
+			if(windowReached && (restaurant.timer.getMilliSeconds()-last_ms>500)){
+				waypoint=Locations.EXIT;
+				exiting=true;
+			}	
+
+		}
 	}
 
+	public void setGLCustomer(GLCustomer glcust){
+		this.glcust=glcust;
+	}
+
+	public GLCustomer getGLCustomer(){
+		return glcust;
+	}
+	
 	public void getTraits(){
 
 

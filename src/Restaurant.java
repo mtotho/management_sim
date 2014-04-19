@@ -15,6 +15,7 @@ public class Restaurant{
 	private int counter;
 	private Foodline foodline;
 	private HashMap<Customer, Task> customer2Task;
+	private HashMap<Task, Customer> task2customer;
 	public DBmapper db;
 	public StateGame sg;
 	public List<Items_model> menu;
@@ -38,6 +39,7 @@ public class Restaurant{
 		customers = new ArrayList<Customer>();
 		customer2Task = new HashMap<Customer, Task>();
 
+		task2customer = new HashMap<Task, Customer>();
 		//Customer c1 = new Customer();
 		//c1.setWayPoint(Locations.FOODLINE);
 		//customers.add(c1);
@@ -78,7 +80,8 @@ public class Restaurant{
 		//timer.addMilliSecond(delta);
 
 
-		if(counter % 166==0){
+
+		if(counter % 40==0){
 
 			Customer cust = new Customer(this, menu);
 			cust.setWayPoint(Locations.FOODLINE);
@@ -93,9 +96,12 @@ public class Restaurant{
 				if(foodline.atStart()){
 					Customer cust = foodline.getNext();
 
-					Task cashierTask = new Task(4000, TaskType.CASHIER, Locations.REGISTER, "Taking order");
+					Task cashierTask = new Task(2500, TaskType.CASHIER, Locations.REGISTER, "Taking order");
 					customer2Task.put(cust, cashierTask);
+					task2customer.put(cashierTask, cust);
 					scheduler.addTask(cashierTask);
+				}else{
+					foodline.advanceLine();
 				}
 			}
 			else{
@@ -103,7 +109,6 @@ public class Restaurant{
 
 				if(!customer2Task.get(cust).isTimeLeft()){
 					foodline.next();
-					cust.setWayPoint(Locations.EXIT);
 				}
 			}
 		}
@@ -130,20 +135,36 @@ public class Restaurant{
 			}else{
 				//consume time on task. This will automatically set employee to not busy if the task runs out
 				Task tempTask = emp.doTask(delta);
-				if(tempTask!=null  && tempTask.getTimeRemaining()<=0){
-					for( Customer cust : customer2Task.keySet()){
-						if(customer2Task.get(cust)==tempTask){
-							if(tempTask.getDuty()==TaskType.CASHIER){
-								Task kitchenTask = new Task(5000, TaskType.KITCHEN, Locations.KITCHEN, "Making food");
-								customer2Task.put(cust, kitchenTask);
-								scheduler.addTask(kitchenTask);
-							}
-							else{
-								customer2Task.remove(cust);
-							}
+				if(tempTask!=null  && !tempTask.isTimeLeft()){
+						
+					if(task2customer.containsKey(tempTask)){
+						Customer cust = task2customer.get(tempTask);
+
+						if(tempTask.getDuty()==TaskType.CASHIER){
+							Task kitchenTask = new Task(6000, TaskType.KITCHEN, Locations.KITCHEN, "Making food");
+							
+							//customer2Task.remove(cust);
+							customer2Task.put(cust, kitchenTask);
+							task2customer.put(kitchenTask, cust);
+
+							cust.setWayPoint(Locations.WAITLINE);
+							scheduler.addTask(kitchenTask);
 						}
-						//System.out.println(cust.getLocation());
+						else if(tempTask.getDuty()==TaskType.KITCHEN){
+							sg.waitline.removeCustomer(cust.getGLCustomer());
+							customer2Task.remove(cust);
+							task2customer.remove(tempTask);
+							cust.setWayPoint(Locations.PICKUPWINDOW);
+								
+						}
 					}
+
+				//	for( Customer cust : customer2Task.keySet()){
+				//		if(customer2Task.get(cust)==tempTask){
+							
+						//}
+						//System.out.println(cust.getLocation());
+					//}
 					scheduler.removeTask(tempTask);
 					//System.out.println("-------------------");
 				}

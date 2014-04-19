@@ -22,6 +22,7 @@ public class GLCustomer extends GLMoveableEntity{
 		this.logical_customer=logical_customer;
 		this.location=logical_customer.getLocation();
 
+		this.logical_customer.setGLCustomer(this);
 
 		GLTile tileLocation =  loc_handler.getTile(this.location);
 
