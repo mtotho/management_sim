@@ -17,23 +17,11 @@ public class DatabasePop{
 		Connection c; //connection
 		Statement stmt; // sql statement
 
-		try{
-
-			Class.forName("org.sqlite.JDBC"); //returns the jdbc classes
-
-		}
-		catch(Exception e){
-
-			System.err.println(e.getClass().getName() + ": " + e.getMessage());
-
-		}
-
-
 
 		try{//populates the tables with the included data
 
-			
-			c = DriverManager.getConnection("jdbc:sqlite:sim.db");
+			Class.forName("org.sqlite.JDBC"); //returns the jdbc classes
+			c = DriverManager.getConnection("jdbc:sqlite:src/database/sim.db");
 	
 			System.out.println("opened database successfully");
 
@@ -44,18 +32,13 @@ public class DatabasePop{
 
 			stmt.executeUpdate(sql);
 
-			sql = "INSERT INTO PLAYER (ID, NAME) " +
-	  			  "VALUES (2, 'player2');";
-
-			stmt.executeUpdate(sql);
-
 			sql = "INSERT INTO RESTAURANT (ID, NAME, PLAYER_ID) " +
 				  "VALUES (0, 'TEST', 1);";
 
 			stmt.executeUpdate(sql);
 
 			sql = "INSERT INTO ITEMS (ID, NAME, PRICE) " +
-				  "VALUES (0, 'TESTITEM', 20.00, 1);";
+				  "VALUES (0, 'TESTITEM', 20.00);";
 
 			stmt.executeUpdate(sql);
 
@@ -63,7 +46,6 @@ public class DatabasePop{
 				  "VALUES (0, 0, 100);";
 
 			stmt.executeUpdate(sql);
-
 
 			sql = "INSERT INTO ITEMS (ID, NAME, PRICE) " +
 				  "VALUES (1, 'Hamburger', 1.50);";
@@ -102,7 +84,7 @@ public class DatabasePop{
 		}//end try
 
 		catch(Exception e){
-
+			System.out.println("Here");
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
 			System.exit(0);
 
