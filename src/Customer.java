@@ -23,6 +23,7 @@ private GLCustomer glcust;
 private boolean windowReached;
 private boolean exiting;
 private int last_ms;
+public FigureDirection direction;
 
 
 	//Constructor()
@@ -31,6 +32,7 @@ private int last_ms;
 		this.restaurant=restaurant;
 		location = Locations.ENTRANCE;
 		waypoint = Locations.FOODLINE;
+		direction=FigureDirection.RIGHT;
 		this.db = db;
 		this.menu = menu;
 		windowReached=false;
@@ -45,6 +47,7 @@ private int last_ms;
 
 			if(location==Locations.PICKUPWINDOW && !windowReached && !exiting){
 				windowReached=true;
+				direction=FigureDirection.UP;
 				last_ms=restaurant.timer.getMilliSeconds();
 			}
 

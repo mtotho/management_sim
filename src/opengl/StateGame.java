@@ -58,7 +58,7 @@ public class StateGame extends BasicGameState{
 
 
     timer = restaurant.getTimer();
-    foodline = new Foodline(8, 17, FigureDirection.RIGHT, 14);
+    foodline = new Foodline(8, 17, FigureDirection.RIGHT, 20);
     waitline = new Foodline(12, 12, FigureDirection.RIGHT, 12);
 
 
@@ -214,20 +214,14 @@ public class StateGame extends BasicGameState{
           gl_employees.get(i).update(gc, game, delta);
         }
 
-        //System.out.println("customer amount: " + customers.size());
       	Input input = gc.getInput();
       	
         int mousex = input.getMouseX();
         int mousey = input.getMouseY();
 
-        //System.out.println("Map coord: x- " + map.getTileX(mousex) + " | y- " +map.getTileY(mousey));
+        //Move the employee to where we left click
         if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)){
-         
-         // GLCustomer glcust = cust_map.get(customers.get(0));
-         // System.out.println(glcust);
-
-         //if(!glcust.isPathing()){
-           
+        
 
             int destX = map.getTileX(mousex);
             int destY = map.getTileY(mousey);
@@ -235,31 +229,26 @@ public class StateGame extends BasicGameState{
             if(destX<map.getWidthInTiles() && destY<map.getHeightInTiles() && !map.blocked(null, destX, destY) && mousex<=640){
               gl_employees.get(0).setPath(destX, destY);
             }
-
-
-            
-          //}
-
           
         }
-      //	if(!blocked(c1.getX(), c1.getY())){
-	  		 if(input.isKeyDown(Input.KEY_UP)){
+  
+	  		if(input.isKeyDown(Input.KEY_UP)){
 	  		
-	      	}
-	      	if(input.isKeyDown(Input.KEY_RIGHT)){
-	  
-	      	}
-	  		  if(input.isKeyDown(Input.KEY_DOWN)){
+      	}
+      	if(input.isKeyDown(Input.KEY_RIGHT)){
+  
+      	}
+  		  if(input.isKeyDown(Input.KEY_DOWN)){
 
-	      	}
-	      	if(input.isKeyDown(Input.KEY_LEFT)){
-	      
-	      	}  
+      	}
+      	if(input.isKeyDown(Input.KEY_LEFT)){
+      
+      	}  
       
            
-        	if(input.isKeyDown(Input.KEY_Q)){
-        		
-        	}  
+      	if(input.isKeyDown(Input.KEY_Q)){
+      		
+      	}  
 
           counter++;   
  

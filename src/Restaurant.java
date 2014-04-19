@@ -81,11 +81,13 @@ public class Restaurant{
 
 
 
-		if(counter % 40==0){
+		if(counter % 20==0){
 
-			Customer cust = new Customer(this, menu);
-			cust.setWayPoint(Locations.FOODLINE);
-			customers.add(cust);
+			if(!foodline.isFull()){
+				Customer cust = new Customer(this, menu);
+				cust.setWayPoint(Locations.FOODLINE);
+				customers.add(cust);
+			}
 
 			//employees.get(1).setWayPoint(Locations.RANDOM);
 		}	

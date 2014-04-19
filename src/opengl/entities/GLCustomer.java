@@ -82,7 +82,7 @@ public class GLCustomer extends GLMoveableEntity{
 		
 		//leave this at the end of this call. Call some parent functionality
 		super.update(gc,game,delta);
-
+		logical_customer.direction=direction;
 		logical_customer.update();
 	}
 
@@ -94,6 +94,8 @@ public class GLCustomer extends GLMoveableEntity{
 
 		//set logic location according to the graphical location value
 		logical_customer.setLocation(this.location);
+
+		direction=logical_customer.direction;
 	}
 
 

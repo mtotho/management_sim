@@ -74,6 +74,14 @@ public class Foodline{
 		}
 	}
 
+	public boolean isFull(){
+		if(customers.size()==capacity){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
 	public boolean add(GLCustomer glcust){
 
 		//If  not at max capacity, add customer
