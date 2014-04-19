@@ -23,13 +23,6 @@ public class StateGame extends BasicGameState{
 	private int ID = 3;
 	private StateBasedGame game;
 
-  //private GLPanel buttonPanel;
-  private int buttonMenu;
-  private GLButton btn_spawnCust;
-  private GLButton btn_randCust;
-  private GLButton btn_next1;
-  private GLButton btn_back2;
-
   private Font font;
   private TrueTypeFont ttf;
 
@@ -40,17 +33,13 @@ public class StateGame extends BasicGameState{
   private ArrayList<Customer> customers;
   private ArrayList<Employee> employees;
   private Time timer;
+  private int counter;
 
-  private GLEmployee e1;
-
-  private ArrayList<GLTile> blocking = new ArrayList<GLTile>();
-  private ArrayList<GLTile> cleaning = new ArrayList<GLTile>();
+  private GLEmployee e1;  
 
   private HashMap<String, GLPanel> panels;
   private GLPanel active_panel;
 
-	//private Path customerPath;
-	//private TiledMap map;
   private OGLMap map;
   private AStarPathFinder astar;
 
@@ -58,13 +47,12 @@ public class StateGame extends BasicGameState{
 
   public Foodline foodline;
   public Foodline waitline;
-	//private boolean[][] blocking;
 
   public StateGame(Restaurant restaurant){
     super();
     this.restaurant=restaurant;
 
-    //
+    //Get the employee/customer entities from the logical restaurant.
     customers = restaurant.getCustomers();
     employees = restaurant.getEmployees();
 
@@ -72,6 +60,7 @@ public class StateGame extends BasicGameState{
     timer = restaurant.getTimer();
     foodline = new Foodline(8, 17, FigureDirection.RIGHT, 14);
     waitline = new Foodline(12, 12, FigureDirection.RIGHT, 12);
+
 
     this.restaurant.setStateGame(this);
 
@@ -81,46 +70,23 @@ public class StateGame extends BasicGameState{
     @Override 
   public void init(GameContainer gc, StateBasedGame game)
             throws SlickException {
-
-
-
-
-
-
-
        	this.game=game;
+
+        //Initiate the Game Map
         map = new OGLMap();
 
 
-        blocking = map.getBlockedTiles();
-
-        /*
-        for(int i=0;i<blocking.size();i++){
-          //System.out.println("X: " + blocking.get(i).getX() + " Y: " + blocking.get(i).getY());
-        }
-
-        cleaning = map.getCleaningTiles();
-        for(int i=0;i<cleaning.size();i++){
-         // System.out.println("X: " + cleaning.get(i).getX() + " Y: " + cleaning.get(i).getY());
-        }*/
-
+        //Initiate a GL employee for each logical employee, store in ArrayList
         gl_employees = new ArrayList<GLEmployee>();
         for(int i=0; i<employees.size(); i++){
           gl_employees.add(new GLEmployee(gc, map, this, employees.get(i)));
         }
 
-
-        //GLCustomer c1 = new GLCustomer(gc,map); 
-
+        //Initialize hashmap between the logical customer and graphical customer
         cust_map = new HashMap<Customer, GLCustomer>();
-      	//c1 = new GLCustomer(gc, map);
-        //c1.setMap(map);
-      	//c1.setLocation(map.getAbsX(3), map.getAbsY(1));
       	gl_customers= new ArrayList<GLCustomer>();
 
-        //create test employee
-        //e1 = new GLEmployee(gc, map, this);
-
+        //Setup panels
         panels = new HashMap<String, GLPanel>();
 
         GLOverviewPanel overviewPanel = new GLOverviewPanel(restaurant, gc, this);
@@ -132,8 +98,11 @@ public class StateGame extends BasicGameState{
 
         //set this panel to active
         activatePanel("OVERVIEW");
-      
+        
+
         astar = new AStarPathFinder(map, 400, false);
+
+        counter=0;
        
     }
 
@@ -157,12 +126,16 @@ public class StateGame extends BasicGameState{
       }
     }
 
+    //removeCustomer(): remove the specified customer from the game. 
     public void removeCustomer(GLCustomer glcust, Customer logic_cust){
 
-
-     // Customer logic_cust = cust_map.get(cust);
+      //Remove the map between logical customer and graphical
       cust_map.remove(logic_cust);
+
+      //Remove the logical customer from the customers arraylist
       customers.remove(logic_cust);
+
+      //remove the graphical customer from the gl_customers arraylist
       gl_customers.remove(glcust);
     }
  
@@ -170,6 +143,7 @@ public class StateGame extends BasicGameState{
     public void render(GameContainer gc, StateBasedGame game, Graphics g)
             throws SlickException {
     	
+      //Render the floor layer of the map
       map.render(0);
 
   		g.setColor(Color.black);
@@ -177,42 +151,21 @@ public class StateGame extends BasicGameState{
       if(active_panel!=null)
         active_panel.render(gc, g);
 
-      //1.render(gc,g);
-      /*if(buttonMenu==1){
-        btn_spawnCust.render(gc, g);
-        btn_randCust.render(gc, g);
-        btn_next1.render(gc, g);
-      }
-      else{
-        btn_back2.render(gc, g);
-      }*/
-
-      //c1.render(gc,g);
-
-	   // g.drawString("Game State", 50, 10);
-
-	   //	c1.setLocation(c1.getX(),c1.getY());
-	   // c1.render(gc, g);
-
-      //font = new Font("Verdana", 20);
-      //TrueTypeFont ttf = new TrueTypeFont(font, true);
-      //g.setFont(ttf);
-      //g.drawString("Number of customers: "+ Integer.toString(customers.size()), 700, 100);
-      //Render the customers
-
-
+      //Render all the customers that exist
     	for(int i=0; i<customers.size(); i++){
         if(cust_map.containsKey(customers.get(i))){
           GLCustomer glcust = cust_map.get(customers.get(i));
           glcust.render(gc, g); 
         }
-    	}
+    	}//end: foreach customer
+
+      //Render all the employees that exist
       for(int j=0; j<gl_employees.size(); j++){
-        //if(cust_map.containsKey(customers.get(i))){
           GLEmployee glemp = gl_employees.get(j);
           glemp.render(gc, g); 
-       // }
       }
+
+      //Render all the map layers that should appear "in front of" the employees and customers
       map.render(1);
       map.render(2);
       map.render(3);
@@ -225,15 +178,12 @@ public class StateGame extends BasicGameState{
     @Override
     public void update(GameContainer gc, StateBasedGame game, int delta)
             throws SlickException {
-        //pass time to restaurant
-        restaurant.update(delta);
        
-      
-
-
-
-       // System.out.println(timer.getSeconds());
-      //  e1.update(gc,game,delta);
+        //Call  the restaurant update 
+        restaurant.updateTime(delta);
+        if(counter % 3 ==0 )
+          restaurant.update();
+       
       
 
 
@@ -309,7 +259,9 @@ public class StateGame extends BasicGameState{
            
         	if(input.isKeyDown(Input.KEY_Q)){
         		
-        	}     
+        	}  
+
+          counter++;   
  
     }
  

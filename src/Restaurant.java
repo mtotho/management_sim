@@ -18,10 +18,15 @@ public class Restaurant{
 	public DBmapper db;
 	public StateGame sg;
 	public List<Items_model> menu;
+
+	public int last_ms;
+
+	//The most previous delta
+	//public int delta;
 	//Constructor()
 
 	public Restaurant(DBmapper db){
-
+		last_ms=0;
 		//initialize timer object which will keep track of and organize time
 		timer = new Time();
 
@@ -62,13 +67,18 @@ public class Restaurant{
 
 	}//end: loop()
 
-	public void update(int delta){
-
-		//add ms to timer object
+	public void updateTime(int delta){
 		timer.addMilliSecond(delta);
+	}
+
+	public void update(){
+
+		int delta = timer.getMilliSeconds()-last_ms;
+		//add ms to timer object
+		//timer.addMilliSecond(delta);
 
 
-		if(counter % 500==0){
+		if(counter % 166==0){
 
 			Customer cust = new Customer(this, menu);
 			cust.setWayPoint(Locations.FOODLINE);
@@ -142,6 +152,7 @@ public class Restaurant{
 		}//end for
 		
 		counter++;
+		last_ms=timer.getMilliSeconds();
 		
 	}//end: Update();
 
