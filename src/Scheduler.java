@@ -122,7 +122,7 @@ public class Scheduler{
 	public Task getNextTask(TaskType type){
 
 		for(int i = 0; i < highPriority.size(); i++){
-			if(type == highPriority.get(i).getType()){
+			if(type == highPriority.get(i).getDuty()){
 				Task task = highPriority.get(i);
 				activeTasks.add(task);
 				highPriority.remove(i); //remove this task from queue
@@ -132,7 +132,7 @@ public class Scheduler{
 		}
 
 		for(int i = 0; i < midPriority.size(); i++){
-			if(type == midPriority.get(i).getType()){
+			if(type == midPriority.get(i).getDuty()){
 				Task task = midPriority.get(i);
 				midPriority.remove(i);
 				activeTasks.add(task);
@@ -143,7 +143,7 @@ public class Scheduler{
 		}
 
 		for(int i = 0; i < lowPriority.size(); i++){
-			if(type == lowPriority.get(i).getType()){
+			if(type == lowPriority.get(i).getDuty()){
 				Task task = lowPriority.get(i);
 				lowPriority.remove(i);
 				activeTasks.add(task);

@@ -75,7 +75,7 @@ public class GLButton extends GLEntity{
 		sprite_sheet = new SpriteSheet(image, 499, 80);
 	}
 
-	private void setUpFonts(int fontSize){
+	public void setUpFonts(int fontSize){
 		font = new Font("Verdana", Font.BOLD, fontSize);
 		ttfFont = new TrueTypeFont(font,false);
 

@@ -36,14 +36,18 @@ public class Restaurant{
 		//Scheduler taskQueue = new Scheduler;
 
 		Employee e1 = new Employee();
+		Employee e2 = new Employee();
 		//Employee e2 = new Employee();
 
 		e1.setLocation(Locations.REGISTER);
+		e2.setLocation(Locations.KITCHEN);
 		//e2.setLocation(Locations.MENSROOM);
 
 		e1.setDuty(TaskType.CASHIER);
+		e2.setDuty(TaskType.KITCHEN);
 	
 		employees.add(e1);
+		employees.add(e2);
 		//employees.add(e2);
 
 		scheduler = new Scheduler();
@@ -76,7 +80,7 @@ public class Restaurant{
 				if(foodline.atStart()){
 					Customer cust = foodline.getNext();
 
-					Task cashierTask = new Task(4000, TaskType.CASHIER, Locations.REGISTER, "Customer Order");
+					Task cashierTask = new Task(4000, TaskType.CASHIER, Locations.REGISTER, "Taking order");
 					customer2Task.put(cust, cashierTask);
 					scheduler.addTask(cashierTask);
 				}
@@ -113,8 +117,22 @@ public class Restaurant{
 			}else{
 				//consume time on task. This will automatically set employee to not busy if the task runs out
 				Task tempTask = emp.doTask(delta);
-				if(tempTask!=null){
+				if(tempTask!=null  && tempTask.getTimeRemaining()<=0){
+					for( Customer cust : customer2Task.keySet()){
+						if(customer2Task.get(cust)==tempTask){
+							if(tempTask.getDuty()==TaskType.CASHIER){
+								Task kitchenTask = new Task(5000, TaskType.KITCHEN, Locations.KITCHEN, "Making food");
+								customer2Task.put(cust, kitchenTask);
+								scheduler.addTask(kitchenTask);
+							}
+							else{
+								customer2Task.remove(cust);
+							}
+						}
+						//System.out.println(cust.getLocation());
+					}
 					scheduler.removeTask(tempTask);
+					//System.out.println("-------------------");
 				}
 
 			}//end if employee not busy

@@ -78,15 +78,18 @@ public class GLTaskPanel extends GLPanel{
 		
 		    for(int i=0; i<tasks.size();i++){
 		    	String taskName = tasks.get(i).getName();
+		    	Integer timeRemaining = tasks.get(i).getTimeRemaining();
 		    	if(!buttons.containsKey("btn"+taskName)){
 		    		addButton(gameCon, "btn"+taskName, taskName, 300, 80);
 		  		}
 		  		else{
-		  			System.out.println("Task " + (i+1) + ": " + buttons.get("btn"+taskName).getName());
+		  			//.out.println("Task " + (i+1) + ": " + buttons.get("btn"+taskName).getName());
 		  		}
 		  		if(!renderedButtons.contains(tasks.get(i).getName())){
 			  		GLButton tempButton = buttons.get("btn" + taskName);
-			    	tempButton.setLabelX(60);
+			  		//tempButton.changeName(tempButton.getName() + " Time: " + timeRemaining);
+			    	tempButton.setLabelX(40);
+			    	//tempButton.setUpFonts(8);
 					tempButton.setX(padding+x);
 					tempButton.setY((y+40)+(80*(i+1)));
 					renderedButtons.add(tasks.get(i).getName());

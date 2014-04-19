@@ -50,7 +50,7 @@ public class Task{
 		return allow_preemption;
 	}//end getPreemption
 
-	public void setType(TaskType type){
+	public void setDuty(TaskType type){
 		this.type=type;
 	}//end setType
 
@@ -58,7 +58,7 @@ public class Task{
 		return name;
 	}
 
-	public TaskType getType(){
+	public TaskType getDuty(){
 		return type;
 	}//end getType
 
