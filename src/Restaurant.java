@@ -29,6 +29,8 @@ public class Restaurant{
 	public List<Restaurant_model> restaurantData;
 	public Player_model player;
 
+	public int customer_timer;
+
 	//Constructor()
 
 	public Restaurant(DBmapper db){
@@ -67,6 +69,9 @@ public class Restaurant{
 
 		scheduler = new Scheduler();
 
+
+		customer_timer=0;
+
 	}//end: Constructor()
 
 	//loop(): main restaurant loop
@@ -86,14 +91,25 @@ public class Restaurant{
 
 
 
-		if(counter % 80==0){
 
-			if(!foodline.isFull()){
+		customer_timer+=delta;
+		double mod = Math.random();
+
+		//System.out.println(mod);
+		if(mod>0.992){
+			customer_timer=0;
+
+			if(!sg.waitline.isFull() && !foodline.isFull()){
 				Customer cust = new Customer(this, menu);
 				cust.setWayPoint(Locations.FOODLINE);
 				customers.add(cust);
 			}
 
+		}
+
+		if(counter % 20==0){
+
+			
 			//employees.get(1).setWayPoint(Locations.RANDOM);
 		}	
 
@@ -103,7 +119,7 @@ public class Restaurant{
 				if(foodline.atStart()){
 					Customer cust = foodline.getNext();
 
-					Task cashierTask = new Task(2500, TaskType.CASHIER, Locations.REGISTER, "Taking order");
+					Task cashierTask = new Task(3000, TaskType.CASHIER, Locations.REGISTER, "Taking order");
 					customer2Task.put(cust, cashierTask);
 					task2customer.put(cashierTask, cust);
 					scheduler.addTask(cashierTask);
@@ -148,7 +164,7 @@ public class Restaurant{
 						Customer cust = task2customer.get(tempTask);
 
 						if(tempTask.getDuty()==TaskType.CASHIER){
-							Task kitchenTask = new Task(6000, TaskType.KITCHEN, Locations.KITCHEN, "Making food");
+							Task kitchenTask = new Task(6500, TaskType.KITCHEN, Locations.KITCHEN, "Making food");
 							
 							//customer2Task.remove(cust);
 							customer2Task.put(cust, kitchenTask);
