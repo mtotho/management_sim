@@ -107,34 +107,43 @@ public class GLMoveableEntity extends GLEntity implements Mover{
 
 	protected void update(GameContainer gc, StateBasedGame game, int delta){
 		
-	
+//		System.out.println(delta);
 
 		if(use_path){
 			get_next_path_node();
-		}
+		}	
+
+//		System.out.println(delta);
+
+		//System.out.println("x: " + x + " | destx: " + destx);
+
+		//System.out.println("y: " + y + " | desty: " + desty);
 
 		//if the current x position is with +/- 2 of the destination, just make x the destination
-		/*if(x-destx<2 && x-destx>=-2){
-			x=destx;
+		double mod=1;
+		if(x-destx<8 && x-destx>=-8){
+			//x=destx;
+		//	mod=0.5;
 		}
-		if(y-desty<2 && y-desty>=-2){
-			y=desty;
-		}*/
+		if(y-desty<8 && y-desty>=-8){
+			//y=desty;
+		//	mod=0.5;
+		}
 		if(x!=destx || y!=desty){
 			isMoving=true;
 			//inbetween_nodes=true;
 			if(x>destx){
-				x=x-(int)(delta*dx);
+				x=x-(int)(delta*dx*mod);
 				direction=FigureDirection.LEFT;
 			}else if(x<destx){
-				x=x+(int)(delta*dx);
+				x=x+(int)(delta*dx*mod);
 				direction=FigureDirection.RIGHT;
 			}
 			if(y>desty){
-				y=y-(int)(delta*dy);
+				y=y-(int)(delta*dy*mod);
 				direction=FigureDirection.UP;
 			}else if(y<desty){
-				y=y+(int)(delta*dy);
+				y=y+(int)(delta*dy*mod);
 				direction=FigureDirection.DOWN;
 			}
 		}else{

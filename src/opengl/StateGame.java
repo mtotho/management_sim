@@ -1,4 +1,4 @@
-
+  
 package mftoth.restaurantsim.ogl;
 
 //import mftoth.entities.*;
@@ -41,7 +41,6 @@ public class StateGame extends BasicGameState{
   private GLPanel active_panel;
 
   private OGLMap map;
-  private AStarPathFinder astar;
 
   public Restaurant restaurant;
 
@@ -98,9 +97,6 @@ public class StateGame extends BasicGameState{
 
         //set this panel to active
         activatePanel("OVERVIEW");
-        
-
-        astar = new AStarPathFinder(map, 400, false);
 
         counter=0;
        
@@ -181,7 +177,7 @@ public class StateGame extends BasicGameState{
        
         //Call  the restaurant update 
         restaurant.updateTime(delta);
-        if(counter % 3 ==0 )
+        if(counter % 3==0 )
           restaurant.update();
        
       
@@ -231,26 +227,8 @@ public class StateGame extends BasicGameState{
             }
           
         }
-  
-	  		if(input.isKeyDown(Input.KEY_UP)){
-	  		
-      	}
-      	if(input.isKeyDown(Input.KEY_RIGHT)){
-  
-      	}
-  		  if(input.isKeyDown(Input.KEY_DOWN)){
 
-      	}
-      	if(input.isKeyDown(Input.KEY_LEFT)){
-      
-      	}  
-      
-           
-      	if(input.isKeyDown(Input.KEY_Q)){
-      		
-      	}  
-
-          counter++;   
+        counter++;   
  
     }
  

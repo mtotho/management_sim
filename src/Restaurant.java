@@ -81,7 +81,7 @@ public class Restaurant{
 
 
 
-		if(counter % 20==0){
+		if(counter % 80==0){
 
 			if(!foodline.isFull()){
 				Customer cust = new Customer(this, menu);

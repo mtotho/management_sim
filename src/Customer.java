@@ -41,7 +41,7 @@ public FigureDirection direction;
 	}//end: Constructor()
 
 	public void update(){
-
+		
 		if(!exiting){
 
 
