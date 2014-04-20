@@ -32,7 +32,7 @@ public class DatabasePop{
 
 			stmt.executeUpdate(sql);
 
-			sql = "INSERT INTO RESTAURANT (ID, NAME, PLAYER_ID) " +
+			sql = "INSERT INTO RESTAURANT (RESTAURANT_ID, NAME, PLAYER_ID) " +
 				  "VALUES (0, 'TEST', 1);";
 
 			stmt.executeUpdate(sql);

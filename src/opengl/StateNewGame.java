@@ -12,9 +12,11 @@ import org.newdawn.slick.gui.*;
 import org.newdawn.slick.gui.AbstractComponent.*;
  
 import mftoth.restaurantsim.logic.*;
+import pjwelch.restaurantsim.database.*;
 
 import java.awt.Font;
 import org.newdawn.slick.UnicodeFont;
+import java.util.List;
 
 public class StateNewGame extends BasicGameState{
 
@@ -38,18 +40,28 @@ public class StateNewGame extends BasicGameState{
 	private Font font;
 	private int fontSize = 19;
 	private TextField text;
+	private GLButton btnStartGame;
+	private String playerName;
+
+	
+	private DBmapper db;
+	public List<Player_model> players;
+	public Player_model newPlayer;
+
 
 	//private GLButton btnNewGame;
 	//private GLButton btnAbout;
 
 	private Restaurant restaurant;
 
-	public StateNewGame(Restaurant restaurant){
+	public StateNewGame(Restaurant restaurant, DBmapper db){
 		super();
 		this.restaurant=restaurant;
+		this.db = db;
 		font = new Font("Verdana", Font.BOLD, fontSize);
 		ttfont = new TrueTypeFont(font, false);
-		
+
+		players = db.select(new Player_model());	
 
 	}
 
@@ -57,8 +69,12 @@ public class StateNewGame extends BasicGameState{
     public void init(GameContainer gc, StateBasedGame game)
             throws SlickException {
         this.game=game;
+		text = new TextField(gc, ttfont, 250, 97, 200, 25);
+		btnStartGame = new GLButton(gc, "Start Game", 499, 80);
 
- 		//btnNewGame.mousePressed(){
+		btnStartGame.setLabelX(170);
+		btnStartGame.setY(300);
+ 		
  		
  		
 
@@ -74,8 +90,11 @@ public class StateNewGame extends BasicGameState{
 		g.setColor(Color.black);
 	    g.drawString("Start a New Game of Management Simulator", 50, 25);
 	    g.drawString("Enter your name: ", 100, 100);
-	    text = new TextField(gc, ttfont, 250, 97, 200, 25);
+	   
 	    text.render(gc, g);
+	    text.setFocus(true);
+
+	    btnStartGame.render(gc, g);
 
 	   // g.drawString("1. Press 1 to start game", 50, 130);
 
@@ -100,7 +119,6 @@ public class StateNewGame extends BasicGameState{
 	        game.enterState(2);
 	        break;
 	    case Input.KEY_2:
-	        // TODO: Implement later
 	        break;
 	    case Input.KEY_3:
 	        // TODO: Implement later
@@ -112,13 +130,23 @@ public class StateNewGame extends BasicGameState{
 
 	public void mousePressed(int button, int posx, int posy){
 
-		/*if(btnNewGame.isPressed()){
+		if(btnStartGame.isPressed()){
+			
+			playerName = text.getText();
+			//System.out.println("new player name: " + playerName);
+			newPlayer = new Player_model(players.size() + 1, playerName);
+			db.insert(newPlayer);
+			players = db.select(new Player_model());
+			//System.out.println(players.toString());
+			
+			db.newPlayer(newPlayer.getID());
+			//db.insert(new Restaurant_model(newPlayer.getID(), newPlayer.getID(), "restaurant"));
+			restaurant.loadGame(newPlayer);
+
 			game.enterState(3);
+
 		}
 
-		if(btnAbout.isPressed()){
-			System.out.println("btnAbout clicked");
-		}*/
 
 	}
 

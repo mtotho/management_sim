@@ -18,12 +18,17 @@ public class Restaurant{
 	private HashMap<Task, Customer> task2customer;
 	public DBmapper db;
 	public StateGame sg;
+	
 	public List<Items_model> menu;
-
 	public int last_ms;
 
 	//The most previous delta
 	//public int delta;
+	public List<Inventory_model> inventory;
+	//public List<Transactions_model> transactions;
+	public List<Restaurant_model> restaurantData;
+	public Player_model player;
+
 	//Constructor()
 
 	public Restaurant(DBmapper db){
@@ -209,4 +214,11 @@ public class Restaurant{
 		return employees;
 	}
 
+	public void loadGame(Player_model player){
+		this.player = player;
+		inventory = db.selectData(new Inventory_model(), player);
+		restaurantData = db.selectData(new Restaurant_model(), player);
+
+
+	}
 }//end class restaurant

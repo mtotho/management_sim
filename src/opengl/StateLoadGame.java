@@ -9,10 +9,16 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.gui.*;
+import org.newdawn.slick.gui.AbstractComponent.*;
  
 import mftoth.restaurantsim.logic.*;
+import pjwelch.restaurantsim.database.*;
 
-public class StateMainMenu extends BasicGameState{
+import java.awt.Font;
+import org.newdawn.slick.UnicodeFont;
+import java.util.List;
+
+public class StateLoadGame extends BasicGameState{
 
 	//private GLButton btnNewGame; 
 	//private OGLGameContainer game;
@@ -28,37 +34,48 @@ public class StateMainMenu extends BasicGameState{
 		
 	//}
 
-	private int ID = 2;
+	private int ID = 5;
 	private StateBasedGame game;
+	private TrueTypeFont ttfont;
+	private Font font;
+	private int fontSize = 19;
+	private TextField text;
+	private GLButton btnStartGame;
+	private String playerName;
 
-	private GLButton btnNewGame;
-	private GLButton btnLoadGame;
-	private GLButton btnAbout;
+	
+	private DBmapper db;
+	public List<Player_model> players;
+	public Player_model player;
+
+
+
+	//private GLButton btnNewGame;
+	//private GLButton btnAbout;
 
 	private Restaurant restaurant;
 
-	public StateMainMenu(Restaurant restaurant){
+	public StateLoadGame(Restaurant restaurant, DBmapper db){
 		super();
 		this.restaurant=restaurant;
+		this.db = db;
+		font = new Font("Verdana", Font.BOLD, fontSize);
+		ttfont = new TrueTypeFont(font, false);
+
+		players = db.select(new Player_model());	
+
 	}
 
 	@Override
     public void init(GameContainer gc, StateBasedGame game)
             throws SlickException {
         this.game=game;
- 	
- 		btnNewGame = new GLButton(gc, "New Game", 499, 80);
- 		btnNewGame.setLabelX(180);
- 		btnNewGame.setY(30);
+		btnStartGame = new GLButton(gc, "Start Game", 499, 80);
 
- 		btnAbout = new GLButton(gc, "About", 499, 80);
- 		btnAbout.setLabelX(190);
- 		btnAbout.setY(270);
-
- 		btnLoadGame = new GLButton(gc, "Load Game", 499, 80);
- 		btnLoadGame.setLabelX(180);
- 		btnLoadGame.setY(150);
- 		//btnNewGame.mousePressed(){
+		btnStartGame.setLabelX(170);
+		btnStartGame.setY(300);
+ 		
+ 		text = new TextField(gc, ttfont, 250, 97, 200, 25);
  		
  		
 
@@ -71,13 +88,17 @@ public class StateMainMenu extends BasicGameState{
        	g.setColor(Color.white);
 		g.fillRect(0,0, gc.getWidth(), gc.getHeight());
 
-	    g.drawString("Main Menu", 50, 100);
+		g.setColor(Color.black);
+	  
+	    btnStartGame.render(gc, g);
+
+	    text.render(gc, g);
+	    text.setFocus(true);
+
+	    g.drawString("Enter the name of a previous game of management simulator!!!", 50, 25);
 
 	   // g.drawString("1. Press 1 to start game", 50, 130);
 
-	    btnNewGame.render(gc, g);
-	    btnLoadGame.render(gc, g);
- 		btnAbout.render(gc, g);
     }
  
     @Override
@@ -96,10 +117,9 @@ public class StateMainMenu extends BasicGameState{
     public void keyReleased(int key, char c) {
 	    switch(key) {
 	    case Input.KEY_1:
-	        game.enterState(3);
+	        game.enterState(2);
 	        break;
 	    case Input.KEY_2:
-	        // TODO: Implement later
 	        break;
 	    case Input.KEY_3:
 	        // TODO: Implement later
@@ -110,19 +130,16 @@ public class StateMainMenu extends BasicGameState{
 	}
 
 	public void mousePressed(int button, int posx, int posy){
-		if(btnNewGame.isPressed()){
-			game.enterState(4);
-		}
 
-		if(btnAbout.isPressed()){
-			System.out.println("btnAbout clicked");
-		}
-
-		if(btnLoadGame.isPressed()){
-			
-			game.enterState(5);
+		if(btnStartGame.isPressed()){
+			String playerName = text.getText();
+			players = (db.selectPlayer(new Player_model(), playerName));
+			player = players.get(0);
+			restaurant.loadGame(player);
+			game.enterState(3);
 
 		}
+
 
 	}
 

@@ -28,6 +28,8 @@ public class DBmapper{
 	public DatabaseMetaData meta;
 	public ResultSet rs;
 
+	public List<Items_model> items;
+
 
 	public DBmapper(){
 
@@ -183,6 +185,68 @@ public class DBmapper{
 
 
 	}
+	public List selectData(Model param, Player_model player){
+
+		String selectStatement = "SELECT * FROM " + param.getTable() + " WHERE RESTAURANT_ID = " + player.getID();
+
+		try{
+
+			ResultSetHandler h = new BeanListHandler(param.getClass());
+			qRunner = new QueryRunner();
+			List beans = (List) qRunner.query(this.c, selectStatement, h);
+
+			/*for (int i = 0; i < beans.size(); i++){
+
+				Class<?>clazz bean = (clazz) beans.get(i);
+				bean.print();
+
+				return beans;
+			}*/
+
+			return beans;
+
+		}
+		catch(Exception e){
+			System.out.println("SELECT");
+			System.err.println(e.getClass().getName() + ": " + e.getMessage() + "SELECT");
+			return null;
+
+		}
+
+
+
+	}
+	public List selectPlayer(Model param, String name){
+
+		String selectStatement = "SELECT * FROM PLAYER WHERE NAME = '" + name + "'";
+
+		try{
+
+			ResultSetHandler h = new BeanListHandler(param.getClass());
+			qRunner = new QueryRunner();
+			List beans = (List) qRunner.query(this.c, selectStatement, h);
+
+			/*for (int i = 0; i < beans.size(); i++){
+
+				Class<?>clazz bean = (clazz) beans.get(i);
+				bean.print();
+
+				return beans;
+			}*/
+
+			return beans;
+
+		}
+		catch(Exception e){
+			System.out.println("SELECT");
+			System.err.println(e.getClass().getName() + ": " + e.getMessage() + "SELECT");
+			return null;
+
+		}
+
+
+	}
+
 
 	public boolean update(Model param){
 
@@ -230,4 +294,37 @@ public class DBmapper{
 
 		return success;
 	}
+
+	public boolean newPlayer(int playerID){
+
+		boolean success = true;
+		
+		try{
+
+			insert(new Restaurant_model(playerID, playerID, "restaurant"));
+			
+			items = select(new Items_model());
+			for(int i = 0; i < items.size(); i++){
+
+				insert(new Inventory_model(items.get(i).getID(), playerID, 100));
+
+
+			}
+
+			success = true;
+
+		}
+		catch(Exception e){
+
+			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			success = false;
+
+		}
+
+
+
+
+		return success;
+	}
+
 }
