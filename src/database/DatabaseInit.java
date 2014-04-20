@@ -44,7 +44,7 @@ public class DatabaseInit{
 			System.out.println("player created");
 
 			sql = "CREATE TABLE RESTAURANT" +
-				  "(ID INT PRIMARY KEY NOT NULL," +
+				  "(RESTAURANT_ID INT PRIMARY KEY NOT NULL," +
 				  "NAME 		TEXT	NOT NULL, " +
 				  "PLAYER_ID	INT 	NOT NULL, " +
 				  "FOREIGN KEY(PLAYER_ID) REFERENCES PLAYER(ID))";
@@ -64,11 +64,12 @@ public class DatabaseInit{
 			System.out.println("items created");
 
 			sql = "CREATE TABLE INVENTORY" +
-				  "(RESTAURANT_ID INT 		NOT NULL," +
-				  "ITEM_ID INT PRIMARY KEY NOT NULL, " +
-				  "QUANTITY		INT 		NOT NULL, " +
+				  "(RESTAURANT_ID INT NOT NULL," +
+				  "ITEM_ID INT 	NOT NULL, " +
+				  "QUANTITY	INT NOT NULL, " +
 				  "FOREIGN KEY(RESTAURANT_ID) REFERENCES RESTAURANT(ID), " +
-				  "FOREIGN KEY(ITEM_ID) REFERENCES ITEMS(ID))";
+				  "FOREIGN KEY(ITEM_ID) REFERENCES ITEMS(ID)" +
+				  "PRIMARY KEY(RESTAURANT_ID, ITEM_ID))";
 
 			stmt.executeUpdate(sql);
 

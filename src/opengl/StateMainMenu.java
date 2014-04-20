@@ -32,6 +32,7 @@ public class StateMainMenu extends BasicGameState{
 	private StateBasedGame game;
 
 	private GLButton btnNewGame;
+	private GLButton btnLoadGame;
 	private GLButton btnAbout;
 
 	private Restaurant restaurant;
@@ -52,8 +53,11 @@ public class StateMainMenu extends BasicGameState{
 
  		btnAbout = new GLButton(gc, "About", 499, 80);
  		btnAbout.setLabelX(190);
- 		btnAbout.setY(150);
+ 		btnAbout.setY(270);
 
+ 		btnLoadGame = new GLButton(gc, "Load Game", 499, 80);
+ 		btnLoadGame.setLabelX(180);
+ 		btnLoadGame.setY(150);
  		//btnNewGame.mousePressed(){
  		
  		
@@ -72,8 +76,8 @@ public class StateMainMenu extends BasicGameState{
 	   // g.drawString("1. Press 1 to start game", 50, 130);
 
 	    btnNewGame.render(gc, g);
-	    btnAbout.render(gc, g);
- 
+	    btnLoadGame.render(gc, g);
+ 		btnAbout.render(gc, g);
     }
  
     @Override
@@ -112,6 +116,12 @@ public class StateMainMenu extends BasicGameState{
 
 		if(btnAbout.isPressed()){
 			System.out.println("btnAbout clicked");
+		}
+
+		if(btnLoadGame.isPressed()){
+			
+			game.enterState(5);
+
 		}
 
 	}

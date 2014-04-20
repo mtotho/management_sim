@@ -22,13 +22,17 @@ public class Inventory_model implements Model{
 
 
 	//constructor
-	public Inventory_model(int itemId, int quantity, int restaurantId){
+	public Inventory_model(int itemId, int restaurantId, int quantity){
 
 		this.itemId = itemId;
 		this.quantity = quantity;
 		this.restaurantId = restaurantId;
 
 	}//end constructor
+	public Inventory_model(){
+
+		
+	}
 
 	public String getTable(){
 		return "Inventory";
@@ -54,17 +58,9 @@ public class Inventory_model implements Model{
 
 	}//end getRestaurantID
 
-	//createNewInventory generates a new inventory for a new restauarant;
-	public void createNewInventory(int restaurant_id){
-
-
-
-
-	}//end createNewInventory
-
 	public String toString(){
 
-		String string = restaurantId + ", " + itemId + ", " + quantity;
+		String string = " " + restaurantId + ", " + itemId + ", " + quantity + " ";
 
 		return string;
 

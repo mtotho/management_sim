@@ -5,7 +5,7 @@ This will be the object for the row entry in the database for the player table
 */
 package pjwelch.restaurantsim.database;
 
-class Player_model implements Model{
+public class Player_model implements Model{
 
 	private String name;
 	private int id;
@@ -14,6 +14,11 @@ class Player_model implements Model{
 
 		this.name = name;
 		this.id = id;
+
+	}
+	public Player_model(){
+
+
 
 	}
 
@@ -43,7 +48,7 @@ class Player_model implements Model{
 		return 0;
 	}
 
-	public int getId(){
+	public int getID(){
 
 		return id;
 		

@@ -21,10 +21,15 @@ public class Restaurant_model implements Model{
 	private int playerId; //player id
 	private String name;
 	//constructor()
-	public Restaurant_model(int playerId, int id){
+	public Restaurant_model(int playerId, int id, String name){
 		this.id = id;
 		this.playerId = playerId;
+		this.name = name;
 	}//end constructor
+	public Restaurant_model(){
+
+
+	}
 	//retrieves restaurant id
 	public int getID(){
 		return id;
