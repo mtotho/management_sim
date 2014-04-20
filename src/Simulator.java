@@ -38,7 +38,9 @@ class Simulator{
 	          container.setDisplayMode(960, 480, false);
 	          container.setShowFPS(true);
 	          container.setTargetFrameRate(80);
+	          container.setAlwaysRender(true);
 	          container.start();
+
 	     } catch (SlickException e) {
 	          // TODO Auto-generated catch block
 	          e.printStackTrace();
