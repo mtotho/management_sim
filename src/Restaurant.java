@@ -29,6 +29,8 @@ public class Restaurant{
 	public List<Restaurant_model> restaurantData;
 	public Player_model player;
 	public ArrayList<ArrayList> orders;
+	public Items_model item;
+
 
 	//Constructor()
 
@@ -40,6 +42,7 @@ public class Restaurant{
 		this.db = db;
 
 		menu = db.select(new Items_model());
+		inventory = db.select(new Inventory_model());
 
 		employees = new ArrayList<Employee>();
 		customers = new ArrayList<Customer>();
@@ -94,7 +97,7 @@ public class Restaurant{
 		if(counter % 80==0){
 
 			if(!foodline.isFull()){
-				Customer cust = new Customer(this, menu);
+				Customer cust = new Customer(this, menu, inventory);
 				cust.setWayPoint(Locations.FOODLINE);
 				customers.add(cust);
 			}
@@ -110,6 +113,23 @@ public class Restaurant{
 
 					orders.add(cust.giveOrder());
 					//System.out.println(orders.toString());
+					for(int i = 0; i < orders.get(orders.size()-1).size(); i++){
+
+							//System.out.println(orders.get(orders.size()-1).get(i) + " i: " +i);
+							String item = orders.get(orders.size()-1).get(i).toString();
+							//System.out.println("ITEM STRING: " + item);
+							int id = item.charAt(0) - 48;
+							//System.out.println(id + "=ITEM ID");
+
+							inventory.get(id).setQuantity(inventory.get(id).getQuantity() -1);
+							//item = orders.get(orders.size()-1).get(i));
+							//System.out.println(item.getID());
+
+							//inventory.get(orders.get(orders.size()-1).get(i).getID()).setQuantity(inventory.get(i).getQuantity()-1);
+
+					} 
+
+					System.out.println(inventory);
 
 					Task cashierTask = new Task(2500, TaskType.CASHIER, Locations.REGISTER, "Taking order");
 					customer2Task.put(cust, cashierTask);
@@ -194,7 +214,7 @@ public class Restaurant{
 	}//end: Update();
 
 	public void addCustomer(){
-		Customer cust = new Customer(this, menu);
+		Customer cust = new Customer(this, menu, inventory);
 		cust.setWayPoint(Locations.RANDOM);
 		customers.add(cust);
 	}

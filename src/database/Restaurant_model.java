@@ -20,11 +20,15 @@ public class Restaurant_model implements Model{
 	private int id; //restaurant id
 	private int playerId; //player id
 	private String name;
+	private double money;
+	private int time;
 	//constructor()
-	public Restaurant_model(int playerId, int id, String name){
+	public Restaurant_model(int playerId, int id, String name, double money, int time){
 		this.id = id;
 		this.playerId = playerId;
 		this.name = name;
+		this.money = money;
+		this.time = time;
 	}//end constructor
 	public Restaurant_model(){
 
@@ -72,9 +76,10 @@ public class Restaurant_model implements Model{
 
 	public String toString(){
 
-		String string = id + ", '" + name + "', " + playerId;
+		String string = id + ", '" + name + "', " + playerId + ", " + money + ", " + time;
 		return string;
 	}
+
 
 }//end restaurant	
 

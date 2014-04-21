@@ -25,10 +25,11 @@ private boolean exiting;
 private int last_ms;
 public FigureDirection direction;
 private Items_model item;
+public List<Inventory_model> inventory;
 
 
 	//Constructor()
-	public Customer(Restaurant restaurant, List<Items_model> menu){
+	public Customer(Restaurant restaurant, List<Items_model> menu, List<Inventory_model> inventory){
 		isRendered=false;
 		this.restaurant=restaurant;
 		location = Locations.ENTRANCE;
@@ -38,6 +39,7 @@ private Items_model item;
 		this.menu = menu;
 		windowReached=false;
 		exiting=false;
+		this.inventory = inventory;
 
 
 
@@ -91,13 +93,18 @@ private Items_model item;
 
 			nextItem = ((random.nextInt() % 6) + 1);
 			
+
 			if(nextItem < 0){
 				nextItem = nextItem * -1;
 			}
-		
-			item = menu.get(nextItem);
-			
-			order.add(item);
+			if(inventory.get(nextItem).getQuantity() > 0) {
+				item = menu.get(nextItem);
+				
+				order.add(item);
+				//System.out.println(order.toString());
+				//System.out.println(i + " to " + items);
+			}
+
 
 		}
 

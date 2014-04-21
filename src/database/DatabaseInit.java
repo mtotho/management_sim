@@ -47,6 +47,8 @@ public class DatabaseInit{
 				  "(RESTAURANT_ID INT PRIMARY KEY NOT NULL," +
 				  "NAME 		TEXT	NOT NULL, " +
 				  "PLAYER_ID	INT 	NOT NULL, " +
+				  "MONEY DOUBLE NOT NULL, " +
+				  "TIME INT NOT NULL, " +
 				  "FOREIGN KEY(PLAYER_ID) REFERENCES PLAYER(ID))";
 
 			stmt.executeUpdate(sql);

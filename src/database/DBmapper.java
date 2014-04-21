@@ -301,7 +301,7 @@ public class DBmapper{
 		
 		try{
 
-			insert(new Restaurant_model(playerID, playerID, "restaurant"));
+			insert(new Restaurant_model(playerID, playerID, "restaurant", 0.0, 0));
 			
 			items = select(new Items_model());
 			for(int i = 0; i < items.size(); i++){
