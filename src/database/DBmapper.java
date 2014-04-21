@@ -271,12 +271,60 @@ public class DBmapper{
 		return success;
 
 	}
-	public boolean update(Class<?> clazz, List<Model> params){
+
+	public boolean updateRestaurant(List<Restaurant_model> param){
+
+		String updateStatement  = "UPDATE " + param.get(0).getTable() + " WHERE RESTAURANT_ID = " + param.get(0).getRestaurantID() + ";" ;
+
+		boolean success = true;
+		try{
+
+			qRunner = new QueryRunner();
+
+			qRunner.update(this.c, updateStatement, param);
+
+
+		}
+		catch(Exception e){
+			System.out.println("UPDATE");
+			success = false;
+			System.err.println(e.getClass().getName() + ": " + e.getMessage() + "UPDATE");
+
+		}
+
+		return success;
+	}
+
+	public boolean update(List<Model> params){
 
 		boolean success = true;
 
 		try{
 			String updateStatement = "UPDATE " + params.get(0) + " WHERE RESTAURANT_ID = " + params.get(0).getRestaurantID() + ";";
+
+			qRunner = new QueryRunner();
+			qRunner.update(this.c, updateStatement, params);
+
+
+
+		}
+		catch(Exception e){
+			System.out.println("UPDATE[]");
+			success = false;
+			System.err.println(e.getClass().getName() + ": " + e.getMessage() + "UPDATE[]");
+
+		}
+
+
+		return success;
+	}
+
+	public boolean updateInventory(List<Inventory_model> params){
+
+		boolean success = true;
+
+		try{
+			String updateStatement = "UPDATE " + params.get(0).getTable() + " WHERE RESTAURANT_ID = " + params.get(0).getRestaurantID() + ";";
 
 			qRunner = new QueryRunner();
 			qRunner.update(this.c, updateStatement, params);
@@ -301,7 +349,7 @@ public class DBmapper{
 		
 		try{
 
-			insert(new Restaurant_model(playerID, playerID, "restaurant", 0.0, 0));
+			insert(new Restaurant_model(playerID, playerID, "restaurant", 0, 0));
 			
 			items = select(new Items_model());
 			for(int i = 0; i < items.size(); i++){

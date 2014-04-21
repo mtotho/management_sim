@@ -30,6 +30,7 @@ public class Restaurant{
 	public Player_model player;
 	public ArrayList<ArrayList> orders;
 	public Items_model item;
+	public double money;
 
 
 	//Constructor()
@@ -248,6 +249,13 @@ public class Restaurant{
 		inventory = db.selectData(new Inventory_model(), player);
 		restaurantData = db.selectData(new Restaurant_model(), player);
 
+
+	}
+
+	public void updateDatabase(){
+
+		db.updateInventory(inventory);
+		db.updateRestaurant(restaurantData);
 
 	}
 }//end class restaurant

@@ -61,7 +61,8 @@ public class Restaurant_model implements Model{
 	}
 
 	public int getRestaurantID(){
-		return 0;
+		return id;
+		
 	}
 
 	public String getName(){
