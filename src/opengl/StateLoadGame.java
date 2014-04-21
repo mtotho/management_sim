@@ -48,7 +48,7 @@ public class StateLoadGame extends BasicGameState{
 	public List<Player_model> players;
 	public Player_model player;
 
-	private GLScrollablePanel loadgames;
+	private GLScrollablePanel<Player_model> loadgames;
 
 
 
@@ -80,12 +80,12 @@ public class StateLoadGame extends BasicGameState{
  		
  		//text = new TextField(gc, ttfont, 250, 97, 200, 25);
  		
- 		loadgames = new GLScrollablePanel(restaurant, gc,200, 75,550, 250);
+ 		loadgames = new GLScrollablePanel<Player_model>(restaurant, gc,200, 75,550, 250);
  	
  		for(int i=0; i<players.size(); i++){
  			Player_model player = players.get(i);
 
- 			loadgames.add(player.getName());
+ 			loadgames.add(player.getName(), player);
  		}
 
  		//Start the button out disabled
@@ -177,9 +177,9 @@ public class StateLoadGame extends BasicGameState{
 
  		if(btnStartGame.isPressed()){
  			
-			int selected_index = loadgames.getSelectedIndex();
+			//int selected_index = loadgames.getSelectedIndex();
 			//System.out.println("selected index: " + selected_index);
- 			Player_model player = players.get(selected_index);
+ 			Player_model player = loadgames.getSelected();// players.get(selected_index);
 
  			System.out.println("Selected player: " + player.getName());
 

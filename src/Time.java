@@ -20,12 +20,20 @@ public class Time{
 		return seconds;
 	}
 
-	//get the current second of the minute
-	public int getSecond(){
-		int time_in_minute = time_passed_ms % MS_MINUTE;
+	public int getSecond(int ms){
+		int time_in_minute = ms % MS_MINUTE;
 		int second = time_in_minute/5;
 
 		return second;
+	}
+
+	//get the current second of the minute
+	public int getSecond(){
+		return getSecond(time_passed_ms);
+	}
+
+	public int toSeconds(int ms){
+		return (int)(ms/1000);
 	}
 
 	public int getMilliSeconds(){

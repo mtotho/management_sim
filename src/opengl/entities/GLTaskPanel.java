@@ -21,9 +21,10 @@ public class GLTaskPanel extends GLPanel{
 	private GameContainer gameCon;
 	private Scheduler scheduler;
 	private Restaurant restaurant;
-	private GLScrollablePanel scroll_panel;
+	private GLScrollablePanel<Task> scroll_panel;
 
 	private ArrayList<Task> tasks = new ArrayList<Task>();
+	private ArrayList<Task> last_tasks = new ArrayList<Task>();
 	private boolean active_list = false;
 	
 	public GLTaskPanel(Restaurant restaurant, GameContainer gc, StateGame game) throws SlickException{
@@ -40,7 +41,7 @@ public class GLTaskPanel extends GLPanel{
         padding=10;
 
 
-        scroll_panel = new GLScrollablePanel(restaurant, gc, x+15, y+30, 290, 250);
+        scroll_panel = new GLScrollablePanel<Task>(restaurant, gc, x+15, y+30, 290, 250);
    
 	}
 
@@ -82,36 +83,36 @@ public class GLTaskPanel extends GLPanel{
 		    scheduler = restaurant.getScheduler();
 			tasks = scheduler.getTaskArray(3);
 			ArrayList<String> renderedButtons = new ArrayList<String>();
-	
+			
+			//Remove the tasks that have expired
+			for(int i=0; i<last_tasks.size(); i++){
+				Task prev_task = last_tasks.get(i);
+
+				if(!tasks.contains(prev_task)){
+					scroll_panel.remove(prev_task);
+				}
+
+			}
+
+
 		    for(int i=0; i<tasks.size();i++){
+		    
+
 		    	String taskName = tasks.get(i).getName();
 		    	Integer timeRemaining = tasks.get(i).getTimeRemaining();
 		    	
-		    	//if(i<scroll_panel.size()){
-
-		    	//String output = String.format(taskName + " : " + (int)(timeRemaining / 1000) + "s remaining");
-		    		scroll_panel.add(taskName + " : " + (int)(timeRemaining / 1000) + "s remaining");
-		    	//}		
 		    	
-		    	/*
-		    	if(!buttons.containsKey("btn"+taskName)){
-		    		addButton(gameCon, "btn"+taskName, taskName, 300, 80);
-		  		}
-		  		else{
-		  			//.out.println("Task " + (i+1) + ": " + buttons.get("btn"+taskName).getName());
-		  		}
-		  		if(!renderedButtons.contains(tasks.get(i).getName())){
-			  		GLButton tempButton = buttons.get("btn" + taskName);
-			  		//tempButton.changeName(tempButton.getName() + " Time: " + timeRemaining);
-			    	tempButton.setLabelX(40);
-			    	//tempButton.setUpFonts(8);
-					tempButton.setX(padding+x);
-					tempButton.setY((y+40)+(80*(i+1)));
-					renderedButtons.add(tasks.get(i).getName());
-					tempButton.render(gc, g);	
-				}*/
-		    	//g.drawString("Employee: " + employees.get(i).getName(), x+30, (y+30)+(30*(i+1)));*/
+
+		    	if(!scroll_panel.contains(tasks.get(i))){
+		    		scroll_panel.add(restaurant.timer.toSeconds(timeRemaining) + "s | " + taskName, tasks.get(i));
+		    	}else{
+		    		scroll_panel.updateLabel(tasks.get(i), restaurant.timer.toSeconds(timeRemaining) + "s | " + taskName);	    		
+	    		}
+
+
 		    }
+
+		    last_tasks = (ArrayList<Task>)tasks.clone();
 
 		    GLButton tempButton = buttons.get("btnBack");
 		    tempButton.setLabelX(60);
@@ -120,7 +121,7 @@ public class GLTaskPanel extends GLPanel{
 			tempButton.render(gc, g);
 
 			scroll_panel.render(gc, g);	
-			scroll_panel.clear();
+			//scroll_panel.clear();
 		}
 	}
 

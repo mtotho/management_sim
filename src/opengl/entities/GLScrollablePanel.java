@@ -11,19 +11,22 @@ import org.newdawn.slick.gui.*;
 import java.util.Random;
 import java.util.LinkedHashMap;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.awt.Font;
 import java.util.Set;
 import mftoth.restaurantsim.logic.*;
 import org.newdawn.slick.UnicodeFont;
 import org.lwjgl.input.Mouse;
+import pjwelch.restaurantsim.database.*;
 
-public class GLScrollablePanel extends GLEntity{
+public class GLScrollablePanel<T> extends GLEntity{
 
 	private TrueTypeFont ttfont;
 	private Font font;
 	private int fontSize = 15;
 	private Restaurant restaurant;
-	private ArrayList<String> items;
+	private ArrayList<T> items;
+	private HashMap<T, String>  item_mapper;
 	private int itemheight;
 	private int itemindex; //index of the first item;
 	private int content_height;
@@ -50,7 +53,8 @@ public class GLScrollablePanel extends GLEntity{
 		itemheight=24; //Height of each item in the panel
 		itemindex=0;   //index of item to render first
 		content_height=0; //height of the sum on the items
-		items = new ArrayList<String>(); 
+		items = new ArrayList<T>(); 
+		item_mapper = new HashMap<T, String>();
 		
 		item_hovered=-	1;
 		item_selected=-1;
@@ -67,7 +71,8 @@ public class GLScrollablePanel extends GLEntity{
 	}
 	
 	//add and item to the panel and increment the content_height accordingly
-	public void add(String item){
+	public void add(String label, T item){
+		item_mapper.put(item, label);
 		items.add(item);
 		content_height+=itemheight;
 	}
@@ -75,6 +80,32 @@ public class GLScrollablePanel extends GLEntity{
 	public void remove(int i){
 		if(i<items.size())
 			items.remove(i);
+	}
+
+	public void remove(T item){
+		if(item_mapper.containsKey(item)){
+
+			//deselect item if it is removed
+			if(items.indexOf(item)==item_selected){
+				item_selected=-1;
+			}
+
+			items.remove(item);
+			item_mapper.remove(item);
+
+			//reduce the content height accordingly
+			content_height-=itemheight;
+
+		}
+
+	}
+
+	public boolean contains(T item){
+		if(item_mapper.containsKey(item)){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	public int size(){
@@ -85,6 +116,12 @@ public class GLScrollablePanel extends GLEntity{
 		items.clear();
 		content_height=0;
 		itemindex=0;
+	}
+
+	public void updateLabel(T item, String label){
+		if(item_mapper.containsKey(item)){
+			item_mapper.put(item, label);
+		}
 	}
 
 	public void render(GUIContext gc, Graphics g){
@@ -122,7 +159,8 @@ public class GLScrollablePanel extends GLEntity{
 
 			if(location<(int)((height-2*padding)/itemheight)){
 
-				String content = items.get(i);
+				T item = items.get(i);
+				String content = item_mapper.get(item);
 
 				double rely = inity + location*itemheight;
 
@@ -207,11 +245,21 @@ public class GLScrollablePanel extends GLEntity{
   		return item_selected;
   	}
 
-  	public String getSelectedString(){
+  	public T getSelected(){
   		if(item_selected!=-1 && item_selected<=items.size()){
   			return items.get(item_selected);
   		}else{
-  			return "";
+  			return null;
+  		}
+  	}
+
+  	public String getSelectedString(){
+  		if(item_selected!=-1 && item_selected<=items.size()){
+  			T item = items.get(item_selected);
+
+  			return item_mapper.get(item);
+  		}else{
+  			return null;
   		}
   	}
 
@@ -292,7 +340,7 @@ public class GLScrollablePanel extends GLEntity{
 		        	if(item_selected==-1){
 		        		item_selected=0;
 		        	}else{
-		        		if(item_selected+1<items.size()){
+		        		if(item_selected<(items.size()-1)){
 		        			item_selected++;
 		        		}
 		        		
