@@ -21,6 +21,7 @@ public class GLTaskPanel extends GLPanel{
 	private GameContainer gameCon;
 	private Scheduler scheduler;
 	private Restaurant restaurant;
+	private GLScrollablePanel scroll_panel;
 
 	private ArrayList<Task> tasks = new ArrayList<Task>();
 	private boolean active_list = false;
@@ -38,6 +39,9 @@ public class GLTaskPanel extends GLPanel{
 
         padding=10;
 
+
+        scroll_panel = new GLScrollablePanel(restaurant, gc, x+15, y+30, 290, 400);
+   
 	}
 
 	public void render(GUIContext gc, Graphics g) throws SlickException{
@@ -64,8 +68,11 @@ public class GLTaskPanel extends GLPanel{
 			}
 		}
 		else{
-			g.setColor(Color.black);
-			g.fillRect(x,y, width, height);
+			
+
+			
+			//g.setColor(Color.black);
+			//g.fillRect(x,y, width, height);
 
 			g.setColor(Color.orange);
 		    g.drawString("Time: " + timer.getFormattedTime(), x+10, y+5);
@@ -75,10 +82,18 @@ public class GLTaskPanel extends GLPanel{
 		    scheduler = restaurant.getScheduler();
 			tasks = scheduler.getTaskArray(3);
 			ArrayList<String> renderedButtons = new ArrayList<String>();
-		
+	
 		    for(int i=0; i<tasks.size();i++){
 		    	String taskName = tasks.get(i).getName();
 		    	Integer timeRemaining = tasks.get(i).getTimeRemaining();
+		    	
+		    	//if(i<scroll_panel.size()){
+
+		    	//String output = String.format(taskName + " : " + (int)(timeRemaining / 1000) + "s remaining");
+		    		scroll_panel.add(taskName + " : " + (int)(timeRemaining / 1000) + "s remaining");
+		    	//}		
+		    	
+		    	/*
 		    	if(!buttons.containsKey("btn"+taskName)){
 		    		addButton(gameCon, "btn"+taskName, taskName, 300, 80);
 		  		}
@@ -94,7 +109,7 @@ public class GLTaskPanel extends GLPanel{
 					tempButton.setY((y+40)+(80*(i+1)));
 					renderedButtons.add(tasks.get(i).getName());
 					tempButton.render(gc, g);	
-				}
+				}*/
 		    	//g.drawString("Employee: " + employees.get(i).getName(), x+30, (y+30)+(30*(i+1)));*/
 		    }
 
@@ -103,6 +118,9 @@ public class GLTaskPanel extends GLPanel{
 			tempButton.setX(padding+x);
 			tempButton.setY(y+350);
 			tempButton.render(gc, g);
+
+			scroll_panel.render(gc, g);	
+			scroll_panel.clear();
 		}
 	}
 

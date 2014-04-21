@@ -67,6 +67,21 @@ public class GLScrollablePanel extends GLEntity{
 		content_height+=itemheight;
 	}
 
+	public void remove(int i){
+		if(i<items.size())
+			items.remove(i);
+	}
+
+	public int size(){
+		return items.size();
+	}
+
+	public void clear(){
+		items.clear();
+		content_height=0;
+		itemindex=0;
+	}
+
 	public void render(GUIContext gc, Graphics g){
 
 		//int content_height;
@@ -82,10 +97,12 @@ public class GLScrollablePanel extends GLEntity{
 
 		//Make it so we dont scroll past the last items
 		int items_on_screen=(int)(height/itemheight);
-		if(itemindex>(items.size()-items_on_screen)){
+		if(itemindex>(items.size()-items_on_screen) && content_height>height){
+		
 			itemindex=items.size()-items_on_screen;
 		}
 
+		//System.out.println("itemindex: " + itemindex);
 		//loop through each item, starting at the current itemindex
 		for(int i=itemindex; i<items.size(); i++){
 
@@ -206,19 +223,21 @@ public class GLScrollablePanel extends GLEntity{
                   int x,
                   int y){
 
+  		if(content_height>height){
+  			//System.out.println("contentheight: " + content_height);
   		//Flag if we are pressing the scroll bar
-  		if(x >= scroll_bar_x && x<=scroll_bar_x+scroll_bar_width && y>=scroll_bar_y && y<=scroll_bar_y+scroll_bar_height){
-  			scroll_bar_pressed=true;
-  		//	scroll_click_gap=y-scroll_bar_y;
-  		}else{
-  			scroll_bar_pressed=false;
-  		//	scroll_click_gap = 0;
+	  		if(x >= scroll_bar_x && x<=scroll_bar_x+scroll_bar_width && y>=scroll_bar_y && y<=scroll_bar_y+scroll_bar_height){
+	  			scroll_bar_pressed=true;
+	  		//	scroll_click_gap=y-scroll_bar_y;
+	  		}else{
+	  			scroll_bar_pressed=false;
+	  		//	scroll_click_gap = 0;
 
-	  		if(item_hovered!=-1){
-	  			item_selected = item_hovered+itemindex;
+		  		if(item_hovered!=-1){
+		  			item_selected = item_hovered+itemindex;
+		  		}
 	  		}
   		}
-
 
 
   	}

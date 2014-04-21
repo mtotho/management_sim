@@ -81,7 +81,7 @@ public class StateLoadGame extends BasicGameState{
  		
  		loadgames = new GLScrollablePanel(restaurant, gc,230, 140,550, 300);
  		loadgames.add("a");
- 		loadgames.add("b");
+ 		/*loadgames.add("b");
  		loadgames.add("c");
  		loadgames.add("d");
  		loadgames.add("e");
