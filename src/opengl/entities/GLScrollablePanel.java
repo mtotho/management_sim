@@ -30,6 +30,7 @@ public class GLScrollablePanel extends GLEntity{
 	private int padding;
 	private int item_hovered;
 	private int item_selected;
+	private boolean hasFocus;
 
 	private boolean scrollbar;
 	private int scroll_bar_width;
@@ -51,7 +52,7 @@ public class GLScrollablePanel extends GLEntity{
 		content_height=0; //height of the sum on the items
 		items = new ArrayList<String>(); 
 		
-		item_hovered=-1;
+		item_hovered=-	1;
 		item_selected=-1;
 
  	 	font = new Font("Verdana", Font.BOLD, fontSize);
@@ -61,6 +62,8 @@ public class GLScrollablePanel extends GLEntity{
 		scroll_bar_pressed=false;
 		scrollbar=false;
 		scroll_bar_y=y;
+
+		hasFocus=false;
 	}
 	
 	//add and item to the panel and increment the content_height accordingly
@@ -189,6 +192,17 @@ public class GLScrollablePanel extends GLEntity{
 
  	 }//end: render
 
+
+ 	public boolean itemSelected(){
+ 		if(item_selected==-1){
+ 			
+ 			return false;
+ 		}else{
+ 			
+ 			return true;
+ 		}
+ 	}
+
   	public int getSelectedIndex(){
   		return item_selected;
   	}
@@ -208,7 +222,10 @@ public class GLScrollablePanel extends GLEntity{
         //Capture mouse wheel move
         scroll();
   
-
+    	//Input input = gc.getInput();
+      	
+       // int mousex = input.getMouseX();
+        //int mousey = input.getMouseY();
  	
     }
 
@@ -240,32 +257,117 @@ public class GLScrollablePanel extends GLEntity{
 	 
 	}
 
+	private void increment(){
+		if(itemindex<items.size()-1){
+        	itemindex++;
+        }
+	}
+
+	private void decrement(){
+		if(itemindex>0) //decrement itemindex
+    		itemindex--;
+	}
+
+
+    public void keyReleased(int key, char c) {
+
+	    switch(key) {
+		    case Input.KEY_ESCAPE:
+		        item_selected=-1;
+		        break;
+		    case Input.KEY_2:
+		        // TODO: Implement later
+		        break;
+		    case Input.KEY_3:
+		        // TODO: Implement later
+		        break;
+	        case Input.KEY_RIGHT:
+		        // TODO: Implement later
+		        break;
+		    case Input.KEY_LEFT:
+		        // TODO: Implement later
+		        break;
+	        case Input.KEY_DOWN:
+		        if(hasFocus){
+		        	if(item_selected==-1){
+		        		item_selected=0;
+		        	}else{
+		        		if(item_selected+1<items.size()){
+		        			item_selected++;
+		        		}
+		        		
+		        	}
+
+		        	
+		        }
+		        break;
+
+	        case Input.KEY_UP:
+	        	if(hasFocus){
+	        		if(item_selected==-1){
+		        		item_selected=0;
+		        	}else{
+		        		if(item_selected>0){
+		        			item_selected--;
+		        		}
+		        		
+		        	}
+	        	}
+		        
+		        break;
+		    default:
+		        break;
+	    }
+	}
+
 
   	public void mouseReleased(int button, int x, int y){
   		
   		scroll_bar_pressed=false;
 		scroll_click_gap = 0;
+
+		if(inBounds(x,y)){
+			hasFocus=true;
+		}else{
+			hasFocus=false;
+		}
   		//mouseDown=false; //change flag back to false after click is done
   	} 
+
+  	public boolean hasFocus(){
+  		return hasFocus;
+  	}
+
+
   	public void mousePressed(int button,
                   int x,
                   int y){
 
-  		if(content_height>height){
-  			//System.out.println("contentheight: " + content_height);
-  		//Flag if we are pressing the scroll bar
-	  		if(x >= scroll_bar_x && x<=scroll_bar_x+scroll_bar_width && y>=scroll_bar_y && y<=scroll_bar_y+scroll_bar_height){
-	  			scroll_bar_pressed=true;
-	  		//	scroll_click_gap=y-scroll_bar_y;
-	  		}else{
-	  			scroll_bar_pressed=false;
-	  		//	scroll_click_gap = 0;
 
-		  		if(item_hovered!=-1){
-		  			item_selected = item_hovered+itemindex;
+  		if(inBounds(x,y)){
+
+	  		if(content_height>height){
+	  			//System.out.println("contentheight: " + content_height);
+	  		//Flag if we are pressing the scroll bar
+		  		if(x >= scroll_bar_x && x<=scroll_bar_x+scroll_bar_width && y>=scroll_bar_y && y<=scroll_bar_y+scroll_bar_height){
+		  			scroll_bar_pressed=true;
+		  		//	scroll_click_gap=y-scroll_bar_y;
+		  		}else{
+		  			scroll_bar_pressed=false;
+		  		//	scroll_click_gap = 0;
+
+			  		
 		  		}
 	  		}
-  		}
+
+	  		if(item_hovered!=-1){
+
+	  			item_selected = item_hovered+itemindex;
+
+	  			if(item_selected>=items.size())
+	  				item_selected=-1;
+	  		}
+	  	}
 
 
   	}
@@ -309,7 +411,6 @@ public class GLScrollablePanel extends GLEntity{
 
   			item_hovered = (int)(rely / itemheight);
 
-  			System.out.println(item_hovered);
 
   		}else{
   			item_hovered=-1;

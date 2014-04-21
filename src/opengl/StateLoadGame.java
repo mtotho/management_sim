@@ -73,13 +73,24 @@ public class StateLoadGame extends BasicGameState{
             throws SlickException {
         this.game=game;
 		btnStartGame = new GLButton(gc, "Start Game", 499, 80);
+		btnStartGame.setLocation(230, 350);
 
 		btnStartGame.setLabelX(170);
-		btnStartGame.setY(300);
+		//btnStartGame.setY(300);
  		
- 		text = new TextField(gc, ttfont, 250, 97, 200, 25);
+ 		//text = new TextField(gc, ttfont, 250, 97, 200, 25);
  		
- 		loadgames = new GLScrollablePanel(restaurant, gc,230, 140,550, 300);
+ 		loadgames = new GLScrollablePanel(restaurant, gc,200, 75,550, 250);
+ 	
+ 		for(int i=0; i<players.size(); i++){
+ 			Player_model player = players.get(i);
+
+ 			loadgames.add(player.getName());
+ 		}
+
+ 		//Start the button out disabled
+	 	btnStartGame.setDisabled(true);
+ 		/*
  		loadgames.add("a");
  		loadgames.add("b");
  		loadgames.add("c");
@@ -123,7 +134,7 @@ public class StateLoadGame extends BasicGameState{
  		loadgames.add("@");
  		loadgames.add("#");
  		loadgames.add("$");
-
+*/
 
 
 
@@ -135,17 +146,14 @@ public class StateLoadGame extends BasicGameState{
 
        	g.setColor(Color.white);
 		g.fillRect(0,0, gc.getWidth(), gc.getHeight());
-
-		g.setColor(Color.black);
-	  
-	   // btnStartGame.render(gc, g);
-
-	    text.render(gc, g);
-	    text.setFocus(true);
-
-
 	    loadgames.render(gc,g);
-	    g.drawString("Enter the name of a previous game of management simulator!!!", 50, 25);
+		
+	  
+	   	btnStartGame.render(gc, g);
+	  
+
+	    g.setColor(Color.black);
+	    g.drawString("Select a Restaurant profile to load: ", 50, 25);
 
 	   // g.drawString("1. Press 1 to start game", 50, 130);
 
@@ -157,11 +165,27 @@ public class StateLoadGame extends BasicGameState{
         // TODO Auto-generated method stub
  		loadgames.update(container, game, delta);
 
+ 		//if not items are selected, disable startgame button
+ 		if(loadgames.itemSelected()==false){
+ 			btnStartGame.setDisabled(true);
+
+ 		//enable start button if something is selected
+ 		}else{
+ 			btnStartGame.setDisabled(false);
+ 		}
 
 
- 		//String selectedString = loadgames.getSelectedString();
- 		//int selectedIndex = loadgames.getSelectedIndex();
- 	//	System.out.println(selectedString);
+ 		if(btnStartGame.isPressed()){
+ 			
+			int selected_index = loadgames.getSelectedIndex();
+			//System.out.println("selected index: " + selected_index);
+ 			Player_model player = players.get(selected_index);
+
+ 			System.out.println("Selected player: " + player.getName());
+
+ 			
+ 		}
+
     }
  
     @Override

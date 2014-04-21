@@ -30,6 +30,8 @@ public class GLButton extends GLEntity{
 	private boolean isPressed;
 	private boolean isHovered;
 
+	private boolean isDisabled;
+
 
 	public GLButton(GameContainer gc) throws SlickException{
 		super(gc);
@@ -65,6 +67,7 @@ public class GLButton extends GLEntity{
 	//Only width height given, assume centered
 	public GLButton(GameContainer gc, String label, double width, double height) throws SlickException{
 		super(gc, width, height);
+		
 		this.label=label;
 		init();
 	}
@@ -73,7 +76,11 @@ public class GLButton extends GLEntity{
 		setUpFonts(25);
 		image = new Image("res/buttons/sprite_mc_medium.png");
 		sprite_sheet = new SpriteSheet(image, 499, 80);
+
+		isDisabled=false;
 	}
+
+
 
 	public void setUpFonts(int fontSize){
 		font = new Font("Verdana", Font.BOLD, fontSize);
@@ -110,16 +117,32 @@ public class GLButton extends GLEntity{
 		//g.fillRoundRect(x, y, width, height, 2);
 		//image.draw(x,y,width,height);
 		
-		if(!isHovered){
-			g.drawImage(sprite_sheet.getSprite(0,0).getScaledCopy(this.width, this.height), (int)x,(int)y);
-		}else{
+		
+			//System.out.println("button y: " + y);
+
+		g.drawImage(sprite_sheet.getSprite(0,0).getScaledCopy(this.width, this.height), (int)x,(int)y);
+		if(isHovered && !isDisabled){
 			g.drawImage(sprite_sheet.getSprite(0,1).getScaledCopy(this.width, this.height), (int)x,(int)y);	
 		}
+
 		g.setColor(Color.blue);
 		g.setFont(ttfFont);
 		g.drawString(label,(int)(x + lblX), (int)(y + lblY));
+
+
+		if(isDisabled){
+			g.setColor(new Color(224, 224, 224, 180));
+			g.fillRect(x,y, this.width, this.height);
+		}
+
+	
+		
 		//uFont.drawString(x + 10, y + 10, label);
 		
+	}
+
+	public void setDisabled(boolean flag){
+		isDisabled=flag;
 	}
 
 	public boolean isPressed(){
@@ -129,7 +152,13 @@ public class GLButton extends GLEntity{
 	public void mousePressed(int button, int posx, int posy){
 
 		if(button==0 && inBounds(posx,posy)){
-			isPressed=true;
+			
+			if(isDisabled==false){
+				isPressed=true;
+			}
+			else{
+				isPressed=false;
+			}
 		}
 	}
 
