@@ -94,8 +94,36 @@ public class StateLoadGame extends BasicGameState{
  		loadgames.add("l");
  		loadgames.add("z");
  		loadgames.add("x");
-
-
+ 		loadgames.add("@");
+ 		loadgames.add("#");
+ 		loadgames.add("$");
+ 		loadgames.add("k");
+ 	/*	loadgames.add("l");
+ 		loadgames.add("z");
+ 		loadgames.add("x");
+ 		loadgames.add("@");
+ 		loadgames.add("#");
+ 		loadgames.add("$");
+ 		 		loadgames.add("f");
+ 		loadgames.add("g");
+ 		loadgames.add("h");
+ 		loadgames.add("i");
+ 		loadgames.add("j");
+ 		loadgames.add("k");
+ 		loadgames.add("l");
+ 		loadgames.add("z");
+ 		loadgames.add("x");
+ 		loadgames.add("@");
+ 		loadgames.add("#");
+ 		loadgames.add("$");
+ 		loadgames.add("k");
+ 		loadgames.add("l");
+ 		loadgames.add("z");
+ 		loadgames.add("x");
+ 		loadgames.add("@");
+ 		loadgames.add("#");
+ 		loadgames.add("$");
+*/
 
 
 

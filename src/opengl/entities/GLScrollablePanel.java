@@ -58,6 +58,7 @@ public class GLScrollablePanel extends GLEntity{
 
 		scroll_bar_width=25;
 		scroll_bar_pressed=false;
+		scroll_bar_y=y;
 	}
 
 	public void add(String item){
@@ -77,6 +78,11 @@ public class GLScrollablePanel extends GLEntity{
 		double inity=y+padding/2;
 
 		int location = 0;
+
+		int items_on_screen=(int)(height/itemheight);
+		if(itemindex>(items.size()-items_on_screen)){
+			itemindex=items.size()-items_on_screen;
+		}
 		for(int i=itemindex; i<items.size(); i++){
 
 			if(location<(int)(height/itemheight)){
@@ -86,7 +92,7 @@ public class GLScrollablePanel extends GLEntity{
 				double rely = inity + location*itemheight;
 
 
-				if(item_hovered!=-1 && location==item_hovered && item_selected!=i){
+				if(item_hovered!=-1 && location==item_hovered && item_selected!=i && !scroll_bar_pressed){
 					g.setColor(Color.yellow);
 				}else if(item_selected==i){
 					g.setColor(Color.blue);
@@ -116,12 +122,13 @@ public class GLScrollablePanel extends GLEntity{
 		if(content_height>height){
 
 			scroll_bar_x = (x+width)-scroll_bar_width+ (float)padding/2;
-			scroll_bar_y = y+(itemheight*itemindex);
+			//scroll_bar_y = y + (itemindex*(float)itemheight/content_height)*(float)(height);
 
+			//System.out.println("itemindex: " + itemindex);
+			scroll_bar_height=(float)(height * ((float)height/content_height))+(float)padding/2;
+			
 
-			scroll_bar_height=(float)(height * ((float)height/content_height)) - padding;
-			System.out.println(content_height);
-
+			g.setColor(Color.black);
 			g.fillRect(scroll_bar_x,(float)scroll_bar_y,scroll_bar_width,scroll_bar_height);
 
 
@@ -175,6 +182,7 @@ public class GLScrollablePanel extends GLEntity{
 		    	if(itemindex>0)
 		    		itemindex--;
 
+		    	 scroll_bar_y = y + (itemindex*(float)itemheight/content_height)*(float)(height);
 		    } else if (dWheel > 0){
 		        //up
 		        int max_scroll = (int)((content_height-height)/itemheight);
@@ -182,7 +190,11 @@ public class GLScrollablePanel extends GLEntity{
 		        	itemindex++;
 		        }
 
+		         scroll_bar_y = y + (itemindex*(float)itemheight/content_height)*(float)(height);
 		    }
+
+
+
 		}
 	 
 	}
@@ -219,10 +231,25 @@ public class GLScrollablePanel extends GLEntity{
                   int newy){
 
 
-/*
+
   		if(scroll_bar_pressed){
 
-  			if(scroll_click_gap+newy>=itemheight){
+  			int delta = newy-oldy;
+
+  			if(scroll_bar_y+delta>y && scroll_bar_y+delta<(y+height+(float)padding/2-scroll_bar_height)){
+  				scroll_bar_y+=delta;
+
+  				float percent = (scroll_bar_y-y)/(height-scroll_bar_height);
+
+  				itemindex=(int)(percent*items.size());
+
+  				System.out.println(itemindex);
+  			}
+
+
+
+  				//dddSystem.out.println("oldy: " + oldy + " | newy : " + newy);
+  			/*if(scroll_click_gap+newy>=itemheight){
 			    int max_scroll = (int)((content_height-height)/itemheight);
 		        if(itemindex<max_scroll){
 		        	itemindex++;
@@ -230,13 +257,12 @@ public class GLScrollablePanel extends GLEntity{
   			}else if(scroll_click_gap<=-1*itemheight){
   				if(itemindex>0)
 		    		itemindex--;
-  			}
-  			System.out.println("oldy: " + oldy + " | newy : " + newy);
+  		
   			//if(newyoldy-scroll_bar_y)
 
-
+		*/
   		}
-*/
+
 
   	}
 
