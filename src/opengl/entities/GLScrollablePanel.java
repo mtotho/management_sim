@@ -45,11 +45,11 @@ public class GLScrollablePanel extends GLEntity{
 
 		padding=5;
 
-		itemheight=25;
-		itemindex=0;
-		content_height=0;
-		items = new ArrayList<String>();
-		//this.active = true;
+		itemheight=25; //Height of each item in the panel
+		itemindex=0;   //index of item to render first
+		content_height=0; //height of the sum on the items
+		items = new ArrayList<String>(); 
+		
 		item_hovered=-1;
 		item_selected=-1;
 
@@ -60,7 +60,8 @@ public class GLScrollablePanel extends GLEntity{
 		scroll_bar_pressed=false;
 		scroll_bar_y=y;
 	}
-
+	
+	//add and item to the panel and increment the content_height accordingly
 	public void add(String item){
 		items.add(item);
 		content_height+=itemheight;
@@ -77,12 +78,15 @@ public class GLScrollablePanel extends GLEntity{
 		double initx=x+padding/2;
 		double inity=y+padding/2;
 
-		int location = 0;
+		int location = 0; //Location to keep track of which viewable slot we are in
 
+		//Make it so we dont scroll past the last items
 		int items_on_screen=(int)(height/itemheight);
 		if(itemindex>(items.size()-items_on_screen)){
 			itemindex=items.size()-items_on_screen;
 		}
+
+		//loop through each item, starting at the current itemindex
 		for(int i=itemindex; i<items.size(); i++){
 
 			if(location<(int)(height/itemheight)){
@@ -92,10 +96,15 @@ public class GLScrollablePanel extends GLEntity{
 				double rely = inity + location*itemheight;
 
 
+				//Change the color to yellow when hovered over an item
 				if(item_hovered!=-1 && location==item_hovered && item_selected!=i && !scroll_bar_pressed){
 					g.setColor(Color.yellow);
+				
+				//Change color to blue when item selected
 				}else if(item_selected==i){
 					g.setColor(Color.blue);
+
+				//Change color to white normally
 				}else{
 					g.setColor(Color.white);
 				}
@@ -103,8 +112,7 @@ public class GLScrollablePanel extends GLEntity{
 				g.fillRect((float)x,(float)rely,width,itemheight);
 		
 
-
-				
+				//Change text color to white when item selected so we can see over blue back
 				if(item_selected==i){
 					g.setColor(Color.white);
 				}else{
@@ -118,13 +126,13 @@ public class GLScrollablePanel extends GLEntity{
 		}
 
 
-
+		//Render Scroll bar if content over flows
 		if(content_height>height){
 
 			scroll_bar_x = (x+width)-scroll_bar_width+ (float)padding/2;
 			//scroll_bar_y = y + (itemindex*(float)itemheight/content_height)*(float)(height);
 
-			//System.out.println("itemindex: " + itemindex);
+			//Set the height of the scroll bar to be some factor of the content_height
 			scroll_bar_height=(float)(height * ((float)height/content_height))+(float)padding/2;
 			
 
@@ -134,13 +142,7 @@ public class GLScrollablePanel extends GLEntity{
 
 		}
 
-		// This is used to determine the distance between buttons
-		//int yDif = (int)(height/(buttons.size()+1));
-
-	   	//g.setColor(Color.white);
-		//g.fillRect(x,y, width, height);
-
- 	 }
+ 	 }//end: render
 
   	public int getSelectedIndex(){
   		return item_selected;
@@ -158,30 +160,24 @@ public class GLScrollablePanel extends GLEntity{
  	public void update(GameContainer container, StateBasedGame game, int delta)
             throws SlickException {
        
-
-     //	Input input = gc.getInput();
-      	
-        //int mousex = input.getMouseX();
-
+        //Capture mouse wheel move
         scroll();
-      //  int mousey = input.getMouseY();
-          //Move the employee to where we left click
-       /// if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)){
-        
-      ///   
-       // }
+  
 
  	
     }
 
     public void scroll() {
+
+    	//Check mouse wheel movement if there is content overflow
 		if(content_height>height){
 		    int dWheel = Mouse.getDWheel();
 		    if (dWheel < 0) {
 		        //scroll down
-		    	if(itemindex>0)
+		    	if(itemindex>0) //decrement itemindex
 		    		itemindex--;
 
+		    	 //Set the y position of the scoll bar to match where we scrolled to
 		    	 scroll_bar_y = y + (itemindex*(float)itemheight/content_height)*(float)(height);
 		    } else if (dWheel > 0){
 		        //up
@@ -210,12 +206,13 @@ public class GLScrollablePanel extends GLEntity{
                   int x,
                   int y){
 
+  		//Flag if we are pressing the scroll bar
   		if(x >= scroll_bar_x && x<=scroll_bar_x+scroll_bar_width && y>=scroll_bar_y && y<=scroll_bar_y+scroll_bar_height){
   			scroll_bar_pressed=true;
-  			scroll_click_gap=y-scroll_bar_y;
+  		//	scroll_click_gap=y-scroll_bar_y;
   		}else{
   			scroll_bar_pressed=false;
-  			scroll_click_gap = 0;
+  		//	scroll_click_gap = 0;
 
 	  		if(item_hovered!=-1){
 	  			item_selected = item_hovered+itemindex;
@@ -231,36 +228,26 @@ public class GLScrollablePanel extends GLEntity{
                   int newy){
 
 
-
+  		//move the scroll bar and itemindex if we drag the scroll bar
   		if(scroll_bar_pressed){
 
+  			//get direction of the drag
   			int delta = newy-oldy;
 
+  			//ensure that dragging the scroll bar keeps inside the bounds of the panel
   			if(scroll_bar_y+delta>y && scroll_bar_y+delta<(y+height+(float)padding/2-scroll_bar_height)){
   				scroll_bar_y+=delta;
 
+  				//Try to determine how far into the items we are 
   				float percent = (scroll_bar_y-y)/(height-scroll_bar_height);
 
+
+  				//This is off but it works well enough
   				itemindex=(int)(percent*items.size());
 
-  				System.out.println(itemindex);
+  				//System.out.println(itemindex);
   			}
 
-
-
-  				//dddSystem.out.println("oldy: " + oldy + " | newy : " + newy);
-  			/*if(scroll_click_gap+newy>=itemheight){
-			    int max_scroll = (int)((content_height-height)/itemheight);
-		        if(itemindex<max_scroll){
-		        	itemindex++;
-		        }
-  			}else if(scroll_click_gap<=-1*itemheight){
-  				if(itemindex>0)
-		    		itemindex--;
-  		
-  			//if(newyoldy-scroll_bar_y)
-
-		*/
   		}
 
 
@@ -268,13 +255,12 @@ public class GLScrollablePanel extends GLEntity{
 
   	public void mouseMoved(int oldx, int oldy, int newx, int newy){
 
+  		//Get the currently hovered item
   		if(inBounds(newx, newy)){
 
   			int rely = newy-y;
 
   			item_hovered = (int)(rely / itemheight);
-
-
 
   			System.out.println(item_hovered);
 
