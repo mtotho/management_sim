@@ -151,7 +151,7 @@ public class GLScrollablePanel extends GLEntity{
 				}else{
 					g.setColor(Color.black);
 				}
-				g.drawString(content,(int)(initx), (int)(rely));
+				g.drawString(content,3+(int)(initx), (int)(rely));
 
 
 				location++;	
@@ -309,7 +309,7 @@ public class GLScrollablePanel extends GLEntity{
 
   			item_hovered = (int)(rely / itemheight);
 
-  			System.out.println(item_hovered);
+  		//	System.out.println(item_hovered);
 
   		}else{
   			item_hovered=-1;
