@@ -31,6 +31,13 @@ public class GLScrollablePanel extends GLEntity{
 	private int item_hovered;
 	private int item_selected;
 
+	private int scroll_bar_width;
+	private float scroll_bar_height;
+	private float scroll_bar_x;
+	private float scroll_bar_y;
+	private boolean scroll_bar_pressed;
+	private float scroll_click_gap;
+
 	public GLScrollablePanel(Restaurant restaurant, GameContainer gc, int x, int y, int width, int height){
 		super(gc,x,y,width,height, false);
 		this.restaurant=restaurant;
@@ -48,6 +55,9 @@ public class GLScrollablePanel extends GLEntity{
 
  	 	font = new Font("Verdana", Font.BOLD, fontSize);
 		ttfont = new TrueTypeFont(font, false);
+
+		scroll_bar_width=25;
+		scroll_bar_pressed=false;
 	}
 
 	public void add(String item){
@@ -58,8 +68,8 @@ public class GLScrollablePanel extends GLEntity{
 	public void render(GUIContext gc, Graphics g){
 
 		//int content_height;
-		g.setColor(Color.green);
-		g.fillRect(x-(padding/2),y-(padding/2),width+padding,height+padding);
+		g.setColor(Color.black);
+		g.drawRect(x-(padding/2),y-(padding/2),width+padding,height+padding);
 
 		g.setFont(ttfont);
 		
@@ -76,8 +86,10 @@ public class GLScrollablePanel extends GLEntity{
 				double rely = inity + location*itemheight;
 
 
-				if(item_hovered!=-1 && location==item_hovered || item_selected==i){
+				if(item_hovered!=-1 && location==item_hovered && item_selected!=i){
 					g.setColor(Color.yellow);
+				}else if(item_selected==i){
+					g.setColor(Color.blue);
 				}else{
 					g.setColor(Color.white);
 				}
@@ -87,13 +99,32 @@ public class GLScrollablePanel extends GLEntity{
 
 
 				
-
-				g.setColor(Color.black);
+				if(item_selected==i){
+					g.setColor(Color.white);
+				}else{
+					g.setColor(Color.black);
+				}
 				g.drawString(content,(int)(initx), (int)(rely));
 
 
 				location++;	
 			}
+		}
+
+
+
+		if(content_height>height){
+
+			scroll_bar_x = (x+width)-scroll_bar_width+ (float)padding/2;
+			scroll_bar_y = y+(itemheight*itemindex);
+
+
+			scroll_bar_height=(float)(height * ((float)height/content_height)) - padding;
+			System.out.println(content_height);
+
+			g.fillRect(scroll_bar_x,(float)scroll_bar_y,scroll_bar_width,scroll_bar_height);
+
+
 		}
 
 		// This is used to determine the distance between buttons
@@ -159,16 +190,53 @@ public class GLScrollablePanel extends GLEntity{
 
   	public void mouseReleased(int button, int x, int y){
   		
-  		
+  		scroll_bar_pressed=false;
+		scroll_click_gap = 0;
   		//mouseDown=false; //change flag back to false after click is done
   	} 
   	public void mousePressed(int button,
                   int x,
                   int y){
 
-  		if(item_hovered!=-1){
-  			item_selected = item_hovered+itemindex;
+  		if(x >= scroll_bar_x && x<=scroll_bar_x+scroll_bar_width && y>=scroll_bar_y && y<=scroll_bar_y+scroll_bar_height){
+  			scroll_bar_pressed=true;
+  			scroll_click_gap=y-scroll_bar_y;
+  		}else{
+  			scroll_bar_pressed=false;
+  			scroll_click_gap = 0;
+
+	  		if(item_hovered!=-1){
+	  			item_selected = item_hovered+itemindex;
+	  		}
   		}
+
+
+
+  	}
+
+  	public void mouseDragged (int oldx,int oldy,
+                  int newx,
+                  int newy){
+
+
+/*
+  		if(scroll_bar_pressed){
+
+  			if(scroll_click_gap+newy>=itemheight){
+			    int max_scroll = (int)((content_height-height)/itemheight);
+		        if(itemindex<max_scroll){
+		        	itemindex++;
+		        }
+  			}else if(scroll_click_gap<=-1*itemheight){
+  				if(itemindex>0)
+		    		itemindex--;
+  			}
+  			System.out.println("oldy: " + oldy + " | newy : " + newy);
+  			//if(newyoldy-scroll_bar_y)
+
+
+  		}
+*/
 
   	}
 
