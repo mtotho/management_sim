@@ -28,6 +28,7 @@ public class Restaurant{
 	//public List<Transactions_model> transactions;
 	public List<Restaurant_model> restaurantData;
 	public Player_model player;
+	public ArrayList<ArrayList> orders;
 
 	//Constructor()
 
@@ -67,6 +68,10 @@ public class Restaurant{
 
 		scheduler = new Scheduler();
 
+		System.out.println(menu.toString());
+
+		orders = new ArrayList<ArrayList>();
+
 	}//end: Constructor()
 
 	//loop(): main restaurant loop
@@ -102,6 +107,9 @@ public class Restaurant{
 			if(!foodline.isHelped()){
 				if(foodline.atStart()){
 					Customer cust = foodline.getNext();
+
+					orders.add(cust.giveOrder());
+					//System.out.println(orders.toString());
 
 					Task cashierTask = new Task(2500, TaskType.CASHIER, Locations.REGISTER, "Taking order");
 					customer2Task.put(cust, cashierTask);
@@ -162,6 +170,7 @@ public class Restaurant{
 							customer2Task.remove(cust);
 							task2customer.remove(tempTask);
 							cust.setWayPoint(Locations.PICKUPWINDOW);
+							orders.remove(cust.getOrder());
 								
 						}
 					}

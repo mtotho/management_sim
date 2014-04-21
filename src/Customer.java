@@ -24,6 +24,7 @@ private boolean windowReached;
 private boolean exiting;
 private int last_ms;
 public FigureDirection direction;
+private Items_model item;
 
 
 	//Constructor()
@@ -37,6 +38,8 @@ public FigureDirection direction;
 		this.menu = menu;
 		windowReached=false;
 		exiting=false;
+
+
 
 	}//end: Constructor()
 
@@ -73,30 +76,40 @@ public FigureDirection direction;
 
 	}//end getTraits
 
-	public void giveOrder(){
-
+	public ArrayList<Items_model> giveOrder(){
 
 		order = new ArrayList<Items_model>();
+		//order = new List<Items_model>();
 
 		Random random = new Random();
-
 		items = (random.nextInt() % 6) + 1;
+		if(items < 0){
+			items = items * -1;
+		}
 
-		for (int i = 0; i < items + 1; i++){
+		for (int i = 0; i < items; i++){
 
 			nextItem = ((random.nextInt() % 6) + 1);
 			
-			order.add(menu.get(i));
+			if(nextItem < 0){
+				nextItem = nextItem * -1;
+			}
+		
+			item = menu.get(nextItem);
+			
+			order.add(item);
 
 		}
 
+		return order;
 
 
 
 	}//end giveOrder
 
-	public void getOrder(){
+	public List<Items_model> getOrder(){
 
+		return order;
 		
 
 	}//end getOrder()
