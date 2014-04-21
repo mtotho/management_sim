@@ -82,12 +82,7 @@ public class StateLoadGame extends BasicGameState{
  		
  		loadgames = new GLScrollablePanel<Player_model>(restaurant, gc,200, 75,550, 250);
  	
- 		for(int i=0; i<players.size(); i++){
- 			Player_model player = players.get(i);
-
- 			loadgames.add(player.getName(), player);
- 		}
-
+ 	
  		//Start the button out disabled
 	 	btnStartGame.setDisabled(true);
  		/*
@@ -146,11 +141,20 @@ public class StateLoadGame extends BasicGameState{
 
        	g.setColor(Color.white);
 		g.fillRect(0,0, gc.getWidth(), gc.getHeight());
+
+		for(int i=0; i<players.size(); i++){
+ 			Player_model player = players.get(i);
+
+ 			if(!loadgames.contains(player))
+ 				loadgames.add(player.getName(), player);
+ 		}
+
 	    loadgames.render(gc,g);
 		
 	  
 	   	btnStartGame.render(gc, g);
-	  
+	  	
+
 
 	    g.setColor(Color.black);
 	    g.drawString("Select a Restaurant profile to load: ", 50, 25);
@@ -183,6 +187,12 @@ public class StateLoadGame extends BasicGameState{
 
  			System.out.println("Selected player: " + player.getName());
 
+ 			restaurant.loadGame(player);
+ 			
+ 			//StateGame stategame = game.getState(3);
+ 			//stategame.clean_up(container, game);
+
+ 			game.enterState(3);
  			
  		}
 
@@ -207,6 +217,19 @@ public class StateLoadGame extends BasicGameState{
 	    default:
 	        break;
 	    }
+	}
+
+	public void leave(GameContainer gc, StateBasedGame game){
+		//System.out.println("game left");
+		players.clear();
+		loadgames.clear();
+	}
+
+	public void enter(GameContainer gc, StateBasedGame game){
+		System.out.println("load game entered");
+		players = db.select(new Player_model());
+
+		System.out.println("player size: " + players.size());	
 	}
 
 	public void mousePressed(int button, int posx, int posy){

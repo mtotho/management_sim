@@ -36,7 +36,7 @@ class Simulator{
 	     try {
 	          AppGameContainer container = new AppGameContainer(game);
 	          container.setDisplayMode(960, 480, false);
-	          container.setShowFPS(true);
+	         // container.setShowFPS(true);
 	          container.setTargetFrameRate(80);
 	          container.setAlwaysRender(true);
 	          container.start();

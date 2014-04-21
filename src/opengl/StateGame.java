@@ -51,19 +51,7 @@ public class StateGame extends BasicGameState{
     super();
     this.restaurant=restaurant;
 
-    //Get the employee/customer entities from the logical restaurant.
-    customers = restaurant.getCustomers();
-    employees = restaurant.getEmployees();
-
-
-    timer = restaurant.getTimer();
-    foodline = new Foodline(8, 17, FigureDirection.RIGHT, 20);
-    waitline = new Foodline(12, 12, FigureDirection.RIGHT, 12);
-
-
-    this.restaurant.setStateGame(this);
-
-    this.restaurant.setFoodline(foodline);
+  
   }
 
     @Override 
@@ -74,6 +62,20 @@ public class StateGame extends BasicGameState{
         //Initiate the Game Map
         map = new OGLMap();
 
+
+        //Get the employee/customer entities from the logical restaurant.
+        customers = restaurant.getCustomers();
+        employees = restaurant.getEmployees();
+
+
+        timer = restaurant.getTimer();
+        foodline = new Foodline(8, 17, FigureDirection.RIGHT, 20);
+        waitline = new Foodline(12, 12, FigureDirection.RIGHT, 12);
+
+
+        this.restaurant.setStateGame(this);
+
+        this.restaurant.setFoodline(foodline);
 
         //Initiate a GL employee for each logical employee, store in ArrayList
         gl_employees = new ArrayList<GLEmployee>();
@@ -281,13 +283,22 @@ public class StateGame extends BasicGameState{
 	}
 
 	public void enter(GameContainer gc, StateBasedGame game){
-		//System.out.println("game entered");
+    clean_up(gc, game);
 	}
 
 
 	//Clean up entities
-	public void clean_up(){
+	public void clean_up(GameContainer gc, StateBasedGame game){
+    cust_map.clear();
+    gl_customers.clear();
+    gl_employees.clear();
+    //counter=0;
 
+    try{
+        init(gc, game);
+    }catch(SlickException e){
+      System.out.println("slick exception: " + e);
+    }
 	}
 
   

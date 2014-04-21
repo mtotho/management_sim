@@ -31,6 +31,9 @@ public class Restaurant{
 
 	public int customer_timer;
 
+	private Employee e1;
+	private Employee e2;;
+
 	//Constructor()
 
 	public Restaurant(DBmapper db){
@@ -40,21 +43,37 @@ public class Restaurant{
 
 		this.db = db;
 
-		menu = db.select(new Items_model());
-
+		
 		employees = new ArrayList<Employee>();
 		customers = new ArrayList<Customer>();
 		customer2Task = new HashMap<Customer, Task>();
 
 		task2customer = new HashMap<Task, Customer>();
-		//Customer c1 = new Customer();
-		//c1.setWayPoint(Locations.FOODLINE);
-		//customers.add(c1);
-		//Scheduler taskQueue = new Scheduler;
+		
+	
 
-		Employee e1 = new Employee();
-		Employee e2 = new Employee();
-		//Employee e2 = new Employee();
+		scheduler = new Scheduler();
+
+		customer_timer=0;
+
+		newGame();
+
+	}//end: Constructor()
+
+	public void newGame(){
+
+		timer.setTime(0);
+
+		menu = db.select(new Items_model());
+
+		employees.clear();
+		customers.clear();
+		customer2Task.clear();
+		task2customer.clear();
+		scheduler = new Scheduler();
+
+		e1 = new Employee();
+		e2 = new Employee();
 
 		e1.setLocation(Locations.REGISTER);
 		e2.setLocation(Locations.KITCHEN);
@@ -62,22 +81,12 @@ public class Restaurant{
 
 		e1.setDuty(TaskType.CASHIER);
 		e2.setDuty(TaskType.KITCHEN);
-	
+
 		employees.add(e1);
 		employees.add(e2);
-		//employees.add(e2);
-
-		scheduler = new Scheduler();
 
 
-		customer_timer=0;
-
-	}//end: Constructor()
-
-	//loop(): main restaurant loop
-	public void loop(){
-
-	}//end: loop()
+	}
 
 	public void updateTime(int delta){
 		timer.addMilliSecond(delta);
@@ -230,10 +239,15 @@ public class Restaurant{
 		return employees;
 	}
 
+	//Load a game from the database
 	public void loadGame(Player_model player){
+		//default all the values
+		newGame();
+
 		this.player = player;
 		inventory = db.selectData(new Inventory_model(), player);
 		restaurantData = db.selectData(new Restaurant_model(), player);
+
 
 
 	}

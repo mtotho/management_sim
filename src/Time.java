@@ -99,6 +99,10 @@ public class Time{
 
 	}
 
+	public void setTime(int ms){
+		time_passed_ms=0;
+	}
+
 	//getday, gethour, etc
 
 }
