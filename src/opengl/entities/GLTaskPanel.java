@@ -40,7 +40,7 @@ public class GLTaskPanel extends GLPanel{
         padding=10;
 
 
-        scroll_panel = new GLScrollablePanel(restaurant, gc, x+15, y+30, 290, 400);
+        scroll_panel = new GLScrollablePanel(restaurant, gc, x+15, y+30, 290, 250);
    
 	}
 

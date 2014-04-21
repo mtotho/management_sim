@@ -31,6 +31,7 @@ public class GLScrollablePanel extends GLEntity{
 	private int item_hovered;
 	private int item_selected;
 
+	private boolean scrollbar;
 	private int scroll_bar_width;
 	private float scroll_bar_height;
 	private float scroll_bar_x;
@@ -45,7 +46,7 @@ public class GLScrollablePanel extends GLEntity{
 
 		padding=5;
 
-		itemheight=25; //Height of each item in the panel
+		itemheight=24; //Height of each item in the panel
 		itemindex=0;   //index of item to render first
 		content_height=0; //height of the sum on the items
 		items = new ArrayList<String>(); 
@@ -58,6 +59,7 @@ public class GLScrollablePanel extends GLEntity{
 
 		scroll_bar_width=25;
 		scroll_bar_pressed=false;
+		scrollbar=false;
 		scroll_bar_y=y;
 	}
 	
@@ -84,20 +86,29 @@ public class GLScrollablePanel extends GLEntity{
 
 	public void render(GUIContext gc, Graphics g){
 
+		if(content_height>height){
+			scrollbar=true;
+		}else{
+			scrollbar=false;
+		}
+
 		//int content_height;
 		g.setColor(Color.black);
-		g.drawRect(x-(padding/2),y-(padding/2),width+padding,height+padding);
+		g.drawRect(x,y,width,height);
+		g.setColor(Color.white);
+		g.fillRect(x+1,y+1,width-2,height-2);
+
 
 		g.setFont(ttfont);
 		
-		double initx=x+padding/2;
-		double inity=y+padding/2;
+		double initx=x+padding;
+		double inity=y+padding;
 
 		int location = 0; //Location to keep track of which viewable slot we are in
 
 		//Make it so we dont scroll past the last items
 		int items_on_screen=(int)(height/itemheight);
-		if(itemindex>(items.size()-items_on_screen) && content_height>height){
+		if(itemindex>(items.size()-items_on_screen) && scrollbar){
 		
 			itemindex=items.size()-items_on_screen;
 		}
@@ -106,7 +117,7 @@ public class GLScrollablePanel extends GLEntity{
 		//loop through each item, starting at the current itemindex
 		for(int i=itemindex; i<items.size(); i++){
 
-			if(location<(int)(height/itemheight)){
+			if(location<(int)((height-2*padding)/itemheight)){
 
 				String content = items.get(i);
 
@@ -126,7 +137,12 @@ public class GLScrollablePanel extends GLEntity{
 					g.setColor(Color.white);
 				}
 
-				g.fillRect((float)x,(float)rely,width,itemheight);
+				if(scrollbar){
+					g.fillRect((float)(x+padding),(float)rely,width-1*padding-scroll_bar_width-2,itemheight);
+				}else{
+					g.fillRect((float)(x+padding),(float)rely,width-2*padding,itemheight);
+				}
+				
 		
 
 				//Change text color to white when item selected so we can see over blue back
@@ -144,17 +160,29 @@ public class GLScrollablePanel extends GLEntity{
 
 
 		//Render Scroll bar if content over flows
-		if(content_height>height){
+		if(scrollbar){
 
-			scroll_bar_x = (x+width)-scroll_bar_width+ (float)padding/2;
+			scroll_bar_x = (x+width)-scroll_bar_width;
 			//scroll_bar_y = y + (itemindex*(float)itemheight/content_height)*(float)(height);
 
 			//Set the height of the scroll bar to be some factor of the content_height
 			scroll_bar_height=(float)(height * ((float)height/content_height))+(float)padding/2;
 			
+			//The left border of the backgroudn
+			g.setColor(new Color(133,133,133));
+			g.fillRect(scroll_bar_x-1, y+1, 1, height-1);
 
-			g.setColor(Color.black);
-			g.fillRect(scroll_bar_x,(float)scroll_bar_y,scroll_bar_width,scroll_bar_height);
+
+			//scroll bar back
+			g.setColor(new Color(220,220,220));
+			g.fillRect(scroll_bar_x, y+1, scroll_bar_width, height-2);
+
+			//scroll bar
+			//g.setColor(Color.black);
+			g.setColor(new Color(166,166,166));	
+			g.fillRect(scroll_bar_x,(float)scroll_bar_y+1,scroll_bar_width,scroll_bar_height);
+
+
 
 
 		}
@@ -198,7 +226,7 @@ public class GLScrollablePanel extends GLEntity{
 		    	 scroll_bar_y = y + (itemindex*(float)itemheight/content_height)*(float)(height);
 		    } else if (dWheel > 0){
 		        //up
-		        int max_scroll = (int)((content_height-height)/itemheight);
+		        int max_scroll = (int)((content_height-height-2*padding)/itemheight);
 		        if(itemindex<max_scroll){
 		        	itemindex++;
 		        }

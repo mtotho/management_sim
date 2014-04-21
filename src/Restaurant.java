@@ -96,7 +96,7 @@ public class Restaurant{
 		double mod = Math.random();
 
 		//System.out.println(mod);
-		if(mod>0.992){
+		if(mod>0.995){
 			customer_timer=0;
 
 			if(!sg.waitline.isFull() && !foodline.isFull()){
