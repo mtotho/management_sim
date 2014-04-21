@@ -9,6 +9,8 @@ import java.util.List;
 public class Restaurant{
 
 	private ArrayList<Employee> employees;
+	private String[] nameList = {"Mike", "Gordon", "Patrick", "Joey", "Jesus", "Melvin", "Eugene", "Dylan", "Ash", "Gary", "Brock", "Red"};
+	private ArrayList<String> nameArray = new ArrayList<String>();
 	private ArrayList<Customer> customers;
 	private Scheduler scheduler;
 	public Time timer;
@@ -16,6 +18,7 @@ public class Restaurant{
 	private Foodline foodline;
 	private HashMap<Customer, Task> customer2Task;
 	private HashMap<Task, Customer> task2customer;
+
 	public DBmapper db;
 	public StateGame sg;
 	
@@ -37,6 +40,9 @@ public class Restaurant{
 		timer = new Time();
 
 		this.db = db;
+		for(int i=0; i<nameList.length; i++){
+			nameArray.add(nameList[i]);
+		}
 
 		menu = db.select(new Items_model());
 
@@ -53,7 +59,6 @@ public class Restaurant{
 		Employee e1 = new Employee();
 		Employee e2 = new Employee();
 		//Employee e2 = new Employee();
-
 		e1.setLocation(Locations.REGISTER);
 		e2.setLocation(Locations.KITCHEN);
 		//e2.setLocation(Locations.MENSROOM);
@@ -63,6 +68,12 @@ public class Restaurant{
 	
 		employees.add(e1);
 		employees.add(e2);
+
+		for(int i =0; i<employees.size(); i++){
+			int randNum = (int)(Math.random()*(nameArray.size()));
+			employees.get(i).setName(nameArray.get(randNum));
+			nameArray.remove(randNum);
+		}
 		//employees.add(e2);
 
 		scheduler = new Scheduler();
