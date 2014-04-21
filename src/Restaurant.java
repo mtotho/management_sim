@@ -28,6 +28,10 @@ public class Restaurant{
 	//public List<Transactions_model> transactions;
 	public List<Restaurant_model> restaurantData;
 	public Player_model player;
+	public ArrayList<ArrayList> orders;
+	public Items_model item;
+	public double money;
+
 
 	public int customer_timer;
 
@@ -43,7 +47,7 @@ public class Restaurant{
 
 		this.db = db;
 
-		
+
 		employees = new ArrayList<Employee>();
 		customers = new ArrayList<Customer>();
 		customer2Task = new HashMap<Customer, Task>();
@@ -65,6 +69,7 @@ public class Restaurant{
 		timer.setTime(0);
 
 		menu = db.select(new Items_model());
+		inventory = db.select(new Inventory_model());
 
 		employees.clear();
 		customers.clear();
@@ -85,8 +90,18 @@ public class Restaurant{
 		employees.add(e1);
 		employees.add(e2);
 
+		//employees.add(e2);
+
+		scheduler = new Scheduler();
+
+		//System.out.println(menu.toString());
+
+		orders = new ArrayList<ArrayList>();
 
 	}
+
+
+	
 
 	public void updateTime(int delta){
 		timer.addMilliSecond(delta);
@@ -101,6 +116,7 @@ public class Restaurant{
 
 
 
+
 		customer_timer+=delta;
 		double mod = Math.random();
 
@@ -109,7 +125,8 @@ public class Restaurant{
 			customer_timer=0;
 
 			if(!sg.waitline.isFull() && !foodline.isFull()){
-				Customer cust = new Customer(this, menu);
+				Customer cust = new Customer(this, menu, inventory);
+
 				cust.setWayPoint(Locations.FOODLINE);
 				customers.add(cust);
 			}
@@ -128,7 +145,27 @@ public class Restaurant{
 				if(foodline.atStart()){
 					Customer cust = foodline.getNext();
 
+
 					Task cashierTask = new Task(3000, TaskType.CASHIER, Locations.REGISTER, "Taking order");
+
+					orders.add(cust.giveOrder());
+					//System.out.println(orders.toString());
+					for(int i = 0; i < orders.get(orders.size()-1).size(); i++){
+
+							//System.out.println(orders.get(orders.size()-1).get(i) + " i: " +i);
+							String item = orders.get(orders.size()-1).get(i).toString();
+							//System.out.println("ITEM STRING: " + item);
+							int id = item.charAt(0) - 48;
+							//System.out.println(id + "=ITEM ID");
+
+							inventory.get(id).setQuantity(inventory.get(id).getQuantity() -1);
+							//item = orders.get(orders.size()-1).get(i));
+							//System.out.println(item.getID());
+
+							//inventory.get(orders.get(orders.size()-1).get(i).getID()).setQuantity(inventory.get(i).getQuantity()-1);
+
+					} 
+
 					customer2Task.put(cust, cashierTask);
 					task2customer.put(cashierTask, cust);
 					scheduler.addTask(cashierTask);
@@ -187,6 +224,7 @@ public class Restaurant{
 							customer2Task.remove(cust);
 							task2customer.remove(tempTask);
 							cust.setWayPoint(Locations.PICKUPWINDOW);
+							orders.remove(cust.getOrder());
 								
 						}
 					}
@@ -210,7 +248,7 @@ public class Restaurant{
 	}//end: Update();
 
 	public void addCustomer(){
-		Customer cust = new Customer(this, menu);
+		Customer cust = new Customer(this, menu, inventory);
 		cust.setWayPoint(Locations.RANDOM);
 		customers.add(cust);
 	}
@@ -249,6 +287,13 @@ public class Restaurant{
 		restaurantData = db.selectData(new Restaurant_model(), player);
 
 
+
+	}
+
+	public void updateDatabase(){
+
+		db.updateInventory(inventory);
+		db.updateRestaurant(restaurantData);
 
 	}
 }//end class restaurant

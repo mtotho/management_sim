@@ -50,6 +50,12 @@ public class Inventory_model implements Model{
 		return quantity;
 
 	}//end getQuantity
+	public void setQuantity(int newQuantity){
+
+		quantity = newQuantity;
+
+
+	}
 
 	//returns the restauarant id of the correspoding item and quantity in the entry
 	public int getRestaurantID(){
