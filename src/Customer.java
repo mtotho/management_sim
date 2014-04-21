@@ -82,6 +82,7 @@ public List<Inventory_model> inventory;
 
 		order = new ArrayList<Items_model>();
 		//order = new List<Items_model>();
+		
 
 		Random random = new Random();
 		items = (random.nextInt() % 6) + 1;
@@ -89,10 +90,14 @@ public List<Inventory_model> inventory;
 			items = items * -1;
 		}
 
+		System.out.println("menu size: " + menu.size());
+
 		for (int i = 0; i < items; i++){
 
 			nextItem = ((random.nextInt() % 6) + 1);
 			
+			System.out.println("next inventory index : " + nextItem);			
+
 
 			if(nextItem < 0){
 				nextItem = nextItem * -1;

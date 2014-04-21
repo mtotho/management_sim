@@ -16,12 +16,8 @@ public class Employee{
 	private int tileX;
 	private int tileY;
 
-	private String[] nameList = {"Mike", "Gordon", "Patrick", "Joey", "Jesus", "Melvin", "Eugene", "Dylan", "Ash", "Gary", "Brock", "Red"};
-
 	//Constructor()
 	public Employee(){
-		int randNum = (int)(Math.random()*(nameList.length));
-		this.name = nameList[randNum];
 		busy=false;
 
 		location = Locations.REGISTER;
@@ -90,6 +86,10 @@ public class Employee{
 
 	public TaskType getDuty(){
 		return duty;
+	}
+
+	public void setName(String name){
+		this.name = name;
 	}
 
 	public String getName(){

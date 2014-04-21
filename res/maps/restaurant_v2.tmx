@@ -137,6 +137,11 @@
     <property name="blocking" value="true"/>
    </properties>
   </tile>
+  <tile id="71">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
   <tile id="80">
    <properties>
     <property name="blocking" value="true"/>
@@ -153,6 +158,21 @@
    </properties>
   </tile>
   <tile id="85">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="86">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="87">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="89">
    <properties>
     <property name="blocking" value="true"/>
    </properties>
@@ -187,6 +207,21 @@
     <property name="blocking" value="true"/>
    </properties>
   </tile>
+  <tile id="102">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="103">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
+  <tile id="105">
+   <properties>
+    <property name="blocking" value="true"/>
+   </properties>
+  </tile>
  </tileset>
  <tileset firstgid="257" name="matted_tile" tilewidth="16" tileheight="16">
   <image source="../tilesets/matted_tile.png" width="16" height="16"/>
@@ -209,12 +244,17 @@
  </tileset>
  <layer name="ground" width="40" height="30">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3XoQ0AIBAEwa+BEsj3XyMehSDhSEaMX7tdVc01Y/O6h7dmQMPPfQAAAKfS/ya9L90CfxONk8ASAAA=
+   H4sIAAAAAAAAC+3DQQ0AAAwDoRNT/xpnYw9IWDVVVVVVffoAYxAsMcASAAA=
+  </data>
+ </layer>
+ <layer name="groundPlus" width="40" height="30">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3UMRUAMAjEUKwU/yLroAzQR4Z8BbnlIiRNO9sBBXpfF30fvU+SfqH/H71PkvSW2wEFeh/dBZ43PG3AEgAA
   </data>
  </layer>
  <layer name="wall_collision" width="40" height="30">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+2UwQqAMAxDOzxNv0C9+hX+/4dJD+KQgaR17SUPcmrIcgirIlKNmorthnhWhzTfckM8HjTfckM8bw7Am9HvL9jPl3/fdC+LYP/CHNhP2QX7F7bgfllk9OttoZRH6JaQXfWyW9CdoPraVe/9kZyD8wkhhBBCCInmAuPVopvAEgAA
+   H4sIAAAAAAAAC+2UsQ6AIBBDIU7gF6irX2H8/+/SmzSEeAcVcehLOhB6R8PQ4JwLlRo85rfMT4BkP+K3zCPIfsRfOi+swHul/pp8LWE+bH/q39+LYnqv1P/3fHKWjE/qnU/r5ztj5j6e8v5SzmNVzOQt6edF8aKalf/8mk25751Pg/kwWvcfSprvb3lb9zOKpUt7YulbQgghpIYDKfRmksASAAA=
   </data>
  </layer>
  <layer name="collision" width="40" height="30">
@@ -222,22 +262,22 @@
    <property name="blocking" value="true"/>
   </properties>
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+2TuwqDQBBFNY12Jmm0018Qon0g2ouPXnz8/yd4m4W1cYplnV0yBw4DwxSnmSBwnwjGMIQjnLT50FR3CXze2JfCDL7gBndtvjXVXQ6LG/sEQRCEMx/uAIIfdwDBzB3gOSV3AMGXO4Cg4w4gcP1/pc8M6TPDhb7+woGxS7FcuDJ2/QMVrC3uTWlga3HvAweZc/TzwBIAAA==
+   H4sIAAAAAAAAC+2VywrCMBBFa13oTq0L3elHqHvB18aF4Hsnvv3/D/BmURgGmwSTNBFz4HAhtOV2oNMkCYsDU1CDdViBG7glmRLz6xqwaanPHC5IPpmCDuzCFrzCG8mMmF/Xg31L/XZwT3LJtIF4r0xiW3LvHT5IuuhnE9rt6LnLJ+jcXj6LaBDi/Cihzy+ihu9nnjIGGs8X/5xUw2rB/Xw/85Qx0ein2s2qHc33M08ZJ41+Lon7xQzV/MaltChGNb9VKS2+R+f79UnsZ0bsZ0bo/da+C4CzxIvHXv/AEI4cnpsyhTOH57/AG1k/Z5jAEgAA
   </data>
  </layer>
  <layer name="non_collision_mask" width="40" height="30">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3SWwoAEBCFYbxaB/tforx5cBm55/9qSkw5U6MU8CajTyeok+aLfblqveEvkl0o9Uh3q/f/lJ03KgAAALCVS85+wf2o2/PtEgA19Y8swBIAAA==
+   H4sIAAAAAAAAC+3XXQqAIBAEYLWzFNRbj/3covvfJYMEIVqWRHaM+WBAFpHxoUDnyJqPCUI6u2rQgrdu8LTd2R1+v1Lo90Psd0n9UkcpuZI9mtC7MWZSzKwsMatiRjjmyuejftN//T8TUVsOIdS+r2+dPlsPFeYJej90J9E92KXAEgAA
   </data>
  </layer>
  <layer name="decorative_collision" width="40" height="30">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3XMQoAIAiFYQ/QEdq7/w2bBJdo8BFW/wdvEXFxUTP8YmyimK3qAzJaSEU9BAAAAHBV71eXuV9Xf6CqfoOX93vCBB5cLVzAEgAA
+   H4sIAAAAAAAAC+3XwQkAIAgAQAdohP7tv2ETRI+kqO7Aj6gIvozgF20SGbOz6gAAAH5TTi8wURd6R39gVv4GL993hw4f6setwBIAAA==
   </data>
  </layer>
  <layer name="cleaning" width="40" height="30">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3XsQkAMAgEQLfJ/humsQwGQiq9AysfG6uPYJqVc8u83P2ZAwAAoIeqB552euNM1d83sETZqMASAAA=
+   H4sIAAAAAAAAC+3XsQkAMAgEQLfJ/humsQwGQiq9AysfG6uPYJqVc8u83P2ZAwAAoIeqB552euNM1d83sETZqMASAAA=
   </data>
  </layer>
 </map>

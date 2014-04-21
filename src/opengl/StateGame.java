@@ -1,4 +1,4 @@
-  
+
 package mftoth.restaurantsim.ogl;
 
 //import mftoth.entities.*;
@@ -51,7 +51,6 @@ public class StateGame extends BasicGameState{
     super();
     this.restaurant=restaurant;
 
-  
   }
 
     @Override 
@@ -69,8 +68,8 @@ public class StateGame extends BasicGameState{
 
 
         timer = restaurant.getTimer();
-        foodline = new Foodline(8, 17, FigureDirection.RIGHT, 20);
-        waitline = new Foodline(12, 12, FigureDirection.RIGHT, 12);
+        foodline = new Foodline(8, 17, FigureDirection.RIGHT, 12);
+        waitline = new Foodline(13, 14, FigureDirection.RIGHT, 12);
 
 
         this.restaurant.setStateGame(this);
@@ -143,6 +142,7 @@ public class StateGame extends BasicGameState{
     	
       //Render the floor layer of the map
       map.render(0);
+      map.render(1);
 
   		g.setColor(Color.black);
 
@@ -164,11 +164,11 @@ public class StateGame extends BasicGameState{
       }
 
       //Render all the map layers that should appear "in front of" the employees and customers
-      map.render(1);
       map.render(2);
       map.render(3);
       map.render(4);
       map.render(5);
+      map.render(6);
     } 
 
 

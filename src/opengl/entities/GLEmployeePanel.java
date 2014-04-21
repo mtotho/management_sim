@@ -22,6 +22,7 @@ public class GLEmployeePanel extends GLPanel{
 	private Restaurant restaurant;
 
 	private ArrayList<Employee> employees;
+	private Employee active_employee;
 	private boolean active_list = false;
 	
 	public GLEmployeePanel(Restaurant restaurant, GameContainer gc, StateGame game) throws SlickException{
@@ -61,6 +62,15 @@ public class GLEmployeePanel extends GLPanel{
 					tempButton.setY((yDif * (i+1)) - 60);
 					tempButton.render(gc, g);
 			}
+		}
+		else if(active_list && active_employee!=null){
+			g.setColor(Color.black);
+			g.fillRect(x,y, width, height);
+
+			g.setColor(Color.orange);
+		    g.drawString("Time: " + timer.getFormattedTime(), x+10, y+5);
+
+		    g.drawString("Day: " + timer.getDay(), x+250, y+5);
 		}
 		else{
 			g.setColor(Color.black);
@@ -112,6 +122,15 @@ public class GLEmployeePanel extends GLPanel{
 		    }
 		   	else if(buttons.get("btnBack").isPressed() && active_list){
 		    	active_list = !active_list;
+		    }
+		    //if(buttons.get("btn" + employees.get(0).getName()).isPressed()){
+		    //	System.out.println(employees.get(0).getName());
+		    //}
+		    for(int i=0; i<employees.size(); i++){
+		    	String employeeName = employees.get(i).getName();
+		    	if(buttons.get("btn"+employeeName)!=null && buttons.get("btn" + employeeName).isPressed() && active_list){
+		    		System.out.println("btn" + employeeName);
+		    	}
 		    }
 	    }
   }

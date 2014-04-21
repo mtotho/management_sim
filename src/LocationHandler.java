@@ -13,8 +13,8 @@ public class LocationHandler{
 		this.map=map;
 
 		tilemapper=new LinkedHashMap<Locations, GLTile>();
-		tilemapper.put(Locations.MENSROOM, new GLTile(28,3));
-		tilemapper.put(Locations.WOMENSROOM, new GLTile(36,3));
+		tilemapper.put(Locations.MENSROOM, new GLTile(35,5));
+		tilemapper.put(Locations.WOMENSROOM, new GLTile(35,13));
 		tilemapper.put(Locations.REGISTER, new GLTile(6,16));
 		tilemapper.put(Locations.EXIT, new GLTile(0, 27));
 		tilemapper.put(Locations.PICKUPWINDOW, new GLTile(10, 12));
