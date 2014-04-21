@@ -48,6 +48,8 @@ public class StateLoadGame extends BasicGameState{
 	public List<Player_model> players;
 	public Player_model player;
 
+	private GLScrollablePanel loadgames;
+
 
 
 	//private GLButton btnNewGame;
@@ -77,7 +79,25 @@ public class StateLoadGame extends BasicGameState{
  		
  		text = new TextField(gc, ttfont, 250, 97, 200, 25);
  		
- 		
+ 		loadgames = new GLScrollablePanel(restaurant, gc,230, 140,550, 300);
+ 		loadgames.add("a");
+ 		loadgames.add("b");
+ 		loadgames.add("c");
+ 		loadgames.add("d");
+ 		loadgames.add("e");
+ 		loadgames.add("f");
+ 		loadgames.add("g");
+ 		loadgames.add("h");
+ 		loadgames.add("i");
+ 		loadgames.add("j");
+ 		loadgames.add("k");
+ 		loadgames.add("l");
+ 		loadgames.add("z");
+ 		loadgames.add("x");
+
+
+
+
 
     }
  
@@ -90,11 +110,13 @@ public class StateLoadGame extends BasicGameState{
 
 		g.setColor(Color.black);
 	  
-	    btnStartGame.render(gc, g);
+	   // btnStartGame.render(gc, g);
 
 	    text.render(gc, g);
 	    text.setFocus(true);
 
+
+	    loadgames.render(gc,g);
 	    g.drawString("Enter the name of a previous game of management simulator!!!", 50, 25);
 
 	   // g.drawString("1. Press 1 to start game", 50, 130);
@@ -105,7 +127,13 @@ public class StateLoadGame extends BasicGameState{
     public void update(GameContainer container, StateBasedGame game, int delta)
             throws SlickException {
         // TODO Auto-generated method stub
- 
+ 		loadgames.update(container, game, delta);
+
+
+
+ 		//String selectedString = loadgames.getSelectedString();
+ 		//int selectedIndex = loadgames.getSelectedIndex();
+ 	//	System.out.println(selectedString);
     }
  
     @Override
@@ -131,14 +159,14 @@ public class StateLoadGame extends BasicGameState{
 
 	public void mousePressed(int button, int posx, int posy){
 
-		if(btnStartGame.isPressed()){
+		/*if(btnStartGame.isPressed()){
 			String playerName = text.getText();
 			players = (db.selectPlayer(new Player_model(), playerName));
 			player = players.get(0);
 			restaurant.loadGame(player);
 			game.enterState(3);
 
-		}
+		}*/
 
 
 	}

@@ -1,4 +1,4 @@
-package mftoth.restaurantsim.ogl;
+		package mftoth.restaurantsim.ogl;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
@@ -117,6 +117,17 @@ public abstract class GLEntity extends AbstractComponent{
 		this.width=width;
 		this.height=height;
 	}
+
+	public boolean inBounds(int posx, int posy){
+
+		if((posx>=x && posx<= x+width) && (posy>=y && posy<=y+height)){
+			return true;
+		}else{
+			return false;
+		}
+
+	}
+
 
 	//[@Override
 	public void setLocation(int x, int y){
