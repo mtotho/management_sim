@@ -28,7 +28,7 @@ public class Restaurant{
 	//The most previous delta
 	//public int delta;
 	public List<Inventory_model> inventory;
-	//public List<Transactions_model> transactions;
+	public List<Transactions_model> transactions;
 	public List<Restaurant_model> restaurantData;
 	public Player_model player;
 	public ArrayList<ArrayList> orders;
@@ -76,7 +76,8 @@ public class Restaurant{
 		timer.setTime(0);
 
 		menu = db.select(new Items_model());
-		inventory = db.select(new Inventory_model());
+		//inventory = db.select(new Inventory_model(), player);
+		//System.out.println(inventory + " 000000000");
 
 		employees.clear();
 		customers.clear();
@@ -258,6 +259,7 @@ public class Restaurant{
 		
 		counter++;
 		last_ms=timer.getMilliSeconds();
+		updateDatabase();
 		
 	}//end: Update();
 
@@ -297,14 +299,19 @@ public class Restaurant{
 		newGame();
 
 		this.player = player;
+		System.out.println("PLAYER ID LOADGAME: " + player.getID());
 		inventory = db.selectData(new Inventory_model(), player);
+		System.out.println(inventory);
 		restaurantData = db.selectData(new Restaurant_model(), player);
-
-
+		System.out.println(restaurantData + " ----- RESTAURANT DATA");
+		transactions = db.selectData(new Transactions_model(), player);
 
 	}
 
 	public void updateDatabase(){
+
+		restaurantData.get(0).setMoney(money);
+		restaurantData.get(0).setTime(timer.getMilliSeconds());
 
 		db.updateInventory(inventory);
 		db.updateRestaurant(restaurantData);

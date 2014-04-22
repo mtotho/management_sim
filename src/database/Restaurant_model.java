@@ -22,6 +22,7 @@ public class Restaurant_model implements Model{
 	private String name;
 	private double money;
 	private int time;
+	
 	//constructor()
 	public Restaurant_model(int playerId, int id, String name, double money, int time){
 		this.id = id;
@@ -62,7 +63,7 @@ public class Restaurant_model implements Model{
 
 	public int getRestaurantID(){
 		return id;
-		
+
 	}
 
 	public String getName(){
@@ -79,6 +80,27 @@ public class Restaurant_model implements Model{
 
 		String string = id + ", '" + name + "', " + playerId + ", " + money + ", " + time;
 		return string;
+	}
+
+	public void setTime(int time){
+
+		this.time = time;
+	}
+
+	public int getTime(){
+
+		return time;
+	}
+
+	public void setMoney(double money){
+
+		this.money = money;
+	}
+
+	public double getMoney(){
+
+		return money;
+
 	}
 
 

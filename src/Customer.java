@@ -96,12 +96,15 @@ public List<Inventory_model> inventory;
 
 			nextItem = ((random.nextInt() % 6) + 1);
 			
-			System.out.println("next inventory index : " + nextItem);			
+			System.out.println(" next inventory index : " + nextItem);			
 
 
 			if(nextItem < 0){
 				nextItem = nextItem * -1;
 			}
+			System.out.println("next item: " + nextItem);
+			System.out.println("Inventory" + inventory); 
+			System.out.println("inventory next item : " + inventory.get(nextItem));
 			if(inventory.get(nextItem).getQuantity() > 0) {
 				item = menu.get(nextItem);
 				
