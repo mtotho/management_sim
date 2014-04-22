@@ -64,9 +64,10 @@ public class GLOverviewPanel extends GLPanel{
 		    	System.out.println(e1.getLocation());
 		    	System.out.println(e1.getWaypoint());
 		    	System.out.println("Tile: " + e1.getTileX() + " " + e1.getTileY());
-		    
+		    	game.activatePanel("INVENTORY");
 		    	//game.activatePanel("EMPLOYEES");
 		    }
+
 	    }
   }
   

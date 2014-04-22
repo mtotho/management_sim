@@ -76,6 +76,7 @@ public class Restaurant{
 		timer.setTime(0);
 
 		menu = db.select(new Items_model());
+		System.out.println("MENU: " + menu);
 		//inventory = db.select(new Inventory_model(), player);
 		//System.out.println(inventory + " 000000000");
 
@@ -174,6 +175,7 @@ public class Restaurant{
 							//System.out.println(id + "=ITEM ID");
 
 							inventory.get(id).setQuantity(inventory.get(id).getQuantity() -1);
+							money = money + menu.get(id).getPrice();
 							//item = orders.get(orders.size()-1).get(i));
 							//System.out.println(item.getID());
 
@@ -259,8 +261,11 @@ public class Restaurant{
 		
 		counter++;
 		last_ms=timer.getMilliSeconds();
-		updateDatabase();
 		
+		if(counter % 57 == 0){
+			updateDatabase();
+		}
+
 	}//end: Update();
 
 	public void addCustomer(){
@@ -304,7 +309,13 @@ public class Restaurant{
 		System.out.println(inventory);
 		restaurantData = db.selectData(new Restaurant_model(), player);
 		System.out.println(restaurantData + " ----- RESTAURANT DATA");
-		transactions = db.selectData(new Transactions_model(), player);
+
+	//	for(int i = 0; i < restaurantData.size(); i++){
+
+	//		System.out.println(restaurantData.get(i).getRestaurantID());
+
+	//	}
+		//transactions = db.selectData(new Transactions_model(), player);
 
 	}
 
@@ -315,6 +326,17 @@ public class Restaurant{
 
 		db.updateInventory(inventory);
 		db.updateRestaurant(restaurantData);
+
+	}
+	public List<Inventory_model> getInventory(){
+
+		return inventory;
+
+	}
+
+	public List<Items_model> getMenu(){
+
+		return menu;
 
 	}
 }//end class restaurant
