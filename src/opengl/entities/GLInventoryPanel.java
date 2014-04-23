@@ -117,10 +117,10 @@ public class GLInventoryPanel extends GLPanel{
 			int itemQty = inventory.get(i).getQuantity();
 
 			if(!scroll_panel.contains(menu.get(i))){
-				scroll_panel.add(itemName + ": " + itemQty + " remaining", menu.get(i));
+				scroll_panel.add(itemName + ": " + itemQty, menu.get(i));
 			}
 			else{
-				scroll_panel.updateLabel(menu.get(i), itemName + ": " + itemQty + " remaining ");
+				scroll_panel.updateLabel(menu.get(i), itemName + ": " + itemQty);
 			} 
 		}
 

@@ -27,53 +27,38 @@ public class DatabasePop{
 
 			stmt = c.createStatement();
 
-			String sql = "INSERT INTO PLAYER (ID, NAME) " +
-						 "VALUES (1, 'player1');";
-
-			stmt.executeUpdate(sql);
-
-			sql = "INSERT INTO RESTAURANT (RESTAURANT_ID, NAME, PLAYER_ID, MONEY, TIME) " +
-				  "VALUES (0, 'TEST', 1, 0.0, 0);";
+			String sql = "INSERT INTO ITEMS (ID, NAME, PRICE) " +
+				  "VALUES (0, 'Squirtle Burger', 20.00);";
 
 			stmt.executeUpdate(sql);
 
 			sql = "INSERT INTO ITEMS (ID, NAME, PRICE) " +
-				  "VALUES (0, 'TESTITEM', 20.00);";
-
-			stmt.executeUpdate(sql);
-
-			sql = "INSERT INTO INVENTORY (RESTAURANT_ID, ITEM_ID, QUANTITY, AMOUNT_SOLD) " +
-				  "VALUES (0, 0, 100, 0);";
+				  "VALUES (1, 'Pikachu Sandwhich', 1.50);";
 
 			stmt.executeUpdate(sql);
 
 			sql = "INSERT INTO ITEMS (ID, NAME, PRICE) " +
-				  "VALUES (1, 'Hamburger', 1.50);";
+				  "VALUES (2, 'Filet O'' Feebas', 2.00);";
 
 			stmt.executeUpdate(sql);
 
 			sql = "INSERT INTO ITEMS (ID, NAME, PRICE) " +
-				  "VALUES (2, 'Cheesburger', 2.00);";
+				  "VALUES (3, 'Magikarp n'' Chips', 1.25);";
 
 			stmt.executeUpdate(sql);
 
 			sql = "INSERT INTO ITEMS (ID, NAME, PRICE) " +
-				  "VALUES (3, 'Fries', 1.25);";
+				  "VALUES (4, 'Pidgey Wings', 2.00);";
 
 			stmt.executeUpdate(sql);
 
 			sql = "INSERT INTO ITEMS (ID, NAME, PRICE) " +
-				  "VALUES (4, 'Nuggets', 2.00);";
+				  "VALUES (5, 'Slowpoke Tail', 2.25);";
 
 			stmt.executeUpdate(sql);
 
 			sql = "INSERT INTO ITEMS (ID, NAME, PRICE) " +
-				  "VALUES (5, 'Chicken Sandwich', 2.25);";
-
-			stmt.executeUpdate(sql);
-
-			sql = "INSERT INTO ITEMS (ID, NAME, PRICE) " +
-				  "VALUES (6, 'Drink', 2.25);";
+				  "VALUES (6, 'Miltank Milk', 2.25);";
 
 			stmt.executeUpdate(sql);
 

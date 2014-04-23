@@ -41,6 +41,7 @@ public class StateNewGame extends BasicGameState{
 	private int fontSize = 19;
 	private TextField text;
 	private GLButton btnStartGame;
+	private GLButton btnBack;
 	private String playerName;
 
 	
@@ -76,6 +77,9 @@ public class StateNewGame extends BasicGameState{
 		btnStartGame.setY(300);
  		
  		
+	    btnBack = new GLButton(gc, "Back", 160, 60);
+		btnBack.setLocation(740, 420);
+		btnBack.setLabelX(25);
  		
 
     }
@@ -95,6 +99,8 @@ public class StateNewGame extends BasicGameState{
 	    text.setFocus(true);
 
 	    btnStartGame.render(gc, g);
+	    btnBack.render(gc, g);
+
 
 	   // g.drawString("1. Press 1 to start game", 50, 130);
 
@@ -145,6 +151,9 @@ public class StateNewGame extends BasicGameState{
 
 			game.enterState(3);
 
+		}
+		if(btnBack.isPressed()){
+			game.enterState(2);
 		}
 
 

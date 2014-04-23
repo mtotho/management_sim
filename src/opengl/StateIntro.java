@@ -9,6 +9,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import mftoth.restaurantsim.logic.*;
+import org.newdawn.slick.Image.*;
 
 public class StateIntro extends BasicGameState{
 
@@ -16,6 +17,8 @@ public class StateIntro extends BasicGameState{
 	private int ID = 1;
 	private StateBasedGame game;
 	private Restaurant restaurant;
+	private Image image1;
+	private Image image2;
 
 	public StateIntro(Restaurant restaurant){
 		super();
@@ -26,6 +29,8 @@ public class StateIntro extends BasicGameState{
     public void init(GameContainer container, StateBasedGame game)
             throws SlickException {
        	this.game=game;
+       	image1 = new Image("res/image1.jpg");
+       	image2 = new Image("res/image.jpg");
  
     }
  
@@ -44,6 +49,9 @@ public class StateIntro extends BasicGameState{
 	    g.setColor(Color.cyan);
 	    g.drawString("Please press Enter to continue...", 200, 400);
  
+ 		image2.draw(40,200);
+ 		image1.draw(200,250);
+
     }
  
     @Override
