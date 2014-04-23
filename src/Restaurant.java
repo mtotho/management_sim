@@ -339,4 +339,18 @@ public class Restaurant{
 		return menu;
 
 	}
+	public void buyInventory(){
+
+		if(money >= 50){
+
+			money = money - 50;
+
+		}
+
+	}
+	public double getMoney(){
+
+		return money;
+
+	}
 }//end class restaurant
