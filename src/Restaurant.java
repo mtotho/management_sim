@@ -89,8 +89,11 @@ public class Restaurant{
 		e2 = new Employee();
 
 
-		e1.setLocation(Locations.REGISTER);
-		e2.setLocation(Locations.KITCHEN);
+		e1.setLocation(Locations.ENTRANCE);
+		e1.setWayPoint(Locations.REGISTER);
+
+		e2.setLocation(Locations.ENTRANCE);
+		e2.setWayPoint(Locations.GRILL);
 		//e2.setLocation(Locations.MENSROOM);
 
 		e1.setDuty(TaskType.CASHIER);
@@ -227,7 +230,7 @@ public class Restaurant{
 						Customer cust = task2customer.get(tempTask);
 
 						if(tempTask.getDuty()==TaskType.CASHIER){
-							Task kitchenTask = new Task(6500, TaskType.KITCHEN, Locations.KITCHEN, "Making food");
+							Task kitchenTask = new Task(6500, TaskType.KITCHEN, Locations.GRILL, "Making food", Locations.KITCHENWINDOW);
 							
 							//customer2Task.remove(cust);
 							customer2Task.put(cust, kitchenTask);

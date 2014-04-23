@@ -61,6 +61,7 @@ public class GLMoveableEntity extends GLEntity implements Mover{
 		isMoving=false;
 
 		astar =new AStarPathFinder(map, 400, false);
+		walking_path=false;
 
 		//set default path so we dont have null
 		//setPath(6,16);

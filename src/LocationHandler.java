@@ -20,6 +20,7 @@ public class LocationHandler{
 		tilemapper.put(Locations.PICKUPWINDOW, new GLTile(10, 12));
 		tilemapper.put(Locations.KITCHENWINDOW, new GLTile(10, 9));
 		tilemapper.put(Locations.KITCHEN, new GLTile(3, 6));
+		tilemapper.put(Locations.GRILL, new GLTile(7, 3));
 	}
 
 	public GLTile getTile(Locations location){
@@ -57,6 +58,10 @@ public class LocationHandler{
 			break;
 
 			case KITCHENWINDOW:
+				tile = tilemapper.get(location);
+			break;
+
+			case GRILL:
 				tile = tilemapper.get(location);
 			break;
 

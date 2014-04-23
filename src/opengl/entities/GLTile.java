@@ -26,4 +26,8 @@ public class GLTile{
 	public boolean isBlocked(){
 		return isBlocked;
 	}
+
+	public String toString(){
+		return "GLTile - X: " + x + " | Y: " + y;
+	}
 }

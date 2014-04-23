@@ -20,8 +20,8 @@ public class Employee{
 	public Employee(){
 		busy=false;
 
-		location = Locations.REGISTER;
-		waypoint = null;
+		location = Locations.ENTRANCE;
+		waypoint = Locations.GRILL;
 	}//end: Constructor()
 
 
@@ -32,10 +32,10 @@ public class Employee{
 			this.location = Locations.REGISTER;
 		}
 		else if(tileX == 3 && tileY == 6){
-			this.location = Locations.KITCHEN;
+		//	this.location = Locations.KITCHEN;
 		}
 		else{
-			this.location = null;
+			//this.location = null;
 		}
 		
 		
@@ -59,20 +59,31 @@ public class Employee{
 
 	public Task doTask(int delta){
 		
+
+
 		//consume time on task if time is left
 		if(active_task.isTimeLeft()){
+
+
 				if(location==active_task.getWaypoint()){
-					active_task.consumeTime(delta);
+					active_task.consumeTime(delta);	
 
 					//set busy to true/false depending on if there is time left
 					//busy = active_task.isTimeLeft();
-				}
-				else{
+
+				}else{
 					this.waypoint = active_task.getWaypoint();
+
+				
 				}
 				//System.out.println(active_task.getTimeRemaining());
 		}
-		else{
+		else if(!active_task.isTimeLeft() && active_task.hasEndPoint() && location!=active_task.getEndPoint()){
+			
+			//System.out.println("Setting endpoint to :" + active_task.getEndPoint());
+			this.waypoint=active_task.getEndPoint();
+
+		}else{
 			busy = false;
 			return active_task;
 		}
@@ -147,6 +158,7 @@ public class Employee{
 	}
 	public void setLocation(Locations location){
 		this.location=location;
+		//this.waypoint=location;
 	}
 
 	public int getTileX(){

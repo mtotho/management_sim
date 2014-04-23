@@ -14,7 +14,10 @@ public class Task{
 	private int time; //ms
 	private int priority;
 	private Locations waypoint;
+	private Locations endpoint;
 	private String name;
+
+	private boolean hasEndPoint;
 
 
 	//Constructor(priority, completion_time)
@@ -26,8 +29,18 @@ public class Task{
 		this.time = this.completion_time;
 		this.waypoint = waypoint;
 		this.name = name;
+		hasEndPoint=false;
 
 	}//end: Constructor(priority, completion_time)
+
+	//Constructor(priority, completion_time)
+	public Task(int completion_time, TaskType type, Locations waypoint, String name, Locations endpoint){
+		this(completion_time, type, waypoint, name);
+		
+		this.endpoint=endpoint;
+		hasEndPoint=true;
+	}//end: Constructor(priority, completion_time)
+
 
 	//Constructor()
 	public Task(){
@@ -38,8 +51,20 @@ public class Task{
 		return priority;
 	}
 
+	public boolean hasEndPoint(){
+		return hasEndPoint;
+	}
+
 	public Locations getWaypoint(){
 		return waypoint;
+	}
+
+	public Locations getEndPoint(){
+		if(hasEndPoint){
+			return endpoint;
+		}else{
+			return waypoint;
+		}
 	}
 
 	public void setPreemption(boolean preemption){

@@ -27,19 +27,26 @@ public class GLEmployee extends GLMoveableEntity{
 		this.map = map;
 
 		GLTile tileLocation =  loc_handler.getTile(this.location);
+		GLTile tileDest =  loc_handler.getTile(this.destination);
 		
-		
+		//use_path=true;
+
 		//this.
 		//default some values		
 		x=map.getAbsX(tileLocation.getX());
 		y=map.getAbsY(tileLocation.getY());
 		destx=x;
 		desty=y;
+
+		setPath(tileDest);
+
 		//destx=96;
 		//desty=256;
 		
 		dx=0.1;
 		dy=0.1;
+
+
 
 		
 
@@ -66,8 +73,10 @@ public class GLEmployee extends GLMoveableEntity{
 			//System.out.println("Im here");
 			//If we arent going to the foodline, get the tile
 			if(destination!=Locations.FOODLINE){
-				 GLTile destTile = loc_handler.getTile(destination);
-				 setPath(destTile);
+				
+				GLTile destTile = loc_handler.getTile(destination);
+				//System.out.println("glemp destination: " + destTile);
+				setPath(destTile);
 			
 			//Not ever going to foodline
 			}else{
@@ -89,6 +98,10 @@ public class GLEmployee extends GLMoveableEntity{
 
 		//set the GLcustomer destination based on the logic destination value
 		this.destination = logical_emp.getWaypoint();
+
+		//System.out.println("gl destination: " + this.destination);
+
+		//System.out.println("GL destination: " +  this.destination);
 		if(this.destination==null)
 			this.destination=this.location;
 

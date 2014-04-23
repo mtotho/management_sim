@@ -56,7 +56,7 @@ public List<Inventory_model> inventory;
 				last_ms=restaurant.timer.getMilliSeconds();
 			}
 
-			if(windowReached && (restaurant.timer.getMilliSeconds()-last_ms>500)){
+			if(windowReached && (restaurant.timer.getMilliSeconds()-last_ms>1300)){
 				waypoint=Locations.EXIT;
 				exiting=true;
 			}	
@@ -90,7 +90,7 @@ public List<Inventory_model> inventory;
 			items = items * -1;
 		}
 
-		System.out.println("menu size: " + menu.size());
+		//System.out.println("menu size: " + menu.size());
 
 		for (int i = 0; i < items; i++){
 
