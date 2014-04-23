@@ -32,6 +32,9 @@ public class GLInventoryPanel extends GLPanel{
 
 	private GLButton btnBack;
 	private GLButton btnBuyInventory;
+	private TrueTypeFont ttfont;
+	private Font font;
+	private int fontSize = 15;
 
 
 	public GLInventoryPanel(Restaurant restaurant, GameContainer gc, StateGame game) throws SlickException{
@@ -62,6 +65,9 @@ public class GLInventoryPanel extends GLPanel{
         padding=10;
 
 
+ 	 	font = new Font("Verdana", Font.BOLD, fontSize);
+		ttfont = new TrueTypeFont(font, false);
+
         scroll_panel = new GLScrollablePanel<Items_model>(restaurant, gc, x+15, y+30, 290, 250);
    
 	}
@@ -73,17 +79,9 @@ public class GLInventoryPanel extends GLPanel{
 		   	g.setColor(Color.black);
 			g.fillRect(x,y, width, height);
 
-			g.setColor(Color.orange);
-		    g.drawString("Time: " + timer.getFormattedTime(), x+10, y+5);
-
-		    g.drawString("Day: " + timer.getDay(), x+120, y+5);
-
-		    g.drawString("Money: $" + restaurant.getMoney(), x+200, y+5);
 
 		    //Object[] keys = buttons.keySet().toArray();
 
-		    btnBack.render(gc, g);
-		    btnBuyInventory.render(gc,g);
 		   /* for(int i=0; i<2; i++){
 		    
 					GLButton tempButton = buttons.get(keys[i]);
@@ -99,14 +97,17 @@ public class GLInventoryPanel extends GLPanel{
 			
 			//g.setColor(Color.black);
 			//g.fillRect(x,y, width, height);
-
-		//	g.setColor(Color.orange);
-		  //  g.drawString("Time: " + timer.getFormattedTime(), x+10, y+5);
+			g.setFont(ttfont);
+			g.setColor(Color.orange);
+		    g.drawString("Inventory", x+10, y+5);
 
 		    //g.drawString("Day: " + timer.getDay(), x+250, y+5);
 
 			ArrayList<String> renderedButtons = new ArrayList<String>();
-			
+				
+		    btnBack.render(gc, g);
+		    btnBuyInventory.render(gc,g);
+
 			//Remove the tasks that have expired
 		
 

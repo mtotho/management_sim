@@ -43,6 +43,7 @@ public class StateGame extends BasicGameState{
   private OGLMap map;
 
   public Restaurant restaurant;
+  public GLInfoBar info_bar;
 
   public Foodline foodline;
   public Foodline waitline;
@@ -104,6 +105,8 @@ public class StateGame extends BasicGameState{
         activatePanel("OVERVIEW");
 
         counter=0;
+
+        info_bar = new GLInfoBar(restaurant, gc);
        
     }
 
@@ -173,6 +176,8 @@ public class StateGame extends BasicGameState{
       map.render(4);
       map.render(5);
       map.render(6);
+
+      info_bar.render(gc, g);
     } 
 
 

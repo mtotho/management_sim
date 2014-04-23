@@ -52,10 +52,6 @@ public class GLTaskPanel extends GLPanel{
 		   	g.setColor(Color.black);
 			g.fillRect(x,y, width, height);
 
-			g.setColor(Color.orange);
-		    g.drawString("Time: " + timer.getFormattedTime(), x+10, y+5);
-
-		    g.drawString("Day: " + timer.getDay(), x+250, y+5);
 
 		    Object[] keys = buttons.keySet().toArray();
 		    
@@ -76,9 +72,7 @@ public class GLTaskPanel extends GLPanel{
 			//g.fillRect(x,y, width, height);
 
 			g.setColor(Color.orange);
-		    g.drawString("Time: " + timer.getFormattedTime(), x+10, y+5);
-
-		    g.drawString("Day: " + timer.getDay(), x+250, y+5);
+		    g.drawString("Ongoing Tasks", x+10, y+5);
 
 		    scheduler = restaurant.getScheduler();
 			tasks = scheduler.getTaskArray(3);
