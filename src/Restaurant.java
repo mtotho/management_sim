@@ -306,6 +306,7 @@ public class Restaurant{
 
 
 		timer.setTime(restaurantData.get(0).getTime());
+		money = restaurantData.get(0).getMoney();
 
 	//	for(int i = 0; i < restaurantData.size(); i++){
 
