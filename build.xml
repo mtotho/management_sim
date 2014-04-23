@@ -2,6 +2,7 @@
     
     <property file="build.properties" />
     <property name="src.dir"     value="src"/>
+  <!--  <property name=".dir"     value="src"/>-->
 
 <!--
     <property name="lwjgl_jar.dir"     value="lwjgl-2.9.1/jar"/>
@@ -16,6 +17,8 @@
         
         <!--<fileset dir="${twl.dir}" includes="TWL.jar"/>-->
     </path>
+    
+    <property name="java.library.path" value="${lwjgl_native.dir}"/>
 
     <property name="build.dir"   value="build"/>
     <property name="classes.dir" value="${build.dir}/classes"/>
@@ -33,16 +36,31 @@
         <javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath"/>
     </target>
 
-    <!--
-    <target name="jar">
+    
+    <target name="jar" depends="compile">
         <mkdir dir="${jar.dir}"/>
-        <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
+        <jar destfile="${jar.dir}/${ant.project.name}.jar">
             <manifest>
                 <attribute name="Main-Class" value="${main-class}"/>
             </manifest>
+            <!--<resources refid="applicationResources"/>-->
+            
+           <!-- <fileset dir="${classes.dir}"/>-->
+            
+            <fileset dir="${classes.dir}" includes="**" />
+            <!--<fileset dir="${lwjgl_jar.dir}" includes="lwjgl_util.jar"/>
+            <fileset dir="${lwjgl_jar.dir}" includes="lwjgl.jar"/>
+            <fileset dir="${slick_jar.dir}" includes="slick.jar"/>
+            <fileset dir="${libs.dir}" includes="sqlite-jdbc-3.7.2.jar"/>
+            <fileset dir="${libs.dir}/commons-dbutils-1.5/" includes="commons-dbutils-1.5.jar"/>-->
+            <fileset dir="." includes="res/" />
+            
+          <!--  <fileset dir="${lwjgl_native.dir}" includes="**" />-->
+             
+    
         </jar>
     </target>
-    -->
+
 
     <target name="run" depends="compile">
          <java fork="true" classname="${main-class}">
@@ -50,6 +68,7 @@
                 <path refid="classpath"/>
                 <path location="${classes.dir}"/>
             </classpath>
+
              <sysproperty key="java.library.path" value="${lwjgl_native.dir}"/>
         </java>
     </target>
