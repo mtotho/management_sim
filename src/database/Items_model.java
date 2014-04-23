@@ -22,6 +22,8 @@ public class Items_model implements Model{
 	//constructor
 	public Items_model(int id, String name, double price){
 
+		System.out.println("ITEM ID: " + id);
+
 		this.id = id;
 		this.name = name;
 		this.price = price;
@@ -54,6 +56,8 @@ public class Items_model implements Model{
 	//sets an ID for the item
 	public void setID(int id){
 
+		System.out.println("ITEM ID: " + id);
+
 		this.id = id;
 
 	}//end setID
@@ -66,7 +70,7 @@ public class Items_model implements Model{
 	}//end getID()
 
 	public int getRestaurantID(){
-		return 0;
+		return 1;
 	}
 
 	//sets the price for the item

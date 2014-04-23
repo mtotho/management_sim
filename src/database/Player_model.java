@@ -43,6 +43,10 @@ public class Player_model implements Model{
 		this.id = id;
 
 	}
+	public void setID(int id){
+
+		this.id = id;
+	}
 
 	public int getRestaurantID(){
 		return 0;

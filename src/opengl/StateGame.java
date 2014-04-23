@@ -92,9 +92,13 @@ public class StateGame extends BasicGameState{
         GLOverviewPanel overviewPanel = new GLOverviewPanel(restaurant, gc, this);
         GLEmployeePanel employeePanel = new GLEmployeePanel(restaurant, gc, this);
         GLTaskPanel taskPanel = new GLTaskPanel(restaurant, gc, this);
+        GLInventoryPanel inventoryPanel = new GLInventoryPanel(restaurant, gc, this);
+        GLStatisticsPanel statisticsPanel = new GLStatisticsPanel(restaurant, gc, this);
         addPanel("OVERVIEW", overviewPanel);
         addPanel("EMPLOYEES", employeePanel);
         addPanel("TASKS", taskPanel);
+        addPanel("INVENTORY", inventoryPanel);
+        addPanel("STATISTICS", statisticsPanel);
 
         //set this panel to active
         activatePanel("OVERVIEW");

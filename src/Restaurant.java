@@ -26,7 +26,7 @@ public class Restaurant{
 	public int last_ms;
 
 	public List<Inventory_model> inventory;
-	//public List<Transactions_model> transactions;
+	public List<Transactions_model> transactions;
 	public List<Restaurant_model> restaurantData;
 	public Player_model player;
 	public ArrayList<ArrayList> orders;
@@ -44,6 +44,7 @@ public class Restaurant{
 	public Restaurant(DBmapper db){
 		last_ms=0;
 		//initialize timer object which will keep track of and organize time
+
 		timer = new Time();
 
 		this.db = db;
@@ -74,7 +75,9 @@ public class Restaurant{
 		timer.setTime(0);
 
 		menu = db.select(new Items_model());
-		inventory = db.select(new Inventory_model());
+		System.out.println("MENU: " + menu);
+		//inventory = db.select(new Inventory_model(), player);
+		//System.out.println(inventory + " 000000000");
 
 		employees.clear();
 		customers.clear();
@@ -171,6 +174,8 @@ public class Restaurant{
 							//System.out.println(id + "=ITEM ID");
 
 							inventory.get(id).setQuantity(inventory.get(id).getQuantity() -1);
+							inventory.get(id).setAmount_Sold(inventory.get(id).getAmount_Sold() + 1);
+							money = money + menu.get(id).getPrice();
 							//item = orders.get(orders.size()-1).get(i));
 							//System.out.println(item.getID());
 
@@ -251,6 +256,10 @@ public class Restaurant{
 		counter++;
 		last_ms=timer.getMilliSeconds();
 		
+		if(counter % 57 == 0){
+			updateDatabase();
+		}
+
 	}//end: Update();
 
 	public void addCustomer(){
@@ -289,17 +298,57 @@ public class Restaurant{
 		newGame();
 
 		this.player = player;
+		System.out.println("PLAYER ID LOADGAME: " + player.getID());
 		inventory = db.selectData(new Inventory_model(), player);
+		System.out.println(inventory);
 		restaurantData = db.selectData(new Restaurant_model(), player);
+		System.out.println(restaurantData + " ----- RESTAURANT DATA");
 
 
+		timer.setTime(restaurantData.get(0).getTime());
+
+	//	for(int i = 0; i < restaurantData.size(); i++){
+
+	//		System.out.println(restaurantData.get(i).getRestaurantID());
+
+	//	}
+		//transactions = db.selectData(new Transactions_model(), player);
 
 	}
 
 	public void updateDatabase(){
 
+		restaurantData.get(0).setMoney(money);
+		restaurantData.get(0).setTime(timer.getMilliSeconds());
+
 		db.updateInventory(inventory);
 		db.updateRestaurant(restaurantData);
+
+
+	}
+	public List<Inventory_model> getInventory(){
+
+		return inventory;
+
+	}
+
+	public List<Items_model> getMenu(){
+
+		return menu;
+
+	}
+	public void buyInventory(){
+
+		if(money >= 50){
+
+			money = money - 50;
+
+		}
+
+	}
+	public double getMoney(){
+
+		return money;
 
 	}
 }//end class restaurant

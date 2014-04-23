@@ -44,12 +44,12 @@ public class DatabaseInit{
 			System.out.println("player created");
 
 			sql = "CREATE TABLE RESTAURANT" +
-				  "(RESTAURANT_ID INT PRIMARY KEY NOT NULL," +
+				  "(restaurant_id INT PRIMARY KEY NOT NULL," +
 				  "NAME 		TEXT	NOT NULL, " +
-				  "PLAYER_ID	INT 	NOT NULL, " +
+				  "player_id	INT 	NOT NULL, " +
 				  "MONEY DOUBLE NOT NULL, " +
-				  "TIME INT NOT NULL, " +
-				  "FOREIGN KEY(PLAYER_ID) REFERENCES PLAYER(ID))";
+				  "TIME INT NOT NULL)";
+				 // "FOREIGN KEY(PLAYER_ID) REFERENCES PLAYER(ID))";
 
 			stmt.executeUpdate(sql);
 
@@ -66,11 +66,12 @@ public class DatabaseInit{
 			System.out.println("items created");
 
 			sql = "CREATE TABLE INVENTORY" +
-				  "(RESTAURANT_ID INT NOT NULL," +
-				  "ITEM_ID INT 	NOT NULL, " +
+				  "(restaurant_id INT NOT NULL," +
+				  "item_id INT 	NOT NULL, " +
 				  "QUANTITY	INT NOT NULL, " +
-				  "FOREIGN KEY(RESTAURANT_ID) REFERENCES RESTAURANT(ID), " +
-				  "FOREIGN KEY(ITEM_ID) REFERENCES ITEMS(ID)" +
+				  //"FOREIGN KEY(RESTAURANT_ID) REFERENCES RESTAURANT(ID), " +
+				  //"FOREIGN KEY(ITEM_ID) REFERENCES ITEMS(ID)" +
+				  "AMOUNT_SOLD INT NOT NULL, " +
 				  "PRIMARY KEY(RESTAURANT_ID, ITEM_ID))";
 
 			stmt.executeUpdate(sql);
@@ -81,8 +82,8 @@ public class DatabaseInit{
 				  "(RESTAURANT_ID INT NOT NULL, " +
 				  "EMPLOYEE_ID INT NOT NULL, " +
 				  "EMPLOYEE_NAME TEXT NOT NULL, " +
-				  "PRIMARY KEY(RESTAURANT_ID, EMPLOYEE_ID), "+
-				  "FOREIGN KEY(RESTAURANT_ID) REFERENCES RESTAURANT(ID))";
+				  "PRIMARY KEY(RESTAURANT_ID, EMPLOYEE_ID)) ";
+				  //"FOREIGN KEY(RESTAURANT_ID) REFERENCES RESTAURANT(ID))";
 				  
 
 			stmt.executeUpdate(sql);
@@ -90,12 +91,11 @@ public class DatabaseInit{
 			System.out.println("employee table created");
 
 			sql = "CREATE TABLE TRANSACTIONS" +
-				  "(RESTAURANT_ID INT NOT NULL, " +
+				  "(Restaurant_id INT NOT NULL, " +
 				  "TRANSACTION_ID INT NOT NULL, " +
-				  "TRANSACTION_DATE TEXT NOT NULL, " + 
 				  "TRANSACTION_PRICE DOUBLE NOT NULL, " +
-				  "PRIMARY KEY(RESTAURANT_ID, TRANSACTION_ID), " +
-				  "FOREIGN KEY(RESTAURANT_ID) REFERENCES RESTAURANT(ID))";
+				  "PRIMARY KEY(RESTAURANT_ID, TRANSACTION_ID))";
+				  //"FOREIGN KEY(RESTAURANT_ID) REFERENCES RESTAURANT(ID))";
 
 			stmt.executeUpdate(sql);
 

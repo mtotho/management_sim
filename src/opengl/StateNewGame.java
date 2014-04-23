@@ -138,7 +138,7 @@ public class StateNewGame extends BasicGameState{
 			db.insert(newPlayer);
 			players = db.select(new Player_model());
 			//System.out.println(players.toString());
-			
+			System.out.println(db.select(new Restaurant_model()));
 			db.newPlayer(newPlayer.getID());
 			//db.insert(new Restaurant_model(newPlayer.getID(), newPlayer.getID(), "restaurant"));
 			restaurant.loadGame(newPlayer);

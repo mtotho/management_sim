@@ -42,8 +42,8 @@ public class DatabasePop{
 
 			stmt.executeUpdate(sql);
 
-			sql = "INSERT INTO INVENTORY (RESTAURANT_ID, ITEM_ID, QUANTITY) " +
-				  "VALUES (0, 0, 100);";
+			sql = "INSERT INTO INVENTORY (RESTAURANT_ID, ITEM_ID, QUANTITY, AMOUNT_SOLD) " +
+				  "VALUES (0, 0, 100, 0);";
 
 			stmt.executeUpdate(sql);
 

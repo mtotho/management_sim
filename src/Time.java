@@ -9,7 +9,9 @@ public class Time{
 	public Time(){
 		time_passed_ms=0;
 	}
-
+	public Time(int time){
+		time_passed_ms=time;
+	}
 	public void addMilliSecond(int ms){
 		time_passed_ms+=ms;
 	}
@@ -100,7 +102,7 @@ public class Time{
 	}
 
 	public void setTime(int ms){
-		time_passed_ms=0;
+		time_passed_ms=ms;
 	}
 
 	//getday, gethour, etc

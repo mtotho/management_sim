@@ -30,6 +30,8 @@ public class DBmapper{
 
 	public List<Items_model> items;
 
+	public Inventory_model inventory;
+
 
 	public DBmapper(){
 
@@ -187,6 +189,8 @@ public class DBmapper{
 	}
 	public List selectData(Model param, Player_model player){
 
+		System.out.println("PLAYER ID DB CALL: " + player.getID());
+
 		String selectStatement = "SELECT * FROM " + param.getTable() + " WHERE RESTAURANT_ID = " + player.getID();
 
 		try{
@@ -202,7 +206,7 @@ public class DBmapper{
 
 				return beans;
 			}*/
-
+			System.out.println(beans);
 			return beans;
 
 		}
@@ -274,14 +278,14 @@ public class DBmapper{
 
 	public boolean updateRestaurant(List<Restaurant_model> param){
 
-		String updateStatement  = "UPDATE " + param.get(0).getTable() + " WHERE RESTAURANT_ID = " + param.get(0).getRestaurantID() + ";" ;
+		String updateStatement  = "UPDATE " + param.get(0).getTable()+ " SET MONEY = " + param.get(0).getMoney() + ", TIME = " + param.get(0).getTime() + " WHERE RESTAURANT_ID = " + param.get(0).getID() + ";" ;
 
 		boolean success = true;
 		try{
 
 			qRunner = new QueryRunner();
 
-			qRunner.update(this.c, updateStatement, param);
+			qRunner.update(this.c, updateStatement);
 
 
 		}
@@ -324,10 +328,16 @@ public class DBmapper{
 		boolean success = true;
 
 		try{
-			String updateStatement = "UPDATE " + params.get(0).getTable() + " WHERE RESTAURANT_ID = " + params.get(0).getRestaurantID() + ";";
 
-			qRunner = new QueryRunner();
-			qRunner.update(this.c, updateStatement, params);
+			for(int i = 0; i < params.size(); i++){
+
+				String updateStatement = "UPDATE " + params.get(0).getTable() + " SET QUANTITY = " + params.get(i).getQuantity() +  " WHERE RESTAURANT_ID = " + params.get(i).getRestaurantID() + " AND ITEM_ID = " + params.get(i).getItemID() + ";";
+
+				qRunner = new QueryRunner();
+				qRunner.update(this.c, updateStatement);
+
+			}
+			
 
 
 
@@ -349,12 +359,12 @@ public class DBmapper{
 		
 		try{
 
-			insert(new Restaurant_model(playerID, playerID, "restaurant", 0, 0));
+			insert(new Restaurant_model(playerID, "restaurant", playerID, 0, 0));
 			
 			items = select(new Items_model());
 			for(int i = 0; i < items.size(); i++){
 
-				insert(new Inventory_model(items.get(i).getID(), playerID, 100));
+				insert(new Inventory_model(playerID, i, 100, 0));
 
 
 			}
