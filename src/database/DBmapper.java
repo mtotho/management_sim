@@ -331,7 +331,7 @@ public class DBmapper{
 
 			for(int i = 0; i < params.size(); i++){
 
-				String updateStatement = "UPDATE " + params.get(0).getTable() + " SET QUANTITY = " + params.get(i).getQuantity() +  " WHERE RESTAURANT_ID = " + params.get(i).getRestaurantID() + " AND ITEM_ID = " + params.get(i).getItemID() + ";";
+				String updateStatement = "UPDATE " + params.get(0).getTable() + " SET QUANTITY = " + params.get(i).getQuantity() + ", AMOUNT_SOLD = " + params.get(i).getAmount_Sold() + " WHERE RESTAURANT_ID = " + params.get(i).getRestaurantID() + " AND ITEM_ID = " + params.get(i).getItemID() + ";";
 
 				qRunner = new QueryRunner();
 				qRunner.update(this.c, updateStatement);
