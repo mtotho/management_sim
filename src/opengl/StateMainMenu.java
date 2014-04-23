@@ -96,7 +96,7 @@ public class StateMainMenu extends BasicGameState{
     public void keyReleased(int key, char c) {
 	    switch(key) {
 	    case Input.KEY_1:
-	        game.enterState(3);
+	       // game.enterState(3);
 	        break;
 	    case Input.KEY_2:
 	        // TODO: Implement later

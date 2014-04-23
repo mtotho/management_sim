@@ -25,8 +25,6 @@ public class Restaurant{
 	public List<Items_model> menu;
 	public int last_ms;
 
-	//The most previous delta
-	//public int delta;
 	public List<Inventory_model> inventory;
 	//public List<Transactions_model> transactions;
 	public List<Restaurant_model> restaurantData;
@@ -135,7 +133,7 @@ public class Restaurant{
 		double mod = Math.random();
 
 		//System.out.println(mod);
-		if(mod>0.45){
+		if(mod>0.994){
 			customer_timer=0;
 
 			if(!sg.waitline.isFull() && !foodline.isFull()){
@@ -243,12 +241,6 @@ public class Restaurant{
 						}
 					}
 
-				//	for( Customer cust : customer2Task.keySet()){
-				//		if(customer2Task.get(cust)==tempTask){
-							
-						//}
-						//System.out.println(cust.getLocation());
-					//}
 					scheduler.removeTask(tempTask);
 					//System.out.println("-------------------");
 				}
