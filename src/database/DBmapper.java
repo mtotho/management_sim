@@ -41,7 +41,7 @@ public class DBmapper{
 		System.out.println("dbmapper constructor called");
 		//System.out.println(this.connect());
 
-		File f = new File("/res/sim.db");
+		File f = new File("res/sim.db");
 
 		if (!f.exists()){
 
