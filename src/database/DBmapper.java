@@ -364,7 +364,7 @@ public class DBmapper{
 			items = select(new Items_model());
 			for(int i = 0; i < items.size(); i++){
 
-				insert(new Inventory_model(playerID, i, 100));
+				insert(new Inventory_model(playerID, i, 100, 0));
 
 
 			}

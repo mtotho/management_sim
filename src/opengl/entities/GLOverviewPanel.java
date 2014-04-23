@@ -67,6 +67,10 @@ public class GLOverviewPanel extends GLPanel{
 		    	game.activatePanel("INVENTORY");
 		    	//game.activatePanel("EMPLOYEES");
 		    }
+		    if(buttons.get("btnStats").isPressed()){
+
+		    	game.activatePanel("STATISTICS");
+		    }
 
 	    }
   }

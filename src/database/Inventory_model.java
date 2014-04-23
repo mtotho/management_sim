@@ -19,14 +19,16 @@ public class Inventory_model implements Model{
 	private int item_id;
 	private int quantity;
 	private int restaurant_id;
+	private int amount_sold;
 
 
 	//constructor
-	public Inventory_model( int restaurant_id, int item_id, int quantity){
+	public Inventory_model( int restaurant_id, int item_id, int quantity, int amount_sold){
 
 		this.item_id = item_id;
 		this.quantity = quantity;
 		this.restaurant_id = restaurant_id;
+		this.amount_sold = amount_sold;
 
 	}//end constructor
 	public Inventory_model(){
@@ -66,7 +68,7 @@ public class Inventory_model implements Model{
 
 	public String toString(){
 
-		String string = restaurant_id + ", " + item_id + ", " + quantity;
+		String string = restaurant_id + ", " + item_id + ", " + quantity + ", " + amount_sold;
 
 		return string;
 
@@ -81,6 +83,17 @@ public class Inventory_model implements Model{
 
 
 		this.item_id = item_id;
+	}
+	public void setAmount_Sold(int amount_sold){
+
+		this.amount_sold = amount_sold;
+
+	}
+
+	public int getAmount_Sold(){
+
+		return amount_sold;
+
 	}
 
 

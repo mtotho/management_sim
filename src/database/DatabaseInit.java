@@ -71,6 +71,7 @@ public class DatabaseInit{
 				  "QUANTITY	INT NOT NULL, " +
 				  //"FOREIGN KEY(RESTAURANT_ID) REFERENCES RESTAURANT(ID), " +
 				  //"FOREIGN KEY(ITEM_ID) REFERENCES ITEMS(ID)" +
+				  "AMOUNT_SOLD INT NOT NULL, " +
 				  "PRIMARY KEY(RESTAURANT_ID, ITEM_ID))";
 
 			stmt.executeUpdate(sql);

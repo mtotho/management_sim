@@ -46,6 +46,7 @@ public class Restaurant{
 	public Restaurant(DBmapper db){
 		last_ms=0;
 		//initialize timer object which will keep track of and organize time
+
 		timer = new Time();
 
 		this.db = db;
@@ -175,6 +176,7 @@ public class Restaurant{
 							//System.out.println(id + "=ITEM ID");
 
 							inventory.get(id).setQuantity(inventory.get(id).getQuantity() -1);
+							inventory.get(id).setAmount_Sold(inventory.get(id).getAmount_Sold() + 1);
 							money = money + menu.get(id).getPrice();
 							//item = orders.get(orders.size()-1).get(i));
 							//System.out.println(item.getID());
@@ -310,6 +312,9 @@ public class Restaurant{
 		restaurantData = db.selectData(new Restaurant_model(), player);
 		System.out.println(restaurantData + " ----- RESTAURANT DATA");
 
+
+		timer.setTime(restaurantData.get(0).getTime());
+
 	//	for(int i = 0; i < restaurantData.size(); i++){
 
 	//		System.out.println(restaurantData.get(i).getRestaurantID());
@@ -326,6 +331,7 @@ public class Restaurant{
 
 		db.updateInventory(inventory);
 		db.updateRestaurant(restaurantData);
+
 
 	}
 	public List<Inventory_model> getInventory(){
