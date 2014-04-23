@@ -103,7 +103,7 @@ public class GLInventoryPanel extends GLPanel{
 
 		    //g.drawString("Day: " + timer.getDay(), x+250, y+5);
 
-			ArrayList<String> renderedButtons = new ArrayList<String>();
+			//ArrayList<String> renderedButtons = new ArrayList<String>();
 				
 		    btnBack.render(gc, g);
 		    btnBuyInventory.render(gc,g);
@@ -136,28 +136,30 @@ public class GLInventoryPanel extends GLPanel{
   
   	public void mousePressed(int button, int posx, int posy){
 
-  		//if(!mouseDown && active){
-  		if(btnBack.isPressed()){
+  		if(!mouseDown && active){
+  			mouseDown=true;
 
-  			game.activatePanel("OVERVIEW");
+	  		if(btnBack.isPressed()){
 
-  		}
-  		if(btnBuyInventory.isPressed()){
-
-	  		Items_model item = scroll_panel.getSelected();
-	  		System.out.println("inventory pressed with selected = " + item);
-	  		if(item != null && restaurant.getMoney() >= 50){
-	  			inventory.get(item.getID()).setQuantity(inventory.get(item.getID()).getQuantity() + 50);
-	  			restaurant.buyInventory();
+	  			game.activatePanel("OVERVIEW");
 
 	  		}
-	  		else{
+	  		if(btnBuyInventory.isPressed()){
 
-	  			
+		  		Items_model item = scroll_panel.getSelected();
+		  		System.out.println("inventory pressed with selected = " + item);
+		  		if(item != null && restaurant.getMoney() >= 50){
+		  			inventory.get(item.getID()).setQuantity(inventory.get(item.getID()).getQuantity() + 50);
+		  			restaurant.buyInventory();
+
+		  		}
+		  		else{
+
+		  			
+		  		}
 	  		}
-  		}
 
-
+	  	}//end if active
 	}
   
   

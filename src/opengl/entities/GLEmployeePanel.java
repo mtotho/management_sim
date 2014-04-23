@@ -24,82 +24,72 @@ public class GLEmployeePanel extends GLPanel{
 	private ArrayList<Employee> employees;
 	private Employee active_employee;
 	private boolean active_list = false;
-	
+	private GLButton btnBack;
+	private GLButton btnEmployeeList;
+	private GLScrollablePanel<Employee> scroll_panel;
+
+	private TrueTypeFont ttfont;
+	private Font font;
+	private int fontSize = 15;
+
 	public GLEmployeePanel(Restaurant restaurant, GameContainer gc, StateGame game) throws SlickException{
 		super(restaurant, gc);
 		this.game = game;
-		this.gameCon = gc;
+		//this.gameCon = gc;
 		this.restaurant = restaurant;
 
 
-		addButton(gc,"btnEmployeeList", "Employee List", 300, 100);
-        addButton(gc, "btnBack", "Back", 300, 100);
+ 	 	font = new Font("Verdana", Font.BOLD, fontSize);
+		ttfont = new TrueTypeFont(font, false);
+
+	//	addButton(gc,"btnEmployeeList", "Employee List", 300, 100);
+      //  addButton(gc, "btnBack", "Back", 300, 100);
+
+		btnBack=new GLButton(gc, "Back",290, 80);
+		btnBack.setLocation(x+15, 370);
+		btnBack.setLabelX(80);	
+
+		//b//tnEmployeeList = new GLButton(gc, "Employee List", 290, 80);
+		//btnEmployeeList.setLocation(370, x+15);
+
+		scroll_panel = new GLScrollablePanel<Employee>(restaurant, gc, x+15, y+30, 290, 250);
 
         padding=10;
 
         employees = restaurant.getEmployees();
+
+
 	}
 
 	public void render(GUIContext gc, Graphics g) throws SlickException{
-		if(!active_list){
-			int yDif = (int)(height/(3));
+		
+		g.setColor(Color.black);
+		g.fillRect(x,y, width, height);
 
-		   	g.setColor(Color.black);
-			g.fillRect(x,y, width, height);
+		g.setFont(ttfont);
+		g.setColor(Color.orange);
+	    g.drawString("Employees", x+10, y+5);
 
 
-		    Object[] keys = buttons.keySet().toArray();
-		    
-		    for(int i=0; i<2; i++){
-		    
-					GLButton tempButton = buttons.get(keys[i]);
-					tempButton.setLabelX(60);
-					tempButton.setX(padding+x);
-					tempButton.setY((yDif * (i+1)) - 60);
-					tempButton.render(gc, g);
-			}
-		}
-		else if(active_list && active_employee!=null){
-			g.setColor(Color.black);
-			g.fillRect(x,y, width, height);
 
-			g.setColor(Color.orange);
-		    g.drawString("Time: " + timer.getFormattedTime(), x+10, y+5);
+	   // employees = restaurant.getEmployees();
+	    for(int i=0; i<employees.size();i++){
+	    	Employee tempEmployee = employees.get(i);
 
-		    g.drawString("Day: " + timer.getDay(), x+250, y+5);
-		}
-		else{
-			g.setColor(Color.black);
-			g.fillRect(x,y, width, height);
+	    	if(!scroll_panel.contains(tempEmployee)){
 
-			g.setColor(Color.orange);
-		    g.drawString("Time: " + timer.getFormattedTime(), x+10, y+5);
+	    		scroll_panel.add(tempEmployee.getName(), tempEmployee);
 
-		    g.drawString("Day: " + timer.getDay(), x+250, y+5);
+	    	}
+		   
 
-		    employees = restaurant.getEmployees();
-		    for(int i=0; i<employees.size();i++){
-		    	String employeeName = employees.get(i).getName();
-		    	if(!buttons.containsKey("btn"+employeeName)){
-		    		addButton(gameCon, "btn"+employeeName, employeeName, 300, 80);
-		  		}
-		  		else{
-		  			//System.out.println(buttons.get("btn"+employeeName).getName());
-		  		}
-		  		GLButton tempButton = buttons.get("btn" + employeeName);
-		    	tempButton.setLabelX(60);
-				tempButton.setX(padding+x);
-				tempButton.setY((y+40)+(80*(i+1)));
-				tempButton.render(gc, g);	
-		    	//g.drawString("Employee: " + employees.get(i).getName(), x+30, (y+30)+(30*(i+1)));*/
-		    }
+		}//end for
 
-		    GLButton tempButton = buttons.get("btnBack");
-		    tempButton.setLabelX(60);
-			tempButton.setX(padding+x);
-			tempButton.setY(y+350);
-			tempButton.render(gc, g);
-		}
+		
+		btnBack.render(gc,g);
+		scroll_panel.render(gc, g);
+		//btnEmployeeList.render(gc,g);
+	
 	}
 
 	public void mousePressed(int button, int posx, int posy){
@@ -110,6 +100,11 @@ public class GLEmployeePanel extends GLPanel{
 	    if(!mouseDown && active){	
 	    	mouseDown=true; //change to true so we cannot re enter this block during this click
 	    	
+	    	if(btnBack.isPressed()){
+	    		game.activatePanel("OVERVIEW");
+	    	}
+
+	    	/*
 		    if(buttons.get("btnEmployeeList").isPressed() && !active_list){
 		      active_list = !active_list;
 		    }
@@ -127,7 +122,7 @@ public class GLEmployeePanel extends GLPanel{
 		    	if(buttons.get("btn"+employeeName)!=null && buttons.get("btn" + employeeName).isPressed() && active_list){
 		    		System.out.println("btn" + employeeName);
 		    	}
-		    }
+		    }*/
 	    }
   }
   

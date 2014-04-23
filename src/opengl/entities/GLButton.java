@@ -119,7 +119,7 @@ public class GLButton extends GLEntity{
 		
 		
 			//System.out.println("button y: " + y);
-
+		
 		g.drawImage(sprite_sheet.getSprite(0,0).getScaledCopy(this.width, this.height), (int)x,(int)y);
 		if(isHovered && !isDisabled){
 			g.drawImage(sprite_sheet.getSprite(0,1).getScaledCopy(this.width, this.height), (int)x,(int)y);	
