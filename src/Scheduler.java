@@ -177,33 +177,7 @@ public class Scheduler{
 
 	public void findEmployeeTask(Employee e){
 
-		//This isnt going to work.. e.getJob returns string and getType returns TaskType enum
-		/*
-		for(int i = 0; i < highPriority.size(); i++){
-			if(e.getJob() == highPriority(i).getType()){
-				e.setTask(highPriority.get(i));
-				return;
-			}
-
-		}
-
-		for(int i = 0; i < midPriority.size(); i++){
-			if(e.getJob() == midPriority(i).getType()){
-				e.setTask(highPriority.get(i));
-				return;
-			}
-
-		}
-
-		for(int i = 0; i < lowPriority.size(); i++){
-			if( e.getJob() == lowPriority(i).getType()){
-				e.setTask(lowPriority.get(i));
-				return;
-			}
-
-
-		}
-*/
+	
 
 	}//end findEmployeeTask(Employee e)
 

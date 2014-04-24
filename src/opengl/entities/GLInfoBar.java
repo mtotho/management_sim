@@ -51,11 +51,8 @@ public class GLInfoBar extends GLEntity{
 	public void render(GUIContext gc, Graphics g){
 		g.setFont(ttfont);
 
-		//int content_height;
 		g.setColor(Color.red);
 		g.fillRect(x,y,width,height);
-		//g.setColor(Color.white);
-		//g.fillRect(x+1,y+1,width-2,height-2);
 
 		g.setColor(Color.orange);
 	    g.drawString("Time: " + restaurant.timer.getFormattedTime(), x+padding, y+padding);

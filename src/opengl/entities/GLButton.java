@@ -37,8 +37,6 @@ public class GLButton extends GLEntity{
 		super(gc);
 		
 		init();
-		//clefairy sprite
-		//image = new Image("res/clefairy_sprite.png");
 		
 
 	}
@@ -113,12 +111,7 @@ public class GLButton extends GLEntity{
 
 	//@Override
 	public void render(GUIContext gc, Graphics g){
-		//g.setColor(Color.green);
-		//g.fillRoundRect(x, y, width, height, 2);
-		//image.draw(x,y,width,height);
 		
-		
-			//System.out.println("button y: " + y);
 		
 		g.drawImage(sprite_sheet.getSprite(0,0).getScaledCopy(this.width, this.height), (int)x,(int)y);
 		if(isHovered && !isDisabled){

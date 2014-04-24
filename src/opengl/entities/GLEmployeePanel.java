@@ -42,15 +42,9 @@ public class GLEmployeePanel extends GLPanel{
  	 	font = new Font("Verdana", Font.BOLD, fontSize);
 		ttfont = new TrueTypeFont(font, false);
 
-	//	addButton(gc,"btnEmployeeList", "Employee List", 300, 100);
-      //  addButton(gc, "btnBack", "Back", 300, 100);
-
 		btnBack=new GLButton(gc, "Back",290, 80);
 		btnBack.setLocation(x+15, 370);
 		btnBack.setLabelX(80);	
-
-		//b//tnEmployeeList = new GLButton(gc, "Employee List", 290, 80);
-		//btnEmployeeList.setLocation(370, x+15);
 
 		scroll_panel = new GLScrollablePanel<Employee>(restaurant, gc, x+15, y+30, 290, 250);
 
@@ -70,9 +64,6 @@ public class GLEmployeePanel extends GLPanel{
 		g.setColor(Color.orange);
 	    g.drawString("Employees", x+10, y+5);
 
-
-
-	   // employees = restaurant.getEmployees();
 	    for(int i=0; i<employees.size();i++){
 	    	Employee tempEmployee = employees.get(i);
 

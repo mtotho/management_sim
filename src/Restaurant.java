@@ -126,14 +126,8 @@ public class Restaurant{
 	}
 
 	public void update(){
-
+		//delta handles the size of update time in the update function
 		int delta = timer.getMilliSeconds()-last_ms;
-		//add ms to timer object
-		//timer.addMilliSecond(delta);
-
-
-
-
 
 		customer_timer+=delta;
 		double mod = Math.random();
@@ -179,10 +173,7 @@ public class Restaurant{
 							inventory.get(id).setQuantity(inventory.get(id).getQuantity() -1);
 							inventory.get(id).setAmount_Sold(inventory.get(id).getAmount_Sold() + 1);
 							money = money + menu.get(id).getPrice();
-							//item = orders.get(orders.size()-1).get(i));
 							//System.out.println(item.getID());
-
-							//inventory.get(orders.get(orders.size()-1).get(i).getID()).setQuantity(inventory.get(i).getQuantity()-1);
 
 					} 
 
@@ -310,13 +301,6 @@ public class Restaurant{
 
 		timer.setTime(restaurantData.get(0).getTime());
 		money = restaurantData.get(0).getMoney();
-
-	//	for(int i = 0; i < restaurantData.size(); i++){
-
-	//		System.out.println(restaurantData.get(i).getRestaurantID());
-
-	//	}
-		//transactions = db.selectData(new Transactions_model(), player);
 
 	}
 

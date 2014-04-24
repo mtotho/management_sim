@@ -7,8 +7,6 @@ This will be the row object for each item entry int the items table in the datab
 package pjwelch.restaurantsim.database;
 
 import org.apache.commons.dbutils.*;
-//import org.apache.commons.dbutils.QueryRunner;
-//import org.apache.commons.dbutils.BeanListHandler;
 
 import java.sql.*;
 import java.util.*;

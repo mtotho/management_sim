@@ -1,7 +1,6 @@
-//package mftoth.restaurantsim.logic;
+
 import org.newdawn.slick.*;
 import org.newdawn.slick.AppGameContainer;
-//import org.newdawn.slick.GameContainer;
 
 import mftoth.restaurantsim.ogl.*;
 import mftoth.restaurantsim.logic.Restaurant;
@@ -10,8 +9,6 @@ import pjwelch.restaurantsim.database.*;
 
 class Simulator{
 
-	//private QueryRunner qr;
-
 	//main()
 	public static void main(String[] args) throws InterruptedException{
 
@@ -19,16 +16,11 @@ class Simulator{
 
 	}//end: main()
 
-	//public OGLDisplay display;
 
 	//Constructor()
 	public Simulator(){
 
 		DBmapper db = new DBmapper();
-
-
-
-		//Restaurant restaurant = new Restaurant();
 
 		//System.out.println("Simulator started");
 
@@ -36,7 +28,6 @@ class Simulator{
 	     try {
 	          AppGameContainer container = new AppGameContainer(game);
 	          container.setDisplayMode(960, 520, false);
-	         // container.setShowFPS(true);
 	          container.setTargetFrameRate(80);
 	          container.setAlwaysRender(true);
 	          container.start();
@@ -45,9 +36,6 @@ class Simulator{
 	          // TODO Auto-generated catch block
 	          e.printStackTrace();
 	     }
-
-		//display = new OGLDisplay();
-		//display.run();
 
 
 	}//end: Constructor()

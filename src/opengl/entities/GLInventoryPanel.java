@@ -58,10 +58,6 @@ public class GLInventoryPanel extends GLPanel{
 		btnBuyInventory.setX(x+15);
 		btnBuyInventory.setLabelX(25);
 
-
-		//addButton(gc,"btnBuyMore", "Buy More", 300, 100);
-        //addButton(gc, "btnBack", "Back", 300, 100);
-
         padding=10;
 
 
@@ -78,32 +74,12 @@ public class GLInventoryPanel extends GLPanel{
 
 		   	g.setColor(Color.black);
 			g.fillRect(x,y, width, height);
-
-
-		    //Object[] keys = buttons.keySet().toArray();
-
-		   /* for(int i=0; i<2; i++){
-		    
-					GLButton tempButton = buttons.get(keys[i]);
-					tempButton.setLabelX(60);
-					tempButton.setX(padding+x);
-					tempButton.setY((yDif * (i+1)) - 60);
-					tempButton.render(gc, g);
-			}*/
 		}
 		
-			
-
-			
-			//g.setColor(Color.black);
-			//g.fillRect(x,y, width, height);
 			g.setFont(ttfont);
 			g.setColor(Color.orange);
 		    g.drawString("Inventory", x+10, y+5);
 
-		    //g.drawString("Day: " + timer.getDay(), x+250, y+5);
-
-			//ArrayList<String> renderedButtons = new ArrayList<String>();
 				
 		    btnBack.render(gc, g);
 		    btnBuyInventory.render(gc,g);

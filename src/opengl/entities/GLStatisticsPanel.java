@@ -78,8 +78,6 @@ public class GLStatisticsPanel extends GLPanel{
 			g.setColor(Color.orange);
 		    g.drawString("Statistics", x+10, y+5);
 
-		    //Object[] keys = buttons.keySet().toArray();
-
 		    btnBack.render(gc, g);
 
 		   /* for(int i=0; i<2; i++){
@@ -92,16 +90,6 @@ public class GLStatisticsPanel extends GLPanel{
 			}*/
 		}
 		
-			
-
-			
-			//g.setColor(Color.black);
-			//g.fillRect(x,y, width, height);
-
-		//	g.setColor(Color.orange);
-		  //  g.drawString("Time: " + timer.getFormattedTime(), x+10, y+5);
-
-		    //g.drawString("Day: " + timer.getDay(), x+250, y+5);
 
 			ArrayList<String> renderedButtons = new ArrayList<String>();
 			

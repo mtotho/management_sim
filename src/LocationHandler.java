@@ -103,23 +103,6 @@ public class LocationHandler{
        
         return new GLTile(wayX, wayY);
 
-       // newpath = astar.findPath(null, 0, 27, wayX,wayY);
-        //setPath(newpath);
-
-
-
-	//	this.destination = point;
-
-
-
-
-        	/*
-            Path newpath;
-           // boolean set_success;
-            int wayX=20;
-            int wayY=20;
-            */
-           
 	}
 
 

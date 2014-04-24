@@ -66,11 +66,6 @@ public class GLTaskPanel extends GLPanel{
 		}
 		else{
 			
-
-			
-			//g.setColor(Color.black);
-			//g.fillRect(x,y, width, height);
-
 			g.setColor(Color.orange);
 		    g.drawString("Ongoing Tasks", x+10, y+5);
 
@@ -120,8 +115,6 @@ public class GLTaskPanel extends GLPanel{
 	}
 
 	public void mousePressed(int button, int posx, int posy){
-	   // ArrayList<GLButton> buttons = getButtons();
-	    //System.out.println(buttons.size());
 	    
 	    //Only register mouse clicks if mouseDown is false (this should prevent the click action being called multiple times per click)
 	    if(!mouseDown && active){	

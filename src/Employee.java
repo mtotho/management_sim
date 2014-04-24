@@ -45,16 +45,7 @@ public class Employee{
 	public void setTask(Task task){
 		active_task = task;
 		busy=true;
-		//If employee is busy, check whether the new task is more important
-		/*if(busy){
-			//if(task.getPreemption() && task.getPriority()>active_task.getPriority()){
-			active_task=task;
-			//}
-		}
-		else{
-			active_task=task;
-		}*/
-		
+	
 	}//end: setTask()
 
 	public Task doTask(int delta){
@@ -158,7 +149,7 @@ public class Employee{
 	}
 	public void setLocation(Locations location){
 		this.location=location;
-		//this.waypoint=location;
+		
 	}
 
 	public int getTileX(){

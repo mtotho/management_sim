@@ -84,19 +84,6 @@ public class Time{
 			string+=minute;
 		}
 
-		/*string+=":";
-
-		if(second<10){
-			string+="0"+second;
-		}else{
-			string+=second;
-		}*/
-
-		
-
-		//System.out.println(daysFloat);
-		//if(days<)
-
 		return string;
 
 	}

@@ -39,9 +39,6 @@ public class GLEmployee extends GLMoveableEntity{
 		desty=y;
 
 		setPath(tileDest);
-
-		//destx=96;
-		//desty=256;
 		
 		dx=0.1;
 		dy=0.1;

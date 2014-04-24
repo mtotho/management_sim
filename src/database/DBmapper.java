@@ -5,9 +5,6 @@ DB Mapper can be called to query, update, and insert into the respective databas
 */
 package pjwelch.restaurantsim.database;
 
-//import org.apache.commons.dbutils.DbUtils;
-//import org.apache.commons.dbutils.QueryRunner;
-//import org.apache.commons.dbutils.BeanListHandler;
 import org.apache.commons.dbutils.*;
 import org.apache.commons.dbutils.handlers.*;
 import java.sql.*;
@@ -43,6 +40,7 @@ public class DBmapper{
 
 		File f = new File("res/sim.db");
 
+		//checks to see if database exists, if no creates
 		if (!f.exists()){
 
 			System.out.println("1");
@@ -55,50 +53,7 @@ public class DBmapper{
 		connect();
 
 	}
-	/*public boolean DBcheck(){
-
-		boolean exists = true;
-		ArrayList<String> list = new ArrayList<String>();
-		String databases = "";
-
-		try{
-			Class.forName(dbDriver);
-			conn = DriverManager.getConnection("jdbc:sqlite:src/database/sim.db");
-			//stmt = conn.createStatement();
-			meta = conn.getMetaData();
-			rs = meta.getCatalogs();
-
-			while(rs.next()){
-
-				databases = rs.getString("TABLE_CAT");
-				list.add(databases);
-				System.out.println(databases);
-
-			}
-			System.out.println("this is" + databases.toString() + " databases");
-			if(list.contains("sim.db")){
-				return exists;
-			}
-			else{
-
-				exists = false;			
-			}
-
-			rs.close();
-			conn.close();
-			stmt.close();	
-			return exists;		
-
-		}	
-		catch(Exception e){
-			System.out.println("DSFEFWGSGFSDF");
-			System.err.println(e.getClass().getName() + ": " + e.getMessage() + "DBCHECK");
-			return false;
-
-		}
-
-	}*/
-
+	//opens connection to the database
 	public synchronized void connect(){
 
 		try{
@@ -117,7 +72,7 @@ public class DBmapper{
 		}
 		
 	}
-
+	//closes the connection
 	public synchronized void close() {
 
 		try{
@@ -135,7 +90,7 @@ public class DBmapper{
 		}
 
 	}
-
+	//generic insert statement for all objects
 	public boolean insert(Model obj){
 
 		String insertStatement = "INSERT INTO " + obj.getTable() + " VALUES (" + obj.toString() +");";
@@ -155,7 +110,7 @@ public class DBmapper{
 		}
 
 	}
-
+	//generic select statement for the database, returns all rows in a table
 	public List select(Model param){
 
 		String selectStatement = "SELECT * FROM " + param.getTable();
@@ -165,14 +120,6 @@ public class DBmapper{
 			ResultSetHandler h = new BeanListHandler(param.getClass());
 			qRunner = new QueryRunner();
 			List beans = (List) qRunner.query(this.c, selectStatement, h);
-
-			/*for (int i = 0; i < beans.size(); i++){
-
-				Class<?>clazz bean = (clazz) beans.get(i);
-				bean.print();
-
-				return beans;
-			}*/
 
 			return beans;
 
@@ -187,6 +134,7 @@ public class DBmapper{
 
 
 	}
+	//selects game data in the program based on the playerID given with newgame or loadgame
 	public List selectData(Model param, Player_model player){
 
 		System.out.println("PLAYER ID DB CALL: " + player.getID());
@@ -199,13 +147,6 @@ public class DBmapper{
 			qRunner = new QueryRunner();
 			List beans = (List) qRunner.query(this.c, selectStatement, h);
 
-			/*for (int i = 0; i < beans.size(); i++){
-
-				Class<?>clazz bean = (clazz) beans.get(i);
-				bean.print();
-
-				return beans;
-			}*/
 			System.out.println(beans);
 			return beans;
 
@@ -220,6 +161,7 @@ public class DBmapper{
 
 
 	}
+	//selects the player from the database based on name
 	public List selectPlayer(Model param, String name){
 
 		String selectStatement = "SELECT * FROM PLAYER WHERE NAME = '" + name + "'";
@@ -229,14 +171,6 @@ public class DBmapper{
 			ResultSetHandler h = new BeanListHandler(param.getClass());
 			qRunner = new QueryRunner();
 			List beans = (List) qRunner.query(this.c, selectStatement, h);
-
-			/*for (int i = 0; i < beans.size(); i++){
-
-				Class<?>clazz bean = (clazz) beans.get(i);
-				bean.print();
-
-				return beans;
-			}*/
 
 			return beans;
 
@@ -251,7 +185,7 @@ public class DBmapper{
 
 	}
 
-
+	//generic update function
 	public boolean update(Model param){
 
 		String updateStatement  = "UPDATE " + param + " WHERE RESTAURANT_ID = " + param.getRestaurantID() + ";" ;
@@ -275,7 +209,7 @@ public class DBmapper{
 		return success;
 
 	}
-
+	//update function for restaurant data
 	public boolean updateRestaurant(List<Restaurant_model> param){
 
 		String updateStatement  = "UPDATE " + param.get(0).getTable()+ " SET MONEY = " + param.get(0).getMoney() + ", TIME = " + param.get(0).getTime() + " WHERE RESTAURANT_ID = " + param.get(0).getID() + ";" ;
@@ -298,7 +232,7 @@ public class DBmapper{
 
 		return success;
 	}
-
+	//generic update function for batch updates from an aray
 	public boolean update(List<Model> params){
 
 		boolean success = true;
@@ -322,7 +256,7 @@ public class DBmapper{
 
 		return success;
 	}
-
+	//inventory update statement for updateing player inventory
 	public boolean updateInventory(List<Inventory_model> params){
 
 		boolean success = true;
@@ -352,7 +286,7 @@ public class DBmapper{
 
 		return success;
 	}
-
+	//generates needed data when a new player is created
 	public boolean newPlayer(int playerID){
 
 		boolean success = true;

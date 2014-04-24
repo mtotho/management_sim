@@ -8,9 +8,6 @@ CS 205 Restaurant Sim Database
 package pjwelch.restaurantsim.database;
 
 import org.apache.commons.dbutils.*;
-//import org.apache.commons.dbutils.QueryRunner;
-//import org.apache.commons.dbutils.BeanListHandler;
-
 import java.sql.*;
 import java.util.*;
 
