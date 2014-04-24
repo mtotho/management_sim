@@ -91,31 +91,19 @@ public class GLEmployeePanel extends GLPanel{
 	    if(!mouseDown && active){	
 	    	mouseDown=true; //change to true so we cannot re enter this block during this click
 	    	
-	    	if(btnBack.isPressed()){
+	    /*	if(btnBack.isPressed()){
 	    		game.activatePanel("OVERVIEW");
-	    	}
+	    	}*/
 
-	    	/*
-		    if(buttons.get("btnEmployeeList").isPressed() && !active_list){
-		      active_list = !active_list;
-		    }
 		    if(buttons.get("btnBack").isPressed() && !active_list){
 		    	game.activatePanel("OVERVIEW");
 		    }
 		   	else if(buttons.get("btnBack").isPressed() && active_list){
 		    	active_list = !active_list;
 		    }
-		    //if(buttons.get("btn" + employees.get(0).getName()).isPressed()){
-		    //	System.out.println(employees.get(0).getName());
-		    //}
-		    for(int i=0; i<employees.size(); i++){
-		    	String employeeName = employees.get(i).getName();
-		    	if(buttons.get("btn"+employeeName)!=null && buttons.get("btn" + employeeName).isPressed() && active_list){
-		    		System.out.println("btn" + employeeName);
-		    	}
-		    }*/
-	    }
-  }
+		}	
+
+	}
   
   	public void mouseReleased(int button, int x, int y){
   		

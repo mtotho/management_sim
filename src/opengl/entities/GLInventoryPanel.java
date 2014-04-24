@@ -115,27 +115,40 @@ public class GLInventoryPanel extends GLPanel{
   		if(!mouseDown && active){
   			mouseDown=true;
 
-	  		if(btnBack.isPressed()){
+	  		/*if(btnBack.isPressed()){
 
 	  			game.activatePanel("OVERVIEW");
 
-	  		}
-	  		if(btnBuyInventory.isPressed()){
-
-		  		Items_model item = scroll_panel.getSelected();
+	  		}*/
+	  		if(buttons.get("btnBack").isPressed() && !active_list){
+		    	game.activatePanel("OVERVIEW");
+		    }
+		   	else if(buttons.get("btnBack").isPressed() && active_list){
+		    	active_list = !active_list;
+		    }
+		    if(buttons.get("btnBuyInventory").isPressed() && !active_list){
+		    	//game.activatePanel("OVERVIEW");
+		    	Items_model item = scroll_panel.getSelected();
 		  		System.out.println("inventory pressed with selected = " + item);
 		  		if(item != null && restaurant.getMoney() >= 50){
 		  			inventory.get(item.getID()).setQuantity(inventory.get(item.getID()).getQuantity() + 50);
 		  			restaurant.buyInventory();
+		    	}
+		   	}
+		   	else if(buttons.get("btnBuyInventory").isPressed() && active_list){
+		    	active_list = !active_list;
+		    }
+		}
+
+			/*if(btnBuyInventory.isPressed()){
+
+		  		
 
 		  		}
 		  		else{
 
 		  			
-		  		}
-	  		}
-
-	  	}//end if active
+		  		}*/
 	}
   
   
